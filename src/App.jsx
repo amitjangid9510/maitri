@@ -37,7 +37,7 @@ const KlingIcon = () => (<svg viewBox="0 0 24 24" className="w-5 h-5"><circle cx
 const ClaudeCodeIcon = () => (<svg viewBox="0 0 24 24" className="w-5 h-5"><circle cx="12" cy="12" r="11" fill="#d97757"/><path fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" d="M9 9l-3 3 3 3M15 9l3 3-3 3"/></svg>);
 
 /* ============================
-   ONE-FINGER POINTING HAND CURSOR
+   CURSOR — finger hand + smiley in About section
 ============================ */
 function WindowsHandCursor() {
   const x = useMotionValue(-100);
@@ -46,6 +46,7 @@ function WindowsHandCursor() {
   const [clicking, setClicking] = useState(false);
   const [ripples, setRipples] = useState([]);
   const [isTouch, setIsTouch] = useState(false);
+  const [inAbout, setInAbout] = useState(false);
 
   const springX = useSpring(x, { stiffness: 400, damping: 38, mass: 0.5 });
   const springY = useSpring(y, { stiffness: 400, damping: 38, mass: 0.5 });
@@ -62,6 +63,16 @@ function WindowsHandCursor() {
       y.set(e.clientY);
       const el = e.target;
       setHovering(!!el.closest("a, button, [data-hover]"));
+      const aboutEl = document.getElementById("about");
+      if (aboutEl) {
+        const rect = aboutEl.getBoundingClientRect();
+        const inside =
+          e.clientX >= rect.left &&
+          e.clientX <= rect.right &&
+          e.clientY >= rect.top &&
+          e.clientY <= rect.bottom;
+        setInAbout(inside);
+      }
     };
     const down = (e) => {
       setClicking(true);
@@ -91,12 +102,12 @@ function WindowsHandCursor() {
         {ripples.map((r) => (
           <motion.div
             key={r.id}
-            className="pointer-events-none fixed z-[9998] rounded-full border-2 border-white"
+            className="pointer-events-none fixed z-[9998] rounded-full border-2"
+            style={{ mixBlendMode: "difference", borderColor: "white" }}
             initial={{ width: 0, height: 0, x: r.x, y: r.y, opacity: 0.9 }}
             animate={{ width: 70, height: 70, x: r.x - 35, y: r.y - 35, opacity: 0 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            style={{ mixBlendMode: "difference" }}
           />
         ))}
       </AnimatePresence>
@@ -107,27 +118,70 @@ function WindowsHandCursor() {
       >
         <motion.div
           animate={{
-            scale: clicking ? 0.85 : hovering ? 1.1 : 1,
+            scale: clicking ? 0.85 : hovering ? 1.1 : inAbout ? 1.15 : 1,
           }}
           transition={{ type: "spring", stiffness: 500, damping: 26 }}
-          style={{ transformOrigin: "7px 2px" }}
+          style={{ transformOrigin: inAbout ? "50% 50%" : "7px 2px" }}
         >
-          <svg
-            width="22"
-            height="30"
-            viewBox="0 0 22 30"
-            fill="none"
-            style={{ mixBlendMode: "difference" }}
-          >
-            <path
-              d="M7.5 1.5C7.5 0.671573 8.17157 0 9 0C9.82843 0 10.5 0.671573 10.5 1.5V15C10.5 15.2761 10.7239 15.5 11 15.5C11.2761 15.5 11.5 15.2761 11.5 15V5.5C11.5 4.67157 12.1716 4 13 4C13.8284 4 14.5 4.67157 14.5 5.5V15C14.5 15.2761 14.7239 15.5 15 15.5C15.2761 15.5 15.5 15.2761 15.5 15V8C15.5 7.17157 16.1716 6.5 17 6.5C17.8284 6.5 18.5 7.17157 18.5 8V15.5C18.5 15.7761 18.7239 16 19 16C19.2761 16 19.5 15.7761 19.5 15.5V12C19.5 11.1716 20.1716 10.5 21 10.5C21.8284 10.5 22.5 11.1716 22.5 12V19C22.5 25.0751 17.5751 30 11.5 30H11C4.92487 30 0 25.0751 0 19V8.5C0 7.67157 0.671573 7 1.5 7C2.32843 7 3 7.67157 3 8.5V14.5C3 14.7761 3.22386 15 3.5 15C3.77614 15 4 14.7761 4 14.5V3.5C4 2.67157 4.67157 2 5.5 2C6.32843 2 7 2.67157 7 3.5V14.5"
-              fill="white"
-              stroke="black"
-              strokeWidth="1"
-              strokeLinejoin="round"
-              strokeLinecap="round"
-            />
-          </svg>
+          <AnimatePresence mode="wait">
+            {inAbout ? (
+              /* ============ SMILEY FACE (About section) ============ */
+              <motion.div
+                key="smiley"
+                initial={{ scale: 0.4, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.4, opacity: 0 }}
+                transition={{ duration: 0.12, ease: "easeOut" }}
+                className="relative"
+                style={{ marginLeft: "-16px", marginTop: "-16px" }}
+              >
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                  <circle cx="16" cy="16" r="15" fill="#FFD93D" stroke="#111" strokeWidth="1.5" />
+                  <motion.circle
+                    cx="11" cy="13" r="1.8" fill="#111"
+                    animate={{ scaleY: [1, 1, 0.1, 1, 1] }}
+                    transition={{ duration: 4, repeat: Infinity, times: [0, 0.9, 0.93, 0.96, 1] }}
+                    style={{ transformOrigin: "11px 13px" }}
+                  />
+                  <motion.circle
+                    cx="21" cy="13" r="1.8" fill="#111"
+                    animate={{ scaleY: [1, 1, 0.1, 1, 1] }}
+                    transition={{ duration: 4, repeat: Infinity, times: [0, 0.9, 0.93, 0.96, 1] }}
+                    style={{ transformOrigin: "21px 13px" }}
+                  />
+                  <path d="M9 20 Q16 27 23 20" stroke="#111" strokeWidth="2" strokeLinecap="round" fill="none" />
+                  <circle cx="8" cy="18" r="1.6" fill="#FF8FA3" opacity="0.7" />
+                  <circle cx="24" cy="18" r="1.6" fill="#FF8FA3" opacity="0.7" />
+                </svg>
+              </motion.div>
+            ) : (
+              /* ============ ONE-FINGER HAND ============ */
+              <motion.div
+                key="hand"
+                initial={{ scale: 0.4, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.4, opacity: 0 }}
+                transition={{ duration: 0.12, ease: "easeOut" }}
+              >
+                <svg
+                  width="22"
+                  height="30"
+                  viewBox="0 0 22 30"
+                  fill="none"
+                  style={{ mixBlendMode: "difference" }}
+                >
+                  <path
+                    d="M7.5 1.5C7.5 0.671573 8.17157 0 9 0C9.82843 0 10.5 0.671573 10.5 1.5V15C10.5 15.2761 10.7239 15.5 11 15.5C11.2761 15.5 11.5 15.2761 11.5 15V5.5C11.5 4.67157 12.1716 4 13 4C13.8284 4 14.5 4.67157 14.5 5.5V15C14.5 15.2761 14.7239 15.5 15 15.5C15.2761 15.5 15.5 15.2761 15.5 15V8C15.5 7.17157 16.1716 6.5 17 6.5C17.8284 6.5 18.5 7.17157 18.5 8V15.5C18.5 15.7761 18.7239 16 19 16C19.2761 16 19.5 15.7761 19.5 15.5V12C19.5 11.1716 20.1716 10.5 21 10.5C21.8284 10.5 22.5 11.1716 22.5 12V19C22.5 25.0751 17.5751 30 11.5 30H11C4.92487 30 0 25.0751 0 19V8.5C0 7.67157 0.671573 7 1.5 7C2.32843 7 3 7.67157 3 8.5V14.5C3 14.7761 3.22386 15 3.5 15C3.77614 15 4 14.7761 4 14.5V3.5C4 2.67157 4.67157 2 5.5 2C6.32843 2 7 2.67157 7 3.5V14.5"
+                    fill="white"
+                    stroke="black"
+                    strokeWidth="1"
+                    strokeLinejoin="round"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.div>
       </motion.div>
 
