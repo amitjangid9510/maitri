@@ -254,6 +254,15 @@ function Hero() {
   const trailX = useSpring(rawX, { stiffness: 180, damping: 26, mass: 0.9 });
   const trailY = useSpring(rawY, { stiffness: 180, damping: 26, mass: 0.9 });
 
+  const maskImage = useTransform(
+    [springX, springY],
+    ([x, y]) =>
+      `radial-gradient(ellipse 460px 400px at ${x}px ${y}px, transparent 0%, transparent 32%, rgba(0,0,0,0.5) 62%, black 88%)`
+  );
+
+  const haloLeft = useTransform(trailX, (v) => v - 260);
+  const haloTop = useTransform(trailY, (v) => v - 260);
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       setIsTouch(window.matchMedia("(pointer: coarse)").matches);
@@ -286,8 +295,6 @@ function Hero() {
 
   const blobRadius = "55% 45% 50% 50% / 50% 55% 45% 50%";
 
-  const maskImage = useTransform([springX, springY], ([x, y]) => `radial-gradient(ellipse 460px 400px at ${x}px ${y}px, transparent 0%, transparent 32%, rgba(0,0,0,0.5) 62%, black 88%)`);
-
   return (
     <section id="top" ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16">
       <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=1920&q=80')" }} />
@@ -295,15 +302,38 @@ function Hero() {
       <div className="absolute inset-0 opacity-70" style={{ background: "radial-gradient(circle at 85% 10%, rgba(255,220,130,0.55) 0%, rgba(255,200,100,0.2) 25%, transparent 55%)" }} />
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
 
-      {!isTouch && (<motion.div className="absolute inset-0 bg-black pointer-events-none" style={{ WebkitMaskImage: maskImage, maskImage: maskImage }} />)}
-      {isTouch && (<div className="absolute inset-0 bg-black pointer-events-none" style={{ opacity: 0.92 }} />)}
-
       {!isTouch && (
-        <motion.div className="absolute pointer-events-none" style={{ left: useTransform(trailX, (v) => v - 260), top: useTransform(trailY, (v) => v - 260), width: 520, height: 520, opacity: isHovering ? 1 : 0, background: "radial-gradient(ellipse at center, rgba(255,215,140,0.22) 0%, rgba(255,180,80,0.08) 35%, rgba(255,180,80,0.02) 55%, transparent 75%)", filter: "blur(30px)", borderRadius: blobRadius, transition: "opacity 0.5s ease" }} />
+        <motion.div
+          className="absolute inset-0 bg-black pointer-events-none"
+          style={{ WebkitMaskImage: maskImage, maskImage: maskImage }}
+        />
+      )}
+      {isTouch && (
+        <div className="absolute inset-0 bg-black pointer-events-none" style={{ opacity: 0.92 }} />
       )}
 
       {!isTouch && (
-        <motion.div className="absolute pointer-events-none" style={{ left: springX, top: springY, opacity: isHovering ? 1 : 0, transition: "opacity 0.45s ease" }}>
+        <motion.div
+          className="absolute pointer-events-none"
+          style={{
+            left: haloLeft,
+            top: haloTop,
+            width: 520,
+            height: 520,
+            opacity: isHovering ? 1 : 0,
+            background: "radial-gradient(ellipse at center, rgba(255,215,140,0.22) 0%, rgba(255,180,80,0.08) 35%, rgba(255,180,80,0.02) 55%, transparent 75%)",
+            filter: "blur(30px)",
+            borderRadius: blobRadius,
+            transition: "opacity 0.5s ease",
+          }}
+        />
+      )}
+
+      {!isTouch && (
+        <motion.div
+          className="absolute pointer-events-none"
+          style={{ left: springX, top: springY, opacity: isHovering ? 1 : 0, transition: "opacity 0.45s ease" }}
+        >
           {[0, 1, 2, 3].map((i) => (
             <motion.div key={i} className="absolute border border-amber-100/30" initial={{ width: 40, height: 40, x: -20, y: -20, opacity: 0.7, borderRadius: "50% 45% 55% 45% / 45% 55% 45% 55%" }} animate={{ width: 340 + i * 65, height: 300 + i * 58, x: -(170 + i * 33), y: -(150 + i * 29), opacity: 0, borderRadius: ["50% 45% 55% 45% / 45% 55% 45% 55%", "45% 55% 50% 50% / 55% 45% 50% 50%", "55% 40% 45% 55% / 40% 55% 45% 60%"], rotate: [0, 12, -8, 15] }} transition={{ duration: 3.4, repeat: Infinity, delay: i * 0.65, ease: "easeOut" }} />
           ))}
@@ -369,7 +399,7 @@ function SectionTitle({ label, title, dark = false }) {
 }
 
 /* ============================
-   ABOUT — white bg, black text default; color only on hover
+   ABOUT — no slide-in animation, content visible immediately
 ============================ */
 function About() {
   const stats = [
@@ -395,8 +425,9 @@ function About() {
         <SectionTitle label="01 — About" title="About Me" dark />
 
         <div className="grid md:grid-cols-2 gap-12 items-start">
-          <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="space-y-5 text-black/70 leading-relaxed">
-            <p>I'm <span className="text-black font-medium">Maitri Shah</span>, a UI/UX Designer based in Mumbai with 2+ years of experience designing intuitive websites, landing pages, and microsites across real estate, healthcare, and education.</p>
+          {/* LEFT — bio. No slide animation */}
+          <div className="space-y-5 text-black/70 leading-relaxed">
+            <p>I'm <span className="text-black font-medium">Maitri Shah</span>, a UX/UI Designer based in Mumbai with 2+ years of experience designing intuitive websites, landing pages, and microsites across real estate, healthcare, and education.</p>
             <p>I blend user research and design systems with AI-powered workflows — using tools like ChatGPT, Claude, Nano Banana, and Kling to generate images, videos, and accelerate delivery without compromising quality.</p>
             <p>Currently designing at <span className="text-black font-medium">Realatte</span>, where I've shipped 15+ projects and reduced design time by 25% through AI integration.</p>
             <div className="flex flex-wrap gap-4 pt-4 text-sm text-black/60">
@@ -404,21 +435,17 @@ function About() {
               <span className="flex items-center gap-2"><Briefcase size={14} /> Realatte</span>
               <span className="flex items-center gap-2"><GraduationCap size={14} /> B.Com, IGNOU</span>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="space-y-8">
-            {/* STATS — plain black default, spin on view, colorful on hover only */}
+          {/* RIGHT — stats + experience. No slide animation */}
+          <div className="space-y-8">
+            {/* STATS — spin on view, colorful on hover only */}
             <div ref={statsRef} className="grid grid-cols-3 gap-4">
               {stats.map((s, i) => (
-                <motion.div
+                <div
                   key={s.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1, duration: 0.6 }}
-                  whileHover={{ y: -6, scale: 1.05 }}
                   data-hover
-                  className="group relative border border-black/10 rounded-2xl p-4 text-center overflow-hidden bg-white cursor-default"
+                  className="group relative border border-black/10 rounded-2xl p-4 text-center overflow-hidden bg-white cursor-default transition-transform duration-300 hover:-translate-y-1.5 hover:scale-105"
                 >
                   <motion.div
                     animate={{ rotate: 360 }}
@@ -426,14 +453,8 @@ function About() {
                     className="absolute -inset-24 opacity-0 group-hover:opacity-60 transition-opacity duration-500 pointer-events-none"
                     style={{ background: `conic-gradient(from 0deg, transparent, ${s.glow}, transparent 30%)`, filter: "blur(20px)" }}
                   />
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                    style={{ background: `radial-gradient(circle at center, ${s.glow}25, transparent 70%)` }}
-                  />
-                  <div
-                    className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                    style={{ boxShadow: `inset 0 0 20px ${s.glow}40` }}
-                  />
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ background: `radial-gradient(circle at center, ${s.glow}25, transparent 70%)` }} />
+                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ boxShadow: `inset 0 0 20px ${s.glow}40` }} />
                   <div className="relative z-10">
                     <div
                       className="text-2xl md:text-3xl font-bold text-black transition-colors duration-300 group-hover:text-transparent group-hover:bg-clip-text"
@@ -448,32 +469,21 @@ function About() {
                     </div>
                     <div className="text-[10px] md:text-xs text-black/50 mt-1 leading-tight transition-colors group-hover:text-black/80">{s.label}</div>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
 
             {/* EXPERIENCE — plain default, colorful on hover */}
             <div className="border border-black/10 rounded-2xl p-6 space-y-4 bg-black/[0.02]">
               <h3 className="text-sm uppercase tracking-widest text-black/40">Experience</h3>
-              {experiences.map((exp, idx) => (
-                <motion.div
+              {experiences.map((exp) => (
+                <div
                   key={exp.company}
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.15, duration: 0.6 }}
-                  whileHover={{ x: 6 }}
                   data-hover
-                  className="group relative border-l-2 border-black/20 pl-4 py-2 rounded-r-lg transition-colors cursor-default"
+                  className="group relative border-l-2 border-black/20 pl-4 py-2 rounded-r-lg transition-all duration-300 cursor-default hover:translate-x-1.5"
                 >
-                  <div
-                    className="absolute inset-0 -z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-r-lg"
-                    style={{ background: `linear-gradient(90deg, ${exp.glow}20, transparent 80%)` }}
-                  />
-                  <div
-                    className="absolute left-0 top-0 bottom-0 w-[3px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full"
-                    style={{ background: `linear-gradient(to bottom, ${exp.glow}, transparent)` }}
-                  />
+                  <div className="absolute inset-0 -z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-r-lg" style={{ background: `linear-gradient(90deg, ${exp.glow}20, transparent 80%)` }} />
+                  <div className="absolute left-0 top-0 bottom-0 w-[3px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full" style={{ background: `linear-gradient(to bottom, ${exp.glow}, transparent)` }} />
                   <div className="relative z-10">
                     <div className="flex items-center justify-between flex-wrap gap-2">
                       <h4 className="text-black font-medium transition-colors">{exp.role}</h4>
@@ -488,10 +498,10 @@ function About() {
                       ))}
                     </ul>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
