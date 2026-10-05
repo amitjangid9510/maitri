@@ -1,7 +1,21 @@
 import { useState, useEffect } from "react";
 import { motion, useScroll, useSpring, useMotionValue } from "framer-motion";
 import { Mail, Phone, MapPin, Palette, ArrowDown, Briefcase, GraduationCap, Sparkles, Code2, Wand2 } from "lucide-react";
-import { FaLinkedin, FaBehance } from "react-icons/fa";
+
+/* ============================
+   BRAND ICONS (inline SVG)
+============================ */
+const LinkedinIcon = ({ size = 16, className = "" }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z" />
+  </svg>
+);
+
+const BehanceIcon = ({ size = 16, className = "" }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <path d="M22 7h-7V5h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14H15.97c.13 3.211 3.483 3.312 4.588 2.029h3.168zm-7.686-4h4.965c-.105-1.547-1.136-2.219-2.477-2.219-1.466 0-2.277.768-2.488 2.219zm-9.574 6.988H0V5.021h6.953c5.476.081 5.58 5.444 2.72 6.906 3.461 1.26 3.577 8.061-3.207 8.061zM3 11h3.584c2.508 0 2.906-3-.312-3H3v3zm3.391 3H3v3.016h3.341c3.055 0 2.868-3.016.05-3.016z" />
+  </svg>
+);
 
 /* ============================
    CUSTOM CURSOR (Black & White)
@@ -28,7 +42,6 @@ function CustomCursor() {
 
   return (
     <>
-      {/* Outer ring */}
       <motion.div
         style={{ x: springX, y: springY }}
         className="pointer-events-none fixed top-0 left-0 z-[9999] -translate-x-1/2 -translate-y-1/2 mix-blend-difference hidden md:block"
@@ -43,7 +56,6 @@ function CustomCursor() {
           className="rounded-full border border-white"
         />
       </motion.div>
-      {/* Inner dot */}
       <motion.div
         style={{ x, y }}
         className="pointer-events-none fixed top-0 left-0 z-[9999] -translate-x-1/2 -translate-y-1/2 mix-blend-difference hidden md:block"
@@ -126,8 +138,8 @@ function Header() {
 ============================ */
 function Hero() {
   return (
-    <section id="top" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Animated background grid */}
+    <section id="top" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16">
+      {/* Background grid */}
       <div className="absolute inset-0 opacity-[0.07]"
         style={{
           backgroundImage:
@@ -142,53 +154,111 @@ function Hero() {
         className="absolute w-[500px] h-[500px] rounded-full bg-white blur-[120px]"
       />
 
-      <div className="relative z-10 text-center px-6">
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.8 }}
-          className="text-xs md:text-sm uppercase tracking-[0.4em] text-white/50 mb-6"
-        >
-          UI/UX Designer • AI
-        </motion.p>
+      <div className="relative z-10 max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center w-full">
+        {/* LEFT — Text */}
+        <div className="text-center md:text-left order-2 md:order-1">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+            className="text-xs md:text-sm uppercase tracking-[0.4em] text-white/50 mb-6"
+          >
+            UI/UX Designer • AI
+          </motion.p>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.9 }}
-          className="text-5xl md:text-8xl font-bold tracking-tighter text-white leading-[0.95]"
-        >
-          Maitri Shah
-        </motion.h1>
+          <motion.h1
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.9 }}
+            className="text-5xl md:text-7xl font-bold tracking-tighter text-white leading-[0.95]"
+          >
+            Maitri Shah
+          </motion.h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-          className="mt-6 text-sm md:text-base text-white/60 max-w-xl mx-auto"
-        >
-          Crafting intuitive digital experiences with a blend of design thinking
-          and AI-driven workflows.
-        </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            className="mt-6 text-sm md:text-base text-white/60 max-w-lg mx-auto md:mx-0"
+          >
+            Crafting intuitive digital experiences with a blend of design thinking
+            and AI-driven workflows.
+          </motion.p>
 
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7, duration: 0.8 }}
+            className="mt-10 flex items-center justify-center md:justify-start gap-4"
+          >
+            <a
+              href="#work"
+              className="px-6 py-3 rounded-full bg-white text-black text-sm font-medium hover:bg-white/90 transition"
+            >
+              View Work
+            </a>
+            <a
+              href="#contact"
+              className="px-6 py-3 rounded-full border border-white/30 text-white text-sm font-medium hover:bg-white/10 transition"
+            >
+              Get in Touch
+            </a>
+          </motion.div>
+        </div>
+
+        {/* RIGHT — Photo */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7, duration: 0.8 }}
-          className="mt-10 flex items-center justify-center gap-4"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.4, duration: 1, ease: [0.22, 1, 0.36, 1] }}
+          className="relative flex items-center justify-center order-1 md:order-2"
+          data-hover
         >
-          <a
-            href="#work"
-            className="px-6 py-3 rounded-full bg-white text-black text-sm font-medium hover:bg-white/90 transition"
+          {/* Rotating dashed ring */}
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+            className="absolute w-[280px] h-[280px] md:w-[380px] md:h-[380px] rounded-full border border-dashed border-white/20"
+          />
+          {/* Second rotating ring */}
+          <motion.div
+            animate={{ rotate: -360 }}
+            transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
+            className="absolute w-[320px] h-[320px] md:w-[440px] md:h-[440px] rounded-full border border-white/10"
+          />
+          {/* Glow behind photo */}
+          <div className="absolute w-[260px] h-[260px] md:w-[340px] md:h-[340px] rounded-full bg-white/20 blur-[80px]" />
+
+          {/* Photo */}
+          <motion.div
+            whileHover={{ scale: 1.03 }}
+            transition={{ type: "spring", stiffness: 200, damping: 20 }}
+            className="relative w-[240px] h-[240px] md:w-[340px] md:h-[340px] rounded-full overflow-hidden border border-white/20 grayscale hover:grayscale-0 transition-all duration-700"
           >
-            View Work
-          </a>
-          <a
-            href="#contact"
-            className="px-6 py-3 rounded-full border border-white/30 text-white text-sm font-medium hover:bg-white/10 transition"
+            <img
+              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80"
+              alt="Maitri Shah"
+              className="w-full h-full object-cover"
+            />
+            {/* Subtle overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+          </motion.div>
+
+          {/* Floating badges */}
+          <motion.div
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 3, repeat: Infinity }}
+            className="absolute top-4 -left-2 md:top-8 md:left-0 bg-black/80 backdrop-blur border border-white/20 rounded-full px-4 py-2 text-xs text-white"
           >
-            Get in Touch
-          </a>
+            ✦ UI/UX
+          </motion.div>
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 3.5, repeat: Infinity }}
+            className="absolute bottom-4 -right-2 md:bottom-8 md:right-0 bg-black/80 backdrop-blur border border-white/20 rounded-full px-4 py-2 text-xs text-white"
+          >
+            ⚡ AI Workflow
+          </motion.div>
         </motion.div>
       </div>
 
@@ -424,7 +494,6 @@ function Skills() {
         })}
       </div>
 
-      {/* Education */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -445,7 +514,6 @@ function Skills() {
         </div>
       </motion.div>
 
-      {/* Target role */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -524,8 +592,8 @@ function Contact() {
   const items = [
     { icon: Mail, label: "Email", value: "shahmaitri123.ms@gmail.com", href: "mailto:shahmaitri123.ms@gmail.com" },
     { icon: Phone, label: "Phone", value: "+91 7990904219", href: "tel:+917990904219" },
-    { icon: FaLinkedin, label: "LinkedIn", value: "linkedin.com/in/shahmaitri", href: "https://www.linkedin.com/feed/" },
-    { icon: FaBehance, label: "Behance", value: "behance.net/shahmaitri", href: "https://www.behance.net/shahmaitri" },
+    { icon: LinkedinIcon, label: "LinkedIn", value: "linkedin.com/in/shahmaitri", href: "https://www.linkedin.com/feed/" },
+    { icon: BehanceIcon, label: "Behance", value: "behance.net/shahmaitri", href: "https://www.behance.net/shahmaitri" },
     { icon: MapPin, label: "Location", value: "Mumbai · Open to Ahmedabad / Remote", href: null },
   ];
 
@@ -556,8 +624,8 @@ function Contact() {
               whileHover={{ x: 4 }}
               className="flex items-center gap-4 border border-white/10 rounded-2xl p-5 hover:border-white/30 hover:bg-white/[0.03] transition"
             >
-              <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center shrink-0">
-                <Icon size={16} className="text-white/80" />
+              <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center shrink-0 text-white/80">
+                <Icon size={16} />
               </div>
               <div className="min-w-0">
                 <p className="text-xs uppercase tracking-widest text-white/40">{it.label}</p>
