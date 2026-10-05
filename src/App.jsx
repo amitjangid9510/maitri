@@ -37,6 +37,64 @@ const KlingIcon = () => (<svg viewBox="0 0 24 24" className="w-5 h-5"><circle cx
 const ClaudeCodeIcon = () => (<svg viewBox="0 0 24 24" className="w-5 h-5"><circle cx="12" cy="12" r="11" fill="#d97757"/><path fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" d="M9 9l-3 3 3 3M15 9l3 3-3 3"/></svg>);
 
 /* ============================
+   FLOATING BUBBLES (About section)
+   — Uddte hue bubbles jo section open hote hi activate hote hain
+============================ */
+function FloatingBubbles({ trigger }) {
+  // Different sizes, colors, positions for each bubble
+  const bubbles = [
+    { size: 14, x: "8%", delay: 0, duration: 6, color: "#60a5fa" },
+    { size: 22, x: "18%", delay: 0.6, duration: 7, color: "#a78bfa" },
+    { size: 10, x: "28%", delay: 1.2, duration: 5.5, color: "#f472b6" },
+    { size: 18, x: "38%", delay: 0.3, duration: 7.5, color: "#34d399" },
+    { size: 12, x: "50%", delay: 1.5, duration: 6.5, color: "#22d3ee" },
+    { size: 26, x: "62%", delay: 0.8, duration: 8, color: "#fb923c" },
+    { size: 16, x: "72%", delay: 1.8, duration: 6, color: "#a855f7" },
+    { size: 20, x: "82%", delay: 0.2, duration: 7, color: "#ec4899" },
+    { size: 12, x: "92%", delay: 1.1, duration: 5.8, color: "#3b82f6" },
+    { size: 15, x: "45%", delay: 2.0, duration: 6.8, color: "#10b981" },
+  ];
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {bubbles.map((b, i) => (
+        <motion.div
+          key={i}
+          className="absolute rounded-full"
+          style={{
+            left: b.x,
+            bottom: -40,
+            width: b.size,
+            height: b.size,
+            background: `radial-gradient(circle at 30% 30%, ${b.color}ee, ${b.color}80 60%, ${b.color}30)`,
+            boxShadow: `0 0 12px ${b.color}80, inset -2px -2px 4px ${b.color}50, inset 2px 2px 4px #ffffff40`,
+          }}
+          initial={{ y: 0, opacity: 0, scale: 0 }}
+          animate={
+            trigger
+              ? {
+                  y: [-40, -700],
+                  opacity: [0, 0.9, 0.9, 0],
+                  scale: [0.4, 1, 1, 1.1],
+                  x: [0, i % 2 === 0 ? 30 : -30, i % 3 === 0 ? -20 : 20, 0],
+                }
+              : { y: 0, opacity: 0, scale: 0 }
+          }
+          transition={{
+            duration: b.duration,
+            delay: b.delay,
+            repeat: Infinity,
+            repeatDelay: 1.5,
+            ease: "easeOut",
+            times: [0, 0.1, 0.85, 1],
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+/* ============================
    SPINNING NUMBER
 ============================ */
 function SpinningNumber({ value, inView }) {
@@ -77,10 +135,7 @@ function SpinningNumber({ value, inView }) {
 
   return (
     <span className="relative inline-flex items-center">
-      <span
-        className={`inline-block tabular-nums transition-all duration-300 ${spinning ? "blur-[1.5px]" : ""}`}
-        style={{ transform: spinning ? "scale(1.05)" : "scale(1)" }}
-      >
+      <span className={`inline-block tabular-nums transition-all duration-300 ${spinning ? "blur-[1.5px]" : ""}`} style={{ transform: spinning ? "scale(1.05)" : "scale(1)" }}>
         {displayNumber}
       </span>
       <span className="ml-0.5">{suffix}</span>
@@ -203,8 +258,8 @@ function WindowsHandCursor() {
 ============================ */
 function ScrollProgress() {
   const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
-  return <motion.div style={{ scaleX }} className="fixed top-0 left-0 right-0 h-[2px] bg-white origin-left z-[100]" />;
+  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+  return <motion.div style={{ scaleX, originX: 0 }} className="fixed top-0 left-0 right-0 h-[2px] bg-white z-[100]" />;
 }
 
 /* ============================
@@ -303,10 +358,7 @@ function Hero() {
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
 
       {!isTouch && (
-        <motion.div
-          className="absolute inset-0 bg-black pointer-events-none"
-          style={{ WebkitMaskImage: maskImage, maskImage: maskImage }}
-        />
+        <motion.div className="absolute inset-0 bg-black pointer-events-none" style={{ WebkitMaskImage: maskImage, maskImage: maskImage }} />
       )}
       {isTouch && (
         <div className="absolute inset-0 bg-black pointer-events-none" style={{ opacity: 0.92 }} />
@@ -330,10 +382,7 @@ function Hero() {
       )}
 
       {!isTouch && (
-        <motion.div
-          className="absolute pointer-events-none"
-          style={{ left: springX, top: springY, opacity: isHovering ? 1 : 0, transition: "opacity 0.45s ease" }}
-        >
+        <motion.div className="absolute pointer-events-none" style={{ left: springX, top: springY, opacity: isHovering ? 1 : 0, transition: "opacity 0.45s ease" }}>
           {[0, 1, 2, 3].map((i) => (
             <motion.div key={i} className="absolute border border-amber-100/30" initial={{ width: 40, height: 40, x: -20, y: -20, opacity: 0.7, borderRadius: "50% 45% 55% 45% / 45% 55% 45% 55%" }} animate={{ width: 340 + i * 65, height: 300 + i * 58, x: -(170 + i * 33), y: -(150 + i * 29), opacity: 0, borderRadius: ["50% 45% 55% 45% / 45% 55% 45% 55%", "45% 55% 50% 50% / 55% 45% 50% 50%", "55% 40% 45% 55% / 40% 55% 45% 60%"], rotate: [0, 12, -8, 15] }} transition={{ duration: 3.4, repeat: Infinity, delay: i * 0.65, ease: "easeOut" }} />
           ))}
@@ -399,7 +448,7 @@ function SectionTitle({ label, title, dark = false }) {
 }
 
 /* ============================
-   ABOUT — no slide-in animation, content visible immediately
+   ABOUT — WHITE BG WITH FLOATING BUBBLES
 ============================ */
 function About() {
   const stats = [
@@ -413,11 +462,16 @@ function About() {
     { role: "UX/UI Designer", company: "Ivvotiontech", time: "Apr 2023 — Mar 2024", points: ["Designed websites and graphic posts"], glow: "#f97316" },
   ];
 
+  const sectionRef = useRef(null);
   const statsRef = useRef(null);
   const statsInView = useInView(statsRef, { once: true, margin: "-80px" });
+  const sectionInView = useInView(sectionRef, { once: false, margin: "-100px" });
 
   return (
-    <section id="about" className="relative py-24 md:py-32 px-6 bg-white text-black overflow-hidden">
+    <section ref={sectionRef} id="about" className="relative py-24 md:py-32 px-6 bg-white text-black overflow-hidden">
+      {/* Floating bubbles — trigger when section is in view */}
+      <FloatingBubbles trigger={sectionInView} />
+
       <motion.div animate={{ x: [0, 100, 0], y: [0, -50, 0] }} transition={{ duration: 22, repeat: Infinity }} className="absolute top-20 left-10 w-80 h-80 bg-blue-300/10 rounded-full blur-[120px] pointer-events-none" />
       <motion.div animate={{ x: [0, -80, 0], y: [0, 60, 0] }} transition={{ duration: 26, repeat: Infinity }} className="absolute bottom-20 right-10 w-80 h-80 bg-pink-300/10 rounded-full blur-[120px] pointer-events-none" />
 
@@ -425,7 +479,6 @@ function About() {
         <SectionTitle label="01 — About" title="About Me" dark />
 
         <div className="grid md:grid-cols-2 gap-12 items-start">
-          {/* LEFT — bio. No slide animation */}
           <div className="space-y-5 text-black/70 leading-relaxed">
             <p>I'm <span className="text-black font-medium">Maitri Shah</span>, a UX/UI Designer based in Mumbai with 2+ years of experience designing intuitive websites, landing pages, and microsites across real estate, healthcare, and education.</p>
             <p>I blend user research and design systems with AI-powered workflows — using tools like ChatGPT, Claude, Nano Banana, and Kling to generate images, videos, and accelerate delivery without compromising quality.</p>
@@ -437,34 +490,19 @@ function About() {
             </div>
           </div>
 
-          {/* RIGHT — stats + experience. No slide animation */}
           <div className="space-y-8">
-            {/* STATS — spin on view, colorful on hover only */}
             <div ref={statsRef} className="grid grid-cols-3 gap-4">
-              {stats.map((s, i) => (
+              {stats.map((s) => (
                 <div
                   key={s.label}
                   data-hover
                   className="group relative border border-black/10 rounded-2xl p-4 text-center overflow-hidden bg-white cursor-default transition-transform duration-300 hover:-translate-y-1.5 hover:scale-105"
                 >
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-                    className="absolute -inset-24 opacity-0 group-hover:opacity-60 transition-opacity duration-500 pointer-events-none"
-                    style={{ background: `conic-gradient(from 0deg, transparent, ${s.glow}, transparent 30%)`, filter: "blur(20px)" }}
-                  />
+                  <motion.div animate={{ rotate: 360 }} transition={{ duration: 6, repeat: Infinity, ease: "linear" }} className="absolute -inset-24 opacity-0 group-hover:opacity-60 transition-opacity duration-500 pointer-events-none" style={{ background: `conic-gradient(from 0deg, transparent, ${s.glow}, transparent 30%)`, filter: "blur(20px)" }} />
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ background: `radial-gradient(circle at center, ${s.glow}25, transparent 70%)` }} />
                   <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ boxShadow: `inset 0 0 20px ${s.glow}40` }} />
                   <div className="relative z-10">
-                    <div
-                      className="text-2xl md:text-3xl font-bold text-black transition-colors duration-300 group-hover:text-transparent group-hover:bg-clip-text"
-                      style={{
-                        backgroundImage: `linear-gradient(135deg, ${s.glow}, #a855f7)`,
-                        WebkitBackgroundClip: "text",
-                        backgroundClip: "text",
-                        backgroundColor: "transparent",
-                      }}
-                    >
+                    <div className="text-2xl md:text-3xl font-bold text-black transition-colors duration-300 group-hover:text-transparent group-hover:bg-clip-text" style={{ backgroundImage: `linear-gradient(135deg, ${s.glow}, #a855f7)`, WebkitBackgroundClip: "text", backgroundClip: "text", backgroundColor: "transparent" }}>
                       <SpinningNumber value={s.value} inView={statsInView} />
                     </div>
                     <div className="text-[10px] md:text-xs text-black/50 mt-1 leading-tight transition-colors group-hover:text-black/80">{s.label}</div>
@@ -473,15 +511,10 @@ function About() {
               ))}
             </div>
 
-            {/* EXPERIENCE — plain default, colorful on hover */}
             <div className="border border-black/10 rounded-2xl p-6 space-y-4 bg-black/[0.02]">
               <h3 className="text-sm uppercase tracking-widest text-black/40">Experience</h3>
               {experiences.map((exp) => (
-                <div
-                  key={exp.company}
-                  data-hover
-                  className="group relative border-l-2 border-black/20 pl-4 py-2 rounded-r-lg transition-all duration-300 cursor-default hover:translate-x-1.5"
-                >
+                <div key={exp.company} data-hover className="group relative border-l-2 border-black/20 pl-4 py-2 rounded-r-lg transition-all duration-300 cursor-default hover:translate-x-1.5">
                   <div className="absolute inset-0 -z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-r-lg" style={{ background: `linear-gradient(90deg, ${exp.glow}20, transparent 80%)` }} />
                   <div className="absolute left-0 top-0 bottom-0 w-[3px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full" style={{ background: `linear-gradient(to bottom, ${exp.glow}, transparent)` }} />
                   <div className="relative z-10">
@@ -509,7 +542,29 @@ function About() {
 }
 
 /* ============================
-   SKILLS
+   SCROLL-LINKED REVEAL
+============================ */
+function ScrollReveal({ children }) {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "center center"] });
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+  const opacity = useTransform(smoothProgress, [0, 1], [0, 1]);
+  const y = useTransform(smoothProgress, [0, 1], [120, 0]);
+  const rotateX = useTransform(smoothProgress, [0, 1], [-45, 0]);
+  const scale = useTransform(smoothProgress, [0, 1], [0.85, 1]);
+
+  return (
+    <motion.div
+      ref={ref}
+      style={{ opacity, y, rotateX, scale, transformPerspective: 1200, transformOrigin: "center bottom", willChange: "transform, opacity" }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+/* ============================
+   SKILLS — BLACK BG, MOTION.DEV SCROLL-LINKED REVEAL
 ============================ */
 function Skills() {
   const uxSkills = [
@@ -522,83 +577,127 @@ function Skills() {
     { name: "Design Systems", color: "#a78bfa" }, { name: "Prototyping", color: "#34d399" },
     { name: "Interaction Design", color: "#fb923c" }, { name: "Micro-interactions", color: "#22d3ee" },
   ];
+
   const tools = [
-    { name: "Figma", Icon: FigmaIcon, color: "#a259ff" }, { name: "Framer", Icon: FramerIcon, color: "#ffffff" },
-    { name: "Photoshop", Icon: PhotoshopIcon, color: "#31a8ff" }, { name: "Illustrator", Icon: IllustratorIcon, color: "#ff9a00" },
-    { name: "Notion", Icon: NotionIcon, color: "#ffffff" },
-  ];
-  const aiTools = [
-    { name: "ChatGPT", Icon: ChatGPTIcon, color: "#10a37f" }, { name: "Claude", Icon: ClaudeIcon, color: "#d97757" },
-    { name: "Claude Code", Icon: ClaudeCodeIcon, color: "#d97757" }, { name: "Gemini", Icon: GeminiIcon, color: "#9b72cb" },
-    { name: "Nano Banana", Icon: NanoBananaIcon, color: "#ffe066" }, { name: "Kling", Icon: KlingIcon, color: "#ffffff" },
+    { name: "Figma", Icon: FigmaIcon, color: "#a259ff", tagline: "Primary Design Tool", desc: "Wireframes · Prototypes · Design Systems" },
+    { name: "Framer", Icon: FramerIcon, color: "#ffffff", tagline: "Motion & Prototypes", desc: "Interactive prototypes · Landing pages" },
+    { name: "Photoshop", Icon: PhotoshopIcon, color: "#31a8ff", tagline: "Raster Editing", desc: "Image editing · Mockups · Assets" },
+    { name: "Illustrator", Icon: IllustratorIcon, color: "#ff9a00", tagline: "Vector Design", desc: "Icons · Logos · Illustrations" },
+    { name: "Notion", Icon: NotionIcon, color: "#ffffff", tagline: "Documentation", desc: "Case studies · Notes · Project tracking" },
   ];
 
-  const ColorPill = ({ name, color, delay }) => (
-    <motion.span initial={{ opacity: 0, scale: 0.8, y: 10 }} whileInView={{ opacity: 1, scale: 1, y: 0 }} viewport={{ once: true }} transition={{ delay, duration: 0.5, type: "spring" }} whileHover={{ scale: 1.08, y: -3 }} className="relative text-xs md:text-sm px-4 py-2 rounded-full border text-white/90 cursor-default overflow-hidden group" style={{ borderColor: `${color}40`, backgroundColor: `${color}15` }}>
-      <motion.span animate={{ scale: [1, 1.4, 1], opacity: [0.6, 1, 0.6] }} transition={{ duration: 2, repeat: Infinity, delay }} className="absolute left-2 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full" style={{ backgroundColor: color, boxShadow: `0 0 8px ${color}` }} />
+  const aiTools = [
+    { name: "ChatGPT", Icon: ChatGPTIcon, color: "#10a37f", tagline: "Content & Ideation", desc: "Copy · UX writing · Research" },
+    { name: "Claude", Icon: ClaudeIcon, color: "#d97757", tagline: "Deep Reasoning", desc: "Long-form · Analysis · UX strategy" },
+    { name: "Claude Code", Icon: ClaudeCodeIcon, color: "#d97757", tagline: "AI-Assisted Dev", desc: "Framer Motion · HTML/CSS · Prototypes" },
+    { name: "Gemini", Icon: GeminiIcon, color: "#9b72cb", tagline: "Multimodal AI", desc: "Images · Video · Search" },
+    { name: "Nano Banana", Icon: NanoBananaIcon, color: "#ffe066", tagline: "AI Image Gen", desc: "Concept art · Hero images" },
+    { name: "Kling", Icon: KlingIcon, color: "#ffffff", tagline: "AI Video Gen", desc: "Motion · Promo videos" },
+  ];
+
+  const ColorPill = ({ name, color, index }) => (
+    <motion.span
+      initial={{ opacity: 0, scale: 0.8, y: 10 }}
+      whileInView={{ opacity: 1, scale: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.05, duration: 0.4, type: "spring" }}
+      whileHover={{ scale: 1.08, y: -3 }}
+      className="relative text-xs md:text-sm px-4 py-2 rounded-full border text-white/90 cursor-default overflow-hidden group"
+      style={{ borderColor: `${color}40`, backgroundColor: `${color}15` }}
+    >
+      <motion.span animate={{ scale: [1, 1.4, 1], opacity: [0.6, 1, 0.6] }} transition={{ duration: 2, repeat: Infinity, delay: index * 0.1 }} className="absolute left-2 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full" style={{ backgroundColor: color, boxShadow: `0 0 8px ${color}` }} />
       <span className="pl-3">{name}</span>
       <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `radial-gradient(circle at center, ${color}30, transparent 70%)` }} />
     </motion.span>
   );
 
-  const ToolCard = ({ name, Icon, color, delay }) => (
-    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay, duration: 0.5 }} whileHover={{ y: -6, scale: 1.05 }} data-hover className="relative flex flex-col items-center justify-center gap-3 p-5 rounded-2xl border border-white/10 hover:border-white/30 transition-all overflow-hidden group" style={{ backgroundColor: "rgba(255,255,255,0.02)" }}>
-      <motion.div animate={{ rotate: 360 }} transition={{ duration: 8, repeat: Infinity, ease: "linear" }} className="absolute -inset-20 opacity-0 group-hover:opacity-40 transition-opacity" style={{ background: `conic-gradient(from 0deg, transparent, ${color}, transparent 30%)` }} />
-      <div className="relative z-10 flex flex-col items-center gap-3">
-        <motion.div whileHover={{ rotate: [0, -10, 10, 0] }} transition={{ duration: 0.5 }}><Icon /></motion.div>
-        <span className="text-xs text-white/70 group-hover:text-white transition-colors">{name}</span>
+  const BigToolCard = ({ name, Icon, color, tagline, desc }) => (
+    <motion.div
+      whileHover={{ y: -8, scale: 1.03 }}
+      data-hover
+      className="group relative flex flex-col items-start gap-4 p-6 rounded-3xl border border-white/10 hover:border-white/30 transition-all overflow-hidden bg-white/[0.02] cursor-default min-h-[180px]"
+    >
+      <motion.div animate={{ rotate: 360 }} transition={{ duration: 8, repeat: Infinity, ease: "linear" }} className="absolute -inset-32 opacity-0 group-hover:opacity-50 transition-opacity duration-500 pointer-events-none" style={{ background: `conic-gradient(from 0deg, transparent, ${color}, transparent 30%)`, filter: "blur(28px)" }} />
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ background: `radial-gradient(circle at top left, ${color}20, transparent 60%)` }} />
+
+      <div className="relative z-10 w-full">
+        <div className="flex items-start justify-between gap-3 mb-2">
+          <div className="w-14 h-14 rounded-2xl border border-white/15 flex items-center justify-center transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6" style={{ backgroundColor: "rgba(255,255,255,0.03)" }}>
+            <div className="scale-150"><Icon /></div>
+          </div>
+          <motion.div className="text-white/30 group-hover:text-white transition-colors" whileHover={{ x: 3, y: -3 }}>
+            <ArrowUpRight size={18} />
+          </motion.div>
+        </div>
+
+        <h4 className="text-white font-semibold text-lg mb-1 transition-transform duration-300 group-hover:translate-x-1">{name}</h4>
+        <p className="text-xs font-medium mb-2 transition-colors" style={{ color }}>{tagline}</p>
+        <p className="text-sm text-white/50 leading-relaxed group-hover:text-white/75 transition-colors">{desc}</p>
       </div>
+
+      <div className="absolute bottom-0 left-0 right-0 h-[3px] opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `linear-gradient(90deg, transparent, ${color}, transparent)` }} />
     </motion.div>
   );
 
   return (
-    <Section id="skills" className="border-t border-white/5 relative overflow-hidden">
+    <section id="skills" className="relative py-24 md:py-32 px-6 border-t border-white/5 overflow-hidden bg-black">
       <motion.div animate={{ x: [0, 100, 0], y: [0, -50, 0] }} transition={{ duration: 20, repeat: Infinity }} className="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-[100px] pointer-events-none" />
       <motion.div animate={{ x: [0, -80, 0], y: [0, 60, 0] }} transition={{ duration: 25, repeat: Infinity }} className="absolute bottom-20 right-10 w-72 h-72 bg-pink-500/10 rounded-full blur-[100px] pointer-events-none" />
       <motion.div animate={{ x: [0, 50, 0], y: [0, 80, 0] }} transition={{ duration: 18, repeat: Infinity }} className="absolute top-1/2 left-1/2 w-64 h-64 bg-purple-500/10 rounded-full blur-[100px] pointer-events-none" />
-      <div className="relative z-10">
+
+      <div className="relative z-10 max-w-6xl mx-auto">
         <SectionTitle label="02 — Skills" title="Skills & Tools" />
-        <div className="grid md:grid-cols-2 gap-6 mb-6">
+
+        <div className="grid md:grid-cols-2 gap-6 mb-14">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.7 }} className="group border border-white/10 rounded-3xl p-8 hover:border-blue-400/30 transition-colors relative overflow-hidden bg-gradient-to-br from-blue-500/[0.03] to-purple-500/[0.03]">
             <div className="flex items-center gap-3 mb-6">
               <motion.div animate={{ rotate: [0, 360] }} transition={{ duration: 12, repeat: Infinity, ease: "linear" }} className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-white text-xs font-bold">UX</motion.div>
-              <h3 className="text-xl font-semibold text-white">UX</h3>
+              <h3 className="text-xl font-semibold text-white">UX Skills</h3>
             </div>
             <div className="flex flex-wrap gap-2">
-              {uxSkills.map((s, i) => (<ColorPill key={s.name} name={s.name} color={s.color} delay={i * 0.06} />))}
+              {uxSkills.map((s, i) => (<ColorPill key={s.name} name={s.name} color={s.color} index={i} />))}
             </div>
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ delay: 0.1, duration: 0.7 }} className="group border border-white/10 rounded-3xl p-8 hover:border-pink-400/30 transition-colors relative overflow-hidden bg-gradient-to-br from-pink-500/[0.03] to-orange-500/[0.03]">
             <div className="flex items-center gap-3 mb-6">
               <motion.div animate={{ scale: [1, 1.15, 1] }} transition={{ duration: 2, repeat: Infinity }} className="w-8 h-8 rounded-lg bg-gradient-to-br from-pink-400 to-orange-500 flex items-center justify-center text-white text-xs font-bold">✦</motion.div>
-              <h3 className="text-xl font-semibold text-white">Design</h3>
+              <h3 className="text-xl font-semibold text-white">Design Skills</h3>
             </div>
             <div className="flex flex-wrap gap-2">
-              {designSkills.map((s, i) => (<ColorPill key={s.name} name={s.name} color={s.color} delay={i * 0.06 + 0.2} />))}
+              {designSkills.map((s, i) => (<ColorPill key={s.name} name={s.name} color={s.color} index={i} />))}
             </div>
           </motion.div>
         </div>
-        <div className="grid md:grid-cols-2 gap-6">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.7 }} className="border border-white/10 rounded-3xl p-8 relative overflow-hidden bg-gradient-to-br from-cyan-500/[0.03] to-blue-500/[0.03]">
-            <div className="flex items-center gap-3 mb-6">
-              <motion.div animate={{ rotate: [0, 15, -15, 0] }} transition={{ duration: 3, repeat: Infinity }} className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-white text-xs font-bold">⚙</motion.div>
-              <h3 className="text-xl font-semibold text-white">Tools</h3>
-            </div>
-            <div className="grid grid-cols-3 sm:grid-cols-5 gap-3">
-              {tools.map((t, i) => (<ToolCard key={t.name} name={t.name} Icon={t.Icon} color={t.color} delay={i * 0.08} />))}
-            </div>
-          </motion.div>
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ delay: 0.1, duration: 0.7 }} className="border border-white/10 rounded-3xl p-8 relative overflow-hidden bg-gradient-to-br from-purple-500/[0.03] to-pink-500/[0.03]">
-            <div className="flex items-center gap-3 mb-6">
-              <motion.div animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }} transition={{ duration: 6, repeat: Infinity }} className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center text-white text-xs font-bold">✨</motion.div>
-              <h3 className="text-xl font-semibold text-white">AI</h3>
-            </div>
-            <div className="grid grid-cols-3 sm:grid-cols-6 gap-3">
-              {aiTools.map((t, i) => (<ToolCard key={t.name} name={t.name} Icon={t.Icon} color={t.color} delay={i * 0.08} />))}
+
+        <div className="mb-14">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="flex items-center gap-3 mb-8">
+            <motion.div animate={{ rotate: [0, 15, -15, 0] }} transition={{ duration: 3, repeat: Infinity }} className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-white text-base font-bold shadow-lg shadow-cyan-500/30">⚙</motion.div>
+            <div>
+              <h3 className="text-2xl font-semibold text-white">Tools I Use</h3>
+              <p className="text-xs text-white/40 mt-1">Design & development stack</p>
             </div>
           </motion.div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {tools.map((t) => (<ScrollReveal key={t.name}><BigToolCard {...t} /></ScrollReveal>))}
+          </div>
         </div>
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="mt-10 border border-white/10 rounded-3xl p-8">
+
+        <div className="mb-14">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="flex items-center gap-3 mb-8">
+            <motion.div animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }} transition={{ duration: 6, repeat: Infinity }} className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center text-white text-base font-bold shadow-lg shadow-purple-500/30">✨</motion.div>
+            <div>
+              <h3 className="text-2xl font-semibold text-white">AI Tools</h3>
+              <p className="text-xs text-white/40 mt-1">AI-powered design & content workflow</p>
+            </div>
+          </motion.div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            {aiTools.map((t) => (<ScrollReveal key={t.name}><BigToolCard {...t} /></ScrollReveal>))}
+          </div>
+        </div>
+
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="border border-white/10 rounded-3xl p-8">
           <h3 className="text-sm uppercase tracking-widest text-white/40 mb-6">Education</h3>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="flex items-center gap-4">
@@ -611,12 +710,13 @@ function Skills() {
             </div>
           </div>
         </motion.div>
+
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="mt-10 text-center">
           <p className="text-xs uppercase tracking-[0.4em] text-white/40 mb-3">Target Role</p>
           <p className="text-2xl md:text-3xl font-bold text-white">UI/UX Designer <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">+</span> AI</p>
         </motion.div>
       </div>
-    </Section>
+    </section>
   );
 }
 
