@@ -125,7 +125,7 @@ function SpinningNumber({ value, inView }) {
 }
 
 /* ============================
-   CURSOR
+   CURSOR — hand + smiley + girl-laptop emoji
 ============================ */
 function WindowsHandCursor() {
   const x = useMotionValue(-100);
@@ -135,6 +135,7 @@ function WindowsHandCursor() {
   const [ripples, setRipples] = useState([]);
   const [isTouch, setIsTouch] = useState(false);
   const [inAbout, setInAbout] = useState(false);
+  const [inContact, setInContact] = useState(false);
 
   const springX = useSpring(x, { stiffness: 400, damping: 38, mass: 0.5 });
   const springY = useSpring(y, { stiffness: 400, damping: 38, mass: 0.5 });
@@ -147,13 +148,27 @@ function WindowsHandCursor() {
 
   useEffect(() => {
     const move = (e) => {
-      x.set(e.clientX); y.set(e.clientY);
+      x.set(e.clientX);
+      y.set(e.clientY);
       const el = e.target;
       setHovering(!!el.closest("a, button, [data-hover]"));
+
       const aboutEl = document.getElementById("about");
       if (aboutEl) {
         const rect = aboutEl.getBoundingClientRect();
-        setInAbout(e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom);
+        setInAbout(
+          e.clientX >= rect.left && e.clientX <= rect.right &&
+          e.clientY >= rect.top && e.clientY <= rect.bottom
+        );
+      }
+
+      const contactEl = document.getElementById("contact");
+      if (contactEl) {
+        const rect = contactEl.getBoundingClientRect();
+        setInContact(
+          e.clientX >= rect.left && e.clientX <= rect.right &&
+          e.clientY >= rect.top && e.clientY <= rect.bottom
+        );
       }
     };
     const down = (e) => {
@@ -185,9 +200,14 @@ function WindowsHandCursor() {
       </AnimatePresence>
 
       <motion.div style={{ x: springX, y: springY }} className="pointer-events-none fixed top-0 left-0 z-[9999] hidden md:block">
-        <motion.div animate={{ scale: clicking ? 0.85 : hovering ? 1.1 : inAbout ? 1.15 : 1 }} transition={{ type: "spring", stiffness: 500, damping: 26 }} style={{ transformOrigin: inAbout ? "50% 50%" : "7px 2px" }}>
+        <motion.div
+          animate={{ scale: clicking ? 0.85 : hovering ? 1.1 : inAbout || inContact ? 1.15 : 1 }}
+          transition={{ type: "spring", stiffness: 500, damping: 26 }}
+          style={{ transformOrigin: inAbout || inContact ? "50% 50%" : "7px 2px" }}
+        >
           <AnimatePresence mode="wait">
-            {inAbout ? (
+            {/* ABOUT: SMILEY */}
+            {inAbout && !inContact ? (
               <motion.div key="smiley" initial={{ scale: 0.4, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.4, opacity: 0 }} transition={{ duration: 0.12, ease: "easeOut" }} className="relative" style={{ marginLeft: "-16px", marginTop: "-16px" }}>
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
                   <circle cx="16" cy="16" r="15" fill="#FFD93D" stroke="#111" strokeWidth="1.5" />
@@ -198,7 +218,27 @@ function WindowsHandCursor() {
                   <circle cx="24" cy="18" r="1.6" fill="#FF8FA3" opacity="0.7" />
                 </svg>
               </motion.div>
+            ) : inContact ? (
+              /* CONTACT: 👩‍💻 Woman Technologist emoji */
+              <motion.div
+                key="girl-laptop"
+                initial={{ scale: 0.4, opacity: 0, rotate: -20 }}
+                animate={{ scale: 1, opacity: 1, rotate: 0 }}
+                exit={{ scale: 0.4, opacity: 0, rotate: 20 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+                className="relative select-none"
+                style={{ marginLeft: "-22px", marginTop: "-22px" }}
+              >
+                <motion.div
+                  animate={{ y: [0, -3, 0] }}
+                  transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+                  style={{ fontSize: "44px", lineHeight: 1, filter: "drop-shadow(0 4px 12px rgba(59,130,246,0.5))" }}
+                >
+                  👩‍💻
+                </motion.div>
+              </motion.div>
             ) : (
+              /* DEFAULT: HAND */
               <motion.div key="hand" initial={{ scale: 0.4, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.4, opacity: 0 }} transition={{ duration: 0.12, ease: "easeOut" }}>
                 <svg width="22" height="30" viewBox="0 0 22 30" fill="none" style={{ mixBlendMode: "difference" }}>
                   <path d="M7.5 1.5C7.5 0.671573 8.17157 0 9 0C9.82843 0 10.5 0.671573 10.5 1.5V15C10.5 15.2761 10.7239 15.5 11 15.5C11.2761 15.5 11.5 15.2761 11.5 15V5.5C11.5 4.67157 12.1716 4 13 4C13.8284 4 14.5 4.67157 14.5 5.5V15C14.5 15.2761 14.7239 15.5 15 15.5C15.2761 15.5 15.5 15.2761 15.5 15V8C15.5 7.17157 16.1716 6.5 17 6.5C17.8284 6.5 18.5 7.17157 18.5 8V15.5C18.5 15.7761 18.7239 16 19 16C19.2761 16 19.5 15.7761 19.5 15.5V12C19.5 11.1716 20.1716 10.5 21 10.5C21.8284 10.5 22.5 11.1716 22.5 12V19C22.5 25.0751 17.5751 30 11.5 30H11C4.92487 30 0 25.0751 0 19V8.5C0 7.67157 0.671573 7 1.5 7C2.32843 7 3 7.67157 3 8.5V14.5C3 14.7761 3.22386 15 3.5 15C3.77614 15 4 14.7761 4 14.5V3.5C4 2.67157 4.67157 2 5.5 2C6.32843 2 7 2.67157 7 3.5V14.5" fill="white" stroke="black" strokeWidth="1" strokeLinejoin="round" strokeLinecap="round" />
@@ -224,7 +264,7 @@ function ScrollProgress() {
 }
 
 /* ============================
-   DOWNLOAD RESUME BUTTON — attractive animated
+   DOWNLOAD RESUME BUTTON
 ============================ */
 function DownloadResumeButton({ variant = "primary" }) {
   const [clicked, setClicked] = useState(false);
@@ -235,7 +275,6 @@ function DownloadResumeButton({ variant = "primary" }) {
   };
 
   if (variant === "secondary") {
-    // Smaller header version
     return (
       <motion.a
         href="/Maitri_Shah_Resume.pdf"
@@ -246,31 +285,13 @@ function DownloadResumeButton({ variant = "primary" }) {
         whileTap={{ scale: 0.95 }}
         className="group relative inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/30 text-white text-xs md:text-sm font-medium overflow-hidden transition-colors hover:border-white/60"
       >
-        {/* Shine sweep */}
-        <motion.span
-          className="absolute inset-0 pointer-events-none"
-          initial={{ x: "-100%" }}
-          animate={{ x: ["-100%", "200%"] }}
-          transition={{ duration: 2.2, repeat: Infinity, repeatDelay: 2, ease: "easeInOut" }}
-          style={{
-            background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent)",
-            width: "60%",
-          }}
-        />
-        {/* Arrow icon with bounce */}
-        <motion.span
-          animate={{ y: [0, 3, 0] }}
-          transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
-          className="relative z-10"
-        >
-          <Download size={14} />
-        </motion.span>
+        <motion.span className="absolute inset-0 pointer-events-none" initial={{ x: "-100%" }} animate={{ x: ["-100%", "200%"] }} transition={{ duration: 2.2, repeat: Infinity, repeatDelay: 2, ease: "easeInOut" }} style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent)", width: "60%" }} />
+        <motion.span animate={{ y: [0, 3, 0] }} transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }} className="relative z-10"><Download size={14} /></motion.span>
         <span className="relative z-10">Resume</span>
       </motion.a>
     );
   }
 
-  // Primary hero version — big, bold, animated
   return (
     <motion.a
       href="/Maitri_Shah_Resume.pdf"
@@ -282,40 +303,11 @@ function DownloadResumeButton({ variant = "primary" }) {
       className="group relative inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white text-sm font-medium overflow-hidden shadow-lg shadow-purple-500/30"
       style={{ backgroundSize: "200% 100%" }}
     >
-      {/* Animated gradient shift */}
-      <motion.span
-        className="absolute inset-0"
-        animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-        style={{
-          background: "linear-gradient(90deg, #3b82f6, #a855f7, #ec4899, #a855f7, #3b82f6)",
-          backgroundSize: "200% 100%",
-        }}
-      />
-      {/* Shine sweep */}
-      <motion.span
-        className="absolute inset-0 pointer-events-none"
-        initial={{ x: "-100%" }}
-        animate={{ x: ["-100%", "200%"] }}
-        transition={{ duration: 2, repeat: Infinity, repeatDelay: 1.5, ease: "easeInOut" }}
-        style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)", width: "50%" }}
-      />
-      {/* Pulsing ring */}
-      <motion.span
-        className="absolute inset-0 rounded-full pointer-events-none"
-        animate={{ boxShadow: ["0 0 0 0 rgba(168,85,247,0.6)", "0 0 0 12px rgba(168,85,247,0)"] }}
-        transition={{ duration: 1.8, repeat: Infinity, ease: "easeOut" }}
-      />
-      {/* Content */}
-      <motion.span
-        animate={{ y: [0, 3, 0] }}
-        transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
-        className="relative z-10 flex items-center"
-      >
-        <Download size={16} />
-      </motion.span>
+      <motion.span className="absolute inset-0" animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }} transition={{ duration: 4, repeat: Infinity, ease: "linear" }} style={{ background: "linear-gradient(90deg, #3b82f6, #a855f7, #ec4899, #a855f7, #3b82f6)", backgroundSize: "200% 100%" }} />
+      <motion.span className="absolute inset-0 pointer-events-none" initial={{ x: "-100%" }} animate={{ x: ["-100%", "200%"] }} transition={{ duration: 2, repeat: Infinity, repeatDelay: 1.5, ease: "easeInOut" }} style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)", width: "50%" }} />
+      <motion.span className="absolute inset-0 rounded-full pointer-events-none" animate={{ boxShadow: ["0 0 0 0 rgba(168,85,247,0.6)", "0 0 0 12px rgba(168,85,247,0)"] }} transition={{ duration: 1.8, repeat: Infinity, ease: "easeOut" }} />
+      <motion.span animate={{ y: [0, 3, 0] }} transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }} className="relative z-10 flex items-center"><Download size={16} /></motion.span>
       <span className="relative z-10">{clicked ? "Downloading..." : "Download Resume"}</span>
-      {/* Confetti burst on click */}
       <AnimatePresence>
         {clicked && (
           <>
@@ -324,22 +316,10 @@ function DownloadResumeButton({ variant = "primary" }) {
                 key={i}
                 className="absolute pointer-events-none"
                 initial={{ x: 0, y: 0, opacity: 1, scale: 1 }}
-                animate={{
-                  x: (i % 2 === 0 ? 1 : -1) * (20 + i * 8),
-                  y: -20 - (i % 3) * 15,
-                  opacity: 0,
-                  scale: 0.3,
-                }}
+                animate={{ x: (i % 2 === 0 ? 1 : -1) * (20 + i * 8), y: -20 - (i % 3) * 15, opacity: 0, scale: 0.3 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.9, ease: "easeOut" }}
-                style={{
-                  left: "50%",
-                  top: "50%",
-                  width: 6,
-                  height: 6,
-                  borderRadius: "50%",
-                  background: ["#3b82f6", "#a855f7", "#ec4899", "#10b981", "#f59e0b"][i % 5],
-                }}
+                style={{ left: "50%", top: "50%", width: 6, height: 6, borderRadius: "50%", background: ["#3b82f6", "#a855f7", "#ec4899", "#10b981", "#f59e0b"][i % 5] }}
               />
             ))}
           </>
@@ -530,7 +510,6 @@ function About() {
   return (
     <section ref={sectionRef} id="about" className="relative py-24 md:py-32 px-6 bg-white text-black overflow-hidden">
       <FloatingBubbles trigger={sectionInView} />
-
       <motion.div animate={{ x: [0, 100, 0], y: [0, -50, 0] }} transition={{ duration: 22, repeat: Infinity }} className="absolute top-20 left-10 w-80 h-80 bg-blue-300/10 rounded-full blur-[120px] pointer-events-none" />
       <motion.div animate={{ x: [0, -80, 0], y: [0, 60, 0] }} transition={{ duration: 26, repeat: Infinity }} className="absolute bottom-20 right-10 w-80 h-80 bg-pink-300/10 rounded-full blur-[120px] pointer-events-none" />
 
