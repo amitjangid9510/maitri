@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, useScroll, useSpring, useMotionValue, useTransform, AnimatePresence, useInView } from "framer-motion";
-import { Mail, Phone, MapPin, ArrowDown, Briefcase, GraduationCap, ArrowUpRight, Send } from "lucide-react";
+import { Mail, Phone, MapPin, ArrowDown, Briefcase, GraduationCap, ArrowUpRight, Send, Download } from "lucide-react";
 
 /* ============================
    BRAND ICONS (inline SVG)
@@ -70,22 +70,10 @@ function FloatingBubbles({ trigger }) {
           initial={{ y: 0, opacity: 0, scale: 0 }}
           animate={
             trigger
-              ? {
-                  y: [-40, -700],
-                  opacity: [0, 0.9, 0.9, 0],
-                  scale: [0.4, 1, 1, 1.1],
-                  x: [0, i % 2 === 0 ? 30 : -30, i % 3 === 0 ? -20 : 20, 0],
-                }
+              ? { y: [-40, -700], opacity: [0, 0.9, 0.9, 0], scale: [0.4, 1, 1, 1.1], x: [0, i % 2 === 0 ? 30 : -30, i % 3 === 0 ? -20 : 20, 0] }
               : { y: 0, opacity: 0, scale: 0 }
           }
-          transition={{
-            duration: b.duration,
-            delay: b.delay,
-            repeat: Infinity,
-            repeatDelay: 1.5,
-            ease: "easeOut",
-            times: [0, 0.1, 0.85, 1],
-          }}
+          transition={{ duration: b.duration, delay: b.delay, repeat: Infinity, repeatDelay: 1.5, ease: "easeOut", times: [0, 0.1, 0.85, 1] }}
         />
       ))}
     </div>
@@ -119,13 +107,8 @@ function SpinningNumber({ value, inView }) {
       } else {
         setDisplayNumber(Math.floor(eased * targetNumber));
       }
-      if (progress < 1) {
-        raf = requestAnimationFrame(animate);
-      } else {
-        setDisplayNumber(targetNumber);
-        setSpinning(false);
-        setDone(true);
-      }
+      if (progress < 1) raf = requestAnimationFrame(animate);
+      else { setDisplayNumber(targetNumber); setSpinning(false); setDone(true); }
     };
     raf = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(raf);
@@ -164,28 +147,20 @@ function WindowsHandCursor() {
 
   useEffect(() => {
     const move = (e) => {
-      x.set(e.clientX);
-      y.set(e.clientY);
+      x.set(e.clientX); y.set(e.clientY);
       const el = e.target;
       setHovering(!!el.closest("a, button, [data-hover]"));
       const aboutEl = document.getElementById("about");
       if (aboutEl) {
         const rect = aboutEl.getBoundingClientRect();
-        const inside =
-          e.clientX >= rect.left &&
-          e.clientX <= rect.right &&
-          e.clientY >= rect.top &&
-          e.clientY <= rect.bottom;
-        setInAbout(inside);
+        setInAbout(e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom);
       }
     };
     const down = (e) => {
       setClicking(true);
       const id = Date.now() + Math.random();
       setRipples((r) => [...r, { id, x: e.clientX, y: e.clientY }]);
-      setTimeout(() => {
-        setRipples((r) => r.filter((rp) => rp.id !== id));
-      }, 600);
+      setTimeout(() => setRipples((r) => r.filter((rp) => rp.id !== id)), 600);
     };
     const up = () => setClicking(false);
 
@@ -205,24 +180,12 @@ function WindowsHandCursor() {
     <>
       <AnimatePresence>
         {ripples.map((r) => (
-          <motion.div
-            key={r.id}
-            className="pointer-events-none fixed z-[9998] rounded-full border-2"
-            style={{ mixBlendMode: "difference", borderColor: "white" }}
-            initial={{ width: 0, height: 0, x: r.x, y: r.y, opacity: 0.9 }}
-            animate={{ width: 70, height: 70, x: r.x - 35, y: r.y - 35, opacity: 0 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-          />
+          <motion.div key={r.id} className="pointer-events-none fixed z-[9998] rounded-full border-2" style={{ mixBlendMode: "difference", borderColor: "white" }} initial={{ width: 0, height: 0, x: r.x, y: r.y, opacity: 0.9 }} animate={{ width: 70, height: 70, x: r.x - 35, y: r.y - 35, opacity: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.6, ease: "easeOut" }} />
         ))}
       </AnimatePresence>
 
       <motion.div style={{ x: springX, y: springY }} className="pointer-events-none fixed top-0 left-0 z-[9999] hidden md:block">
-        <motion.div
-          animate={{ scale: clicking ? 0.85 : hovering ? 1.1 : inAbout ? 1.15 : 1 }}
-          transition={{ type: "spring", stiffness: 500, damping: 26 }}
-          style={{ transformOrigin: inAbout ? "50% 50%" : "7px 2px" }}
-        >
+        <motion.div animate={{ scale: clicking ? 0.85 : hovering ? 1.1 : inAbout ? 1.15 : 1 }} transition={{ type: "spring", stiffness: 500, damping: 26 }} style={{ transformOrigin: inAbout ? "50% 50%" : "7px 2px" }}>
           <AnimatePresence mode="wait">
             {inAbout ? (
               <motion.div key="smiley" initial={{ scale: 0.4, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.4, opacity: 0 }} transition={{ duration: 0.12, ease: "easeOut" }} className="relative" style={{ marginLeft: "-16px", marginTop: "-16px" }}>
@@ -261,6 +224,132 @@ function ScrollProgress() {
 }
 
 /* ============================
+   DOWNLOAD RESUME BUTTON — attractive animated
+============================ */
+function DownloadResumeButton({ variant = "primary" }) {
+  const [clicked, setClicked] = useState(false);
+
+  const handleClick = () => {
+    setClicked(true);
+    setTimeout(() => setClicked(false), 1500);
+  };
+
+  if (variant === "secondary") {
+    // Smaller header version
+    return (
+      <motion.a
+        href="/Maitri_Shah_Resume.pdf"
+        download="Maitri_Shah_Resume.pdf"
+        onClick={handleClick}
+        data-hover
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        className="group relative inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/30 text-white text-xs md:text-sm font-medium overflow-hidden transition-colors hover:border-white/60"
+      >
+        {/* Shine sweep */}
+        <motion.span
+          className="absolute inset-0 pointer-events-none"
+          initial={{ x: "-100%" }}
+          animate={{ x: ["-100%", "200%"] }}
+          transition={{ duration: 2.2, repeat: Infinity, repeatDelay: 2, ease: "easeInOut" }}
+          style={{
+            background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent)",
+            width: "60%",
+          }}
+        />
+        {/* Arrow icon with bounce */}
+        <motion.span
+          animate={{ y: [0, 3, 0] }}
+          transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
+          className="relative z-10"
+        >
+          <Download size={14} />
+        </motion.span>
+        <span className="relative z-10">Resume</span>
+      </motion.a>
+    );
+  }
+
+  // Primary hero version — big, bold, animated
+  return (
+    <motion.a
+      href="/Maitri_Shah_Resume.pdf"
+      download="Maitri_Shah_Resume.pdf"
+      onClick={handleClick}
+      data-hover
+      whileHover={{ scale: 1.05, y: -2 }}
+      whileTap={{ scale: 0.96 }}
+      className="group relative inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white text-sm font-medium overflow-hidden shadow-lg shadow-purple-500/30"
+      style={{ backgroundSize: "200% 100%" }}
+    >
+      {/* Animated gradient shift */}
+      <motion.span
+        className="absolute inset-0"
+        animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+        style={{
+          background: "linear-gradient(90deg, #3b82f6, #a855f7, #ec4899, #a855f7, #3b82f6)",
+          backgroundSize: "200% 100%",
+        }}
+      />
+      {/* Shine sweep */}
+      <motion.span
+        className="absolute inset-0 pointer-events-none"
+        initial={{ x: "-100%" }}
+        animate={{ x: ["-100%", "200%"] }}
+        transition={{ duration: 2, repeat: Infinity, repeatDelay: 1.5, ease: "easeInOut" }}
+        style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)", width: "50%" }}
+      />
+      {/* Pulsing ring */}
+      <motion.span
+        className="absolute inset-0 rounded-full pointer-events-none"
+        animate={{ boxShadow: ["0 0 0 0 rgba(168,85,247,0.6)", "0 0 0 12px rgba(168,85,247,0)"] }}
+        transition={{ duration: 1.8, repeat: Infinity, ease: "easeOut" }}
+      />
+      {/* Content */}
+      <motion.span
+        animate={{ y: [0, 3, 0] }}
+        transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
+        className="relative z-10 flex items-center"
+      >
+        <Download size={16} />
+      </motion.span>
+      <span className="relative z-10">{clicked ? "Downloading..." : "Download Resume"}</span>
+      {/* Confetti burst on click */}
+      <AnimatePresence>
+        {clicked && (
+          <>
+            {Array.from({ length: 8 }).map((_, i) => (
+              <motion.span
+                key={i}
+                className="absolute pointer-events-none"
+                initial={{ x: 0, y: 0, opacity: 1, scale: 1 }}
+                animate={{
+                  x: (i % 2 === 0 ? 1 : -1) * (20 + i * 8),
+                  y: -20 - (i % 3) * 15,
+                  opacity: 0,
+                  scale: 0.3,
+                }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.9, ease: "easeOut" }}
+                style={{
+                  left: "50%",
+                  top: "50%",
+                  width: 6,
+                  height: 6,
+                  borderRadius: "50%",
+                  background: ["#3b82f6", "#a855f7", "#ec4899", "#10b981", "#f59e0b"][i % 5],
+                }}
+              />
+            ))}
+          </>
+        )}
+      </AnimatePresence>
+    </motion.a>
+  );
+}
+
+/* ============================
    HEADER
 ============================ */
 function Header() {
@@ -284,14 +373,17 @@ function Header() {
             </li>
           ))}
         </ul>
-        <motion.a href="#contact" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="text-xs md:text-sm px-4 py-2 rounded-full border border-white/30 text-white hover:bg-white hover:text-black transition-all">Let's Talk</motion.a>
+        <div className="flex items-center gap-2">
+          <DownloadResumeButton variant="secondary" />
+          <motion.a href="#contact" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="hidden sm:inline-flex text-xs md:text-sm px-4 py-2 rounded-full border border-white/30 text-white hover:bg-white hover:text-black transition-all">Let's Talk</motion.a>
+        </div>
       </nav>
     </motion.header>
   );
 }
 
 /* ============================
-   HERO — updated profile image
+   HERO
 ============================ */
 function Hero() {
   const heroRef = useRef(null);
@@ -307,19 +399,12 @@ function Hero() {
   const trailX = useSpring(rawX, { stiffness: 180, damping: 26, mass: 0.9 });
   const trailY = useSpring(rawY, { stiffness: 180, damping: 26, mass: 0.9 });
 
-  const maskImage = useTransform(
-    [springX, springY],
-    ([x, y]) =>
-      `radial-gradient(ellipse 460px 400px at ${x}px ${y}px, transparent 0%, transparent 32%, rgba(0,0,0,0.5) 62%, black 88%)`
-  );
-
+  const maskImage = useTransform([springX, springY], ([x, y]) => `radial-gradient(ellipse 460px 400px at ${x}px ${y}px, transparent 0%, transparent 32%, rgba(0,0,0,0.5) 62%, black 88%)`);
   const haloLeft = useTransform(trailX, (v) => v - 260);
   const haloTop = useTransform(trailY, (v) => v - 260);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      setIsTouch(window.matchMedia("(pointer: coarse)").matches);
-    }
+    if (typeof window !== "undefined") setIsTouch(window.matchMedia("(pointer: coarse)").matches);
   }, []);
 
   useEffect(() => {
@@ -329,13 +414,7 @@ function Hero() {
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       const inside = x >= 0 && y >= 0 && x <= rect.width && y <= rect.height;
-      if (inside) {
-        rawX.set(x);
-        rawY.set(y);
-        setIsHovering(true);
-      } else {
-        setIsHovering(false);
-      }
+      if (inside) { rawX.set(x); rawY.set(y); setIsHovering(true); } else setIsHovering(false);
     };
     const handleLeave = () => setIsHovering(false);
     window.addEventListener("mousemove", handleMove);
@@ -355,28 +434,11 @@ function Hero() {
       <div className="absolute inset-0 opacity-70" style={{ background: "radial-gradient(circle at 85% 10%, rgba(255,220,130,0.55) 0%, rgba(255,200,100,0.2) 25%, transparent 55%)" }} />
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
 
-      {!isTouch && (
-        <motion.div className="absolute inset-0 bg-black pointer-events-none" style={{ WebkitMaskImage: maskImage, maskImage: maskImage }} />
-      )}
-      {isTouch && (
-        <div className="absolute inset-0 bg-black pointer-events-none" style={{ opacity: 0.92 }} />
-      )}
+      {!isTouch && (<motion.div className="absolute inset-0 bg-black pointer-events-none" style={{ WebkitMaskImage: maskImage, maskImage: maskImage }} />)}
+      {isTouch && (<div className="absolute inset-0 bg-black pointer-events-none" style={{ opacity: 0.92 }} />)}
 
       {!isTouch && (
-        <motion.div
-          className="absolute pointer-events-none"
-          style={{
-            left: haloLeft,
-            top: haloTop,
-            width: 520,
-            height: 520,
-            opacity: isHovering ? 1 : 0,
-            background: "radial-gradient(ellipse at center, rgba(255,215,140,0.22) 0%, rgba(255,180,80,0.08) 35%, rgba(255,180,80,0.02) 55%, transparent 75%)",
-            filter: "blur(30px)",
-            borderRadius: blobRadius,
-            transition: "opacity 0.5s ease",
-          }}
-        />
+        <motion.div className="absolute pointer-events-none" style={{ left: haloLeft, top: haloTop, width: 520, height: 520, opacity: isHovering ? 1 : 0, background: "radial-gradient(ellipse at center, rgba(255,215,140,0.22) 0%, rgba(255,180,80,0.08) 35%, rgba(255,180,80,0.02) 55%, transparent 75%)", filter: "blur(30px)", borderRadius: blobRadius, transition: "opacity 0.5s ease" }} />
       )}
 
       {!isTouch && (
@@ -397,9 +459,9 @@ function Hero() {
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.8 }} className="text-xs md:text-sm uppercase tracking-[0.4em] text-amber-100/80 mb-6">UI/UX Designer • AI</motion.p>
           <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.9 }} className="text-5xl md:text-7xl font-bold tracking-tighter text-white leading-[0.95] drop-shadow-2xl">Maitri Shah</motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.8 }} className="mt-6 text-sm md:text-base text-white/80 max-w-lg mx-auto md:mx-0 drop-shadow-lg">Crafting intuitive digital experiences with a blend of design thinking and AI-driven workflows.</motion.p>
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7, duration: 0.8 }} className="mt-10 flex items-center justify-center md:justify-start gap-4">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7, duration: 0.8 }} className="mt-10 flex flex-wrap items-center justify-center md:justify-start gap-4">
             <a href="#work" className="px-6 py-3 rounded-full bg-white text-black text-sm font-medium hover:bg-white/90 transition shadow-lg shadow-black/30">View Work</a>
-            <a href="#contact" className="px-6 py-3 rounded-full border border-white/40 text-white text-sm font-medium hover:bg-white/10 backdrop-blur-sm transition">Get in Touch</a>
+            <DownloadResumeButton variant="primary" />
           </motion.div>
         </div>
 
@@ -408,11 +470,7 @@ function Hero() {
           <motion.div animate={{ rotate: -360 }} transition={{ duration: 45, repeat: Infinity, ease: "linear" }} className="absolute w-[320px] h-[320px] md:w-[440px] md:h-[440px] rounded-full border border-white/15" />
           <div className="absolute w-[260px] h-[260px] md:w-[340px] md:h-[340px] rounded-full bg-amber-200/30 blur-[80px]" />
           <motion.div whileHover={{ scale: 1.03 }} transition={{ type: "spring", stiffness: 200, damping: 20 }} className="relative w-[240px] h-[240px] md:w-[340px] md:h-[340px] rounded-full overflow-hidden border-2 border-white/40 shadow-2xl grayscale hover:grayscale-0 transition-all duration-700">
-            <img 
-              src="/491841578_1061399819179060_2724536558206529226_n.jpg" 
-              alt="Maitri Shah" 
-              className="w-full h-full object-cover" 
-            />
+            <img src="/491841578_1061399819179060_2724536558206529226_n.jpg" alt="Maitri Shah" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
           </motion.div>
           <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 3, repeat: Infinity }} className="absolute top-4 -left-2 md:top-8 md:left-0 bg-black/80 backdrop-blur border border-white/20 rounded-full px-4 py-2 text-xs text-white">✦ UI/UX</motion.div>
@@ -494,11 +552,7 @@ function About() {
           <div className="space-y-8">
             <div ref={statsRef} className="grid grid-cols-3 gap-4">
               {stats.map((s) => (
-                <div
-                  key={s.label}
-                  data-hover
-                  className="group relative border border-black/10 rounded-2xl p-4 text-center overflow-hidden bg-white cursor-default transition-transform duration-300 hover:-translate-y-1.5 hover:scale-105"
-                >
+                <div key={s.label} data-hover className="group relative border border-black/10 rounded-2xl p-4 text-center overflow-hidden bg-white cursor-default transition-transform duration-300 hover:-translate-y-1.5 hover:scale-105">
                   <motion.div animate={{ rotate: 360 }} transition={{ duration: 6, repeat: Infinity, ease: "linear" }} className="absolute -inset-24 opacity-0 group-hover:opacity-60 transition-opacity duration-500 pointer-events-none" style={{ background: `conic-gradient(from 0deg, transparent, ${s.glow}, transparent 30%)`, filter: "blur(20px)" }} />
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ background: `radial-gradient(circle at center, ${s.glow}25, transparent 70%)` }} />
                   <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ boxShadow: `inset 0 0 20px ${s.glow}40` }} />
@@ -555,10 +609,7 @@ function ScrollReveal({ children }) {
   const scale = useTransform(smoothProgress, [0, 1], [0.85, 1]);
 
   return (
-    <motion.div
-      ref={ref}
-      style={{ opacity, y, rotateX, scale, transformPerspective: 1200, transformOrigin: "center bottom", willChange: "transform, opacity" }}
-    >
+    <motion.div ref={ref} style={{ opacity, y, rotateX, scale, transformPerspective: 1200, transformOrigin: "center bottom", willChange: "transform, opacity" }}>
       {children}
     </motion.div>
   );
@@ -578,7 +629,6 @@ function Skills() {
     { name: "Design Systems", color: "#a78bfa" }, { name: "Prototyping", color: "#34d399" },
     { name: "Interaction Design", color: "#fb923c" }, { name: "Micro-interactions", color: "#22d3ee" },
   ];
-
   const tools = [
     { name: "Figma", Icon: FigmaIcon, color: "#a259ff", tagline: "Primary Design Tool", desc: "Wireframes · Prototypes · Design Systems" },
     { name: "Framer", Icon: FramerIcon, color: "#ffffff", tagline: "Motion & Prototypes", desc: "Interactive prototypes · Landing pages" },
@@ -586,7 +636,6 @@ function Skills() {
     { name: "Illustrator", Icon: IllustratorIcon, color: "#ff9a00", tagline: "Vector Design", desc: "Icons · Logos · Illustrations" },
     { name: "Notion", Icon: NotionIcon, color: "#ffffff", tagline: "Documentation", desc: "Case studies · Notes · Project tracking" },
   ];
-
   const aiTools = [
     { name: "ChatGPT", Icon: ChatGPTIcon, color: "#10a37f", tagline: "Content & Ideation", desc: "Copy · UX writing · Research" },
     { name: "Claude", Icon: ClaudeIcon, color: "#d97757", tagline: "Deep Reasoning", desc: "Long-form · Analysis · UX strategy" },
@@ -597,15 +646,7 @@ function Skills() {
   ];
 
   const ColorPill = ({ name, color, index }) => (
-    <motion.span
-      initial={{ opacity: 0, scale: 0.8, y: 10 }}
-      whileInView={{ opacity: 1, scale: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.05, duration: 0.4, type: "spring" }}
-      whileHover={{ scale: 1.08, y: -3 }}
-      className="relative text-xs md:text-sm px-4 py-2 rounded-full border text-white/90 cursor-default overflow-hidden group"
-      style={{ borderColor: `${color}40`, backgroundColor: `${color}15` }}
-    >
+    <motion.span initial={{ opacity: 0, scale: 0.8, y: 10 }} whileInView={{ opacity: 1, scale: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.05, duration: 0.4, type: "spring" }} whileHover={{ scale: 1.08, y: -3 }} className="relative text-xs md:text-sm px-4 py-2 rounded-full border text-white/90 cursor-default overflow-hidden group" style={{ borderColor: `${color}40`, backgroundColor: `${color}15` }}>
       <motion.span animate={{ scale: [1, 1.4, 1], opacity: [0.6, 1, 0.6] }} transition={{ duration: 2, repeat: Infinity, delay: index * 0.1 }} className="absolute left-2 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full" style={{ backgroundColor: color, boxShadow: `0 0 8px ${color}` }} />
       <span className="pl-3">{name}</span>
       <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `radial-gradient(circle at center, ${color}30, transparent 70%)` }} />
@@ -613,29 +654,20 @@ function Skills() {
   );
 
   const BigToolCard = ({ name, Icon, color, tagline, desc }) => (
-    <motion.div
-      whileHover={{ y: -8, scale: 1.03 }}
-      data-hover
-      className="group relative flex flex-col items-start gap-4 p-6 rounded-3xl border border-white/10 hover:border-white/30 transition-all overflow-hidden bg-white/[0.02] cursor-default min-h-[180px]"
-    >
+    <motion.div whileHover={{ y: -8, scale: 1.03 }} data-hover className="group relative flex flex-col items-start gap-4 p-6 rounded-3xl border border-white/10 hover:border-white/30 transition-all overflow-hidden bg-white/[0.02] cursor-default min-h-[180px]">
       <motion.div animate={{ rotate: 360 }} transition={{ duration: 8, repeat: Infinity, ease: "linear" }} className="absolute -inset-32 opacity-0 group-hover:opacity-50 transition-opacity duration-500 pointer-events-none" style={{ background: `conic-gradient(from 0deg, transparent, ${color}, transparent 30%)`, filter: "blur(28px)" }} />
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ background: `radial-gradient(circle at top left, ${color}20, transparent 60%)` }} />
-
       <div className="relative z-10 w-full">
         <div className="flex items-start justify-between gap-3 mb-2">
           <div className="w-14 h-14 rounded-2xl border border-white/15 flex items-center justify-center transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6" style={{ backgroundColor: "rgba(255,255,255,0.03)" }}>
             <div className="scale-150"><Icon /></div>
           </div>
-          <motion.div className="text-white/30 group-hover:text-white transition-colors" whileHover={{ x: 3, y: -3 }}>
-            <ArrowUpRight size={18} />
-          </motion.div>
+          <motion.div className="text-white/30 group-hover:text-white transition-colors" whileHover={{ x: 3, y: -3 }}><ArrowUpRight size={18} /></motion.div>
         </div>
-
         <h4 className="text-white font-semibold text-lg mb-1 transition-transform duration-300 group-hover:translate-x-1">{name}</h4>
         <p className="text-xs font-medium mb-2 transition-colors" style={{ color }}>{tagline}</p>
         <p className="text-sm text-white/50 leading-relaxed group-hover:text-white/75 transition-colors">{desc}</p>
       </div>
-
       <div className="absolute bottom-0 left-0 right-0 h-[3px] opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `linear-gradient(90deg, transparent, ${color}, transparent)` }} />
     </motion.div>
   );
@@ -648,7 +680,6 @@ function Skills() {
 
       <div className="relative z-10 max-w-6xl mx-auto">
         <SectionTitle label="02 — Skills" title="Skills & Tools" />
-
         <div className="grid md:grid-cols-2 gap-6 mb-14">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.7 }} className="group border border-white/10 rounded-3xl p-8 hover:border-blue-400/30 transition-colors relative overflow-hidden bg-gradient-to-br from-blue-500/[0.03] to-purple-500/[0.03]">
             <div className="flex items-center gap-3 mb-6">
@@ -678,7 +709,6 @@ function Skills() {
               <p className="text-xs text-white/40 mt-1">Design & development stack</p>
             </div>
           </motion.div>
-
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {tools.map((t) => (<ScrollReveal key={t.name}><BigToolCard {...t} /></ScrollReveal>))}
           </div>
@@ -692,7 +722,6 @@ function Skills() {
               <p className="text-xs text-white/40 mt-1">AI-powered design & content workflow</p>
             </div>
           </motion.div>
-
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {aiTools.map((t) => (<ScrollReveal key={t.name}><BigToolCard {...t} /></ScrollReveal>))}
           </div>
@@ -722,7 +751,7 @@ function Skills() {
 }
 
 /* ============================
-   MY WORK — Unique animated background
+   MY WORK
 ============================ */
 function Work() {
   const projects = [
@@ -736,83 +765,25 @@ function Work() {
 
   return (
     <section id="work" className="relative py-24 md:py-32 px-6 border-t border-white/5 overflow-hidden bg-black">
-      {/* Animated gradient mesh background */}
-      <motion.div
-        animate={{
-          background: [
-            "radial-gradient(circle at 20% 20%, rgba(59,130,246,0.15), transparent 50%), radial-gradient(circle at 80% 80%, rgba(168,85,247,0.12), transparent 50%), radial-gradient(circle at 50% 50%, rgba(236,72,153,0.08), transparent 60%)",
-            "radial-gradient(circle at 80% 20%, rgba(59,130,246,0.15), transparent 50%), radial-gradient(circle at 20% 80%, rgba(168,85,247,0.12), transparent 50%), radial-gradient(circle at 50% 50%, rgba(236,72,153,0.08), transparent 60%)",
-            "radial-gradient(circle at 50% 80%, rgba(59,130,246,0.15), transparent 50%), radial-gradient(circle at 50% 20%, rgba(168,85,247,0.12), transparent 50%), radial-gradient(circle at 50% 50%, rgba(236,72,153,0.08), transparent 60%)",
-            "radial-gradient(circle at 20% 20%, rgba(59,130,246,0.15), transparent 50%), radial-gradient(circle at 80% 80%, rgba(168,85,247,0.12), transparent 50%), radial-gradient(circle at 50% 50%, rgba(236,72,153,0.08), transparent 60%)",
-          ],
-        }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        className="absolute inset-0 pointer-events-none"
-      />
-
-      {/* Floating orbs */}
+      <motion.div animate={{ background: ["radial-gradient(circle at 20% 20%, rgba(59,130,246,0.15), transparent 50%), radial-gradient(circle at 80% 80%, rgba(168,85,247,0.12), transparent 50%)", "radial-gradient(circle at 80% 20%, rgba(59,130,246,0.15), transparent 50%), radial-gradient(circle at 20% 80%, rgba(168,85,247,0.12), transparent 50%)", "radial-gradient(circle at 20% 20%, rgba(59,130,246,0.15), transparent 50%), radial-gradient(circle at 80% 80%, rgba(168,85,247,0.12), transparent 50%)"] }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }} className="absolute inset-0 pointer-events-none" />
       <motion.div animate={{ x: [0, 120, 0], y: [0, -80, 0], scale: [1, 1.2, 1] }} transition={{ duration: 18, repeat: Infinity }} className="absolute top-20 left-10 w-96 h-96 bg-blue-500/15 rounded-full blur-[120px] pointer-events-none" />
       <motion.div animate={{ x: [0, -100, 0], y: [0, 100, 0], scale: [1, 1.3, 1] }} transition={{ duration: 22, repeat: Infinity }} className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/15 rounded-full blur-[120px] pointer-events-none" />
-      <motion.div animate={{ x: [0, 80, 0], y: [0, -100, 0], scale: [1, 1.4, 1] }} transition={{ duration: 20, repeat: Infinity, delay: 3 }} className="absolute top-1/2 left-1/3 w-80 h-80 bg-pink-500/12 rounded-full blur-[120px] pointer-events-none" />
-
-      {/* Dot grid */}
-      <div
-        className="absolute inset-0 opacity-[0.15] pointer-events-none"
-        style={{
-          backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
-          maskImage: "radial-gradient(ellipse at center, black 30%, transparent 70%)",
-          WebkitMaskImage: "radial-gradient(ellipse at center, black 30%, transparent 70%)",
-        }}
-      />
-
-      {/* Rotating conic sweep */}
-      <motion.div
-        animate={{ rotate: 360 }}
-        transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] opacity-[0.06] pointer-events-none"
-        style={{
-          background: "conic-gradient(from 0deg, transparent, #3b82f6, transparent 30%, #a855f7, transparent 60%, #ec4899, transparent)",
-          maskImage: "radial-gradient(circle at center, transparent 20%, black 60%, transparent 90%)",
-          WebkitMaskImage: "radial-gradient(circle at center, transparent 20%, black 60%, transparent 90%)",
-        }}
-      />
-
-      {/* Floating particles */}
+      <div className="absolute inset-0 opacity-[0.15] pointer-events-none" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)", backgroundSize: "40px 40px", maskImage: "radial-gradient(ellipse at center, black 30%, transparent 70%)", WebkitMaskImage: "radial-gradient(ellipse at center, black 30%, transparent 70%)" }} />
+      <motion.div animate={{ rotate: 360 }} transition={{ duration: 60, repeat: Infinity, ease: "linear" }} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] opacity-[0.06] pointer-events-none" style={{ background: "conic-gradient(from 0deg, transparent, #3b82f6, transparent 30%, #a855f7, transparent 60%, #ec4899, transparent)", maskImage: "radial-gradient(circle at center, transparent 20%, black 60%, transparent 90%)", WebkitMaskImage: "radial-gradient(circle at center, transparent 20%, black 60%, transparent 90%)" }} />
       {Array.from({ length: 20 }).map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-1 h-1 rounded-full bg-white/40 pointer-events-none"
-          style={{ left: `${(i * 5.3) % 100}%`, top: `${(i * 7.7) % 100}%` }}
-          animate={{ y: [0, -60 - (i % 5) * 20, 0], x: [0, (i % 2 === 0 ? 30 : -30), 0], opacity: [0, 0.8, 0] }}
-          transition={{ duration: 6 + (i % 4), repeat: Infinity, delay: i * 0.3, ease: "easeInOut" }}
-        />
+        <motion.div key={i} className="absolute w-1 h-1 rounded-full bg-white/40 pointer-events-none" style={{ left: `${(i * 5.3) % 100}%`, top: `${(i * 7.7) % 100}%` }} animate={{ y: [0, -60 - (i % 5) * 20, 0], x: [0, (i % 2 === 0 ? 30 : -30), 0], opacity: [0, 0.8, 0] }} transition={{ duration: 6 + (i % 4), repeat: Infinity, delay: i * 0.3, ease: "easeInOut" }} />
       ))}
-
-      {/* Top & bottom fades */}
       <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black to-transparent pointer-events-none" />
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none" />
 
-      {/* Content */}
       <div className="relative z-10 max-w-6xl mx-auto">
         <SectionTitle label="03 — Work" title="Selected Work" />
-
         <div className="grid md:grid-cols-2 gap-6">
           {projects.map((p, i) => (
-            <motion.div
-              key={p.title}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ delay: (i % 2) * 0.1, duration: 0.7 }}
-              whileHover={{ y: -6, scale: 1.02 }}
-              data-hover
-              className="group relative border border-white/10 rounded-3xl p-8 overflow-hidden bg-white/[0.02] backdrop-blur-sm hover:bg-white/[0.05] hover:border-white/25 transition"
-            >
+            <motion.div key={p.title} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ delay: (i % 2) * 0.1, duration: 0.7 }} whileHover={{ y: -6, scale: 1.02 }} data-hover className="group relative border border-white/10 rounded-3xl p-8 overflow-hidden bg-white/[0.02] backdrop-blur-sm hover:bg-white/[0.05] hover:border-white/25 transition">
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ background: `radial-gradient(circle at top right, ${p.color}20, transparent 70%)` }} />
               <div className="absolute -top-24 -right-24 w-64 h-64 rounded-full blur-3xl opacity-0 group-hover:opacity-60 transition-opacity duration-500 pointer-events-none" style={{ background: p.color }} />
               <div className="absolute bottom-0 left-0 right-0 h-[3px] opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `linear-gradient(90deg, transparent, ${p.color}, transparent)` }} />
-
               <div className="relative">
                 <div className="flex items-center justify-between mb-6">
                   <span className="text-xs px-3 py-1 rounded-full border transition-colors" style={{ borderColor: `${p.color}40`, color: p.color, backgroundColor: `${p.color}10` }}>{p.tag}</span>
@@ -850,33 +821,19 @@ function Contact() {
     <section id="contact" className="relative py-24 md:py-32 px-6 border-t border-black/5 overflow-hidden bg-white text-black">
       <motion.div animate={{ x: [0, 80, 0], y: [0, -60, 0], scale: [1, 1.2, 1] }} transition={{ duration: 15, repeat: Infinity }} className="absolute top-10 left-10 w-80 h-80 bg-blue-300/15 rounded-full blur-[120px] pointer-events-none" />
       <motion.div animate={{ x: [0, -100, 0], y: [0, 60, 0], scale: [1, 1.3, 1] }} transition={{ duration: 18, repeat: Infinity }} className="absolute bottom-10 right-10 w-80 h-80 bg-pink-300/15 rounded-full blur-[120px] pointer-events-none" />
-      <motion.div animate={{ x: [0, 60, 0], y: [0, -80, 0] }} transition={{ duration: 22, repeat: Infinity }} className="absolute top-1/2 left-1/3 w-64 h-64 bg-purple-300/10 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="relative z-10 max-w-6xl mx-auto">
         <SectionTitle label="04 — Contact" title="Let's Work Together" dark />
-
         <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="text-black/60 max-w-2xl mb-14 text-base md:text-lg leading-relaxed">
           Open to <span className="text-black font-medium">UI/UX Designer roles with an AI edge</span> — in Ahmedabad or remote. Let's build something thoughtful together.
         </motion.p>
 
-        <motion.a
-          href="mailto:shahmaitri123.ms@gmail.com"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          whileHover={{ scale: 1.01 }}
-          data-hover
-          className="group relative block border border-black/10 rounded-3xl p-8 md:p-10 overflow-hidden mb-8 bg-white shadow-sm hover:shadow-xl transition-shadow"
-        >
+        <motion.a href="mailto:shahmaitri123.ms@gmail.com" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} whileHover={{ scale: 1.01 }} data-hover className="group relative block border border-black/10 rounded-3xl p-8 md:p-10 overflow-hidden mb-8 bg-white shadow-sm hover:shadow-xl transition-shadow">
           <motion.div animate={{ rotate: 360 }} transition={{ duration: 8, repeat: Infinity, ease: "linear" }} className="absolute -inset-40 opacity-30 pointer-events-none" style={{ background: "conic-gradient(from 0deg, transparent, #3b82f6, #a855f7, #ec4899, transparent 40%)", filter: "blur(30px)" }} />
           <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(circle at center, rgba(59,130,246,0.08), rgba(168,85,247,0.06) 40%, transparent 70%)" }} />
-
           <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="flex items-center gap-5">
-              <motion.div animate={{ rotate: [0, -10, 10, 0] }} transition={{ duration: 3, repeat: Infinity }} className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg shadow-blue-500/30">
-                <Send size={22} className="text-white" />
-              </motion.div>
+              <motion.div animate={{ rotate: [0, -10, 10, 0] }} transition={{ duration: 3, repeat: Infinity }} className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg shadow-blue-500/30"><Send size={22} className="text-white" /></motion.div>
               <div>
                 <p className="text-xs uppercase tracking-[0.3em] text-black/40 mb-1">Drop me a line</p>
                 <p className="text-lg md:text-2xl font-semibold text-black">shahmaitri123.ms@gmail.com</p>
@@ -893,27 +850,11 @@ function Contact() {
           {contactMethods.map((it, i) => {
             const Icon = it.icon;
             return (
-              <motion.a
-                key={it.label}
-                href={it.href}
-                target={it.href.startsWith("http") ? "_blank" : undefined}
-                rel={it.href.startsWith("http") ? "noreferrer noopener" : undefined}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08, duration: 0.6 }}
-                whileHover={{ y: -8, scale: 1.02 }}
-                data-hover
-                className="group relative border border-black/10 rounded-2xl p-6 overflow-hidden bg-white hover:border-black/25 transition-all shadow-sm hover:shadow-xl"
-              >
+              <motion.a key={it.label} href={it.href} target={it.href.startsWith("http") ? "_blank" : undefined} rel={it.href.startsWith("http") ? "noreferrer noopener" : undefined} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08, duration: 0.6 }} whileHover={{ y: -8, scale: 1.02 }} data-hover className="group relative border border-black/10 rounded-2xl p-6 overflow-hidden bg-white hover:border-black/25 transition-all shadow-sm hover:shadow-xl">
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ background: `radial-gradient(circle at top right, ${it.glow}15, transparent 70%)` }} />
-                <motion.div className="absolute top-4 right-4 text-black/30 group-hover:text-black transition-colors" whileHover={{ x: 3, y: -3 }}>
-                  <ArrowUpRight size={16} />
-                </motion.div>
+                <motion.div className="absolute top-4 right-4 text-black/30 group-hover:text-black transition-colors" whileHover={{ x: 3, y: -3 }}><ArrowUpRight size={16} /></motion.div>
                 <div className="relative z-10">
-                  <motion.div whileHover={{ rotate: [0, -8, 8, 0] }} transition={{ duration: 0.5 }} className={`w-11 h-11 rounded-xl bg-gradient-to-br ${it.gradient} flex items-center justify-center text-white mb-4 shadow-lg`} style={{ boxShadow: `0 8px 24px -8px ${it.glow}80` }}>
-                    <Icon size={18} />
-                  </motion.div>
+                  <motion.div whileHover={{ rotate: [0, -8, 8, 0] }} transition={{ duration: 0.5 }} className={`w-11 h-11 rounded-xl bg-gradient-to-br ${it.gradient} flex items-center justify-center text-white mb-4 shadow-lg`} style={{ boxShadow: `0 8px 24px -8px ${it.glow}80` }}><Icon size={18} /></motion.div>
                   <p className="text-[10px] uppercase tracking-[0.3em] text-black/40 mb-1.5">{it.label}</p>
                   <p className="text-black text-sm font-medium break-all leading-snug">{it.value}</p>
                 </div>
