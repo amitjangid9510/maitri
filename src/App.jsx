@@ -37,11 +37,9 @@ const KlingIcon = () => (<svg viewBox="0 0 24 24" className="w-5 h-5"><circle cx
 const ClaudeCodeIcon = () => (<svg viewBox="0 0 24 24" className="w-5 h-5"><circle cx="12" cy="12" r="11" fill="#d97757"/><path fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" d="M9 9l-3 3 3 3M15 9l3 3-3 3"/></svg>);
 
 /* ============================
-   FLOATING BUBBLES (About section)
-   — Uddte hue bubbles jo section open hote hi activate hote hain
+   FLOATING BUBBLES
 ============================ */
 function FloatingBubbles({ trigger }) {
-  // Different sizes, colors, positions for each bubble
   const bubbles = [
     { size: 14, x: "8%", delay: 0, duration: 6, color: "#60a5fa" },
     { size: 22, x: "18%", delay: 0.6, duration: 7, color: "#a78bfa" },
@@ -293,7 +291,7 @@ function Header() {
 }
 
 /* ============================
-   HERO
+   HERO — updated profile image
 ============================ */
 function Hero() {
   const heroRef = useRef(null);
@@ -410,7 +408,11 @@ function Hero() {
           <motion.div animate={{ rotate: -360 }} transition={{ duration: 45, repeat: Infinity, ease: "linear" }} className="absolute w-[320px] h-[320px] md:w-[440px] md:h-[440px] rounded-full border border-white/15" />
           <div className="absolute w-[260px] h-[260px] md:w-[340px] md:h-[340px] rounded-full bg-amber-200/30 blur-[80px]" />
           <motion.div whileHover={{ scale: 1.03 }} transition={{ type: "spring", stiffness: 200, damping: 20 }} className="relative w-[240px] h-[240px] md:w-[340px] md:h-[340px] rounded-full overflow-hidden border-2 border-white/40 shadow-2xl grayscale hover:grayscale-0 transition-all duration-700">
-            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80" alt="Maitri Shah" className="w-full h-full object-cover" />
+            <img 
+              src="/491841578_1061399819179060_2724536558206529226_n.jpg" 
+              alt="Maitri Shah" 
+              className="w-full h-full object-cover" 
+            />
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
           </motion.div>
           <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 3, repeat: Infinity }} className="absolute top-4 -left-2 md:top-8 md:left-0 bg-black/80 backdrop-blur border border-white/20 rounded-full px-4 py-2 text-xs text-white">✦ UI/UX</motion.div>
@@ -448,7 +450,7 @@ function SectionTitle({ label, title, dark = false }) {
 }
 
 /* ============================
-   ABOUT — WHITE BG WITH FLOATING BUBBLES
+   ABOUT
 ============================ */
 function About() {
   const stats = [
@@ -469,7 +471,6 @@ function About() {
 
   return (
     <section ref={sectionRef} id="about" className="relative py-24 md:py-32 px-6 bg-white text-black overflow-hidden">
-      {/* Floating bubbles — trigger when section is in view */}
       <FloatingBubbles trigger={sectionInView} />
 
       <motion.div animate={{ x: [0, 100, 0], y: [0, -50, 0] }} transition={{ duration: 22, repeat: Infinity }} className="absolute top-20 left-10 w-80 h-80 bg-blue-300/10 rounded-full blur-[120px] pointer-events-none" />
@@ -564,7 +565,7 @@ function ScrollReveal({ children }) {
 }
 
 /* ============================
-   SKILLS — BLACK BG, MOTION.DEV SCROLL-LINKED REVEAL
+   SKILLS
 ============================ */
 function Skills() {
   const uxSkills = [
@@ -721,42 +722,114 @@ function Skills() {
 }
 
 /* ============================
-   MY WORK
+   MY WORK — Unique animated background
 ============================ */
 function Work() {
   const projects = [
-    { title: "Real Estate Microsites", tag: "Real Estate", desc: "Designed conversion-focused microsites and landing pages for real estate clients.", year: "2025" },
-    { title: "Healthcare Website", tag: "Healthcare", desc: "Intuitive patient-first website design with accessibility in mind.", year: "2025" },
-    { title: "Education Platform", tag: "Education", desc: "A learning platform designed to make course discovery effortless.", year: "2025" },
-    { title: "AI Image & Video Gen", tag: "AI", desc: "Leveraged AI tools to generate visual assets, cutting production time by 25%.", year: "2025" },
-    { title: "Design System", tag: "Design System", desc: "Built a scalable component library in Figma for consistent product design.", year: "2024" },
-    { title: "Graphic Posts & Branding", tag: "Branding", desc: "Designed social graphics and brand collateral at Ivvotiontech.", year: "2024" },
+    { title: "Real Estate Microsites", tag: "Real Estate", desc: "Designed conversion-focused microsites and landing pages for real estate clients.", year: "2025", color: "#3b82f6" },
+    { title: "Healthcare Website", tag: "Healthcare", desc: "Intuitive patient-first website design with accessibility in mind.", year: "2025", color: "#10b981" },
+    { title: "Education Platform", tag: "Education", desc: "A learning platform designed to make course discovery effortless.", year: "2025", color: "#f59e0b" },
+    { title: "AI Image & Video Gen", tag: "AI", desc: "Leveraged AI tools to generate visual assets, cutting production time by 25%.", year: "2025", color: "#a855f7" },
+    { title: "Design System", tag: "Design System", desc: "Built a scalable component library in Figma for consistent product design.", year: "2024", color: "#ec4899" },
+    { title: "Graphic Posts & Branding", tag: "Branding", desc: "Designed social graphics and brand collateral at Ivvotiontech.", year: "2024", color: "#06b6d4" },
   ];
+
   return (
-    <Section id="work" className="border-t border-white/5">
-      <SectionTitle label="03 — Work" title="Selected Work" />
-      <div className="grid md:grid-cols-2 gap-6">
-        {projects.map((p, i) => (
-          <motion.div key={p.title} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ delay: (i % 2) * 0.1, duration: 0.7 }} whileHover={{ y: -6 }} data-hover className="group relative border border-white/10 rounded-3xl p-8 overflow-hidden bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/25 transition">
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-              <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
-            </div>
-            <div className="relative">
-              <div className="flex items-center justify-between mb-6">
-                <span className="text-xs px-3 py-1 rounded-full border border-white/20 text-white/60">{p.tag}</span>
-                <span className="text-xs text-white/40">{p.year}</span>
+    <section id="work" className="relative py-24 md:py-32 px-6 border-t border-white/5 overflow-hidden bg-black">
+      {/* Animated gradient mesh background */}
+      <motion.div
+        animate={{
+          background: [
+            "radial-gradient(circle at 20% 20%, rgba(59,130,246,0.15), transparent 50%), radial-gradient(circle at 80% 80%, rgba(168,85,247,0.12), transparent 50%), radial-gradient(circle at 50% 50%, rgba(236,72,153,0.08), transparent 60%)",
+            "radial-gradient(circle at 80% 20%, rgba(59,130,246,0.15), transparent 50%), radial-gradient(circle at 20% 80%, rgba(168,85,247,0.12), transparent 50%), radial-gradient(circle at 50% 50%, rgba(236,72,153,0.08), transparent 60%)",
+            "radial-gradient(circle at 50% 80%, rgba(59,130,246,0.15), transparent 50%), radial-gradient(circle at 50% 20%, rgba(168,85,247,0.12), transparent 50%), radial-gradient(circle at 50% 50%, rgba(236,72,153,0.08), transparent 60%)",
+            "radial-gradient(circle at 20% 20%, rgba(59,130,246,0.15), transparent 50%), radial-gradient(circle at 80% 80%, rgba(168,85,247,0.12), transparent 50%), radial-gradient(circle at 50% 50%, rgba(236,72,153,0.08), transparent 60%)",
+          ],
+        }}
+        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        className="absolute inset-0 pointer-events-none"
+      />
+
+      {/* Floating orbs */}
+      <motion.div animate={{ x: [0, 120, 0], y: [0, -80, 0], scale: [1, 1.2, 1] }} transition={{ duration: 18, repeat: Infinity }} className="absolute top-20 left-10 w-96 h-96 bg-blue-500/15 rounded-full blur-[120px] pointer-events-none" />
+      <motion.div animate={{ x: [0, -100, 0], y: [0, 100, 0], scale: [1, 1.3, 1] }} transition={{ duration: 22, repeat: Infinity }} className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/15 rounded-full blur-[120px] pointer-events-none" />
+      <motion.div animate={{ x: [0, 80, 0], y: [0, -100, 0], scale: [1, 1.4, 1] }} transition={{ duration: 20, repeat: Infinity, delay: 3 }} className="absolute top-1/2 left-1/3 w-80 h-80 bg-pink-500/12 rounded-full blur-[120px] pointer-events-none" />
+
+      {/* Dot grid */}
+      <div
+        className="absolute inset-0 opacity-[0.15] pointer-events-none"
+        style={{
+          backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)",
+          backgroundSize: "40px 40px",
+          maskImage: "radial-gradient(ellipse at center, black 30%, transparent 70%)",
+          WebkitMaskImage: "radial-gradient(ellipse at center, black 30%, transparent 70%)",
+        }}
+      />
+
+      {/* Rotating conic sweep */}
+      <motion.div
+        animate={{ rotate: 360 }}
+        transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] opacity-[0.06] pointer-events-none"
+        style={{
+          background: "conic-gradient(from 0deg, transparent, #3b82f6, transparent 30%, #a855f7, transparent 60%, #ec4899, transparent)",
+          maskImage: "radial-gradient(circle at center, transparent 20%, black 60%, transparent 90%)",
+          WebkitMaskImage: "radial-gradient(circle at center, transparent 20%, black 60%, transparent 90%)",
+        }}
+      />
+
+      {/* Floating particles */}
+      {Array.from({ length: 20 }).map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-1 h-1 rounded-full bg-white/40 pointer-events-none"
+          style={{ left: `${(i * 5.3) % 100}%`, top: `${(i * 7.7) % 100}%` }}
+          animate={{ y: [0, -60 - (i % 5) * 20, 0], x: [0, (i % 2 === 0 ? 30 : -30), 0], opacity: [0, 0.8, 0] }}
+          transition={{ duration: 6 + (i % 4), repeat: Infinity, delay: i * 0.3, ease: "easeInOut" }}
+        />
+      ))}
+
+      {/* Top & bottom fades */}
+      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none" />
+
+      {/* Content */}
+      <div className="relative z-10 max-w-6xl mx-auto">
+        <SectionTitle label="03 — Work" title="Selected Work" />
+
+        <div className="grid md:grid-cols-2 gap-6">
+          {projects.map((p, i) => (
+            <motion.div
+              key={p.title}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ delay: (i % 2) * 0.1, duration: 0.7 }}
+              whileHover={{ y: -6, scale: 1.02 }}
+              data-hover
+              className="group relative border border-white/10 rounded-3xl p-8 overflow-hidden bg-white/[0.02] backdrop-blur-sm hover:bg-white/[0.05] hover:border-white/25 transition"
+            >
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ background: `radial-gradient(circle at top right, ${p.color}20, transparent 70%)` }} />
+              <div className="absolute -top-24 -right-24 w-64 h-64 rounded-full blur-3xl opacity-0 group-hover:opacity-60 transition-opacity duration-500 pointer-events-none" style={{ background: p.color }} />
+              <div className="absolute bottom-0 left-0 right-0 h-[3px] opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `linear-gradient(90deg, transparent, ${p.color}, transparent)` }} />
+
+              <div className="relative">
+                <div className="flex items-center justify-between mb-6">
+                  <span className="text-xs px-3 py-1 rounded-full border transition-colors" style={{ borderColor: `${p.color}40`, color: p.color, backgroundColor: `${p.color}10` }}>{p.tag}</span>
+                  <span className="text-xs text-white/40">{p.year}</span>
+                </div>
+                <h3 className="text-2xl font-semibold text-white mb-3 group-hover:translate-x-1 transition-transform">{p.title}</h3>
+                <p className="text-sm text-white/60 leading-relaxed">{p.desc}</p>
+                <div className="mt-6 flex items-center gap-2 text-sm text-white/70 group-hover:text-white transition-colors">
+                  <span>View case</span>
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                </div>
               </div>
-              <h3 className="text-2xl font-semibold text-white mb-3 group-hover:translate-x-1 transition-transform">{p.title}</h3>
-              <p className="text-sm text-white/60 leading-relaxed">{p.desc}</p>
-              <div className="mt-6 flex items-center gap-2 text-sm text-white/70 group-hover:text-white transition-colors">
-                <span>View case</span>
-                <span className="group-hover:translate-x-1 transition-transform">→</span>
-              </div>
-            </div>
-          </motion.div>
-        ))}
+            </motion.div>
+          ))}
+        </div>
       </div>
-    </Section>
+    </section>
   );
 }
 
@@ -772,61 +845,92 @@ function Contact() {
     { icon: WhatsappIcon, label: "WhatsApp", value: "Chat with me", href: "https://wa.me/917990904219", gradient: "from-green-400 to-green-600", glow: "#22c55e" },
     { icon: MapPin, label: "Location", value: "Mumbai · Open to Ahmedabad / Remote", href: "https://maps.google.com/?q=Mumbai", gradient: "from-pink-500 to-rose-500", glow: "#ec4899" },
   ];
+
   return (
-    <Section id="contact" className="border-t border-white/5 relative overflow-hidden">
-      <motion.div animate={{ x: [0, 80, 0], y: [0, -60, 0], scale: [1, 1.2, 1] }} transition={{ duration: 15, repeat: Infinity }} className="absolute top-10 left-10 w-80 h-80 bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
-      <motion.div animate={{ x: [0, -100, 0], y: [0, 60, 0], scale: [1, 1.3, 1] }} transition={{ duration: 18, repeat: Infinity }} className="absolute bottom-10 right-10 w-80 h-80 bg-pink-500/10 rounded-full blur-[120px] pointer-events-none" />
-      <motion.div animate={{ x: [0, 60, 0], y: [0, -80, 0] }} transition={{ duration: 22, repeat: Infinity }} className="absolute top-1/2 left-1/3 w-64 h-64 bg-purple-500/10 rounded-full blur-[100px] pointer-events-none" />
-      <div className="relative z-10">
-        <SectionTitle label="04 — Contact" title="Let's Work Together" />
-        <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="text-white/60 max-w-2xl mb-14 text-base md:text-lg leading-relaxed">
-          Open to <span className="text-white font-medium">UI/UX Designer roles with an AI edge</span> — in Ahmedabad or remote. Let's build something thoughtful together.
+    <section id="contact" className="relative py-24 md:py-32 px-6 border-t border-black/5 overflow-hidden bg-white text-black">
+      <motion.div animate={{ x: [0, 80, 0], y: [0, -60, 0], scale: [1, 1.2, 1] }} transition={{ duration: 15, repeat: Infinity }} className="absolute top-10 left-10 w-80 h-80 bg-blue-300/15 rounded-full blur-[120px] pointer-events-none" />
+      <motion.div animate={{ x: [0, -100, 0], y: [0, 60, 0], scale: [1, 1.3, 1] }} transition={{ duration: 18, repeat: Infinity }} className="absolute bottom-10 right-10 w-80 h-80 bg-pink-300/15 rounded-full blur-[120px] pointer-events-none" />
+      <motion.div animate={{ x: [0, 60, 0], y: [0, -80, 0] }} transition={{ duration: 22, repeat: Infinity }} className="absolute top-1/2 left-1/3 w-64 h-64 bg-purple-300/10 rounded-full blur-[100px] pointer-events-none" />
+
+      <div className="relative z-10 max-w-6xl mx-auto">
+        <SectionTitle label="04 — Contact" title="Let's Work Together" dark />
+
+        <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="text-black/60 max-w-2xl mb-14 text-base md:text-lg leading-relaxed">
+          Open to <span className="text-black font-medium">UI/UX Designer roles with an AI edge</span> — in Ahmedabad or remote. Let's build something thoughtful together.
         </motion.p>
-        <motion.a href="mailto:shahmaitri123.ms@gmail.com" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} whileHover={{ scale: 1.01 }} data-hover className="group relative block border border-white/15 rounded-3xl p-8 md:p-10 overflow-hidden mb-8 bg-gradient-to-br from-white/[0.04] to-white/[0.01]">
-          <motion.div animate={{ rotate: 360 }} transition={{ duration: 12, repeat: Infinity, ease: "linear" }} className="absolute -inset-40 opacity-0 group-hover:opacity-30 transition-opacity duration-700" style={{ background: "conic-gradient(from 0deg, transparent, #3b82f6, #a855f7, #ec4899, transparent 40%)" }} />
+
+        <motion.a
+          href="mailto:shahmaitri123.ms@gmail.com"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          whileHover={{ scale: 1.01 }}
+          data-hover
+          className="group relative block border border-black/10 rounded-3xl p-8 md:p-10 overflow-hidden mb-8 bg-white shadow-sm hover:shadow-xl transition-shadow"
+        >
+          <motion.div animate={{ rotate: 360 }} transition={{ duration: 8, repeat: Infinity, ease: "linear" }} className="absolute -inset-40 opacity-30 pointer-events-none" style={{ background: "conic-gradient(from 0deg, transparent, #3b82f6, #a855f7, #ec4899, transparent 40%)", filter: "blur(30px)" }} />
+          <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(circle at center, rgba(59,130,246,0.08), rgba(168,85,247,0.06) 40%, transparent 70%)" }} />
+
           <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="flex items-center gap-5">
               <motion.div animate={{ rotate: [0, -10, 10, 0] }} transition={{ duration: 3, repeat: Infinity }} className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg shadow-blue-500/30">
                 <Send size={22} className="text-white" />
               </motion.div>
               <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-white/40 mb-1">Drop me a line</p>
-                <p className="text-lg md:text-2xl font-semibold text-white">shahmaitri123.ms@gmail.com</p>
+                <p className="text-xs uppercase tracking-[0.3em] text-black/40 mb-1">Drop me a line</p>
+                <p className="text-lg md:text-2xl font-semibold text-black">shahmaitri123.ms@gmail.com</p>
               </div>
             </div>
-            <motion.div whileHover={{ x: 5 }} className="flex items-center gap-2 text-white text-sm font-medium">
+            <motion.div whileHover={{ x: 5 }} className="flex items-center gap-2 text-black text-sm font-medium">
               <span>Say hello</span>
               <motion.span animate={{ x: [0, 5, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>→</motion.span>
             </motion.div>
           </div>
         </motion.a>
+
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
           {contactMethods.map((it, i) => {
             const Icon = it.icon;
             return (
-              <motion.a key={it.label} href={it.href} target={it.href.startsWith("http") ? "_blank" : undefined} rel={it.href.startsWith("http") ? "noreferrer noopener" : undefined} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08, duration: 0.6 }} whileHover={{ y: -8, scale: 1.02 }} data-hover className="group relative border border-white/10 rounded-2xl p-6 overflow-hidden bg-white/[0.02] hover:border-white/25 transition-colors">
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ background: `radial-gradient(circle at top right, ${it.glow}25, transparent 70%)` }} />
-                <motion.div className="absolute top-4 right-4 text-white/30 group-hover:text-white transition-colors" whileHover={{ x: 3, y: -3 }}><ArrowUpRight size={16} /></motion.div>
+              <motion.a
+                key={it.label}
+                href={it.href}
+                target={it.href.startsWith("http") ? "_blank" : undefined}
+                rel={it.href.startsWith("http") ? "noreferrer noopener" : undefined}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08, duration: 0.6 }}
+                whileHover={{ y: -8, scale: 1.02 }}
+                data-hover
+                className="group relative border border-black/10 rounded-2xl p-6 overflow-hidden bg-white hover:border-black/25 transition-all shadow-sm hover:shadow-xl"
+              >
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ background: `radial-gradient(circle at top right, ${it.glow}15, transparent 70%)` }} />
+                <motion.div className="absolute top-4 right-4 text-black/30 group-hover:text-black transition-colors" whileHover={{ x: 3, y: -3 }}>
+                  <ArrowUpRight size={16} />
+                </motion.div>
                 <div className="relative z-10">
                   <motion.div whileHover={{ rotate: [0, -8, 8, 0] }} transition={{ duration: 0.5 }} className={`w-11 h-11 rounded-xl bg-gradient-to-br ${it.gradient} flex items-center justify-center text-white mb-4 shadow-lg`} style={{ boxShadow: `0 8px 24px -8px ${it.glow}80` }}>
                     <Icon size={18} />
                   </motion.div>
-                  <p className="text-[10px] uppercase tracking-[0.3em] text-white/40 mb-1.5">{it.label}</p>
-                  <p className="text-white text-sm font-medium break-all leading-snug">{it.value}</p>
+                  <p className="text-[10px] uppercase tracking-[0.3em] text-black/40 mb-1.5">{it.label}</p>
+                  <p className="text-black text-sm font-medium break-all leading-snug">{it.value}</p>
                 </div>
               </motion.a>
             );
           })}
         </div>
+
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.5, duration: 0.7 }} className="mt-10 flex items-center justify-center gap-3">
           <span className="relative flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500" />
           </span>
-          <span className="text-xs md:text-sm text-white/60">Available for freelance & full-time opportunities</span>
+          <span className="text-xs md:text-sm text-black/60">Available for freelance & full-time opportunities</span>
         </motion.div>
       </div>
-    </Section>
+    </section>
   );
 }
 
