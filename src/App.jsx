@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, useScroll, useSpring, useMotionValue } from "framer-motion";
-import { Mail, Phone, MapPin, Palette, ArrowDown, Briefcase, GraduationCap, Sparkles, Code2, Wand2 } from "lucide-react";
+import { Mail, Phone, MapPin, ArrowDown, Briefcase, GraduationCap, ArrowUpRight, Send } from "lucide-react";
 
 /* ============================
    BRAND ICONS (inline SVG)
@@ -17,14 +17,42 @@ const BehanceIcon = ({ size = 16, className = "" }) => (
   </svg>
 );
 
+const WhatsappIcon = ({ size = 16, className = "" }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+  </svg>
+);
+
 /* ============================
-   CUSTOM CURSOR (Black & White)
+   COLORFUL SVG SKILL ICONS
+============================ */
+const FigmaIcon = () => (
+  <svg viewBox="0 0 38 57" className="w-5 h-5">
+    <path fill="#1abcfe" d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z"/>
+    <path fill="#0acf83" d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0z"/>
+    <path fill="#ff7262" d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z"/>
+    <path fill="#f24e1e" d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z"/>
+    <path fill="#a259ff" d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z"/>
+  </svg>
+);
+const FramerIcon = () => (<svg viewBox="0 0 14 21" className="w-4 h-5"><path fill="#fff" d="M0 0h14v7H7zM0 7h7l7 7H7v7l-7-7z"/></svg>);
+const PhotoshopIcon = () => (<svg viewBox="0 0 24 24" className="w-5 h-5"><rect width="24" height="24" rx="4" fill="#001e36"/><text x="12" y="17" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#31a8ff">Ps</text></svg>);
+const IllustratorIcon = () => (<svg viewBox="0 0 24 24" className="w-5 h-5"><rect width="24" height="24" rx="4" fill="#330000"/><text x="12" y="17" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#ff9a00">Ai</text></svg>);
+const NotionIcon = () => (<svg viewBox="0 0 24 24" className="w-5 h-5"><rect width="24" height="24" rx="4" fill="#fff"/><text x="12" y="17" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#000">N</text></svg>);
+const ChatGPTIcon = () => (<svg viewBox="0 0 24 24" className="w-5 h-5"><circle cx="12" cy="12" r="11" fill="#10a37f"/><path fill="#fff" d="M12 5.5c-1.6 0-3 1-3.6 2.4-.3 0-.6-.1-.9-.1-2 0-3.5 1.6-3.5 3.5 0 1.4.8 2.6 2 3.1-.1.3-.1.7-.1 1 0 2 1.6 3.5 3.5 3.5 1.2 0 2.2-.6 2.8-1.5.3.1.6.1.9.1 2 0 3.5-1.6 3.5-3.5 0-1.4-.8-2.6-2-3.1.1-.3.1-.7.1-1 0-2-1.6-3.5-3.5-3.5-.5 0-1 .1-1.5.4-.4-.6-1.1-1-1.7-1z"/></svg>);
+const ClaudeIcon = () => (<svg viewBox="0 0 24 24" className="w-5 h-5"><circle cx="12" cy="12" r="11" fill="#d97757"/><path fill="#fff" d="M8 16l3-9h2l3 9h-2l-.6-2H10.6L10 16H8zm3.2-3.6h1.6L12 9.5l-.8 2.9z"/></svg>);
+const GeminiIcon = () => (<svg viewBox="0 0 24 24" className="w-5 h-5"><defs><linearGradient id="gem" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#4285f4"/><stop offset="50%" stopColor="#9b72cb"/><stop offset="100%" stopColor="#d96570"/></linearGradient></defs><circle cx="12" cy="12" r="11" fill="url(#gem)"/><path fill="#fff" d="M12 5l1.5 5 5 1.5-5 1.5L12 19l-1.5-5-5-1.5 5-1.5z"/></svg>);
+const NanoBananaIcon = () => (<svg viewBox="0 0 24 24" className="w-5 h-5"><circle cx="12" cy="12" r="11" fill="#ffe066"/><path fill="#f59e0b" d="M6 15c2-6 8-9 12-7-2 1-3 3-3 5s1 3 2 4c-4-1-9 0-11-2z"/></svg>);
+const KlingIcon = () => (<svg viewBox="0 0 24 24" className="w-5 h-5"><circle cx="12" cy="12" r="11" fill="#111"/><path fill="#fff" d="M7 6v12h2v-4l1.5-2L14 18h2.5l-4.2-6 4-5H14l-3.5 4.3V6H7z"/></svg>);
+const ClaudeCodeIcon = () => (<svg viewBox="0 0 24 24" className="w-5 h-5"><circle cx="12" cy="12" r="11" fill="#d97757"/><path fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" d="M9 9l-3 3 3 3M15 9l3 3-3 3"/></svg>);
+
+/* ============================
+   CUSTOM CURSOR
 ============================ */
 function CustomCursor() {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const [hovering, setHovering] = useState(false);
-
   const springX = useSpring(x, { stiffness: 300, damping: 30 });
   const springY = useSpring(y, { stiffness: 300, damping: 30 });
 
@@ -33,8 +61,7 @@ function CustomCursor() {
       x.set(e.clientX);
       y.set(e.clientY);
       const el = e.target;
-      if (el.closest("a, button, [data-hover]")) setHovering(true);
-      else setHovering(false);
+      setHovering(!!el.closest("a, button, [data-hover]"));
     };
     window.addEventListener("mousemove", move);
     return () => window.removeEventListener("mousemove", move);
@@ -42,24 +69,10 @@ function CustomCursor() {
 
   return (
     <>
-      <motion.div
-        style={{ x: springX, y: springY }}
-        className="pointer-events-none fixed top-0 left-0 z-[9999] -translate-x-1/2 -translate-y-1/2 mix-blend-difference hidden md:block"
-      >
-        <motion.div
-          animate={{
-            width: hovering ? 64 : 36,
-            height: hovering ? 64 : 36,
-            borderWidth: hovering ? 2 : 1.5,
-          }}
-          transition={{ type: "spring", stiffness: 300, damping: 20 }}
-          className="rounded-full border border-white"
-        />
+      <motion.div style={{ x: springX, y: springY }} className="pointer-events-none fixed top-0 left-0 z-[9999] -translate-x-1/2 -translate-y-1/2 mix-blend-difference hidden md:block">
+        <motion.div animate={{ width: hovering ? 64 : 36, height: hovering ? 64 : 36, borderWidth: hovering ? 2 : 1.5 }} transition={{ type: "spring", stiffness: 300, damping: 20 }} className="rounded-full border border-white" />
       </motion.div>
-      <motion.div
-        style={{ x, y }}
-        className="pointer-events-none fixed top-0 left-0 z-[9999] -translate-x-1/2 -translate-y-1/2 mix-blend-difference hidden md:block"
-      >
+      <motion.div style={{ x, y }} className="pointer-events-none fixed top-0 left-0 z-[9999] -translate-x-1/2 -translate-y-1/2 mix-blend-difference hidden md:block">
         <div className="w-1.5 h-1.5 rounded-full bg-white" />
       </motion.div>
       <style>{`@media (min-width: 768px) { * { cursor: none !important; } }`}</style>
@@ -68,21 +81,16 @@ function CustomCursor() {
 }
 
 /* ============================
-   SCROLL PROGRESS BAR
+   SCROLL PROGRESS
 ============================ */
 function ScrollProgress() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
-  return (
-    <motion.div
-      style={{ scaleX }}
-      className="fixed top-0 left-0 right-0 h-[2px] bg-white origin-left z-[100]"
-    />
-  );
+  return <motion.div style={{ scaleX }} className="fixed top-0 left-0 right-0 h-[2px] bg-white origin-left z-[100]" />;
 }
 
 /* ============================
-   HEADER / NAVBAR
+   HEADER
 ============================ */
 function Header() {
   const links = [
@@ -91,43 +99,21 @@ function Header() {
     { name: "Work", href: "#work" },
     { name: "Contact", href: "#contact" },
   ];
-
   return (
-    <motion.header
-      initial={{ y: -80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-black/40 border-b border-white/10"
-    >
+    <motion.header initial={{ y: -80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }} className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-black/40 border-b border-white/10">
       <nav className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        <motion.a
-          href="#top"
-          whileHover={{ scale: 1.05 }}
-          className="text-lg font-bold tracking-tight text-white"
-        >
-          Maitri<span className="text-white/40">.</span>
-        </motion.a>
+        <motion.a href="#top" whileHover={{ scale: 1.05 }} className="text-lg font-bold tracking-tight text-white">Maitri<span className="text-white/40">.</span></motion.a>
         <ul className="hidden md:flex items-center gap-8">
           {links.map((link) => (
             <li key={link.name}>
-              <a
-                href={link.href}
-                className="relative text-sm text-white/70 hover:text-white transition-colors group"
-              >
+              <a href={link.href} className="relative text-sm text-white/70 hover:text-white transition-colors group">
                 {link.name}
                 <span className="absolute -bottom-1 left-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full" />
               </a>
             </li>
           ))}
         </ul>
-        <motion.a
-          href="#contact"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="text-xs md:text-sm px-4 py-2 rounded-full border border-white/30 text-white hover:bg-white hover:text-black transition-all"
-        >
-          Let's Talk
-        </motion.a>
+        <motion.a href="#contact" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="text-xs md:text-sm px-4 py-2 rounded-full border border-white/30 text-white hover:bg-white hover:text-black transition-all">Let's Talk</motion.a>
       </nav>
     </motion.header>
   );
@@ -139,136 +125,34 @@ function Header() {
 function Hero() {
   return (
     <section id="top" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16">
-      {/* Background grid */}
-      <div className="absolute inset-0 opacity-[0.07]"
-        style={{
-          backgroundImage:
-            "linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-        }}
-      />
-      {/* Glow */}
-      <motion.div
-        animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.3, 0.15] }}
-        transition={{ duration: 6, repeat: Infinity }}
-        className="absolute w-[500px] h-[500px] rounded-full bg-white blur-[120px]"
-      />
+      <div className="absolute inset-0 opacity-[0.07]" style={{ backgroundImage: "linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
+      <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.3, 0.15] }} transition={{ duration: 6, repeat: Infinity }} className="absolute w-[500px] h-[500px] rounded-full bg-white blur-[120px]" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center w-full">
-        {/* LEFT — Text */}
         <div className="text-center md:text-left order-2 md:order-1">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.8 }}
-            className="text-xs md:text-sm uppercase tracking-[0.4em] text-white/50 mb-6"
-          >
-            UI/UX Designer • AI
-          </motion.p>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.9 }}
-            className="text-5xl md:text-7xl font-bold tracking-tighter text-white leading-[0.95]"
-          >
-            Maitri Shah
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            className="mt-6 text-sm md:text-base text-white/60 max-w-lg mx-auto md:mx-0"
-          >
-            Crafting intuitive digital experiences with a blend of design thinking
-            and AI-driven workflows.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7, duration: 0.8 }}
-            className="mt-10 flex items-center justify-center md:justify-start gap-4"
-          >
-            <a
-              href="#work"
-              className="px-6 py-3 rounded-full bg-white text-black text-sm font-medium hover:bg-white/90 transition"
-            >
-              View Work
-            </a>
-            <a
-              href="#contact"
-              className="px-6 py-3 rounded-full border border-white/30 text-white text-sm font-medium hover:bg-white/10 transition"
-            >
-              Get in Touch
-            </a>
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.8 }} className="text-xs md:text-sm uppercase tracking-[0.4em] text-white/50 mb-6">UI/UX Designer • AI</motion.p>
+          <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.9 }} className="text-5xl md:text-7xl font-bold tracking-tighter text-white leading-[0.95]">Maitri Shah</motion.h1>
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.8 }} className="mt-6 text-sm md:text-base text-white/60 max-w-lg mx-auto md:mx-0">Crafting intuitive digital experiences with a blend of design thinking and AI-driven workflows.</motion.p>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7, duration: 0.8 }} className="mt-10 flex items-center justify-center md:justify-start gap-4">
+            <a href="#work" className="px-6 py-3 rounded-full bg-white text-black text-sm font-medium hover:bg-white/90 transition">View Work</a>
+            <a href="#contact" className="px-6 py-3 rounded-full border border-white/30 text-white text-sm font-medium hover:bg-white/10 transition">Get in Touch</a>
           </motion.div>
         </div>
 
-        {/* RIGHT — Photo */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.4, duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="relative flex items-center justify-center order-1 md:order-2"
-          data-hover
-        >
-          {/* Rotating dashed ring */}
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-            className="absolute w-[280px] h-[280px] md:w-[380px] md:h-[380px] rounded-full border border-dashed border-white/20"
-          />
-          {/* Second rotating ring */}
-          <motion.div
-            animate={{ rotate: -360 }}
-            transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
-            className="absolute w-[320px] h-[320px] md:w-[440px] md:h-[440px] rounded-full border border-white/10"
-          />
-          {/* Glow behind photo */}
+        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.4, duration: 1, ease: [0.22, 1, 0.36, 1] }} className="relative flex items-center justify-center order-1 md:order-2" data-hover>
+          <motion.div animate={{ rotate: 360 }} transition={{ duration: 30, repeat: Infinity, ease: "linear" }} className="absolute w-[280px] h-[280px] md:w-[380px] md:h-[380px] rounded-full border border-dashed border-white/20" />
+          <motion.div animate={{ rotate: -360 }} transition={{ duration: 45, repeat: Infinity, ease: "linear" }} className="absolute w-[320px] h-[320px] md:w-[440px] md:h-[440px] rounded-full border border-white/10" />
           <div className="absolute w-[260px] h-[260px] md:w-[340px] md:h-[340px] rounded-full bg-white/20 blur-[80px]" />
-
-          {/* Photo */}
-          <motion.div
-            whileHover={{ scale: 1.03 }}
-            transition={{ type: "spring", stiffness: 200, damping: 20 }}
-            className="relative w-[240px] h-[240px] md:w-[340px] md:h-[340px] rounded-full overflow-hidden border border-white/20 grayscale hover:grayscale-0 transition-all duration-700"
-          >
-            <img
-              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80"
-              alt="Maitri Shah"
-              className="w-full h-full object-cover"
-            />
-            {/* Subtle overlay */}
+          <motion.div whileHover={{ scale: 1.03 }} transition={{ type: "spring", stiffness: 200, damping: 20 }} className="relative w-[240px] h-[240px] md:w-[340px] md:h-[340px] rounded-full overflow-hidden border border-white/20 grayscale hover:grayscale-0 transition-all duration-700">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80" alt="Maitri Shah" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
           </motion.div>
-
-          {/* Floating badges */}
-          <motion.div
-            animate={{ y: [0, -10, 0] }}
-            transition={{ duration: 3, repeat: Infinity }}
-            className="absolute top-4 -left-2 md:top-8 md:left-0 bg-black/80 backdrop-blur border border-white/20 rounded-full px-4 py-2 text-xs text-white"
-          >
-            ✦ UI/UX
-          </motion.div>
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 3.5, repeat: Infinity }}
-            className="absolute bottom-4 -right-2 md:bottom-8 md:right-0 bg-black/80 backdrop-blur border border-white/20 rounded-full px-4 py-2 text-xs text-white"
-          >
-            ⚡ AI Workflow
-          </motion.div>
+          <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 3, repeat: Infinity }} className="absolute top-4 -left-2 md:top-8 md:left-0 bg-black/80 backdrop-blur border border-white/20 rounded-full px-4 py-2 text-xs text-white">✦ UI/UX</motion.div>
+          <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 3.5, repeat: Infinity }} className="absolute bottom-4 -right-2 md:bottom-8 md:right-0 bg-black/80 backdrop-blur border border-white/20 rounded-full px-4 py-2 text-xs text-white">⚡ AI Workflow</motion.div>
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
-      <motion.a
-        href="#about"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/40"
-      >
+      <motion.a href="#about" animate={{ y: [0, 10, 0] }} transition={{ duration: 2, repeat: Infinity }} className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/40">
         <ArrowDown size={20} />
       </motion.a>
     </section>
@@ -279,22 +163,12 @@ function Hero() {
    SECTION WRAPPER
 ============================ */
 function Section({ id, children, className = "" }) {
-  return (
-    <section id={id} className={`relative py-24 md:py-32 px-6 ${className}`}>
-      <div className="max-w-6xl mx-auto">{children}</div>
-    </section>
-  );
+  return <section id={id} className={`relative py-24 md:py-32 px-6 ${className}`}><div className="max-w-6xl mx-auto">{children}</div></section>;
 }
 
 function SectionTitle({ label, title }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.7 }}
-      className="mb-14"
-    >
+    <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.7 }} className="mb-14">
       <p className="text-xs uppercase tracking-[0.4em] text-white/40 mb-3">{label}</p>
       <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-white">{title}</h2>
     </motion.div>
@@ -314,31 +188,11 @@ function About() {
   return (
     <Section id="about">
       <SectionTitle label="01 — About" title="About Me" />
-
       <div className="grid md:grid-cols-2 gap-12 items-start">
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="space-y-5 text-white/70 leading-relaxed"
-        >
-          <p>
-            I'm <span className="text-white font-medium">Maitri Shah</span>, a UI/UX Designer
-            based in Mumbai with 2+ years of experience designing intuitive websites,
-            landing pages, and microsites across real estate, healthcare, and education.
-          </p>
-          <p>
-            I blend user research and design systems with AI-powered workflows —
-            using tools like ChatGPT, Claude, Nano Banana, and Kling to generate
-            images, videos, and accelerate delivery without compromising quality.
-          </p>
-          <p>
-            Currently designing at <span className="text-white font-medium">Realatte</span>,
-            where I've shipped 15+ projects and reduced design time by 25% through
-            AI integration.
-          </p>
-
+        <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="space-y-5 text-white/70 leading-relaxed">
+          <p>I'm <span className="text-white font-medium">Maitri Shah</span>, a UI/UX Designer based in Mumbai with 2+ years of experience designing intuitive websites, landing pages, and microsites across real estate, healthcare, and education.</p>
+          <p>I blend user research and design systems with AI-powered workflows — using tools like ChatGPT, Claude, Nano Banana, and Kling to generate images, videos, and accelerate delivery without compromising quality.</p>
+          <p>Currently designing at <span className="text-white font-medium">Realatte</span>, where I've shipped 15+ projects and reduced design time by 25% through AI integration.</p>
           <div className="flex flex-wrap gap-4 pt-4 text-sm text-white/60">
             <span className="flex items-center gap-2"><MapPin size={14} /> Mumbai, India</span>
             <span className="flex items-center gap-2"><Briefcase size={14} /> Realatte</span>
@@ -346,49 +200,20 @@ function About() {
           </div>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="space-y-8"
-        >
+        <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="space-y-8">
           <div className="grid grid-cols-3 gap-4">
             {stats.map((s, i) => (
-              <motion.div
-                key={s.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.6 }}
-                className="border border-white/10 rounded-2xl p-4 text-center hover:border-white/30 transition"
-              >
+              <motion.div key={s.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1, duration: 0.6 }} className="border border-white/10 rounded-2xl p-4 text-center hover:border-white/30 transition">
                 <div className="text-2xl md:text-3xl font-bold text-white">{s.value}</div>
                 <div className="text-[10px] md:text-xs text-white/50 mt-1 leading-tight">{s.label}</div>
               </motion.div>
             ))}
           </div>
-
           <div className="border border-white/10 rounded-2xl p-6 space-y-4">
             <h3 className="text-sm uppercase tracking-widest text-white/40">Experience</h3>
             {[
-              {
-                role: "UX/UI Designer",
-                company: "Realatte",
-                time: "Apr 2025 — Present",
-                points: [
-                  "Design intuitive websites, LPs, microsites",
-                  "AI image & video generation",
-                  "15+ projects across real estate, healthcare, education",
-                  "Reduced design time by 25% using AI",
-                ],
-              },
-              {
-                role: "UX/UI Designer",
-                company: "Ivvotiontech",
-                time: "Apr 2023 — Mar 2024",
-                points: ["Designed websites and graphic posts"],
-              },
+              { role: "UX/UI Designer", company: "Realatte", time: "Apr 2025 — Present", points: ["Design intuitive websites, LPs, microsites", "AI image & video generation", "15+ projects across real estate, healthcare, education", "Reduced design time by 25% using AI"] },
+              { role: "UX/UI Designer", company: "Ivvotiontech", time: "Apr 2023 — Mar 2024", points: ["Designed websites and graphic posts"] },
             ].map((exp) => (
               <div key={exp.company} className="border-l border-white/20 pl-4 py-2">
                 <div className="flex items-center justify-between flex-wrap gap-2">
@@ -398,9 +223,7 @@ function About() {
                 <p className="text-sm text-white/50 mt-1">{exp.company}</p>
                 <ul className="mt-2 space-y-1">
                   {exp.points.map((p) => (
-                    <li key={p} className="text-sm text-white/60 flex gap-2">
-                      <span className="text-white/30">—</span> {p}
-                    </li>
+                    <li key={p} className="text-sm text-white/60 flex gap-2"><span className="text-white/30">—</span> {p}</li>
                   ))}
                 </ul>
               </div>
@@ -416,116 +239,117 @@ function About() {
    SKILLS
 ============================ */
 function Skills() {
-  const groups = [
-    {
-      title: "UX",
-      icon: Sparkles,
-      items: [
-        "User Research", "User Interviews", "Usability Testing",
-        "UX Audit", "Wireframing", "Competitive Research",
-      ],
-    },
-    {
-      title: "Design",
-      icon: Palette,
-      items: [
-        "Visual Design", "Responsive Design", "Design Systems",
-        "Prototyping", "Interaction Design", "Micro-interactions",
-      ],
-    },
-    {
-      title: "Tools",
-      icon: Code2,
-      items: [
-        "Figma", "Framer (Basic)", "Photoshop (Basic)",
-        "Illustrator (Basic)", "Notion",
-      ],
-    },
-    {
-      title: "AI",
-      icon: Wand2,
-      items: [
-        "ChatGPT", "Claude", "Claude Code",
-        "Gemini", "Nano Banana", "Kling",
-      ],
-    },
+  const uxSkills = [
+    { name: "User Research", color: "#60a5fa" }, { name: "User Interviews", color: "#a78bfa" },
+    { name: "Usability Testing", color: "#f472b6" }, { name: "UX Audit", color: "#fb923c" },
+    { name: "Wireframing", color: "#34d399" }, { name: "Competitive Research", color: "#22d3ee" },
+  ];
+  const designSkills = [
+    { name: "Visual Design", color: "#f472b6" }, { name: "Responsive Design", color: "#60a5fa" },
+    { name: "Design Systems", color: "#a78bfa" }, { name: "Prototyping", color: "#34d399" },
+    { name: "Interaction Design", color: "#fb923c" }, { name: "Micro-interactions", color: "#22d3ee" },
+  ];
+  const tools = [
+    { name: "Figma", Icon: FigmaIcon, color: "#a259ff" }, { name: "Framer", Icon: FramerIcon, color: "#ffffff" },
+    { name: "Photoshop", Icon: PhotoshopIcon, color: "#31a8ff" }, { name: "Illustrator", Icon: IllustratorIcon, color: "#ff9a00" },
+    { name: "Notion", Icon: NotionIcon, color: "#ffffff" },
+  ];
+  const aiTools = [
+    { name: "ChatGPT", Icon: ChatGPTIcon, color: "#10a37f" }, { name: "Claude", Icon: ClaudeIcon, color: "#d97757" },
+    { name: "Claude Code", Icon: ClaudeCodeIcon, color: "#d97757" }, { name: "Gemini", Icon: GeminiIcon, color: "#9b72cb" },
+    { name: "Nano Banana", Icon: NanoBananaIcon, color: "#ffe066" }, { name: "Kling", Icon: KlingIcon, color: "#ffffff" },
   ];
 
-  return (
-    <Section id="skills" className="border-t border-white/5">
-      <SectionTitle label="02 — Skills" title="Skills & Tools" />
+  const ColorPill = ({ name, color, delay }) => (
+    <motion.span initial={{ opacity: 0, scale: 0.8, y: 10 }} whileInView={{ opacity: 1, scale: 1, y: 0 }} viewport={{ once: true }} transition={{ delay, duration: 0.5, type: "spring" }} whileHover={{ scale: 1.08, y: -3 }} className="relative text-xs md:text-sm px-4 py-2 rounded-full border text-white/90 cursor-default overflow-hidden group" style={{ borderColor: `${color}40`, backgroundColor: `${color}15` }}>
+      <motion.span animate={{ scale: [1, 1.4, 1], opacity: [0.6, 1, 0.6] }} transition={{ duration: 2, repeat: Infinity, delay }} className="absolute left-2 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full" style={{ backgroundColor: color, boxShadow: `0 0 8px ${color}` }} />
+      <span className="pl-3">{name}</span>
+      <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `radial-gradient(circle at center, ${color}30, transparent 70%)` }} />
+    </motion.span>
+  );
 
-      <div className="grid md:grid-cols-2 gap-6">
-        {groups.map((g, gi) => {
-          const Icon = g.icon;
-          return (
-            <motion.div
-              key={g.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ delay: gi * 0.1, duration: 0.7 }}
-              className="group border border-white/10 rounded-3xl p-8 hover:border-white/30 transition-colors relative overflow-hidden"
-            >
-              <div className="absolute -top-20 -right-20 w-48 h-48 bg-white/5 rounded-full blur-3xl group-hover:bg-white/10 transition" />
-              <div className="relative">
-                <div className="flex items-center gap-3 mb-6">
-                  <Icon size={20} className="text-white/70" />
-                  <h3 className="text-xl font-semibold text-white">{g.title}</h3>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {g.items.map((item, i) => (
-                    <motion.span
-                      key={item}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: gi * 0.1 + i * 0.04, duration: 0.4 }}
-                      whileHover={{ scale: 1.06, backgroundColor: "#ffffff", color: "#000000" }}
-                      className="text-xs md:text-sm px-3 py-1.5 rounded-full border border-white/15 text-white/80 transition-colors"
-                    >
-                      {item}
-                    </motion.span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          );
-        })}
+  const ToolCard = ({ name, Icon, color, delay }) => (
+    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay, duration: 0.5 }} whileHover={{ y: -6, scale: 1.05 }} data-hover className="relative flex flex-col items-center justify-center gap-3 p-5 rounded-2xl border border-white/10 hover:border-white/30 transition-all overflow-hidden group" style={{ backgroundColor: "rgba(255,255,255,0.02)" }}>
+      <motion.div animate={{ rotate: 360 }} transition={{ duration: 8, repeat: Infinity, ease: "linear" }} className="absolute -inset-20 opacity-0 group-hover:opacity-40 transition-opacity" style={{ background: `conic-gradient(from 0deg, transparent, ${color}, transparent 30%)` }} />
+      <div className="relative z-10 flex flex-col items-center gap-3">
+        <motion.div whileHover={{ rotate: [0, -10, 10, 0] }} transition={{ duration: 0.5 }}><Icon /></motion.div>
+        <span className="text-xs text-white/70 group-hover:text-white transition-colors">{name}</span>
       </div>
+    </motion.div>
+  );
 
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.7 }}
-        className="mt-10 border border-white/10 rounded-3xl p-8"
-      >
-        <h3 className="text-sm uppercase tracking-widest text-white/40 mb-6">Education</h3>
-        <div className="grid md:grid-cols-2 gap-6">
-          <div>
-            <p className="text-white font-medium">B.Com</p>
-            <p className="text-sm text-white/50">IGNOU</p>
-          </div>
-          <div>
-            <p className="text-white font-medium">UX/UI Design Course</p>
-            <p className="text-sm text-white/50">TOPS Technology</p>
-          </div>
+  return (
+    <Section id="skills" className="border-t border-white/5 relative overflow-hidden">
+      <motion.div animate={{ x: [0, 100, 0], y: [0, -50, 0] }} transition={{ duration: 20, repeat: Infinity }} className="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-[100px] pointer-events-none" />
+      <motion.div animate={{ x: [0, -80, 0], y: [0, 60, 0] }} transition={{ duration: 25, repeat: Infinity }} className="absolute bottom-20 right-10 w-72 h-72 bg-pink-500/10 rounded-full blur-[100px] pointer-events-none" />
+      <motion.div animate={{ x: [0, 50, 0], y: [0, 80, 0] }} transition={{ duration: 18, repeat: Infinity }} className="absolute top-1/2 left-1/2 w-64 h-64 bg-purple-500/10 rounded-full blur-[100px] pointer-events-none" />
+
+      <div className="relative z-10">
+        <SectionTitle label="02 — Skills" title="Skills & Tools" />
+
+        <div className="grid md:grid-cols-2 gap-6 mb-6">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.7 }} className="group border border-white/10 rounded-3xl p-8 hover:border-blue-400/30 transition-colors relative overflow-hidden bg-gradient-to-br from-blue-500/[0.03] to-purple-500/[0.03]">
+            <div className="flex items-center gap-3 mb-6">
+              <motion.div animate={{ rotate: [0, 360] }} transition={{ duration: 12, repeat: Infinity, ease: "linear" }} className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-white text-xs font-bold">UX</motion.div>
+              <h3 className="text-xl font-semibold text-white">UX</h3>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {uxSkills.map((s, i) => (<ColorPill key={s.name} name={s.name} color={s.color} delay={i * 0.06} />))}
+            </div>
+          </motion.div>
+
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ delay: 0.1, duration: 0.7 }} className="group border border-white/10 rounded-3xl p-8 hover:border-pink-400/30 transition-colors relative overflow-hidden bg-gradient-to-br from-pink-500/[0.03] to-orange-500/[0.03]">
+            <div className="flex items-center gap-3 mb-6">
+              <motion.div animate={{ scale: [1, 1.15, 1] }} transition={{ duration: 2, repeat: Infinity }} className="w-8 h-8 rounded-lg bg-gradient-to-br from-pink-400 to-orange-500 flex items-center justify-center text-white text-xs font-bold">✦</motion.div>
+              <h3 className="text-xl font-semibold text-white">Design</h3>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {designSkills.map((s, i) => (<ColorPill key={s.name} name={s.name} color={s.color} delay={i * 0.06 + 0.2} />))}
+            </div>
+          </motion.div>
         </div>
-      </motion.div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.7 }}
-        className="mt-10 text-center"
-      >
-        <p className="text-xs uppercase tracking-[0.4em] text-white/40 mb-3">Target Role</p>
-        <p className="text-2xl md:text-3xl font-bold text-white">
-          UI/UX Designer <span className="text-white/40">+</span> AI
-        </p>
-      </motion.div>
+        <div className="grid md:grid-cols-2 gap-6">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.7 }} className="border border-white/10 rounded-3xl p-8 relative overflow-hidden bg-gradient-to-br from-cyan-500/[0.03] to-blue-500/[0.03]">
+            <div className="flex items-center gap-3 mb-6">
+              <motion.div animate={{ rotate: [0, 15, -15, 0] }} transition={{ duration: 3, repeat: Infinity }} className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-white text-xs font-bold">⚙</motion.div>
+              <h3 className="text-xl font-semibold text-white">Tools</h3>
+            </div>
+            <div className="grid grid-cols-3 sm:grid-cols-5 gap-3">
+              {tools.map((t, i) => (<ToolCard key={t.name} name={t.name} Icon={t.Icon} color={t.color} delay={i * 0.08} />))}
+            </div>
+          </motion.div>
+
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ delay: 0.1, duration: 0.7 }} className="border border-white/10 rounded-3xl p-8 relative overflow-hidden bg-gradient-to-br from-purple-500/[0.03] to-pink-500/[0.03]">
+            <div className="flex items-center gap-3 mb-6">
+              <motion.div animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }} transition={{ duration: 6, repeat: Infinity }} className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center text-white text-xs font-bold">✨</motion.div>
+              <h3 className="text-xl font-semibold text-white">AI</h3>
+            </div>
+            <div className="grid grid-cols-3 sm:grid-cols-6 gap-3">
+              {aiTools.map((t, i) => (<ToolCard key={t.name} name={t.name} Icon={t.Icon} color={t.color} delay={i * 0.08} />))}
+            </div>
+          </motion.div>
+        </div>
+
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="mt-10 border border-white/10 rounded-3xl p-8">
+          <h3 className="text-sm uppercase tracking-widest text-white/40 mb-6">Education</h3>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="flex items-center gap-4">
+              <motion.div animate={{ rotate: [0, 10, -10, 0] }} transition={{ duration: 3, repeat: Infinity }} className="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-black text-lg">🎓</motion.div>
+              <div><p className="text-white font-medium">B.Com</p><p className="text-sm text-white/50">IGNOU</p></div>
+            </div>
+            <div className="flex items-center gap-4">
+              <motion.div animate={{ rotate: [0, -10, 10, 0] }} transition={{ duration: 3, repeat: Infinity }} className="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center text-black text-lg">📐</motion.div>
+              <div><p className="text-white font-medium">UX/UI Design Course</p><p className="text-sm text-white/50">TOPS Technology</p></div>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="mt-10 text-center">
+          <p className="text-xs uppercase tracking-[0.4em] text-white/40 mb-3">Target Role</p>
+          <p className="text-2xl md:text-3xl font-bold text-white">UI/UX Designer <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">+</span> AI</p>
+        </motion.div>
+      </div>
     </Section>
   );
 }
@@ -546,32 +370,18 @@ function Work() {
   return (
     <Section id="work" className="border-t border-white/5">
       <SectionTitle label="03 — Work" title="Selected Work" />
-
       <div className="grid md:grid-cols-2 gap-6">
         {projects.map((p, i) => (
-          <motion.div
-            key={p.title}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ delay: (i % 2) * 0.1, duration: 0.7 }}
-            whileHover={{ y: -6 }}
-            data-hover
-            className="group relative border border-white/10 rounded-3xl p-8 overflow-hidden bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/25 transition"
-          >
+          <motion.div key={p.title} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ delay: (i % 2) * 0.1, duration: 0.7 }} whileHover={{ y: -6 }} data-hover className="group relative border border-white/10 rounded-3xl p-8 overflow-hidden bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/25 transition">
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
               <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
             </div>
             <div className="relative">
               <div className="flex items-center justify-between mb-6">
-                <span className="text-xs px-3 py-1 rounded-full border border-white/20 text-white/60">
-                  {p.tag}
-                </span>
+                <span className="text-xs px-3 py-1 rounded-full border border-white/20 text-white/60">{p.tag}</span>
                 <span className="text-xs text-white/40">{p.year}</span>
               </div>
-              <h3 className="text-2xl font-semibold text-white mb-3 group-hover:translate-x-1 transition-transform">
-                {p.title}
-              </h3>
+              <h3 className="text-2xl font-semibold text-white mb-3 group-hover:translate-x-1 transition-transform">{p.title}</h3>
               <p className="text-sm text-white/60 leading-relaxed">{p.desc}</p>
               <div className="mt-6 flex items-center gap-2 text-sm text-white/70 group-hover:text-white transition-colors">
                 <span>View case</span>
@@ -586,61 +396,189 @@ function Work() {
 }
 
 /* ============================
-   CONTACT
+   CONTACT — FANCY + ATTRACTIVE
 ============================ */
 function Contact() {
-  const items = [
-    { icon: Mail, label: "Email", value: "shahmaitri123.ms@gmail.com", href: "mailto:shahmaitri123.ms@gmail.com" },
-    { icon: Phone, label: "Phone", value: "+91 7990904219", href: "tel:+917990904219" },
-    { icon: LinkedinIcon, label: "LinkedIn", value: "linkedin.com/in/shahmaitri", href: "https://www.linkedin.com/feed/" },
-    { icon: BehanceIcon, label: "Behance", value: "behance.net/shahmaitri", href: "https://www.behance.net/shahmaitri" },
-    { icon: MapPin, label: "Location", value: "Mumbai · Open to Ahmedabad / Remote", href: null },
+  const contactMethods = [
+    {
+      icon: Mail,
+      label: "Email",
+      value: "shahmaitri123.ms@gmail.com",
+      href: "mailto:shahmaitri123.ms@gmail.com",
+      gradient: "from-blue-500 to-cyan-500",
+      glow: "#3b82f6",
+    },
+    {
+      icon: Phone,
+      label: "Phone",
+      value: "+91 7990904219",
+      href: "tel:+917990904219",
+      gradient: "from-green-500 to-emerald-500",
+      glow: "#10b981",
+    },
+    {
+      icon: LinkedinIcon,
+      label: "LinkedIn",
+      value: "linkedin.com/in/shahmaitri",
+      href: "https://www.linkedin.com/in/shahmaitri",
+      gradient: "from-sky-500 to-blue-600",
+      glow: "#0ea5e9",
+    },
+    {
+      icon: BehanceIcon,
+      label: "Behance",
+      value: "behance.net/shahmaitri",
+      href: "https://www.behance.net/shahmaitri",
+      gradient: "from-indigo-500 to-purple-600",
+      glow: "#6366f1",
+    },
+    {
+      icon: WhatsappIcon,
+      label: "WhatsApp",
+      value: "Chat with me",
+      href: "https://wa.me/917990904219",
+      gradient: "from-green-400 to-green-600",
+      glow: "#22c55e",
+    },
+    {
+      icon: MapPin,
+      label: "Location",
+      value: "Mumbai · Open to Ahmedabad / Remote",
+      href: "https://maps.google.com/?q=Mumbai",
+      gradient: "from-pink-500 to-rose-500",
+      glow: "#ec4899",
+    },
   ];
 
   return (
-    <Section id="contact" className="border-t border-white/5">
-      <SectionTitle label="04 — Contact" title="Let's Work Together" />
+    <Section id="contact" className="border-t border-white/5 relative overflow-hidden">
+      {/* Animated background blobs */}
+      <motion.div animate={{ x: [0, 80, 0], y: [0, -60, 0], scale: [1, 1.2, 1] }} transition={{ duration: 15, repeat: Infinity }} className="absolute top-10 left-10 w-80 h-80 bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
+      <motion.div animate={{ x: [0, -100, 0], y: [0, 60, 0], scale: [1, 1.3, 1] }} transition={{ duration: 18, repeat: Infinity }} className="absolute bottom-10 right-10 w-80 h-80 bg-pink-500/10 rounded-full blur-[120px] pointer-events-none" />
+      <motion.div animate={{ x: [0, 60, 0], y: [0, -80, 0] }} transition={{ duration: 22, repeat: Infinity }} className="absolute top-1/2 left-1/3 w-64 h-64 bg-purple-500/10 rounded-full blur-[100px] pointer-events-none" />
 
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.7 }}
-        className="text-white/60 max-w-xl mb-12"
-      >
-        Open to UI/UX Designer roles with an AI edge — in Ahmedabad or remote.
-        Let's build something thoughtful together.
-      </motion.p>
+      <div className="relative z-10">
+        <SectionTitle label="04 — Contact" title="Let's Work Together" />
 
-      <div className="grid md:grid-cols-2 gap-4">
-        {items.map((it, i) => {
-          const Icon = it.icon;
-          const Card = (
+        {/* Big CTA line */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="text-white/60 max-w-2xl mb-14 text-base md:text-lg leading-relaxed"
+        >
+          Open to <span className="text-white font-medium">UI/UX Designer roles with an AI edge</span> — in Ahmedabad or remote.
+          Let's build something thoughtful together.
+        </motion.p>
+
+        {/* Main email CTA card */}
+        <motion.a
+          href="mailto:shahmaitri123.ms@gmail.com"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          whileHover={{ scale: 1.01 }}
+          data-hover
+          className="group relative block border border-white/15 rounded-3xl p-8 md:p-10 overflow-hidden mb-8 bg-gradient-to-br from-white/[0.04] to-white/[0.01]"
+        >
+          {/* Rotating conic glow */}
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+            className="absolute -inset-40 opacity-0 group-hover:opacity-30 transition-opacity duration-700"
+            style={{ background: "conic-gradient(from 0deg, transparent, #3b82f6, #a855f7, #ec4899, transparent 40%)" }}
+          />
+          <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div className="flex items-center gap-5">
+              <motion.div
+                animate={{ rotate: [0, -10, 10, 0] }}
+                transition={{ duration: 3, repeat: Infinity }}
+                className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg shadow-blue-500/30"
+              >
+                <Send size={22} className="text-white" />
+              </motion.div>
+              <div>
+                <p className="text-xs uppercase tracking-[0.3em] text-white/40 mb-1">Drop me a line</p>
+                <p className="text-lg md:text-2xl font-semibold text-white">shahmaitri123.ms@gmail.com</p>
+              </div>
+            </div>
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08, duration: 0.6 }}
-              whileHover={{ x: 4 }}
-              className="flex items-center gap-4 border border-white/10 rounded-2xl p-5 hover:border-white/30 hover:bg-white/[0.03] transition"
+              whileHover={{ x: 5 }}
+              className="flex items-center gap-2 text-white text-sm font-medium"
             >
-              <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center shrink-0 text-white/80">
-                <Icon size={16} />
-              </div>
-              <div className="min-w-0">
-                <p className="text-xs uppercase tracking-widest text-white/40">{it.label}</p>
-                <p className="text-white text-sm truncate">{it.value}</p>
-              </div>
+              <span>Say hello</span>
+              <motion.span animate={{ x: [0, 5, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>→</motion.span>
             </motion.div>
-          );
-          return it.href ? (
-            <a key={it.label} href={it.href} target="_blank" rel="noreferrer">
-              {Card}
-            </a>
-          ) : (
-            <div key={it.label}>{Card}</div>
-          );
-        })}
+          </div>
+        </motion.a>
+
+        {/* Contact method cards */}
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+          {contactMethods.map((it, i) => {
+            const Icon = it.icon;
+            return (
+              <motion.a
+                key={it.label}
+                href={it.href}
+                target={it.href.startsWith("http") ? "_blank" : undefined}
+                rel={it.href.startsWith("http") ? "noreferrer noopener" : undefined}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08, duration: 0.6 }}
+                whileHover={{ y: -8, scale: 1.02 }}
+                data-hover
+                className="group relative border border-white/10 rounded-2xl p-6 overflow-hidden bg-white/[0.02] hover:border-white/25 transition-colors"
+              >
+                {/* Hover glow */}
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                  style={{ background: `radial-gradient(circle at top right, ${it.glow}25, transparent 70%)` }}
+                />
+
+                {/* Corner arrow */}
+                <motion.div
+                  className="absolute top-4 right-4 text-white/30 group-hover:text-white transition-colors"
+                  whileHover={{ x: 3, y: -3 }}
+                >
+                  <ArrowUpRight size={16} />
+                </motion.div>
+
+                <div className="relative z-10">
+                  <motion.div
+                    whileHover={{ rotate: [0, -8, 8, 0] }}
+                    transition={{ duration: 0.5 }}
+                    className={`w-11 h-11 rounded-xl bg-gradient-to-br ${it.gradient} flex items-center justify-center text-white mb-4 shadow-lg`}
+                    style={{ boxShadow: `0 8px 24px -8px ${it.glow}80` }}
+                  >
+                    <Icon size={18} />
+                  </motion.div>
+                  <p className="text-[10px] uppercase tracking-[0.3em] text-white/40 mb-1.5">{it.label}</p>
+                  <p className="text-white text-sm font-medium break-all leading-snug">{it.value}</p>
+                </div>
+              </motion.a>
+            );
+          })}
+        </div>
+
+        {/* Availability badge */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5, duration: 0.7 }}
+          className="mt-10 flex items-center justify-center gap-3"
+        >
+          <span className="relative flex h-2.5 w-2.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500" />
+          </span>
+          <span className="text-xs md:text-sm text-white/60">
+            Available for freelance & full-time opportunities
+          </span>
+        </motion.div>
       </div>
     </Section>
   );
@@ -653,12 +591,8 @@ function Footer() {
   return (
     <footer className="border-t border-white/10 py-10 px-6">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-        <p className="text-white/50 text-sm">
-          © {new Date().getFullYear()} Maitri Shah — Designed & Built with care.
-        </p>
-        <a href="#top" className="text-white/50 hover:text-white text-sm transition">
-          Back to top ↑
-        </a>
+        <p className="text-white/50 text-sm">© {new Date().getFullYear()} Maitri Shah — Designed & Built with care.</p>
+        <a href="#top" className="text-white/50 hover:text-white text-sm transition">Back to top ↑</a>
       </div>
     </footer>
   );
