@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { motion, useScroll, useSpring, useMotionValue, useTransform } from "framer-motion";
+import { motion, useScroll, useSpring, useMotionValue, useTransform, AnimatePresence } from "framer-motion";
 import { Mail, Phone, MapPin, ArrowDown, Briefcase, GraduationCap, ArrowUpRight, Send } from "lucide-react";
 
 /* ============================
@@ -37,14 +37,24 @@ const KlingIcon = () => (<svg viewBox="0 0 24 24" className="w-5 h-5"><circle cx
 const ClaudeCodeIcon = () => (<svg viewBox="0 0 24 24" className="w-5 h-5"><circle cx="12" cy="12" r="11" fill="#d97757"/><path fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" d="M9 9l-3 3 3 3M15 9l3 3-3 3"/></svg>);
 
 /* ============================
-   CUSTOM CURSOR
+   ONE-FINGER POINTING HAND CURSOR
 ============================ */
-function CustomCursor() {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
+function WindowsHandCursor() {
+  const x = useMotionValue(-100);
+  const y = useMotionValue(-100);
   const [hovering, setHovering] = useState(false);
-  const springX = useSpring(x, { stiffness: 300, damping: 30 });
-  const springY = useSpring(y, { stiffness: 300, damping: 30 });
+  const [clicking, setClicking] = useState(false);
+  const [ripples, setRipples] = useState([]);
+  const [isTouch, setIsTouch] = useState(false);
+
+  const springX = useSpring(x, { stiffness: 400, damping: 38, mass: 0.5 });
+  const springY = useSpring(y, { stiffness: 400, damping: 38, mass: 0.5 });
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setIsTouch(window.matchMedia("(pointer: coarse)").matches);
+    }
+  }, []);
 
   useEffect(() => {
     const move = (e) => {
@@ -53,18 +63,74 @@ function CustomCursor() {
       const el = e.target;
       setHovering(!!el.closest("a, button, [data-hover]"));
     };
+    const down = (e) => {
+      setClicking(true);
+      const id = Date.now() + Math.random();
+      setRipples((r) => [...r, { id, x: e.clientX, y: e.clientY }]);
+      setTimeout(() => {
+        setRipples((r) => r.filter((rp) => rp.id !== id));
+      }, 600);
+    };
+    const up = () => setClicking(false);
+
     window.addEventListener("mousemove", move);
-    return () => window.removeEventListener("mousemove", move);
+    window.addEventListener("mousedown", down);
+    window.addEventListener("mouseup", up);
+    return () => {
+      window.removeEventListener("mousemove", move);
+      window.removeEventListener("mousedown", down);
+      window.removeEventListener("mouseup", up);
+    };
   }, [x, y]);
+
+  if (isTouch) return null;
 
   return (
     <>
-      <motion.div style={{ x: springX, y: springY }} className="pointer-events-none fixed top-0 left-0 z-[9999] -translate-x-1/2 -translate-y-1/2 mix-blend-difference hidden md:block">
-        <motion.div animate={{ width: hovering ? 64 : 36, height: hovering ? 64 : 36, borderWidth: hovering ? 2 : 1.5 }} transition={{ type: "spring", stiffness: 300, damping: 20 }} className="rounded-full border border-white" />
+      <AnimatePresence>
+        {ripples.map((r) => (
+          <motion.div
+            key={r.id}
+            className="pointer-events-none fixed z-[9998] rounded-full border-2 border-white"
+            initial={{ width: 0, height: 0, x: r.x, y: r.y, opacity: 0.9 }}
+            animate={{ width: 70, height: 70, x: r.x - 35, y: r.y - 35, opacity: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            style={{ mixBlendMode: "difference" }}
+          />
+        ))}
+      </AnimatePresence>
+
+      <motion.div
+        style={{ x: springX, y: springY }}
+        className="pointer-events-none fixed top-0 left-0 z-[9999] hidden md:block"
+      >
+        <motion.div
+          animate={{
+            scale: clicking ? 0.85 : hovering ? 1.1 : 1,
+          }}
+          transition={{ type: "spring", stiffness: 500, damping: 26 }}
+          style={{ transformOrigin: "7px 2px" }}
+        >
+          <svg
+            width="22"
+            height="30"
+            viewBox="0 0 22 30"
+            fill="none"
+            style={{ mixBlendMode: "difference" }}
+          >
+            <path
+              d="M7.5 1.5C7.5 0.671573 8.17157 0 9 0C9.82843 0 10.5 0.671573 10.5 1.5V15C10.5 15.2761 10.7239 15.5 11 15.5C11.2761 15.5 11.5 15.2761 11.5 15V5.5C11.5 4.67157 12.1716 4 13 4C13.8284 4 14.5 4.67157 14.5 5.5V15C14.5 15.2761 14.7239 15.5 15 15.5C15.2761 15.5 15.5 15.2761 15.5 15V8C15.5 7.17157 16.1716 6.5 17 6.5C17.8284 6.5 18.5 7.17157 18.5 8V15.5C18.5 15.7761 18.7239 16 19 16C19.2761 16 19.5 15.7761 19.5 15.5V12C19.5 11.1716 20.1716 10.5 21 10.5C21.8284 10.5 22.5 11.1716 22.5 12V19C22.5 25.0751 17.5751 30 11.5 30H11C4.92487 30 0 25.0751 0 19V8.5C0 7.67157 0.671573 7 1.5 7C2.32843 7 3 7.67157 3 8.5V14.5C3 14.7761 3.22386 15 3.5 15C3.77614 15 4 14.7761 4 14.5V3.5C4 2.67157 4.67157 2 5.5 2C6.32843 2 7 2.67157 7 3.5V14.5"
+              fill="white"
+              stroke="black"
+              strokeWidth="1"
+              strokeLinejoin="round"
+              strokeLinecap="round"
+            />
+          </svg>
+        </motion.div>
       </motion.div>
-      <motion.div style={{ x, y }} className="pointer-events-none fixed top-0 left-0 z-[9999] -translate-x-1/2 -translate-y-1/2 mix-blend-difference hidden md:block">
-        <div className="w-1.5 h-1.5 rounded-full bg-white" />
-      </motion.div>
+
       <style>{`@media (min-width: 768px) { * { cursor: none !important; } }`}</style>
     </>
   );
@@ -110,22 +176,19 @@ function Header() {
 }
 
 /* ============================
-   HERO — Flower field + FAST smooth reveal
+   HERO
 ============================ */
 function Hero() {
   const heroRef = useRef(null);
   const [isHovering, setIsHovering] = useState(false);
   const [isTouch, setIsTouch] = useState(false);
 
-  // Raw motion values (instant set on mousemove)
   const rawX = useMotionValue(-9999);
   const rawY = useMotionValue(-9999);
 
-  // Faster spring = tight, snappy follow (no more slow lag)
   const springX = useSpring(rawX, { stiffness: 320, damping: 32, mass: 0.6 });
   const springY = useSpring(rawY, { stiffness: 320, damping: 32, mass: 0.6 });
 
-  // Slightly softer trailing layer for halo (still tight)
   const trailX = useSpring(rawX, { stiffness: 180, damping: 26, mass: 0.9 });
   const trailY = useSpring(rawY, { stiffness: 180, damping: 26, mass: 0.9 });
 
@@ -173,7 +236,6 @@ function Hero() {
       ref={heroRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16"
     >
-      {/* ============ LAYER 1: Flower field with golden sunlight ============ */}
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
@@ -191,7 +253,6 @@ function Hero() {
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
 
-      {/* ============ LAYER 2: Black overlay with FAST smooth mask ============ */}
       {!isTouch && (
         <motion.div
           className="absolute inset-0 bg-black pointer-events-none"
@@ -202,7 +263,6 @@ function Hero() {
         <div className="absolute inset-0 bg-black pointer-events-none" style={{ opacity: 0.92 }} />
       )}
 
-      {/* ============ LAYER 3: Soft warm halo (tight trailing) ============ */}
       {!isTouch && (
         <motion.div
           className="absolute pointer-events-none"
@@ -221,7 +281,6 @@ function Hero() {
         />
       )}
 
-      {/* ============ LAYER 4: Organic water rings + bubbles (tight follow) ============ */}
       {!isTouch && (
         <motion.div
           className="absolute pointer-events-none"
@@ -294,7 +353,6 @@ function Hero() {
         </motion.div>
       )}
 
-      {/* ============ LAYER 5: Subtle grid ============ */}
       <div
         className="absolute inset-0 opacity-[0.04] pointer-events-none"
         style={{
@@ -304,7 +362,6 @@ function Hero() {
         }}
       />
 
-      {/* ============ CONTENT ============ */}
       <div className="relative z-10 max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center w-full">
         <div className="text-center md:text-left order-2 md:order-1">
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.8 }} className="text-xs md:text-sm uppercase tracking-[0.4em] text-amber-100/80 mb-6">UI/UX Designer • AI</motion.p>
@@ -329,7 +386,6 @@ function Hero() {
         </motion.div>
       </div>
 
-      {/* Hover hint */}
       {!isTouch && (
         <motion.div
           initial={{ opacity: 0 }}
@@ -355,17 +411,17 @@ function Section({ id, children, className = "" }) {
   return <section id={id} className={`relative py-24 md:py-32 px-6 ${className}`}><div className="max-w-6xl mx-auto">{children}</div></section>;
 }
 
-function SectionTitle({ label, title }) {
+function SectionTitle({ label, title, dark = false }) {
   return (
     <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.7 }} className="mb-14">
-      <p className="text-xs uppercase tracking-[0.4em] text-white/40 mb-3">{label}</p>
-      <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-white">{title}</h2>
+      <p className={`text-xs uppercase tracking-[0.4em] mb-3 ${dark ? "text-black/40" : "text-white/40"}`}>{label}</p>
+      <h2 className={`text-4xl md:text-6xl font-bold tracking-tight ${dark ? "text-black" : "text-white"}`}>{title}</h2>
     </motion.div>
   );
 }
 
 /* ============================
-   ABOUT
+   ABOUT — WHITE BACKGROUND, BLACK TEXT
 ============================ */
 function About() {
   const stats = [
@@ -374,51 +430,88 @@ function About() {
     { value: "25%", label: "Time Saved with AI" },
   ];
   return (
-    <Section id="about">
-      <SectionTitle label="01 — About" title="About Me" />
-      <div className="grid md:grid-cols-2 gap-12 items-start">
-        <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="space-y-5 text-white/70 leading-relaxed">
-          <p>I'm <span className="text-white font-medium">Maitri Shah</span>, a UI/UX Designer based in Mumbai with 2+ years of experience designing intuitive websites, landing pages, and microsites across real estate, healthcare, and education.</p>
-          <p>I blend user research and design systems with AI-powered workflows — using tools like ChatGPT, Claude, Nano Banana, and Kling to generate images, videos, and accelerate delivery without compromising quality.</p>
-          <p>Currently designing at <span className="text-white font-medium">Realatte</span>, where I've shipped 15+ projects and reduced design time by 25% through AI integration.</p>
-          <div className="flex flex-wrap gap-4 pt-4 text-sm text-white/60">
-            <span className="flex items-center gap-2"><MapPin size={14} /> Mumbai, India</span>
-            <span className="flex items-center gap-2"><Briefcase size={14} /> Realatte</span>
-            <span className="flex items-center gap-2"><GraduationCap size={14} /> B.Com, IGNOU</span>
-          </div>
-        </motion.div>
-        <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="space-y-8">
-          <div className="grid grid-cols-3 gap-4">
-            {stats.map((s, i) => (
-              <motion.div key={s.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1, duration: 0.6 }} className="border border-white/10 rounded-2xl p-4 text-center hover:border-white/30 transition">
-                <div className="text-2xl md:text-3xl font-bold text-white">{s.value}</div>
-                <div className="text-[10px] md:text-xs text-white/50 mt-1 leading-tight">{s.label}</div>
-              </motion.div>
-            ))}
-          </div>
-          <div className="border border-white/10 rounded-2xl p-6 space-y-4">
-            <h3 className="text-sm uppercase tracking-widest text-white/40">Experience</h3>
-            {[
-              { role: "UX/UI Designer", company: "Realatte", time: "Apr 2025 — Present", points: ["Design intuitive websites, LPs, microsites", "AI image & video generation", "15+ projects across real estate, healthcare, education", "Reduced design time by 25% using AI"] },
-              { role: "UX/UI Designer", company: "Ivvotiontech", time: "Apr 2023 — Mar 2024", points: ["Designed websites and graphic posts"] },
-            ].map((exp) => (
-              <div key={exp.company} className="border-l border-white/20 pl-4 py-2">
-                <div className="flex items-center justify-between flex-wrap gap-2">
-                  <h4 className="text-white font-medium">{exp.role}</h4>
-                  <span className="text-xs text-white/40">{exp.time}</span>
+    <section id="about" className="relative py-24 md:py-32 px-6 bg-white text-black">
+      <div className="max-w-6xl mx-auto">
+        <SectionTitle label="01 — About" title="About Me" dark />
+
+        <div className="grid md:grid-cols-2 gap-12 items-start">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="space-y-5 text-black/70 leading-relaxed"
+          >
+            <p>
+              I'm <span className="text-black font-medium">Maitri Shah</span>, a UI/UX Designer
+              based in Mumbai with 2+ years of experience designing intuitive websites,
+              landing pages, and microsites across real estate, healthcare, and education.
+            </p>
+            <p>
+              I blend user research and design systems with AI-powered workflows —
+              using tools like ChatGPT, Claude, Nano Banana, and Kling to generate
+              images, videos, and accelerate delivery without compromising quality.
+            </p>
+            <p>
+              Currently designing at <span className="text-black font-medium">Realatte</span>,
+              where I've shipped 15+ projects and reduced design time by 25% through
+              AI integration.
+            </p>
+
+            <div className="flex flex-wrap gap-4 pt-4 text-sm text-black/60">
+              <span className="flex items-center gap-2"><MapPin size={14} /> Mumbai, India</span>
+              <span className="flex items-center gap-2"><Briefcase size={14} /> Realatte</span>
+              <span className="flex items-center gap-2"><GraduationCap size={14} /> B.Com, IGNOU</span>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="space-y-8"
+          >
+            <div className="grid grid-cols-3 gap-4">
+              {stats.map((s, i) => (
+                <motion.div
+                  key={s.label}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1, duration: 0.6 }}
+                  className="border border-black/10 rounded-2xl p-4 text-center hover:border-black/40 transition bg-black/[0.02]"
+                >
+                  <div className="text-2xl md:text-3xl font-bold text-black">{s.value}</div>
+                  <div className="text-[10px] md:text-xs text-black/50 mt-1 leading-tight">{s.label}</div>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="border border-black/10 rounded-2xl p-6 space-y-4 bg-black/[0.02]">
+              <h3 className="text-sm uppercase tracking-widest text-black/40">Experience</h3>
+              {[
+                { role: "UX/UI Designer", company: "Realatte", time: "Apr 2025 — Present", points: ["Design intuitive websites, LPs, microsites", "AI image & video generation", "15+ projects across real estate, healthcare, education", "Reduced design time by 25% using AI"] },
+                { role: "UX/UI Designer", company: "Ivvotiontech", time: "Apr 2023 — Mar 2024", points: ["Designed websites and graphic posts"] },
+              ].map((exp) => (
+                <div key={exp.company} className="border-l border-black/20 pl-4 py-2">
+                  <div className="flex items-center justify-between flex-wrap gap-2">
+                    <h4 className="text-black font-medium">{exp.role}</h4>
+                    <span className="text-xs text-black/40">{exp.time}</span>
+                  </div>
+                  <p className="text-sm text-black/50 mt-1">{exp.company}</p>
+                  <ul className="mt-2 space-y-1">
+                    {exp.points.map((p) => (
+                      <li key={p} className="text-sm text-black/60 flex gap-2"><span className="text-black/30">—</span> {p}</li>
+                    ))}
+                  </ul>
                 </div>
-                <p className="text-sm text-white/50 mt-1">{exp.company}</p>
-                <ul className="mt-2 space-y-1">
-                  {exp.points.map((p) => (
-                    <li key={p} className="text-sm text-white/60 flex gap-2"><span className="text-white/30">—</span> {p}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
       </div>
-    </Section>
+    </section>
   );
 }
 
@@ -664,7 +757,7 @@ function Footer() {
 function App() {
   return (
     <div className="bg-black text-white min-h-screen selection:bg-white selection:text-black overflow-x-hidden antialiased">
-      <CustomCursor />
+      <WindowsHandCursor />
       <ScrollProgress />
       <Header />
       <main>
