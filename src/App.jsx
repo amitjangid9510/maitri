@@ -1,6 +1,9 @@
 import { useState } from "react";
 
-// ---------- Reusable Grid Background ----------
+// ============================================================
+// REUSABLE PIECES
+// ============================================================
+
 const GridBackground = () => (
   <div
     className="absolute inset-0 pointer-events-none"
@@ -12,7 +15,6 @@ const GridBackground = () => (
   />
 );
 
-// ---------- Top Nav Pill ----------
 const NavBar = () => (
   <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50">
     <div className="flex items-center gap-1 bg-white rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.06)] px-2 py-1.5">
@@ -32,7 +34,6 @@ const NavBar = () => (
   </div>
 );
 
-// ---------- Scroll to explore ----------
 const ScrollHint = () => (
   <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2 text-[10px] tracking-[0.25em] text-[#8a8478]">
     <span className="inline-flex items-center justify-center w-5 h-3 border border-[#8a8478] rounded-full">
@@ -42,7 +43,6 @@ const ScrollHint = () => (
   </div>
 );
 
-// ---------- Scattered item wrapper ----------
 const Item = ({ style, children, className = "" }) => (
   <div className={`absolute select-none ${className}`} style={style}>
     {children}
@@ -54,7 +54,6 @@ const Item = ({ style, children, className = "" }) => (
 // ============================================================
 const Frame1 = () => (
   <div className="absolute inset-0">
-    {/* Maitri Shah (top-left) */}
     <Item style={{ top: "22%", left: "9%" }} className="text-left">
       <p
         className="text-[#C4552E] text-[26px] leading-none"
@@ -62,15 +61,12 @@ const Frame1 = () => (
       >
         Maitri Shah
       </p>
-      <p className="text-[11px] text-[#4a4a4a] mt-1">
-        UX/UI Designer · Mumbai
-      </p>
+      <p className="text-[11px] text-[#4a4a4a] mt-1">UX/UI Designer · Mumbai</p>
       <p className="text-[11px] text-[#4a4a4a] mt-1.5 flex items-center gap-1">
         View selected work <span className="text-[10px]">↗</span>
       </p>
     </Item>
 
-    {/* THE WORLD IS FULL OF */}
     <Item style={{ top: "22%", left: "34%" }}>
       <h2
         className="text-[34px] leading-[1.05] font-semibold tracking-tight text-[#111]"
@@ -82,38 +78,30 @@ const Frame1 = () => (
       </h2>
     </Item>
 
-    {/* Yellow DESIGN notepad */}
     <Item style={{ top: "18%", left: "61%" }}>
       <div className="w-[64px] h-[86px] bg-[#F2C94C] shadow-md rotate-[-4deg] flex items-center justify-center">
-        <p className="text-[13px] font-bold text-[#111] tracking-wider">
-          DESIGN
-        </p>
+        <p className="text-[13px] font-bold text-[#111] tracking-wider">DESIGN</p>
       </div>
     </Item>
 
-    {/* Coffee cup image */}
     <Item style={{ top: "20%", left: "76%" }}>
       <div className="w-[60px] h-[50px] flex items-center justify-center text-[38px]">
         ☕
       </div>
     </Item>
 
-    {/* Desk lamp */}
     <Item style={{ top: "38%", left: "9%" }} className="text-[90px] leading-none">
       🛋️
     </Item>
 
-    {/* Headphones */}
     <Item style={{ top: "38%", left: "31%" }} className="text-[70px] leading-none">
       🎧
     </Item>
 
-    {/* Vinyl record */}
     <Item style={{ top: "37%", left: "48%" }} className="text-[80px] leading-none">
       💿
     </Item>
 
-    {/* UNFINISHED IDEAS */}
     <Item style={{ top: "35%", left: "67%" }}>
       <h3
         className="text-[26px] leading-[1.05] font-semibold tracking-tight text-[#111]"
@@ -125,7 +113,6 @@ const Frame1 = () => (
       </h3>
     </Item>
 
-    {/* Blue icon box */}
     <Item style={{ top: "42%", left: "80%" }}>
       <div className="w-[86px] h-[40px] bg-[#6FA8BF] rounded-md shadow-md flex items-center justify-center gap-2 text-white text-[16px]">
         <span>⚏</span>
@@ -134,11 +121,7 @@ const Frame1 = () => (
       </div>
     </Item>
 
-    {/* Dotted line + X */}
-    <div
-      className="absolute"
-      style={{ top: "55%", left: "14%", right: "26%" }}
-    >
+    <div className="absolute" style={{ top: "55%", left: "14%", right: "26%" }}>
       <div className="relative border-t-2 border-dashed border-[#6FA8BF]">
         <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 text-[#6FA8BF] text-lg">
           ✕
@@ -146,7 +129,6 @@ const Frame1 = () => (
       </div>
     </div>
 
-    {/* & FRUSTRATING EXPERIENCES */}
     <Item style={{ top: "57%", left: "30%" }}>
       <h3
         className="text-[26px] leading-[1.05] font-semibold tracking-tight text-[#111]"
@@ -158,7 +140,6 @@ const Frame1 = () => (
       </h3>
     </Item>
 
-    {/* Polaroid */}
     <Item style={{ top: "50%", left: "73%" }}>
       <div className="w-[86px] h-[96px] bg-white shadow-lg rotate-[6deg] p-1.5">
         <div className="w-full h-[70%] bg-[#e8e8e8] flex items-center justify-center text-[24px]">
@@ -167,7 +148,6 @@ const Frame1 = () => (
       </div>
     </Item>
 
-    {/* I design the path ... */}
     <Item style={{ top: "63%", left: "64%" }}>
       <p
         className="text-[#C4552E] text-[15px] italic"
@@ -185,12 +165,10 @@ const Frame1 = () => (
       </h3>
     </Item>
 
-    {/* Plant */}
     <Item style={{ top: "70%", left: "26%" }} className="text-[64px] leading-none">
       🪴
     </Item>
 
-    {/* Sticky notes cluster */}
     <Item style={{ top: "72%", left: "38%" }}>
       <div className="relative w-[100px] h-[70px]">
         <div className="absolute left-0 top-0 w-[62px] h-[58px] bg-[#A8CBE0] shadow-sm rotate-[-6deg] flex items-start justify-start p-2">
@@ -214,7 +192,6 @@ const Frame1 = () => (
 // ============================================================
 const Frame2 = () => (
   <div className="absolute inset-0">
-    {/* Center content */}
     <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
       <p
         className="text-[#C4552E] text-[28px] mb-3"
@@ -250,7 +227,6 @@ const Frame2 = () => (
       </button>
     </div>
 
-    {/* Left side decor */}
     <Item style={{ top: "18%", left: "8%" }} className="text-[70px] leading-none">
       🎧
     </Item>
@@ -264,7 +240,6 @@ const Frame2 = () => (
       🪴
     </Item>
 
-    {/* Sticky notes (bottom left) */}
     <Item style={{ top: "80%", left: "10%" }}>
       <div className="relative w-[110px] h-[70px]">
         <div className="absolute left-0 top-0 w-[62px] h-[58px] bg-[#A8CBE0] shadow-sm rotate-[-6deg] flex items-start justify-start p-2">
@@ -281,12 +256,9 @@ const Frame2 = () => (
       </div>
     </Item>
 
-    {/* Right side decor */}
     <Item style={{ top: "18%", left: "80%" }}>
       <div className="w-[64px] h-[86px] bg-[#F2C94C] shadow-md rotate-[4deg] flex items-center justify-center">
-        <p className="text-[13px] font-bold text-[#111] tracking-wider">
-          DESIGN
-        </p>
+        <p className="text-[13px] font-bold text-[#111] tracking-wider">DESIGN</p>
       </div>
     </Item>
     <Item style={{ top: "14%", left: "92%" }} className="text-[44px] leading-none">
@@ -310,66 +282,231 @@ const Frame2 = () => (
 );
 
 // ============================================================
+// PROBLEMS SECTION — "Problems explored with purpose"
+// ============================================================
+
+const problems = [
+  {
+    id: "01",
+    tag: "UI/UX DESIGN · PRODUCT THINKING",
+    title: "Making property discovery feel effortless",
+    desc: "A bold redesign made space for a search-first experience and clearer information architecture, transforming the search journey to be quicker and more seamless.",
+    bg: "#F4D0BF",
+  },
+  {
+    id: "02",
+    tag: "UI/UX DESIGN · PRODUCT THINKING",
+    title: "Making property discovery feel effortless",
+    desc: "A bold redesign made space for a search-first experience and clearer information architecture, transforming the search journey to be quicker and more seamless.",
+    bg: "#C9DCEB",
+  },
+  {
+    id: "03",
+    tag: "UI/UX DESIGN · PRODUCT THINKING",
+    title: "Making property discovery feel effortless",
+    desc: "A bold redesign made space for a search-first experience and clearer information architecture, transforming the search journey to be quicker and more seamless.",
+    bg: "#EDDAA6",
+  },
+];
+
+const BrowserMockup = () => (
+  <div
+    className="relative shrink-0"
+    style={{
+      width: "780px",
+      height: "412px",
+      transform: "rotate(-2deg)",
+      background: "#FAF9F5",
+      borderRadius: "18.98px",
+      border: "5.2px solid #282725",
+      boxShadow: "0px 29.65px 59.31px 0px #2A251B40",
+      overflow: "hidden",
+    }}
+  >
+    <div className="flex items-center gap-2 px-5 pt-4 pb-3">
+      <span className="w-2.5 h-2.5 rounded-full bg-[#e0e0e0]" />
+      <span className="w-2.5 h-2.5 rounded-full bg-[#e0e0e0]" />
+      <span className="w-2.5 h-2.5 rounded-full bg-[#e0e0e0]" />
+    </div>
+
+    <div className="mx-5 h-[42px] bg-[#282725] rounded-md flex items-center px-4">
+      <div className="w-[120px] h-2 bg-white/20 rounded-full" />
+      <div className="ml-auto w-3 h-3 bg-white/30 rounded-full" />
+    </div>
+
+    <div className="px-5 mt-5">
+      <div className="w-[60%] h-2.5 bg-[#e0e0e0] rounded-full mb-2" />
+      <div className="w-[80%] h-2.5 bg-[#e0e0e0] rounded-full mb-6" />
+
+      <div className="flex items-end gap-4 h-[120px]">
+        <div className="w-[70px] h-[60px] bg-[#E5592E] rounded-sm" />
+        <div className="w-[70px] h-[60px] bg-[#E5592E] rounded-sm" />
+        <div className="w-[70px] h-[90px] bg-[#E5592E] rounded-sm" />
+        <div className="w-[70px] h-[60px] bg-[#E5592E] rounded-sm" />
+      </div>
+    </div>
+  </div>
+);
+
+const ProblemCard = ({ item }) => (
+  <div
+    className="relative w-full flex flex-col lg:flex-row items-center gap-10"
+    style={{
+      maxWidth: "1400px",
+      minHeight: "557px",
+      background: item.bg,
+      borderRadius: "30.84px",
+      border: "1.19px solid rgba(0,0,0,0.06)",
+      padding: "60px 50px",
+    }}
+  >
+    <div className="flex-1 min-w-[280px] max-w-[420px]">
+      <p
+        className="text-[#C4552E] text-[12px] tracking-[0.15em] font-medium mb-1"
+        style={{ fontFamily: "'Inter', sans-serif" }}
+      >
+        {item.id}
+      </p>
+      <p className="text-[10px] tracking-[0.2em] text-[#5a5a5a] mb-4 uppercase">
+        {item.tag}
+      </p>
+
+      <h3
+        className="text-[40px] leading-[1.1] text-[#111] mb-4"
+        style={{ fontFamily: "'Caveat', cursive" }}
+      >
+        {item.title}
+      </h3>
+
+      <p className="text-[12px] leading-[1.6] text-[#4a4a4a] mb-5">{item.desc}</p>
+
+      <div className="flex flex-col gap-1.5">
+        <a
+          href="#"
+          className="inline-flex items-center gap-1.5 text-[11px] text-[#111] hover:opacity-70"
+        >
+          <span className="w-3 h-3 border border-[#111] rounded-full flex items-center justify-center text-[7px]">
+            ✕
+          </span>
+          Add to anticipated outcome
+        </a>
+        <a
+          href="#"
+          className="inline-flex items-center gap-1.5 text-[11px] text-[#111] hover:opacity-70 underline underline-offset-4"
+        >
+          View case study ↗
+        </a>
+      </div>
+    </div>
+
+    <div className="flex-1 flex justify-center items-center w-full overflow-hidden">
+      <BrowserMockup />
+    </div>
+  </div>
+);
+
+const ProblemsSection = () => (
+  <section
+    className="relative w-full"
+    style={{
+      background: "#FFFDF8",
+      borderTopLeftRadius: "100px",
+      borderTopRightRadius: "100px",
+      padding: "100px 40px 120px",
+      marginTop: "-100px",
+      zIndex: 10,
+    }}
+  >
+    <div className="max-w-[1400px] mx-auto">
+      <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-14">
+        <div>
+          <p
+            className="text-[#C4552E] tracking-[0.15em] mb-3"
+            style={{ fontFamily: "'Caveat', cursive", fontSize: "18px" }}
+          >
+            Selected work
+          </p>
+          <h2
+            className="text-[52px] leading-[1.05] text-[#111] font-medium max-w-[520px]"
+            style={{ fontFamily: "'Inter', sans-serif" }}
+          >
+            Problems explored
+            <br />
+            with purpose.
+          </h2>
+        </div>
+        <p className="text-[12px] text-[#6b6b6b] max-w-[280px] leading-[1.6] md:pt-14">
+          These projects were an early foray into real client work, sharpening
+          my product thinking and technical foundation.
+        </p>
+      </div>
+
+      <div className="flex flex-col gap-10">
+        {problems.map((item) => (
+          <ProblemCard key={item.id} item={item} />
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+// ============================================================
 // MAIN APP
 // ============================================================
 function App() {
-  const [frame, setFrame] = useState(1); // 1 = Frame1, 2 = Frame2
-
-  // handle drag to go back
-  const handleDragEnd = (e) => {
-    // simple horizontal drag detection
-    const startX = e.currentTarget.dataset.startx;
-    if (startX) {
-      const diff = e.clientX - parseInt(startX);
-      if (diff < -60) setFrame(2); // dragged left -> next
-      if (diff > 60) setFrame(1); // dragged right -> prev
-    }
-  };
+  const [frame, setFrame] = useState(1);
 
   const handleDragStart = (e) => {
     e.currentTarget.dataset.startx = e.clientX;
   };
 
+  const handleDragEnd = (e) => {
+    const startX = e.currentTarget.dataset.startx;
+    if (startX) {
+      const diff = e.clientX - parseInt(startX);
+      if (diff < -60) setFrame(2);
+      if (diff > 60) setFrame(1);
+    }
+  };
+
   return (
     <div
-      className="relative w-full h-screen overflow-hidden"
-      style={{
-        background: "#F5F1E7",
-        cursor: "grab",
-      }}
-      onClick={() => {
-        // click toggles frames (Frame1 -> Frame2, Frame2 -> Frame1)
-        setFrame((f) => (f === 1 ? 2 : 1));
-      }}
-      onMouseDown={handleDragStart}
-      onMouseUp={handleDragEnd}
+      className="relative w-full overflow-x-hidden"
+      style={{ background: "#F5F1E7" }}
     >
-      {/* Grid background */}
-      <GridBackground />
+      {/* ---------- HERO (Frame 1 & 2) ---------- */}
+      <div
+        className="relative w-full h-screen overflow-hidden"
+        style={{ cursor: "grab" }}
+        onClick={() => setFrame((f) => (f === 1 ? 2 : 1))}
+        onMouseDown={handleDragStart}
+        onMouseUp={handleDragEnd}
+      >
+        <GridBackground />
 
-      {/* Frames with fade animation */}
-      <div className="absolute inset-0">
-        <div
-          className={`absolute inset-0 transition-opacity duration-[1000ms] ease-out ${
-            frame === 1 ? "opacity-100" : "opacity-0 pointer-events-none"
-          }`}
-        >
-          <Frame1 />
+        <div className="absolute inset-0">
+          <div
+            className={`absolute inset-0 transition-opacity duration-[1000ms] ease-out ${
+              frame === 1 ? "opacity-100" : "opacity-0 pointer-events-none"
+            }`}
+          >
+            <Frame1 />
+          </div>
+          <div
+            className={`absolute inset-0 transition-opacity duration-[1000ms] ease-out ${
+              frame === 2 ? "opacity-100" : "opacity-0 pointer-events-none"
+            }`}
+          >
+            <Frame2 />
+          </div>
         </div>
-        <div
-          className={`absolute inset-0 transition-opacity duration-[1000ms] ease-out ${
-            frame === 2 ? "opacity-100" : "opacity-0 pointer-events-none"
-          }`}
-        >
-          <Frame2 />
-        </div>
+
+        <NavBar />
+        <ScrollHint />
       </div>
 
-      {/* Nav (always on top) */}
-      <NavBar />
-
-      {/* Scroll hint (always bottom) */}
-      <ScrollHint />
+      {/* ---------- PROBLEMS SECTION ---------- */}
+      <ProblemsSection />
 
       {/* Font loader */}
       <style>{`
