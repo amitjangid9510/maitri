@@ -15,7 +15,6 @@ const GridBackground = () => (
   />
 );
 
-// ---------- NAVBAR with Scroll Spy + smooth scroll ----------
 const NavBar = () => {
   const navItems = [
     { id: "hero", label: "MS" },
@@ -266,12 +265,10 @@ const Frame1Desktop = () => (
       </h2>
     </Item>
 
-    {/* Desktop images — bigger */}
     <Item style={{ top: "14%", left: "59%" }}>
       <img src="/design-notepad.png" alt="Design notepad" className="w-[145px] h-auto rotate-[-4deg]" />
     </Item>
 
-    {/* ☕ COFFEE — EXTRA BIG */}
     <Item style={{ top: "14%", left: "75%" }}>
       <img src="/coffe.png" alt="Coffee" className="w-[145px] h-auto" />
     </Item>
@@ -505,7 +502,6 @@ const Frame2Desktop = () => (
     <Item style={{ top: "14%", left: "78%" }}>
       <img src="/design-notepad.png" alt="Design" className="w-[130px] h-auto rotate-[4deg]" />
     </Item>
-    {/* ☕ COFFEE — EXTRA BIG in Frame2 too */}
     <Item style={{ top: "9%", left: "89%" }}>
       <img src="/coffe.png" alt="Coffee" className="w-[120px] h-auto" />
     </Item>
@@ -530,29 +526,29 @@ const Frame2 = () => (
 );
 
 // ============================================================
-// PROBLEMS SECTION
+// PROBLEMS SECTION — Typography exact Figma match
 // ============================================================
 
 const problems = [
   {
     id: "01",
-    tag: "UI/UX DESIGN · PRODUCT THINKING",
+    tag: "Real estate · Product design",
     title: "Making property discovery feel effortless",
-    desc: "A bold redesign made space for a search-first experience and clearer information architecture, transforming the search journey to be quicker and more seamless.",
+    desc: "A placeholder case study for a search and discovery experience that helps people move from browsing to confident decisions.",
     bg: "#F4D0BF",
   },
   {
     id: "02",
-    tag: "UI/UX DESIGN · PRODUCT THINKING",
+    tag: "Real estate · Product design",
     title: "Making property discovery feel effortless",
-    desc: "A bold redesign made space for a search-first experience and clearer information architecture, transforming the search journey to be quicker and more seamless.",
+    desc: "A placeholder case study for a search and discovery experience that helps people move from browsing to confident decisions.",
     bg: "#C9DCEB",
   },
   {
     id: "03",
-    tag: "UI/UX DESIGN · PRODUCT THINKING",
+    tag: "Real estate · Product design",
     title: "Making property discovery feel effortless",
-    desc: "A bold redesign made space for a search-first experience and clearer information architecture, transforming the search journey to be quicker and more seamless.",
+    desc: "A placeholder case study for a search and discovery experience that helps people move from browsing to confident decisions.",
     bg: "#EDDAA6",
   },
 ];
@@ -601,27 +597,105 @@ const ProblemCard = ({ item }) => (
       border: "1.19px solid rgba(0,0,0,0.06)",
     }}
   >
-    <div className="flex-1 min-w-0 lg:min-w-[280px] max-w-full lg:max-w-[420px]">
-      <p className="text-[#C4552E] text-[11px] md:text-[12px] tracking-[0.15em] font-medium mb-1" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>
+    <div className="flex-1 min-w-0 lg:min-w-[280px] max-w-full lg:max-w-[480px]">
+      {/* 01 — Caveat 400, 30px, lh 42.7px */}
+      <p
+        className="text-[#C4552E] mb-1"
+        style={{
+          fontFamily: "'Caveat', cursive",
+          fontWeight: 400,
+          fontSize: "30px",
+          lineHeight: "42.7px",
+          letterSpacing: "0px",
+        }}
+      >
         {item.id}
       </p>
-      <p className="text-[9px] md:text-[10px] tracking-[0.2em] text-[#5a5a5a] mb-3 md:mb-4 uppercase" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>
+
+      {/* TAG — DM Sans 700, 14px, lh 21.35px, ls 1.42px, uppercase */}
+      <p
+        className="text-[#5a5a5a] mb-4 md:mb-5"
+        style={{
+          fontFamily: "'DM Sans', sans-serif",
+          fontWeight: 700,
+          fontSize: "14px",
+          lineHeight: "21.35px",
+          letterSpacing: "1.42px",
+          textTransform: "uppercase",
+        }}
+      >
         {item.tag}
       </p>
-      <h3 className="text-[26px] md:text-[32px] lg:text-[40px] leading-[1.1] text-[#111] mb-3 md:mb-4" style={{ fontFamily: "'Caveat', cursive" }}>
+
+      {/* TITLE — Libre Franklin 400, 52px, lh 56.04px, ls -2.4px */}
+      <h3
+        className="text-[#111] mb-4 md:mb-5"
+        style={{
+          fontFamily: "'Libre Franklin', sans-serif",
+          fontWeight: 400,
+          fontSize: "52px",
+          lineHeight: "56.04px",
+          letterSpacing: "-2.4px",
+        }}
+      >
         {item.title}
       </h3>
-      <p className="text-[11px] md:text-[12px] leading-[1.6] text-[#4a4a4a] mb-4 md:mb-5" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>{item.desc}</p>
-      <div className="flex flex-col gap-1.5">
-        <a href="#" className="inline-flex items-center gap-1.5 text-[10px] md:text-[11px] text-[#111] hover:opacity-70" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-          <span className="w-3 h-3 border border-[#111] rounded-full flex items-center justify-center text-[7px]">✕</span>
-          Add to anticipated outcome
+
+      {/* DESC — DM Sans 400, 18px, lh 31.31px */}
+      <p
+        className="text-[#4a4a4a] mb-5 md:mb-6"
+        style={{
+          fontFamily: "'DM Sans', sans-serif",
+          fontWeight: 400,
+          fontSize: "18px",
+          lineHeight: "31.31px",
+          letterSpacing: "0px",
+        }}
+      >
+        {item.desc}
+      </p>
+
+      {/* CTA LINKS */}
+      <div className="flex flex-col gap-3">
+        <a
+          href="#"
+          className="inline-flex items-center gap-2 text-[#111] hover:opacity-70"
+          style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontWeight: 700,
+            fontSize: "15.42px",
+            lineHeight: "23.13px",
+            letterSpacing: "0px",
+          }}
+        >
+          <span
+            className="border border-[#111] rounded-full flex items-center justify-center"
+            style={{ width: "20px", height: "20px", fontSize: "10px" }}
+          >
+            ✕
+          </span>
+          Add your strongest outcome
         </a>
-        <a href="#" className="inline-flex items-center gap-1.5 text-[10px] md:text-[11px] text-[#111] hover:opacity-70 underline underline-offset-4" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-          View case study ↗
+
+        <a
+          href="#"
+          className="inline-flex items-center justify-center gap-2 text-white rounded-full hover:opacity-90 transition-opacity"
+          style={{
+            background: "#282725",
+            fontFamily: "'DM Sans', sans-serif",
+            fontWeight: 600,
+            fontSize: "18px",
+            lineHeight: "28.47px",
+            letterSpacing: "0px",
+            padding: "12px 28px",
+            width: "fit-content",
+          }}
+        >
+          View case study
         </a>
       </div>
     </div>
+
     <div className="flex-1 flex justify-center items-center w-full overflow-hidden">
       <BrowserMockup />
     </div>
@@ -673,20 +747,53 @@ const ProblemsSection = () => (
     <div className="max-w-[1400px] mx-auto">
       <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 md:gap-6 mb-10 md:mb-14">
         <div>
-          <p className="text-[#C4552E] tracking-[0.15em] mb-3" style={{ fontFamily: "'Caveat', cursive", fontSize: "16px" }}>
+          {/* SELECTED WORK — DM Sans 700, 14px, lh 20.53px, ls 1.92px, uppercase, #FF6714 */}
+          <p
+            className="mb-3"
+            style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontWeight: 700,
+              fontSize: "14px",
+              lineHeight: "20.53px",
+              letterSpacing: "1.92px",
+              textTransform: "uppercase",
+              color: "#FF6714",
+            }}
+          >
             Selected work
           </p>
-          <h2 className="text-[32px] md:text-[42px] lg:text-[52px] leading-[1.05] text-[#111] font-medium max-w-[520px]" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>
-            Problems explored
+          <h2
+            className="text-[#111] font-medium max-w-[600px]"
+            style={{
+              fontFamily: "'Libre Franklin', sans-serif",
+              fontSize: "52px",
+              lineHeight: "56.04px",
+              letterSpacing: "-2.4px",
+            }}
+          >
+            Problems explored with
             <br />
-            with purpose.
+            purpose.
           </h2>
         </div>
-        <p className="text-[11px] md:text-[12px] text-[#6b6b6b] max-w-[280px] leading-[1.6] lg:pt-14" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-          These projects were an early foray into real client work, sharpening
-          my product thinking and technical foundation.
+
+        {/* RIGHT TEXT — DM Sans 400, 18px, lh 31.03px, color #716F6B */}
+        <p
+          className="max-w-[340px] lg:pt-14"
+          style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontWeight: 400,
+            fontSize: "18px",
+            lineHeight: "31.03px",
+            letterSpacing: "0px",
+            color: "#716F6B",
+          }}
+        >
+          These project slots are ready for your real screenshots, process, and
+          measurable outcomes.
         </p>
       </div>
+
       <div className="flex flex-col gap-6 md:gap-8 lg:gap-10">
         {problems.map((item) => (
           <ProblemCard key={item.id} item={item} />
