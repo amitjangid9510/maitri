@@ -15,7 +15,7 @@ const GridBackground = () => (
   />
 );
 
-// ---------- NAVBAR with smooth scroll ----------
+// ---------- NAVBAR with DM Sans typography + smooth scroll ----------
 const NavBar = () => {
   const navItems = [
     { id: "hero", label: "MS" },
@@ -38,11 +38,16 @@ const NavBar = () => {
           <button
             key={item.id}
             onClick={() => handleScroll(item.id)}
-            className={`px-2.5 md:px-4 py-1 md:py-1.5 text-[11px] md:text-[13px] rounded-full transition-colors whitespace-nowrap ${
+            className={`px-2.5 md:px-4 py-1 md:py-1.5 text-[12px] md:text-[14px] rounded-full transition-colors whitespace-nowrap text-center ${
               i === 0
-                ? "bg-[#111] text-white font-medium"
-                : "text-[#444] hover:bg-[#f2f2f2]"
+                ? "bg-[#111] text-white font-bold"
+                : "text-[#444] hover:bg-[#f2f2f2] font-normal"
             }`}
+            style={{
+              fontFamily: "'DM Sans', sans-serif",
+              lineHeight: "21px",
+              letterSpacing: "0px",
+            }}
           >
             {item.label}
           </button>
@@ -74,19 +79,47 @@ const Item = ({ style, children, className = "" }) => (
 const Frame1Mobile = () => (
   <div className="absolute inset-0 flex flex-col items-center justify-center px-6 pt-20 pb-16 gap-5">
     <div className="text-center">
-      <p className="text-[#C4552E] text-[24px] leading-none" style={{ fontFamily: "'Caveat', cursive" }}>
+      <p
+        className="text-[#FF6714] leading-none"
+        style={{
+          fontFamily: "'Caveat', cursive",
+          fontWeight: 600,
+          fontSize: "28px",
+        }}
+      >
         Maitri Shah
       </p>
-      <p className="text-[10px] text-[#4a4a4a] mt-1">UX/UI Designer · Mumbai</p>
-      <p className="text-[10px] text-[#4a4a4a] mt-1 flex items-center justify-center gap-1">
+      <p
+        className="text-[#4a4a4a] mt-1"
+        style={{
+          fontFamily: "'DM Sans', sans-serif",
+          fontWeight: 400,
+          fontSize: "13px",
+          lineHeight: "19.5px",
+        }}
+      >
+        UX/UI Designer · Mumbai
+      </p>
+      <p
+        className="text-[#4a4a4a] mt-1 flex items-center justify-center gap-1"
+        style={{
+          fontFamily: "'DM Sans', sans-serif",
+          fontWeight: 400,
+          fontSize: "13px",
+          lineHeight: "19.5px",
+        }}
+      >
         View selected work ↗
       </p>
     </div>
 
-    <h2 className="text-[26px] leading-[1.1] font-semibold tracking-tight text-[#111] text-center" style={{ fontFamily: "'Inter', sans-serif" }}>
-      THE WORLD IS
+    <h2
+      className="text-[26px] leading-[1.08] text-[#111] text-center uppercase"
+      style={{ fontFamily: "'Libre Franklin', sans-serif" }}
+    >
+      <span className="font-normal">THE WORLD IS</span>
       <br />
-      FULL OF
+      <span className="font-bold">FULL OF</span>
     </h2>
 
     <div className="flex items-center justify-center gap-4 mt-2">
@@ -95,10 +128,13 @@ const Frame1Mobile = () => (
       <img src="/disc.png" alt="Vinyl" className="w-[55px] h-auto" />
     </div>
 
-    <h3 className="text-[22px] leading-[1.05] font-semibold tracking-tight text-[#111] text-center" style={{ fontFamily: "'Inter', sans-serif" }}>
-      UNFINISHED
+    <h3
+      className="text-[22px] leading-[1.08] text-[#111] text-center uppercase"
+      style={{ fontFamily: "'Libre Franklin', sans-serif" }}
+    >
+      <span className="font-normal">UNFINISHED</span>
       <br />
-      IDEAS
+      <span className="font-bold">IDEAS</span>
     </h3>
 
     <div className="flex items-center justify-center gap-4">
@@ -107,17 +143,20 @@ const Frame1Mobile = () => (
       <img src="/coffe.png" alt="Coffee" className="w-[40px] h-auto" />
     </div>
 
-    <h3 className="text-[22px] leading-[1.05] font-semibold tracking-tight text-[#111] text-center" style={{ fontFamily: "'Inter', sans-serif" }}>
-      & FRUSTRATING
+    <h3
+      className="text-[22px] leading-[1.08] text-[#111] text-center uppercase"
+      style={{ fontFamily: "'Libre Franklin', sans-serif" }}
+    >
+      <span className="font-normal">& FRUSTRATING</span>
       <br />
-      EXPERIENCES
+      <span className="font-bold">EXPERIENCES</span>
     </h3>
 
     <div className="flex items-center justify-center gap-6">
       <img src="/plant.png" alt="Plant" className="w-[45px] h-auto" />
       <div className="relative w-[80px] h-[55px]">
         <div className="absolute left-0 top-0 w-[50px] h-[46px] bg-[#A8CBE0] shadow-sm rotate-[-6deg] flex items-start justify-start p-1.5">
-          <p className="text-[8px] text-[#333]">Ask why</p>
+          <p className="text-[8px] text-[#333]" style={{ fontFamily: "'DM Sans', sans-serif" }}>Ask why</p>
         </div>
         <div className="absolute left-6 top-1.5 w-[44px] h-[40px] bg-[#E8A87C] shadow-sm rotate-[8deg] flex items-center justify-center">
           <p className="text-[10px] text-[#333]" style={{ fontFamily: "'Caveat', cursive" }}>Simplify</p>
@@ -126,13 +165,19 @@ const Frame1Mobile = () => (
     </div>
 
     <div className="text-center">
-      <p className="text-[#C4552E] text-[13px] italic" style={{ fontFamily: "'Caveat', cursive" }}>
+      <p
+        className="text-[#C4552E] italic"
+        style={{ fontFamily: "'Caveat', cursive", fontSize: "13px" }}
+      >
         I design the path
       </p>
-      <h3 className="text-[20px] leading-[1.05] font-semibold tracking-tight text-[#111] mt-0.5" style={{ fontFamily: "'Inter', sans-serif" }}>
-        THAT MAKES
+      <h3
+        className="text-[20px] leading-[1.08] text-[#111] mt-0.5 uppercase"
+        style={{ fontFamily: "'Libre Franklin', sans-serif" }}
+      >
+        <span className="font-normal">THAT MAKES</span>
         <br />
-        THEM SEAMLESS
+        <span className="font-bold">THEM SEAMLESS</span>
       </h3>
     </div>
   </div>
@@ -140,21 +185,59 @@ const Frame1Mobile = () => (
 
 const Frame1Desktop = () => (
   <div className="absolute inset-0 hidden lg:block">
-    <Item style={{ top: "22%", left: "9%" }} className="text-left">
-      <p className="text-[#C4552E] text-[26px] leading-none" style={{ fontFamily: "'Caveat', cursive" }}>
+    {/* Maitri Shah block — exact Figma typography */}
+    <Item style={{ top: "20.5%", left: "13.5%" }} className="text-left">
+      <p
+        className="text-[#C4552E] leading-none"
+        style={{
+          fontFamily: "'Caveat', cursive",
+          fontWeight: 600,
+          fontSize: "32px",
+          lineHeight: "48px",
+          letterSpacing: "0px",
+        }}
+      >
         Maitri Shah
       </p>
-      <p className="text-[11px] text-[#4a4a4a] mt-1">UX/UI Designer · Mumbai</p>
-      <p className="text-[11px] text-[#4a4a4a] mt-1.5 flex items-center gap-1">
+      <p
+        className="text-[#4a4a4a]"
+        style={{
+          fontFamily: "'DM Sans', sans-serif",
+          fontWeight: 400,
+          fontSize: "13px",
+          lineHeight: "19.5px",
+          letterSpacing: "0px",
+        }}
+      >
+        UX/UI Designer · Mumbai
+      </p>
+      <p
+        className="text-[#4a4a4a] mt-1.5 flex items-center gap-1"
+        style={{
+          fontFamily: "'DM Sans', sans-serif",
+          fontWeight: 400,
+          fontSize: "13px",
+          lineHeight: "19.5px",
+          letterSpacing: "0px",
+        }}
+      >
         View selected work <span className="text-[10px]">↗</span>
       </p>
     </Item>
 
+    {/* THE WORLD IS / FULL OF */}
     <Item style={{ top: "22%", left: "34%" }}>
-      <h2 className="text-[34px] leading-[1.05] font-semibold tracking-tight text-[#111]" style={{ fontFamily: "'Inter', sans-serif" }}>
-        THE WORLD IS
+      <h2
+        className="text-[34px] text-[#111] uppercase"
+        style={{
+          fontFamily: "'Libre Franklin', sans-serif",
+          lineHeight: "36.72px",
+          letterSpacing: "0px",
+        }}
+      >
+        <span className="font-normal">THE WORLD IS</span>
         <br />
-        FULL OF
+        <span className="font-bold">FULL OF</span>
       </h2>
     </Item>
 
@@ -179,10 +262,17 @@ const Frame1Desktop = () => (
     </Item>
 
     <Item style={{ top: "35%", left: "67%" }}>
-      <h3 className="text-[26px] leading-[1.05] font-semibold tracking-tight text-[#111]" style={{ fontFamily: "'Inter', sans-serif" }}>
-        UNFINISHED
+      <h3
+        className="text-[26px] text-[#111] uppercase"
+        style={{
+          fontFamily: "'Libre Franklin', sans-serif",
+          lineHeight: "28px",
+          letterSpacing: "0px",
+        }}
+      >
+        <span className="font-normal">UNFINISHED</span>
         <br />
-        IDEAS
+        <span className="font-bold">IDEAS</span>
       </h3>
     </Item>
 
@@ -191,10 +281,17 @@ const Frame1Desktop = () => (
     </Item>
 
     <Item style={{ top: "57%", left: "30%" }}>
-      <h3 className="text-[26px] leading-[1.05] font-semibold tracking-tight text-[#111]" style={{ fontFamily: "'Inter', sans-serif" }}>
-        & FRUSTRATING
+      <h3
+        className="text-[26px] text-[#111] uppercase"
+        style={{
+          fontFamily: "'Libre Franklin', sans-serif",
+          lineHeight: "28px",
+          letterSpacing: "0px",
+        }}
+      >
+        <span className="font-normal">& FRUSTRATING</span>
         <br />
-        EXPERIENCES
+        <span className="font-bold">EXPERIENCES</span>
       </h3>
     </Item>
 
@@ -205,13 +302,23 @@ const Frame1Desktop = () => (
     </Item>
 
     <Item style={{ top: "63%", left: "64%" }}>
-      <p className="text-[#C4552E] text-[15px] italic" style={{ fontFamily: "'Caveat', cursive" }}>
+      <p
+        className="text-[#C4552E] italic"
+        style={{ fontFamily: "'Caveat', cursive", fontSize: "15px" }}
+      >
         I design the path
       </p>
-      <h3 className="text-[24px] leading-[1.05] font-semibold tracking-tight text-[#111] mt-0.5" style={{ fontFamily: "'Inter', sans-serif" }}>
-        THAT MAKES
+      <h3
+        className="text-[24px] text-[#111] mt-0.5 uppercase"
+        style={{
+          fontFamily: "'Libre Franklin', sans-serif",
+          lineHeight: "26px",
+          letterSpacing: "0px",
+        }}
+      >
+        <span className="font-normal">THAT MAKES</span>
         <br />
-        THEM SEAMLESS
+        <span className="font-bold">THEM SEAMLESS</span>
       </h3>
     </Item>
 
@@ -222,10 +329,18 @@ const Frame1Desktop = () => (
     <Item style={{ top: "72%", left: "38%" }}>
       <div className="relative w-[100px] h-[70px]">
         <div className="absolute left-0 top-0 w-[62px] h-[58px] bg-[#A8CBE0] shadow-sm rotate-[-6deg] flex items-start justify-start p-2">
-          <p className="text-[9px] text-[#333]">Ask why</p>
+          <p
+            className="text-[9px] text-[#333]"
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
+            Ask why
+          </p>
         </div>
         <div className="absolute left-8 top-2 w-[52px] h-[46px] bg-[#E8A87C] shadow-sm rotate-[8deg] flex items-center justify-center">
-          <p className="text-[11px] text-[#333]" style={{ fontFamily: "'Caveat', cursive" }}>
+          <p
+            className="text-[11px] text-[#333]"
+            style={{ fontFamily: "'Caveat', cursive" }}
+          >
             Simplify
           </p>
         </div>
@@ -255,27 +370,36 @@ const Frame2Mobile = () => (
       <img src="/disc.png" alt="Vinyl" className="w-[45px] h-auto" />
     </div>
 
-    <p className="text-[#C4552E] text-[24px]" style={{ fontFamily: "'Caveat', cursive" }}>
+    <p
+      className="text-[#FF6714]"
+      style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, fontSize: "24px" }}
+    >
       Maitri Shah
     </p>
 
-    <h1 className="text-[34px] leading-[1.1] font-normal tracking-tight text-[#111]" style={{ fontFamily: "'Inter', sans-serif" }}>
+    <h1 className="text-[34px] leading-[1.1] text-[#111]" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>
       I turn complex ideas
       <br />
       into{" "}
-      <span className="text-[#C4552E] italic" style={{ fontFamily: "'Caveat', cursive", fontSize: "38px" }}>
+      <span className="text-[#FF6714] italic" style={{ fontFamily: "'Caveat', cursive", fontSize: "38px" }}>
         clear, human
       </span>
       <br />
       experiences.
     </h1>
 
-    <p className="text-[11px] text-[#6b6b6b] max-w-[320px] mt-2 leading-relaxed">
+    <p
+      className="text-[11px] text-[#6b6b6b] max-w-[320px] mt-2 leading-relaxed"
+      style={{ fontFamily: "'DM Sans', sans-serif" }}
+    >
       UX/UI designer in Mumbai with 2+ years of experience, bringing
       curiosity, clarity, and care to every screen.
     </p>
 
-    <button className="mt-4 bg-[#111] text-white text-[12px] px-5 py-2.5 rounded-full flex items-center gap-2 hover:bg-[#333] transition-colors">
+    <button
+      className="mt-4 bg-[#111] text-white text-[12px] px-5 py-2.5 rounded-full flex items-center gap-2 hover:bg-[#333] transition-colors"
+      style={{ fontFamily: "'DM Sans', sans-serif" }}
+    >
       Explore my work <span>↗</span>
     </button>
 
@@ -291,27 +415,36 @@ const Frame2Mobile = () => (
 const Frame2Desktop = () => (
   <div className="absolute inset-0 hidden lg:block">
     <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
-      <p className="text-[#C4552E] text-[28px] mb-3" style={{ fontFamily: "'Caveat', cursive" }}>
+      <p
+        className="text-[#FF6714] mb-3"
+        style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, fontSize: "32px", lineHeight: "48px" }}
+      >
         Maitri Shah
       </p>
 
-      <h1 className="text-[64px] leading-[1.05] font-normal tracking-tight text-[#111] max-w-[900px]" style={{ fontFamily: "'Inter', sans-serif" }}>
+      <h1 className="text-[64px] leading-[1.05] text-[#111] max-w-[900px]" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>
         I turn complex ideas
         <br />
         into{" "}
-        <span className="text-[#C4552E] italic" style={{ fontFamily: "'Caveat', cursive", fontSize: "72px" }}>
+        <span className="text-[#FF6714] italic" style={{ fontFamily: "'Caveat', cursive", fontSize: "72px" }}>
           clear, human
         </span>
         <br />
         experiences.
       </h1>
 
-      <p className="text-[13px] text-[#6b6b6b] max-w-[440px] mt-7 leading-relaxed">
+      <p
+        className="text-[13px] text-[#6b6b6b] max-w-[440px] mt-7 leading-relaxed"
+        style={{ fontFamily: "'DM Sans', sans-serif", lineHeight: "19.5px" }}
+      >
         UX/UI designer in Mumbai with 2+ years of experience, bringing
         curiosity, clarity, and care to every screen.
       </p>
 
-      <button className="mt-8 bg-[#111] text-white text-[13px] px-6 py-3 rounded-full flex items-center gap-2 hover:bg-[#333] transition-colors">
+      <button
+        className="mt-8 bg-[#111] text-white text-[13px] px-6 py-3 rounded-full flex items-center gap-2 hover:bg-[#333] transition-colors"
+        style={{ fontFamily: "'DM Sans', sans-serif", lineHeight: "19.5px" }}
+      >
         Explore my work <span>↗</span>
       </button>
     </div>
@@ -332,7 +465,7 @@ const Frame2Desktop = () => (
     <Item style={{ top: "80%", left: "10%" }}>
       <div className="relative w-[110px] h-[70px]">
         <div className="absolute left-0 top-0 w-[62px] h-[58px] bg-[#A8CBE0] shadow-sm rotate-[-6deg] flex items-start justify-start p-2">
-          <p className="text-[9px] text-[#333]">Ask why</p>
+          <p className="text-[9px] text-[#333]" style={{ fontFamily: "'DM Sans', sans-serif" }}>Ask why</p>
         </div>
         <div className="absolute left-9 top-2 w-[52px] h-[46px] bg-[#E8A87C] shadow-sm rotate-[8deg] flex items-center justify-center">
           <p className="text-[11px] text-[#333]" style={{ fontFamily: "'Caveat', cursive" }}>
@@ -441,22 +574,22 @@ const ProblemCard = ({ item }) => (
     }}
   >
     <div className="flex-1 min-w-0 lg:min-w-[280px] max-w-full lg:max-w-[420px]">
-      <p className="text-[#C4552E] text-[11px] md:text-[12px] tracking-[0.15em] font-medium mb-1" style={{ fontFamily: "'Inter', sans-serif" }}>
+      <p className="text-[#C4552E] text-[11px] md:text-[12px] tracking-[0.15em] font-medium mb-1" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>
         {item.id}
       </p>
-      <p className="text-[9px] md:text-[10px] tracking-[0.2em] text-[#5a5a5a] mb-3 md:mb-4 uppercase">
+      <p className="text-[9px] md:text-[10px] tracking-[0.2em] text-[#5a5a5a] mb-3 md:mb-4 uppercase" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>
         {item.tag}
       </p>
       <h3 className="text-[26px] md:text-[32px] lg:text-[40px] leading-[1.1] text-[#111] mb-3 md:mb-4" style={{ fontFamily: "'Caveat', cursive" }}>
         {item.title}
       </h3>
-      <p className="text-[11px] md:text-[12px] leading-[1.6] text-[#4a4a4a] mb-4 md:mb-5">{item.desc}</p>
+      <p className="text-[11px] md:text-[12px] leading-[1.6] text-[#4a4a4a] mb-4 md:mb-5" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>{item.desc}</p>
       <div className="flex flex-col gap-1.5">
-        <a href="#" className="inline-flex items-center gap-1.5 text-[10px] md:text-[11px] text-[#111] hover:opacity-70">
+        <a href="#" className="inline-flex items-center gap-1.5 text-[10px] md:text-[11px] text-[#111] hover:opacity-70" style={{ fontFamily: "'DM Sans', sans-serif" }}>
           <span className="w-3 h-3 border border-[#111] rounded-full flex items-center justify-center text-[7px]">✕</span>
           Add to anticipated outcome
         </a>
-        <a href="#" className="inline-flex items-center gap-1.5 text-[10px] md:text-[11px] text-[#111] hover:opacity-70 underline underline-offset-4">
+        <a href="#" className="inline-flex items-center gap-1.5 text-[10px] md:text-[11px] text-[#111] hover:opacity-70 underline underline-offset-4" style={{ fontFamily: "'DM Sans', sans-serif" }}>
           View case study ↗
         </a>
       </div>
@@ -515,13 +648,13 @@ const ProblemsSection = () => (
           <p className="text-[#C4552E] tracking-[0.15em] mb-3" style={{ fontFamily: "'Caveat', cursive", fontSize: "16px" }}>
             Selected work
           </p>
-          <h2 className="text-[32px] md:text-[42px] lg:text-[52px] leading-[1.05] text-[#111] font-medium max-w-[520px]" style={{ fontFamily: "'Inter', sans-serif" }}>
+          <h2 className="text-[32px] md:text-[42px] lg:text-[52px] leading-[1.05] text-[#111] font-medium max-w-[520px]" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>
             Problems explored
             <br />
             with purpose.
           </h2>
         </div>
-        <p className="text-[11px] md:text-[12px] text-[#6b6b6b] max-w-[280px] leading-[1.6] lg:pt-14">
+        <p className="text-[11px] md:text-[12px] text-[#6b6b6b] max-w-[280px] leading-[1.6] lg:pt-14" style={{ fontFamily: "'DM Sans', sans-serif" }}>
           These projects were an early foray into real client work, sharpening
           my product thinking and technical foundation.
         </p>
@@ -585,10 +718,10 @@ const experiences = [
 const ExperienceRow = ({ item }) => (
   <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 lg:gap-20">
     <div className="flex flex-col gap-2">
-      <h3 className="text-[24px] md:text-[28px] lg:text-[34px] leading-[1.1] text-[#111] font-medium" style={{ fontFamily: "'Inter', sans-serif" }}>
+      <h3 className="text-[24px] md:text-[28px] lg:text-[34px] leading-[1.1] text-[#111] font-medium" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>
         {item.company}
       </h3>
-      <p className="text-[10px] md:text-[11px] text-[#4a4a4a]">{item.role}</p>
+      <p className="text-[10px] md:text-[11px] text-[#4a4a4a]" style={{ fontFamily: "'DM Sans', sans-serif" }}>{item.role}</p>
     </div>
     <div className="flex items-center flex-wrap gap-2.5 md:gap-3 lg:gap-4">
       {item.tools.map((tool) => (
@@ -603,29 +736,39 @@ const ExperienceSection = () => (
     <style>{`
       .experience-section-wrapper {
         background: #FFFDF8;
+        border-top-left-radius: 48px;
+        border-top-right-radius: 48px;
         padding: 60px 20px 80px;
       }
       @media (min-width: 768px) {
-        .experience-section-wrapper { padding: 90px 30px 110px; }
+        .experience-section-wrapper {
+          border-top-left-radius: 70px;
+          border-top-right-radius: 70px;
+          padding: 90px 30px 110px;
+        }
       }
       @media (min-width: 1024px) {
-        .experience-section-wrapper { padding: 120px 40px 160px; }
+        .experience-section-wrapper {
+          border-top-left-radius: 100px;
+          border-top-right-radius: 100px;
+          padding: 120px 40px 160px;
+        }
       }
     `}</style>
 
     <div className="mx-auto flex flex-col gap-12 md:gap-16 lg:gap-20 max-w-[1401px]">
       <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 lg:gap-8">
         <div>
-          <p className="text-[#C4552E] tracking-[0.15em] mb-3 font-medium text-[11px] md:text-[12px] uppercase" style={{ fontFamily: "'Inter', sans-serif" }}>
+          <p className="text-[#C4552E] tracking-[0.15em] mb-3 font-medium text-[11px] md:text-[12px] uppercase" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>
             Selected work
           </p>
-          <h2 className="text-[32px] md:text-[42px] lg:text-[52px] leading-[1.05] text-[#111] font-medium max-w-[600px]" style={{ fontFamily: "'Inter', sans-serif" }}>
+          <h2 className="text-[32px] md:text-[42px] lg:text-[52px] leading-[1.05] text-[#111] font-medium max-w-[600px]" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>
             Problems explored with
             <br />
             purpose.
           </h2>
         </div>
-        <p className="text-[11px] md:text-[12px] text-[#6b6b6b] max-w-[320px] leading-[1.6] lg:pt-14">
+        <p className="text-[11px] md:text-[12px] text-[#6b6b6b] max-w-[320px] leading-[1.6] lg:pt-14" style={{ fontFamily: "'DM Sans', sans-serif" }}>
           These project slots are ready for your real screenshots, process, and
           measurable outcomes.
         </p>
@@ -665,20 +808,20 @@ const aiBars = [
 
 const WorkflowBars = ({ title, titleColor, bars }) => (
   <div className="flex flex-col gap-4">
-    <p className="text-[10px] md:text-[11px] tracking-[0.15em] font-medium uppercase" style={{ fontFamily: "'Inter', sans-serif", color: titleColor }}>
+    <p className="text-[10px] md:text-[11px] tracking-[0.15em] font-medium uppercase" style={{ fontFamily: "'Libre Franklin', sans-serif", color: titleColor }}>
       {title}
     </p>
     <div className="flex flex-col gap-3">
       {bars.map((bar) => (
         <div key={bar.label} className="flex items-center gap-3 md:gap-4">
-          <p className="text-[11px] md:text-[13px] text-[#282725] w-[80px] md:w-[110px] shrink-0">{bar.label}</p>
+          <p className="text-[11px] md:text-[13px] text-[#282725] w-[80px] md:w-[110px] shrink-0" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>{bar.label}</p>
           <div className="relative flex-1 h-[6px] bg-[#BDBDBD]/70 rounded-full overflow-hidden">
             <div
               className="absolute left-0 top-0 h-full rounded-full"
               style={{ width: bar.width, background: bar.filled ? "#FF6714" : "#8a8a8a" }}
             />
           </div>
-          <p className="text-[10px] md:text-[11px] text-[#5a5a5a] w-[38px] md:w-[42px] text-right shrink-0">{bar.value}</p>
+          <p className="text-[10px] md:text-[11px] text-[#5a5a5a] w-[38px] md:w-[42px] text-right shrink-0" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>{bar.value}</p>
         </div>
       ))}
     </div>
@@ -693,6 +836,7 @@ const FlowStep = ({ label }) => (
       border: "0.75px solid #DAD8D3",
       borderRadius: "6px",
       padding: "6px 12px",
+      fontFamily: "'DM Sans', sans-serif",
     }}
   >
     {label}
@@ -729,16 +873,16 @@ const AIWorkflowSection = () => (
     <div className="mx-auto flex flex-col gap-10 md:gap-14 lg:gap-20 max-w-[1400px]">
       <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 lg:gap-10">
         <div>
-          <p className="text-[#FF6714] tracking-[0.15em] mb-3 font-bold text-[10px] md:text-[11px] uppercase" style={{ fontFamily: "'Inter', sans-serif" }}>
+          <p className="text-[#FF6714] tracking-[0.15em] mb-3 font-bold text-[10px] md:text-[11px] uppercase" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>
             AI-Enhanced Workflow
           </p>
-          <h2 className="text-[32px] md:text-[42px] lg:text-[56px] leading-[1.1] text-[#111] font-medium max-w-[760px]" style={{ fontFamily: "'Inter', sans-serif" }}>
+          <h2 className="text-[32px] md:text-[42px] lg:text-[56px] leading-[1.1] text-[#111] font-medium max-w-[760px]" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>
             AI is part of my workflow.
             <br />
             Not my decision maker.
           </h2>
         </div>
-        <p className="text-[11px] md:text-[13px] text-[#4a4a4a] max-w-[320px] leading-[1.6] lg:pt-16">
+        <p className="text-[11px] md:text-[13px] text-[#4a4a4a] max-w-[320px] leading-[1.6] lg:pt-16" style={{ fontFamily: "'DM Sans', sans-serif" }}>
           AI removes the friction from my process so the craft gets more of my
           attention, not less. Here&apos;s where it plugs in – and where the
           decisions stay human.
@@ -755,7 +899,7 @@ const AIWorkflowSection = () => (
             padding: "28px 24px",
           }}
         >
-          <p className="text-[13px] md:text-[15px] leading-[1.75] text-[#282725]">
+          <p className="text-[13px] md:text-[15px] leading-[1.75] text-[#282725]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
             I use AI to quickly move from an unclear idea to a structured
             starting point. It helps me explore flows, generate screen ideas,
             write first-pass copy, and identify missing states before I begin
@@ -789,7 +933,7 @@ const AIWorkflowSection = () => (
             bars={traditionalBars}
           />
           <WorkflowBars title="Time taken with AI" titleColor="#FF6714" bars={aiBars} />
-          <p className="text-[11px] md:text-[13px] leading-[1.6] text-[#FF6714]">
+          <p className="text-[11px] md:text-[13px] leading-[1.6] text-[#FF6714]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
             AI reduced the overall design workflow time by around{" "}
             <strong>65–70%</strong>, helping me move faster from research to
             refined design.
@@ -836,7 +980,6 @@ const ExperimentCard = ({ item }) => (
         gap: 14px;
         height: 100%;
       }
-      /* No background wrapper — image directly */
       .experiment-card img.experiment-img {
         display: block;
         width: 100%;
@@ -849,7 +992,6 @@ const ExperimentCard = ({ item }) => (
       }
     `}</style>
 
-    {/* Image directly — no wrapper background */}
     <img
       src={item.image}
       alt={item.title}
@@ -857,11 +999,11 @@ const ExperimentCard = ({ item }) => (
     />
 
     <div className="flex flex-col gap-2 flex-1">
-      <h3 className="text-[14px] md:text-[15px] font-semibold text-[#111]" style={{ fontFamily: "'Inter', sans-serif" }}>
+      <h3 className="text-[14px] md:text-[15px] font-semibold text-[#111]" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>
         {item.title}
       </h3>
-      <p className="text-[11px] md:text-[11.5px] leading-[1.6] text-[#5a5a5a]">{item.desc}</p>
-      <p className="text-[9px] md:text-[10px] tracking-[0.15em] uppercase text-[#8a8478] mt-auto pt-2">
+      <p className="text-[11px] md:text-[11.5px] leading-[1.6] text-[#5a5a5a]" style={{ fontFamily: "'DM Sans', sans-serif" }}>{item.desc}</p>
+      <p className="text-[9px] md:text-[10px] tracking-[0.15em] uppercase text-[#8a8478] mt-auto pt-2" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>
         {item.tag}
       </p>
     </div>
@@ -884,7 +1026,7 @@ const ProfileAsset = ({ src, label }) => (
     <div className="w-[60px] h-[60px] md:w-[80px] md:h-[80px] flex items-center justify-center">
       <img src={src} alt={label} className="w-full h-full object-contain" />
     </div>
-    <p className="text-[9px] md:text-[10px] text-[#5a5a5a]">{label}</p>
+    <p className="text-[9px] md:text-[10px] text-[#5a5a5a]" style={{ fontFamily: "'DM Sans', sans-serif" }}>{label}</p>
   </div>
 );
 
@@ -906,14 +1048,22 @@ const ProfileCard = () => (
     `}</style>
 
     <div className="flex flex-col items-center md:items-start w-full md:w-[45%]">
-      <p className="text-[#C4552E] text-[24px] md:text-[28px] leading-none" style={{ fontFamily: "'Caveat', cursive" }}>
+      <p
+        className="text-[#FF6714] leading-none"
+        style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, fontSize: "28px" }}
+      >
         Maitri Shah
       </p>
       <div className="flex items-center gap-3 mt-2 mb-5 md:mb-6">
-        <p className="text-[11px] md:text-[12px] text-[#4a4a4a]">UX/UI Designer</p>
+        <p
+          className="text-[#4a4a4a]"
+          style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px" }}
+        >
+          UX/UI Designer
+        </p>
         <span
-          className="text-[10px] md:text-[11px] text-[#C4552E] px-2.5 py-0.5 rounded-full"
-          style={{ border: "1.5px solid #C4552E", fontFamily: "'Caveat', cursive" }}
+          className="text-[#C4552E] px-2.5 py-0.5 rounded-full"
+          style={{ border: "1.5px solid #C4552E", fontFamily: "'Caveat', cursive", fontSize: "11px" }}
         >
           2+ Years
         </span>
@@ -923,7 +1073,7 @@ const ProfileCard = () => (
         <img src="/maitri.jpg" alt="Maitri Shah" className="w-full h-full object-cover" />
         <div
           className="absolute bottom-3 right-3 text-white text-[10px] px-2.5 py-1 rounded"
-          style={{ background: "#E5592E" }}
+          style={{ background: "#E5592E", fontFamily: "'DM Sans', sans-serif" }}
         >
           Hire me →
         </div>
@@ -942,7 +1092,7 @@ const ProfileCard = () => (
           <span className="w-1.5 h-1.5 rounded-full bg-[#F2C94C]" />
           <span className="w-1.5 h-1.5 rounded-full bg-[#6FA8BF]" />
         </div>
-        <p className="text-[11px] md:text-[12px] leading-[1.7] text-[#3a3a3a]">
+        <p className="text-[11px] md:text-[12px] leading-[1.7] text-[#3a3a3a]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
           I use AI to quickly move from an unclear idea to a structured starting
           point. It helps me explore flows, generate screen ideas, write
           first-pass copy, and identify missing states before I begin detailed
@@ -986,16 +1136,16 @@ const AIExperimentsSection = () => (
     <div className="mx-auto flex flex-col gap-12 md:gap-16 lg:gap-24 max-w-[1400px]">
       <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 lg:gap-8">
         <div>
-          <p className="text-[#FF6714] tracking-[0.15em] mb-3 font-bold text-[10px] md:text-[11px] uppercase" style={{ fontFamily: "'Inter', sans-serif" }}>
+          <p className="text-[#FF6714] tracking-[0.15em] mb-3 font-bold text-[10px] md:text-[11px] uppercase" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>
             AI Experiments
           </p>
-          <h2 className="text-[32px] md:text-[42px] lg:text-[56px] leading-[1.1] text-[#111] font-medium max-w-[600px]" style={{ fontFamily: "'Inter', sans-serif" }}>
+          <h2 className="text-[32px] md:text-[42px] lg:text-[56px] leading-[1.1] text-[#111] font-medium max-w-[600px]" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>
             AI-Powered Design
             <br />
             Experiments
           </h2>
         </div>
-        <p className="text-[11px] md:text-[13px] text-[#4a4a4a] max-w-[340px] leading-[1.6] lg:pt-16">
+        <p className="text-[11px] md:text-[13px] text-[#4a4a4a] max-w-[340px] leading-[1.6] lg:pt-16" style={{ fontFamily: "'DM Sans', sans-serif" }}>
           A collection of AI-led explorations where I used Claude and Google
           Stitch to build landing page concepts, and Majestic AI with ChatGPT to
           create images, videos, and visual assets.
@@ -1051,7 +1201,7 @@ const SocialIcon = ({ label }) => (
   <a
     href="#"
     className="w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center text-[#C4552E] text-[12px] md:text-[13px] font-semibold transition-transform hover:scale-110"
-    style={{ background: "#F0DCCB" }}
+    style={{ background: "#F0DCCB", fontFamily: "'DM Sans', sans-serif" }}
   >
     {label}
   </a>
@@ -1089,11 +1239,14 @@ const ContactSection = () => (
       ))}
 
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
-        <p className="text-[#E5592E] text-[20px] md:text-[24px] lg:text-[26px] mb-3 md:mb-4" style={{ fontFamily: "'Caveat', cursive" }}>
+        <p
+          className="text-[#E5592E] mb-3 md:mb-4"
+          style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, fontSize: "26px" }}
+        >
           Let&apos;s make something useful
         </p>
 
-        <h2 className="text-[34px] md:text-[46px] lg:text-[60px] leading-[1.1] text-[#111] font-medium max-w-[820px]" style={{ fontFamily: "'Inter', sans-serif" }}>
+        <h2 className="text-[34px] md:text-[46px] lg:text-[60px] leading-[1.1] text-[#111] font-medium max-w-[820px]" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>
           Have a thoughtful product
           <br />
           problem to solve?
@@ -1108,7 +1261,7 @@ const ContactSection = () => (
         <a
           href="#"
           className="mt-6 md:mt-10 inline-flex items-center gap-2 text-white text-[12px] md:text-[13px] px-5 md:px-6 py-2.5 md:py-3 rounded-full hover:opacity-90 transition-opacity"
-          style={{ background: "#282725" }}
+          style={{ background: "#282725", fontFamily: "'DM Sans', sans-serif", lineHeight: "19.5px" }}
         >
           Add your email <span>↗</span>
         </a>
@@ -1166,8 +1319,8 @@ function App() {
       <ContactSection />
 
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Caveat:wght@500;600&family=DM+Sans:wght@400;500;700&display=swap');
-        body { font-family: 'Inter', sans-serif; margin: 0; scroll-behavior: smooth; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Caveat:wght@500;600&family=DM+Sans:wght@400;500;700&family=Libre+Franklin:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Libre Franklin', sans-serif; margin: 0; scroll-behavior: smooth; }
       `}</style>
     </div>
   );
