@@ -17,7 +17,6 @@ const GridBackground = () => (
 
 // ---------- NAVBAR with smooth scroll ----------
 const NavBar = () => {
-  // id = section id, label = button text
   const navItems = [
     { id: "hero", label: "MS" },
     { id: "problems", label: "Profile" },
@@ -237,7 +236,6 @@ const Frame1Desktop = () => (
   </div>
 );
 
-// ---------- FRAME 1 WRAPPER ----------
 const Frame1 = () => (
   <>
     <div className="lg:hidden">
@@ -365,7 +363,6 @@ const Frame2Desktop = () => (
   </div>
 );
 
-// ---------- FRAME 2 WRAPPER ----------
 const Frame2 = () => (
   <>
     <div className="lg:hidden">
@@ -543,61 +540,20 @@ const ProblemsSection = () => (
 );
 
 // ============================================================
-// EXPERIENCE SECTION
+// EXPERIENCE SECTION — Actual PNG tool icons
 // ============================================================
 
-const ToolIcon = ({ name }) => {
-  const icons = {
-    figma: (
-      <svg viewBox="0 0 24 36" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-        <path fill="#F24E1E" d="M6 0h6v12H6a6 6 0 0 1 0-12z" />
-        <path fill="#FF7262" d="M12 0h6a6 6 0 0 1 0 12h-6V0z" />
-        <path fill="#A259FF" d="M12 12h6a6 6 0 0 1 0 12h-6V12z" />
-        <path fill="#1ABCFE" d="M6 12h6v12H6a6 6 0 0 1 0-12z" />
-        <path fill="#0ACF83" d="M6 24h6v6a6 6 0 1 1-6-6z" />
-      </svg>
-    ),
-    framer: (
-      <svg viewBox="0 0 24 24" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-        <path d="M4 0h16v8H12l8 8H4v-8h8L4 0zm0 16h8v8l-8-8z" fill="#000" />
-      </svg>
-    ),
-    figjam: (
-      <svg viewBox="0 0 24 24" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-        <g stroke="#E5592E" strokeWidth="1.8" strokeLinecap="round">
-          <line x1="12" y1="2" x2="12" y2="22" />
-          <line x1="2" y1="12" x2="22" y2="12" />
-          <line x1="4.9" y1="4.9" x2="19.1" y2="19.1" />
-          <line x1="19.1" y1="4.9" x2="4.9" y2="19.1" />
-        </g>
-      </svg>
-    ),
-    m: (
-      <svg viewBox="0 0 24 24" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-        <rect width="24" height="24" rx="4" fill="#000" />
-        <path d="M5 18V7l3.5 6L12 7l3.5 6L19 7v11" stroke="#fff" strokeWidth="2" fill="none" strokeLinejoin="round" strokeLinecap="round" />
-      </svg>
-    ),
-    xd: (
-      <svg viewBox="0 0 24 24" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-        <rect width="24" height="24" rx="4" fill="#470137" />
-        <text x="12" y="17" textAnchor="middle" fill="#FF61F6" fontSize="11" fontWeight="bold" fontFamily="Arial">Xd</text>
-      </svg>
-    ),
-    ai: (
-      <svg viewBox="0 0 24 24" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-        <rect width="24" height="24" rx="4" fill="#330000" />
-        <text x="12" y="17" textAnchor="middle" fill="#FF9A00" fontSize="11" fontWeight="bold" fontFamily="Arial">Ai</text>
-      </svg>
-    ),
-    ps: (
-      <svg viewBox="0 0 24 24" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-        <rect width="24" height="24" rx="4" fill="#001E36" />
-        <text x="12" y="17" textAnchor="middle" fill="#31A8FF" fontSize="11" fontWeight="bold" fontFamily="Arial">Ps</text>
-      </svg>
-    ),
-  };
-  return icons[name] || null;
+// Map tool name to actual image file in public/
+const toolImageMap = {
+  figma: "/figma.png",
+  framer: "/M.png",   // M-something tool logo
+  figjam: "/figma.png", // Fallback — figma image
+  m: "/M.png",
+  xd: "/xd.png",
+  ai: "/Ai.png",
+  ps: "/ps.png",
+  chatgpt: "/chatgpt.png",
+  claude: "/claud.png",
 };
 
 const ToolBox = ({ name }) => (
@@ -607,10 +563,14 @@ const ToolBox = ({ name }) => (
       background: "#F5F1E7",
       border: "0.75px solid #DAD8D3",
       borderRadius: "4.5px",
-      padding: "10px",
+      padding: "15.74px",
     }}
   >
-    <ToolIcon name={name} />
+    <img
+      src={toolImageMap[name] || "/figma.png"}
+      alt={name}
+      className="w-full h-full object-contain"
+    />
   </div>
 );
 
@@ -618,7 +578,7 @@ const experiences = [
   {
     company: "Logiclopp / Realatte",
     role: "Executive UI/UX Designer / Gen AI + Agentic AI Designer – 08 Apr 2024 – Present",
-    tools: ["figma", "framer", "figjam", "m"],
+    tools: ["figma", "claude", "chatgpt", "m"],
   },
   {
     company: "IvotionTech",
@@ -846,7 +806,7 @@ const AIWorkflowSection = () => (
 );
 
 // ============================================================
-// AI-POWERED EXPERIMENTS SECTION
+// AI-POWERED EXPERIMENTS SECTION — Actual PNG mockups
 // ============================================================
 
 const experiments = [
@@ -854,74 +814,21 @@ const experiments = [
     title: "Claude design",
     desc: "Created landing page concepts, structure, and micro-interactions using Claude.",
     tag: "Real estate",
-    image: "claude",
+    image: "/experimnts1.png",
   },
   {
     title: "Google Stitch",
     desc: "Explored landing page layouts and UI directions with Google Stitch.",
     tag: "Real estate",
-    image: "stitch",
+    image: "/experimnts2.png",
   },
   {
     title: "Majestic AI + ChatGPT",
     desc: "Generated images, enhanced visuals, and explored video concepts for the project.",
     tag: "Real estate",
-    image: "majestic",
+    image: "/experimnts3.png",
   },
 ];
-
-const ExperimentMockup = ({ variant }) => (
-  <div className="relative w-full h-[130px] md:h-[150px] rounded-lg overflow-hidden bg-[#EFEAE0] flex items-center justify-center">
-    {variant === "claude" && (
-      <div className="relative w-[80%]">
-        <div className="w-full h-[80px] md:h-[90px] bg-[#DAD5C8] rounded-md border border-[#c8c2b3] relative">
-          <div className="absolute inset-2 bg-white rounded-sm flex flex-col gap-1 p-2">
-            <div className="w-[40%] h-1.5 bg-[#d0d0d0] rounded-full" />
-            <div className="w-[70%] h-1.5 bg-[#d0d0d0] rounded-full" />
-            <div className="w-[55%] h-1.5 bg-[#d0d0d0] rounded-full" />
-          </div>
-          <div className="absolute -top-2 -left-3 bg-white text-[7px] px-1.5 py-0.5 rounded shadow">Idea</div>
-          <div className="absolute -top-1 -right-4 bg-white text-[7px] px-1.5 py-0.5 rounded shadow">Flow</div>
-          <div className="absolute -bottom-2 -right-3 bg-white text-[7px] px-1.5 py-0.5 rounded shadow">UX</div>
-        </div>
-        <div className="h-[6px] w-[60%] mx-auto bg-[#c8c2b3] rounded-b-md" />
-      </div>
-    )}
-
-    {variant === "stitch" && (
-      <div className="w-[90%] flex flex-col gap-2">
-        <div className="flex gap-2">
-          <div className="flex-1 h-[40px] md:h-[46px] bg-white rounded-md border border-[#e0ddd3] flex items-center justify-center text-[10px] text-[#999]">▣</div>
-          <div className="flex-1 h-[40px] md:h-[46px] bg-white rounded-md border border-[#e0ddd3] flex items-center justify-center">
-            <div className="w-[70%] h-2 bg-[#d0d0d0] rounded-full" />
-          </div>
-          <div className="flex-1 h-[40px] md:h-[46px] bg-white rounded-md border border-[#e0ddd3] flex flex-col gap-1 p-1.5">
-            <div className="w-[80%] h-1.5 bg-[#d0d0d0] rounded-full" />
-            <div className="w-[60%] h-1.5 bg-[#d0d0d0] rounded-full" />
-          </div>
-        </div>
-        <div className="flex gap-2">
-          <div className="flex-1 h-[35px] md:h-[40px] bg-white rounded-md border border-[#e0ddd3]" />
-          <div className="flex-1 h-[35px] md:h-[40px] bg-white rounded-md border border-[#e0ddd3]" />
-        </div>
-      </div>
-    )}
-
-    {variant === "majestic" && (
-      <div className="w-[90%] h-[100px] md:h-[120px] rounded-md overflow-hidden relative bg-gradient-to-br from-[#5B7B9A] via-[#3E5772] to-[#2A3B4F]">
-        <div className="absolute top-2 left-2 right-2 flex gap-1">
-          <div className="w-[30%] h-1.5 bg-white/30 rounded-full" />
-        </div>
-        <div className="absolute bottom-2 left-2 right-2 flex gap-1.5">
-          <div className="w-[22%] h-[28px] md:h-[34px] bg-white/90 rounded-sm" />
-          <div className="w-[22%] h-[28px] md:h-[34px] bg-white/90 rounded-sm" />
-          <div className="w-[22%] h-[28px] md:h-[34px] bg-white/90 rounded-sm" />
-          <div className="w-[22%] h-[28px] md:h-[34px] bg-white/90 rounded-sm" />
-        </div>
-      </div>
-    )}
-  </div>
-);
 
 const ExperimentCard = ({ item }) => (
   <div className="flex flex-col experiment-card">
@@ -937,7 +844,16 @@ const ExperimentCard = ({ item }) => (
         .experiment-card { padding: 20px; gap: 16px; }
       }
     `}</style>
-    <ExperimentMockup variant={item.image} />
+
+    {/* Actual mockup image */}
+    <div className="relative w-full h-[130px] md:h-[150px] rounded-lg overflow-hidden bg-[#EFEAE0] flex items-center justify-center">
+      <img
+        src={item.image}
+        alt={item.title}
+        className="w-full h-full object-cover"
+      />
+    </div>
+
     <div className="flex flex-col gap-2">
       <h3 className="text-[14px] md:text-[15px] font-semibold text-[#111]" style={{ fontFamily: "'Inter', sans-serif" }}>
         {item.title}
@@ -947,6 +863,27 @@ const ExperimentCard = ({ item }) => (
         {item.tag}
       </p>
     </div>
+  </div>
+);
+
+// ============================================================
+// PROFILE CARD — Actual PNG assets
+// ============================================================
+
+// Profile card asset grid (4 images)
+const profileAssets = [
+  { src: "/sunflower.png", label: "Sunflower.png" },
+  { src: "/dance-lover.png", label: "Danceofmoon.png" },
+  { src: "/tea-lover.png", label: "ToolsCover.png" },
+  { src: "/beach-lover.png", label: "BeachCover.png" },
+];
+
+const ProfileAsset = ({ src, label }) => (
+  <div className="flex flex-col items-center gap-1">
+    <div className="w-[60px] h-[60px] md:w-[80px] md:h-[80px] flex items-center justify-center">
+      <img src={src} alt={label} className="w-full h-full object-contain" />
+    </div>
+    <p className="text-[9px] md:text-[10px] text-[#5a5a5a]">{label}</p>
   </div>
 );
 
@@ -993,17 +930,13 @@ const ProfileCard = () => (
     </div>
 
     <div className="flex-1 flex flex-col gap-4 md:gap-5 w-full">
+      {/* Top row: 2 assets */}
       <div className="grid grid-cols-2 gap-4 md:gap-5">
-        <div className="flex flex-col items-center gap-1">
-          <div className="w-[60px] md:w-[80px] h-[60px] md:h-[80px] flex items-center justify-center text-[40px] md:text-[50px]">🌻</div>
-          <p className="text-[9px] md:text-[10px] text-[#5a5a5a]">Sunflower.png</p>
-        </div>
-        <div className="flex flex-col items-center gap-1">
-          <div className="w-[60px] md:w-[80px] h-[60px] md:h-[80px] flex items-center justify-center text-[40px] md:text-[50px]">🦋</div>
-          <p className="text-[9px] md:text-[10px] text-[#5a5a5a]">Danceofmoon.png</p>
-        </div>
+        <ProfileAsset src={profileAssets[0].src} label={profileAssets[0].label} />
+        <ProfileAsset src={profileAssets[1].src} label={profileAssets[1].label} />
       </div>
 
+      {/* Text box */}
       <div className="flex items-start gap-3 p-3 md:p-4 rounded-lg" style={{ background: "#FFFFFF", border: "1px solid #E5E1D6" }}>
         <div className="flex gap-0.5 mt-1">
           <span className="w-1.5 h-1.5 rounded-full bg-[#C4552E]" />
@@ -1018,15 +951,10 @@ const ProfileCard = () => (
         </p>
       </div>
 
+      {/* Bottom row: 2 assets */}
       <div className="grid grid-cols-2 gap-4 md:gap-5">
-        <div className="flex flex-col items-center gap-1">
-          <div className="w-[60px] md:w-[80px] h-[60px] md:h-[80px] flex items-center justify-center text-[40px] md:text-[50px]">🌀</div>
-          <p className="text-[9px] md:text-[10px] text-[#5a5a5a]">ToolsCover.png</p>
-        </div>
-        <div className="flex flex-col items-center gap-1">
-          <div className="w-[60px] md:w-[80px] h-[60px] md:h-[80px] flex items-center justify-center text-[40px] md:text-[50px]">🏖️</div>
-          <p className="text-[9px] md:text-[10px] text-[#5a5a5a]">BeachCover.png</p>
-        </div>
+        <ProfileAsset src={profileAssets[2].src} label={profileAssets[2].label} />
+        <ProfileAsset src={profileAssets[3].src} label={profileAssets[3].label} />
       </div>
     </div>
   </div>
@@ -1212,7 +1140,6 @@ function App() {
 
   return (
     <div className="relative w-full overflow-x-hidden" style={{ background: "#F5F1E7" }}>
-      {/* HERO (id="hero" for NavBar scroll) */}
       <div
         id="hero"
         className="relative w-full h-screen overflow-hidden"
