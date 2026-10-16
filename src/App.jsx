@@ -15,24 +15,43 @@ const GridBackground = () => (
   />
 );
 
-const NavBar = () => (
-  <div className="fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] md:w-auto max-w-[420px]">
-    <div className="flex items-center justify-center md:justify-start gap-0.5 md:gap-1 bg-white rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.06)] px-1.5 md:px-2 py-1 md:py-1.5">
-      {["MS", "Profile", "Case studies", "Résumé"].map((item, i) => (
-        <button
-          key={item}
-          className={`px-2.5 md:px-4 py-1 md:py-1.5 text-[11px] md:text-[13px] rounded-full transition-colors whitespace-nowrap ${
-            i === 0
-              ? "bg-[#111] text-white font-medium"
-              : "text-[#444] hover:bg-[#f2f2f2]"
-          }`}
-        >
-          {item}
-        </button>
-      ))}
+// ---------- NAVBAR with smooth scroll ----------
+const NavBar = () => {
+  // id = section id, label = button text
+  const navItems = [
+    { id: "hero", label: "MS" },
+    { id: "problems", label: "Profile" },
+    { id: "experience", label: "Case studies" },
+    { id: "ai-experiments", label: "Résumé" },
+  ];
+
+  const handleScroll = (id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  return (
+    <div className="fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] md:w-auto max-w-[420px]">
+      <div className="flex items-center justify-center md:justify-start gap-0.5 md:gap-1 bg-white rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.06)] px-1.5 md:px-2 py-1 md:py-1.5">
+        {navItems.map((item, i) => (
+          <button
+            key={item.id}
+            onClick={() => handleScroll(item.id)}
+            className={`px-2.5 md:px-4 py-1 md:py-1.5 text-[11px] md:text-[13px] rounded-full transition-colors whitespace-nowrap ${
+              i === 0
+                ? "bg-[#111] text-white font-medium"
+                : "text-[#444] hover:bg-[#f2f2f2]"
+            }`}
+          >
+            {item.label}
+          </button>
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const ScrollHint = () => (
   <div className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2 text-[9px] md:text-[10px] tracking-[0.25em] text-[#8a8478]">
@@ -456,7 +475,7 @@ const ProblemCard = ({ item }) => (
 );
 
 const ProblemsSection = () => (
-  <section className="relative w-full problems-section-wrapper">
+  <section id="problems" className="relative w-full problems-section-wrapper">
     <style>{`
       .problems-section-wrapper {
         background: #FFFDF8;
@@ -625,7 +644,7 @@ const ExperienceRow = ({ item }) => (
 );
 
 const ExperienceSection = () => (
-  <section className="relative w-full experience-section-wrapper">
+  <section id="experience" className="relative w-full experience-section-wrapper">
     <style>{`
       .experience-section-wrapper {
         background: #FFFDF8;
@@ -728,7 +747,7 @@ const FlowStep = ({ label }) => (
 const FlowArrow = () => <span className="text-[#8a8478] text-[12px] md:text-[14px] mx-1.5 md:mx-2">→</span>;
 
 const AIWorkflowSection = () => (
-  <section className="relative w-full ai-workflow-wrapper">
+  <section id="ai-workflow" className="relative w-full ai-workflow-wrapper">
     <style>{`
       .ai-workflow-wrapper {
         background: #F5F1E7;
@@ -1014,7 +1033,7 @@ const ProfileCard = () => (
 );
 
 const AIExperimentsSection = () => (
-  <section className="relative w-full ai-experiments-wrapper">
+  <section id="ai-experiments" className="relative w-full ai-experiments-wrapper">
     <style>{`
       .ai-experiments-wrapper {
         background: #FFFDF8;
@@ -1113,7 +1132,7 @@ const SocialIcon = ({ label }) => (
 );
 
 const ContactSection = () => (
-  <section className="relative w-full overflow-hidden contact-wrapper">
+  <section id="contact" className="relative w-full overflow-hidden contact-wrapper">
     <style>{`
       .contact-wrapper {
         background: #F5F1E7;
@@ -1193,7 +1212,9 @@ function App() {
 
   return (
     <div className="relative w-full overflow-x-hidden" style={{ background: "#F5F1E7" }}>
+      {/* HERO (id="hero" for NavBar scroll) */}
       <div
+        id="hero"
         className="relative w-full h-screen overflow-hidden"
         style={{ cursor: "grab" }}
         onClick={() => setFrame((f) => (f === 1 ? 2 : 1))}
@@ -1221,7 +1242,7 @@ function App() {
 
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Caveat:wght@500;600&family=DM+Sans:wght@400;500;700&display=swap');
-        body { font-family: 'Inter', sans-serif; margin: 0; }
+        body { font-family: 'Inter', sans-serif; margin: 0; scroll-behavior: smooth; }
       `}</style>
     </div>
   );
