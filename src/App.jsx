@@ -16,12 +16,12 @@ const GridBackground = () => (
 );
 
 const NavBar = () => (
-  <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50">
-    <div className="flex items-center gap-1 bg-white rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.06)] px-2 py-1.5">
+  <div className="fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] md:w-auto max-w-[420px]">
+    <div className="flex items-center justify-center md:justify-start gap-0.5 md:gap-1 bg-white rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.06)] px-1.5 md:px-2 py-1 md:py-1.5">
       {["MS", "Profile", "Case studies", "Résumé"].map((item, i) => (
         <button
           key={item}
-          className={`px-4 py-1.5 text-[13px] rounded-full transition-colors ${
+          className={`px-2.5 md:px-4 py-1 md:py-1.5 text-[11px] md:text-[13px] rounded-full transition-colors whitespace-nowrap ${
             i === 0
               ? "bg-[#111] text-white font-medium"
               : "text-[#444] hover:bg-[#f2f2f2]"
@@ -35,8 +35,8 @@ const NavBar = () => (
 );
 
 const ScrollHint = () => (
-  <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2 text-[10px] tracking-[0.25em] text-[#8a8478]">
-    <span className="inline-flex items-center justify-center w-5 h-3 border border-[#8a8478] rounded-full">
+  <div className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2 text-[9px] md:text-[10px] tracking-[0.25em] text-[#8a8478]">
+    <span className="inline-flex items-center justify-center w-4 h-3 md:w-5 md:h-3 border border-[#8a8478] rounded-full">
       <span className="w-0.5 h-1.5 bg-[#8a8478] rounded-full" />
     </span>
     SCROLL TO EXPLORE
@@ -52,8 +52,78 @@ const Item = ({ style, children, className = "" }) => (
 // ============================================================
 // FRAME 1
 // ============================================================
-const Frame1 = () => (
-  <div className="absolute inset-0">
+
+// ---------- FRAME 1 MOBILE ----------
+const Frame1Mobile = () => (
+  <div className="absolute inset-0 flex flex-col items-center justify-center px-6 pt-20 pb-16 gap-5">
+    <div className="text-center">
+      <p className="text-[#C4552E] text-[24px] leading-none" style={{ fontFamily: "'Caveat', cursive" }}>
+        Maitri Shah
+      </p>
+      <p className="text-[10px] text-[#4a4a4a] mt-1">UX/UI Designer · Mumbai</p>
+      <p className="text-[10px] text-[#4a4a4a] mt-1 flex items-center justify-center gap-1">
+        View selected work ↗
+      </p>
+    </div>
+
+    <h2 className="text-[26px] leading-[1.1] font-semibold tracking-tight text-[#111] text-center" style={{ fontFamily: "'Inter', sans-serif" }}>
+      THE WORLD IS
+      <br />
+      FULL OF
+    </h2>
+
+    <div className="flex items-center justify-center gap-4 mt-2">
+      <img src="/lamp.png" alt="Lamp" className="w-[55px] h-auto" />
+      <img src="/headphone.png" alt="Headphones" className="w-[50px] h-auto" />
+      <img src="/disc.png" alt="Vinyl" className="w-[55px] h-auto" />
+    </div>
+
+    <h3 className="text-[22px] leading-[1.05] font-semibold tracking-tight text-[#111] text-center" style={{ fontFamily: "'Inter', sans-serif" }}>
+      UNFINISHED
+      <br />
+      IDEAS
+    </h3>
+
+    <div className="flex items-center justify-center gap-4">
+      <img src="/design-notepad.png" alt="Design" className="w-[40px] h-auto rotate-[-4deg] shadow-md" />
+      <img src="/icons.svg" alt="Icons" className="w-[55px] h-auto" />
+      <img src="/coffe.png" alt="Coffee" className="w-[40px] h-auto" />
+    </div>
+
+    <h3 className="text-[22px] leading-[1.05] font-semibold tracking-tight text-[#111] text-center" style={{ fontFamily: "'Inter', sans-serif" }}>
+      & FRUSTRATING
+      <br />
+      EXPERIENCES
+    </h3>
+
+    <div className="flex items-center justify-center gap-6">
+      <img src="/plant.png" alt="Plant" className="w-[45px] h-auto" />
+      <div className="relative w-[80px] h-[55px]">
+        <div className="absolute left-0 top-0 w-[50px] h-[46px] bg-[#A8CBE0] shadow-sm rotate-[-6deg] flex items-start justify-start p-1.5">
+          <p className="text-[8px] text-[#333]">Ask why</p>
+        </div>
+        <div className="absolute left-6 top-1.5 w-[44px] h-[40px] bg-[#E8A87C] shadow-sm rotate-[8deg] flex items-center justify-center">
+          <p className="text-[10px] text-[#333]" style={{ fontFamily: "'Caveat', cursive" }}>Simplify</p>
+        </div>
+      </div>
+    </div>
+
+    <div className="text-center">
+      <p className="text-[#C4552E] text-[13px] italic" style={{ fontFamily: "'Caveat', cursive" }}>
+        I design the path
+      </p>
+      <h3 className="text-[20px] leading-[1.05] font-semibold tracking-tight text-[#111] mt-0.5" style={{ fontFamily: "'Inter', sans-serif" }}>
+        THAT MAKES
+        <br />
+        THEM SEAMLESS
+      </h3>
+    </div>
+  </div>
+);
+
+// ---------- FRAME 1 DESKTOP ----------
+const Frame1Desktop = () => (
+  <div className="absolute inset-0 hidden lg:block">
     <Item style={{ top: "22%", left: "9%" }} className="text-left">
       <p className="text-[#C4552E] text-[26px] leading-none" style={{ fontFamily: "'Caveat', cursive" }}>
         Maitri Shah
@@ -72,49 +142,24 @@ const Frame1 = () => (
       </h2>
     </Item>
 
-    {/* DESIGN notepad — PNG */}
     <Item style={{ top: "18%", left: "61%" }}>
-      <img
-        src="/design-notepad.png"
-        alt="Design notepad"
-        className="w-[64px] md:w-[80px] lg:w-[90px] h-auto rotate-[-4deg] shadow-md"
-      />
+      <img src="/design-notepad.png" alt="Design notepad" className="w-[90px] h-auto rotate-[-4deg] shadow-md" />
     </Item>
 
-    {/* Coffee — PNG */}
     <Item style={{ top: "20%", left: "76%" }}>
-      <img
-        src="/coffe.png"
-        alt="Coffee"
-        className="w-[50px] md:w-[60px] lg:w-[70px] h-auto"
-      />
+      <img src="/coffe.png" alt="Coffee" className="w-[70px] h-auto" />
     </Item>
 
-    {/* Lamp — PNG */}
     <Item style={{ top: "38%", left: "9%" }}>
-      <img
-        src="/lamp.png"
-        alt="Desk lamp"
-        className="w-[80px] md:w-[100px] lg:w-[120px] h-auto"
-      />
+      <img src="/lamp.png" alt="Desk lamp" className="w-[120px] h-auto" />
     </Item>
 
-    {/* Headphones — PNG */}
     <Item style={{ top: "38%", left: "31%" }}>
-      <img
-        src="/headphone.png"
-        alt="Headphones"
-        className="w-[60px] md:w-[75px] lg:w-[90px] h-auto"
-      />
+      <img src="/headphone.png" alt="Headphones" className="w-[90px] h-auto" />
     </Item>
 
-    {/* Vinyl / Disc — PNG */}
     <Item style={{ top: "37%", left: "48%" }}>
-      <img
-        src="/disc.png"
-        alt="Vinyl record"
-        className="w-[70px] md:w-[85px] lg:w-[100px] h-auto"
-      />
+      <img src="/disc.png" alt="Vinyl record" className="w-[100px] h-auto" />
     </Item>
 
     <Item style={{ top: "35%", left: "67%" }}>
@@ -125,20 +170,9 @@ const Frame1 = () => (
       </h3>
     </Item>
 
-    {/* Blue icons — SVG */}
     <Item style={{ top: "42%", left: "80%" }}>
-      <img
-        src="/icons.svg"
-        alt="Icons"
-        className="w-[70px] md:w-[80px] lg:w-[86px] h-auto"
-      />
+      <img src="/icons.svg" alt="Icons" className="w-[86px] h-auto" />
     </Item>
-
-    <div className="absolute" style={{ top: "55%", left: "14%", right: "26%" }}>
-      <div className="relative border-t-2 border-dashed border-[#6FA8BF]">
-        <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 text-[#6FA8BF] text-lg">✕</div>
-      </div>
-    </div>
 
     <Item style={{ top: "57%", left: "30%" }}>
       <h3 className="text-[26px] leading-[1.05] font-semibold tracking-tight text-[#111]" style={{ fontFamily: "'Inter', sans-serif" }}>
@@ -148,12 +182,9 @@ const Frame1 = () => (
       </h3>
     </Item>
 
-    {/* Polaroid placeholder — keep as is, no image provided */}
     <Item style={{ top: "50%", left: "73%" }}>
       <div className="w-[86px] h-[96px] bg-white shadow-lg rotate-[6deg] p-1.5">
-        <div className="w-full h-[70%] bg-[#e8e8e8] flex items-center justify-center text-[24px]">
-          📷
-        </div>
+        <div className="w-full h-[70%] bg-[#e8e8e8] flex items-center justify-center text-[24px]">📷</div>
       </div>
     </Item>
 
@@ -168,16 +199,10 @@ const Frame1 = () => (
       </h3>
     </Item>
 
-    {/* Plant — PNG */}
     <Item style={{ top: "70%", left: "26%" }}>
-      <img
-        src="/plant.png"
-        alt="Plant"
-        className="w-[55px] md:w-[70px] lg:w-[85px] h-auto"
-      />
+      <img src="/plant.png" alt="Plant" className="w-[85px] h-auto" />
     </Item>
 
-    {/* Sticky notes — keep CSS version */}
     <Item style={{ top: "72%", left: "38%" }}>
       <div className="relative w-[100px] h-[70px]">
         <div className="absolute left-0 top-0 w-[62px] h-[58px] bg-[#A8CBE0] shadow-sm rotate-[-6deg] flex items-start justify-start p-2">
@@ -193,11 +218,65 @@ const Frame1 = () => (
   </div>
 );
 
+// ---------- FRAME 1 WRAPPER ----------
+const Frame1 = () => (
+  <>
+    <div className="lg:hidden">
+      <Frame1Mobile />
+    </div>
+    <Frame1Desktop />
+  </>
+);
+
 // ============================================================
 // FRAME 2
 // ============================================================
-const Frame2 = () => (
-  <div className="absolute inset-0">
+
+// ---------- FRAME 2 MOBILE ----------
+const Frame2Mobile = () => (
+  <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 pt-20 pb-16 gap-4">
+    <div className="flex items-center justify-center gap-5 mb-2">
+      <img src="/headphone.png" alt="Headphones" className="w-[40px] h-auto" />
+      <img src="/lamp.png" alt="Lamp" className="w-[45px] h-auto" />
+      <img src="/disc.png" alt="Vinyl" className="w-[45px] h-auto" />
+    </div>
+
+    <p className="text-[#C4552E] text-[24px]" style={{ fontFamily: "'Caveat', cursive" }}>
+      Maitri Shah
+    </p>
+
+    <h1 className="text-[34px] leading-[1.1] font-normal tracking-tight text-[#111]" style={{ fontFamily: "'Inter', sans-serif" }}>
+      I turn complex ideas
+      <br />
+      into{" "}
+      <span className="text-[#C4552E] italic" style={{ fontFamily: "'Caveat', cursive", fontSize: "38px" }}>
+        clear, human
+      </span>
+      <br />
+      experiences.
+    </h1>
+
+    <p className="text-[11px] text-[#6b6b6b] max-w-[320px] mt-2 leading-relaxed">
+      UX/UI designer in Mumbai with 2+ years of experience, bringing
+      curiosity, clarity, and care to every screen.
+    </p>
+
+    <button className="mt-4 bg-[#111] text-white text-[12px] px-5 py-2.5 rounded-full flex items-center gap-2 hover:bg-[#333] transition-colors">
+      Explore my work <span>↗</span>
+    </button>
+
+    <div className="flex items-center justify-center gap-4 mt-4">
+      <img src="/plant.png" alt="Plant" className="w-[40px] h-auto" />
+      <img src="/design-notepad.png" alt="Design" className="w-[36px] h-auto rotate-[-4deg]" />
+      <img src="/icons.svg" alt="Icons" className="w-[55px] h-auto" />
+      <img src="/coffe.png" alt="Coffee" className="w-[36px] h-auto" />
+    </div>
+  </div>
+);
+
+// ---------- FRAME 2 DESKTOP ----------
+const Frame2Desktop = () => (
+  <div className="absolute inset-0 hidden lg:block">
     <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
       <p className="text-[#C4552E] text-[28px] mb-3" style={{ fontFamily: "'Caveat', cursive" }}>
         Maitri Shah
@@ -224,27 +303,19 @@ const Frame2 = () => (
       </button>
     </div>
 
-    {/* Headphones */}
     <Item style={{ top: "18%", left: "8%" }}>
-      <img src="/headphone.png" alt="Headphones" className="w-[55px] md:w-[70px] lg:w-[85px] h-auto" />
+      <img src="/headphone.png" alt="Headphones" className="w-[85px] h-auto" />
     </Item>
-
-    {/* Lamp */}
     <Item style={{ top: "26%", left: "4%" }}>
-      <img src="/lamp.png" alt="Desk lamp" className="w-[70px] md:w-[90px] lg:w-[105px] h-auto" />
+      <img src="/lamp.png" alt="Desk lamp" className="w-[105px] h-auto" />
     </Item>
-
-    {/* Disc */}
     <Item style={{ top: "36%", left: "6%" }}>
-      <img src="/disc.png" alt="Vinyl record" className="w-[55px] md:w-[70px] lg:w-[85px] h-auto" />
+      <img src="/disc.png" alt="Vinyl record" className="w-[85px] h-auto" />
     </Item>
-
-    {/* Plant */}
     <Item style={{ top: "68%", left: "5%" }}>
-      <img src="/plant.png" alt="Plant" className="w-[50px] md:w-[65px] lg:w-[80px] h-auto" />
+      <img src="/plant.png" alt="Plant" className="w-[80px] h-auto" />
     </Item>
 
-    {/* Sticky notes */}
     <Item style={{ top: "80%", left: "10%" }}>
       <div className="relative w-[110px] h-[70px]">
         <div className="absolute left-0 top-0 w-[62px] h-[58px] bg-[#A8CBE0] shadow-sm rotate-[-6deg] flex items-start justify-start p-2">
@@ -258,30 +329,31 @@ const Frame2 = () => (
       </div>
     </Item>
 
-    {/* Design notepad */}
     <Item style={{ top: "18%", left: "80%" }}>
-      <img src="/design-notepad.png" alt="Design notepad" className="w-[55px] md:w-[70px] lg:w-[80px] h-auto rotate-[4deg] shadow-md" />
+      <img src="/design-notepad.png" alt="Design" className="w-[80px] h-auto rotate-[4deg] shadow-md" />
     </Item>
-
-    {/* Coffee */}
     <Item style={{ top: "14%", left: "92%" }}>
-      <img src="/coffe.png" alt="Coffee" className="w-[40px] md:w-[50px] lg:w-[60px] h-auto" />
+      <img src="/coffe.png" alt="Coffee" className="w-[60px] h-auto" />
     </Item>
-
-    {/* Icons SVG */}
     <Item style={{ top: "32%", left: "94%" }}>
-      <img src="/icons.svg" alt="Icons" className="w-[70px] md:w-[80px] lg:w-[86px] h-auto" />
+      <img src="/icons.svg" alt="Icons" className="w-[86px] h-auto" />
     </Item>
-
-    {/* Polaroid placeholder */}
     <Item style={{ top: "48%", left: "88%" }}>
       <div className="w-[86px] h-[96px] bg-white shadow-lg rotate-[6deg] p-1.5">
-        <div className="w-full h-[70%] bg-[#e8e8e8] flex items-center justify-center text-[24px]">
-          📷
-        </div>
+        <div className="w-full h-[70%] bg-[#e8e8e8] flex items-center justify-center text-[24px]">📷</div>
       </div>
     </Item>
   </div>
+);
+
+// ---------- FRAME 2 WRAPPER ----------
+const Frame2 = () => (
+  <>
+    <div className="lg:hidden">
+      <Frame2Mobile />
+    </div>
+    <Frame2Desktop />
+  </>
 );
 
 // ============================================================
@@ -314,10 +386,9 @@ const problems = [
 
 const BrowserMockup = () => (
   <div
-    className="relative shrink-0"
+    className="relative shrink-0 w-full max-w-[780px]"
     style={{
-      width: "780px",
-      height: "412px",
+      aspectRatio: "780 / 412",
       transform: "rotate(-2deg)",
       background: "#FAF9F5",
       borderRadius: "18.98px",
@@ -326,23 +397,23 @@ const BrowserMockup = () => (
       overflow: "hidden",
     }}
   >
-    <div className="flex items-center gap-2 px-5 pt-4 pb-3">
-      <span className="w-2.5 h-2.5 rounded-full bg-[#e0e0e0]" />
-      <span className="w-2.5 h-2.5 rounded-full bg-[#e0e0e0]" />
-      <span className="w-2.5 h-2.5 rounded-full bg-[#e0e0e0]" />
+    <div className="flex items-center gap-2 px-4 md:px-5 pt-3 md:pt-4 pb-2 md:pb-3">
+      <span className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-[#e0e0e0]" />
+      <span className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-[#e0e0e0]" />
+      <span className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-[#e0e0e0]" />
     </div>
-    <div className="mx-5 h-[42px] bg-[#282725] rounded-md flex items-center px-4">
-      <div className="w-[120px] h-2 bg-white/20 rounded-full" />
-      <div className="ml-auto w-3 h-3 bg-white/30 rounded-full" />
+    <div className="mx-3 md:mx-5 h-[30px] md:h-[42px] bg-[#282725] rounded-md flex items-center px-3 md:px-4">
+      <div className="w-[80px] md:w-[120px] h-1.5 md:h-2 bg-white/20 rounded-full" />
+      <div className="ml-auto w-2.5 h-2.5 md:w-3 md:h-3 bg-white/30 rounded-full" />
     </div>
-    <div className="px-5 mt-5">
-      <div className="w-[60%] h-2.5 bg-[#e0e0e0] rounded-full mb-2" />
-      <div className="w-[80%] h-2.5 bg-[#e0e0e0] rounded-full mb-6" />
-      <div className="flex items-end gap-4 h-[120px]">
-        <div className="w-[70px] h-[60px] bg-[#E5592E] rounded-sm" />
-        <div className="w-[70px] h-[60px] bg-[#E5592E] rounded-sm" />
-        <div className="w-[70px] h-[90px] bg-[#E5592E] rounded-sm" />
-        <div className="w-[70px] h-[60px] bg-[#E5592E] rounded-sm" />
+    <div className="px-3 md:px-5 mt-3 md:mt-5">
+      <div className="w-[60%] h-2 md:h-2.5 bg-[#e0e0e0] rounded-full mb-1.5 md:mb-2" />
+      <div className="w-[80%] h-2 md:h-2.5 bg-[#e0e0e0] rounded-full mb-4 md:mb-6" />
+      <div className="flex items-end gap-2 md:gap-4 h-[70px] md:h-[120px]">
+        <div className="w-[15%] h-[50%] bg-[#E5592E] rounded-sm" />
+        <div className="w-[15%] h-[50%] bg-[#E5592E] rounded-sm" />
+        <div className="w-[15%] h-[75%] bg-[#E5592E] rounded-sm" />
+        <div className="w-[15%] h-[50%] bg-[#E5592E] rounded-sm" />
       </div>
     </div>
   </div>
@@ -350,33 +421,30 @@ const BrowserMockup = () => (
 
 const ProblemCard = ({ item }) => (
   <div
-    className="relative w-full flex flex-col lg:flex-row items-center gap-10"
+    className="relative w-full flex flex-col lg:flex-row items-center gap-6 md:gap-8 lg:gap-10 problem-card"
     style={{
       maxWidth: "1400px",
-      minHeight: "557px",
       background: item.bg,
-      borderRadius: "30.84px",
       border: "1.19px solid rgba(0,0,0,0.06)",
-      padding: "60px 50px",
     }}
   >
-    <div className="flex-1 min-w-[280px] max-w-[420px]">
-      <p className="text-[#C4552E] text-[12px] tracking-[0.15em] font-medium mb-1" style={{ fontFamily: "'Inter', sans-serif" }}>
+    <div className="flex-1 min-w-0 lg:min-w-[280px] max-w-full lg:max-w-[420px]">
+      <p className="text-[#C4552E] text-[11px] md:text-[12px] tracking-[0.15em] font-medium mb-1" style={{ fontFamily: "'Inter', sans-serif" }}>
         {item.id}
       </p>
-      <p className="text-[10px] tracking-[0.2em] text-[#5a5a5a] mb-4 uppercase">
+      <p className="text-[9px] md:text-[10px] tracking-[0.2em] text-[#5a5a5a] mb-3 md:mb-4 uppercase">
         {item.tag}
       </p>
-      <h3 className="text-[40px] leading-[1.1] text-[#111] mb-4" style={{ fontFamily: "'Caveat', cursive" }}>
+      <h3 className="text-[26px] md:text-[32px] lg:text-[40px] leading-[1.1] text-[#111] mb-3 md:mb-4" style={{ fontFamily: "'Caveat', cursive" }}>
         {item.title}
       </h3>
-      <p className="text-[12px] leading-[1.6] text-[#4a4a4a] mb-5">{item.desc}</p>
+      <p className="text-[11px] md:text-[12px] leading-[1.6] text-[#4a4a4a] mb-4 md:mb-5">{item.desc}</p>
       <div className="flex flex-col gap-1.5">
-        <a href="#" className="inline-flex items-center gap-1.5 text-[11px] text-[#111] hover:opacity-70">
+        <a href="#" className="inline-flex items-center gap-1.5 text-[10px] md:text-[11px] text-[#111] hover:opacity-70">
           <span className="w-3 h-3 border border-[#111] rounded-full flex items-center justify-center text-[7px]">✕</span>
           Add to anticipated outcome
         </a>
-        <a href="#" className="inline-flex items-center gap-1.5 text-[11px] text-[#111] hover:opacity-70 underline underline-offset-4">
+        <a href="#" className="inline-flex items-center gap-1.5 text-[10px] md:text-[11px] text-[#111] hover:opacity-70 underline underline-offset-4">
           View case study ↗
         </a>
       </div>
@@ -388,35 +456,65 @@ const ProblemCard = ({ item }) => (
 );
 
 const ProblemsSection = () => (
-  <section
-    className="relative w-full"
-    style={{
-      background: "#FFFDF8",
-      borderTopLeftRadius: "100px",
-      borderTopRightRadius: "100px",
-      padding: "100px 40px 120px",
-      marginTop: "-100px",
-      zIndex: 10,
-    }}
-  >
+  <section className="relative w-full problems-section-wrapper">
+    <style>{`
+      .problems-section-wrapper {
+        background: #FFFDF8;
+        border-top-left-radius: 48px;
+        border-top-right-radius: 48px;
+        padding: 60px 20px 80px;
+        margin-top: -60px;
+        z-index: 10;
+      }
+      .problem-card {
+        border-radius: 24px;
+        padding: 32px 24px;
+      }
+      @media (min-width: 768px) {
+        .problems-section-wrapper {
+          border-top-left-radius: 70px;
+          border-top-right-radius: 70px;
+          padding: 80px 30px 100px;
+          margin-top: -80px;
+        }
+        .problem-card {
+          border-radius: 26px;
+          padding: 45px 35px;
+        }
+      }
+      @media (min-width: 1024px) {
+        .problems-section-wrapper {
+          border-top-left-radius: 100px;
+          border-top-right-radius: 100px;
+          padding: 100px 40px 120px;
+          margin-top: -100px;
+        }
+        .problem-card {
+          border-radius: 30.84px;
+          padding: 60px 50px;
+          min-height: 557px;
+        }
+      }
+    `}</style>
+
     <div className="max-w-[1400px] mx-auto">
-      <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-14">
+      <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 md:gap-6 mb-10 md:mb-14">
         <div>
-          <p className="text-[#C4552E] tracking-[0.15em] mb-3" style={{ fontFamily: "'Caveat', cursive", fontSize: "18px" }}>
+          <p className="text-[#C4552E] tracking-[0.15em] mb-3" style={{ fontFamily: "'Caveat', cursive", fontSize: "16px" }}>
             Selected work
           </p>
-          <h2 className="text-[52px] leading-[1.05] text-[#111] font-medium max-w-[520px]" style={{ fontFamily: "'Inter', sans-serif" }}>
+          <h2 className="text-[32px] md:text-[42px] lg:text-[52px] leading-[1.05] text-[#111] font-medium max-w-[520px]" style={{ fontFamily: "'Inter', sans-serif" }}>
             Problems explored
             <br />
             with purpose.
           </h2>
         </div>
-        <p className="text-[12px] text-[#6b6b6b] max-w-[280px] leading-[1.6] md:pt-14">
+        <p className="text-[11px] md:text-[12px] text-[#6b6b6b] max-w-[280px] leading-[1.6] lg:pt-14">
           These projects were an early foray into real client work, sharpening
           my product thinking and technical foundation.
         </p>
       </div>
-      <div className="flex flex-col gap-10">
+      <div className="flex flex-col gap-6 md:gap-8 lg:gap-10">
         {problems.map((item) => (
           <ProblemCard key={item.id} item={item} />
         ))}
@@ -432,7 +530,7 @@ const ProblemsSection = () => (
 const ToolIcon = ({ name }) => {
   const icons = {
     figma: (
-      <svg viewBox="0 0 24 36" className="w-8 h-12" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 24 36" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
         <path fill="#F24E1E" d="M6 0h6v12H6a6 6 0 0 1 0-12z" />
         <path fill="#FF7262" d="M12 0h6a6 6 0 0 1 0 12h-6V0z" />
         <path fill="#A259FF" d="M12 12h6a6 6 0 0 1 0 12h-6V12z" />
@@ -441,12 +539,12 @@ const ToolIcon = ({ name }) => {
       </svg>
     ),
     framer: (
-      <svg viewBox="0 0 24 24" className="w-9 h-9" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 24 24" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
         <path d="M4 0h16v8H12l8 8H4v-8h8L4 0zm0 16h8v8l-8-8z" fill="#000" />
       </svg>
     ),
     figjam: (
-      <svg viewBox="0 0 24 24" className="w-9 h-9" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 24 24" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
         <g stroke="#E5592E" strokeWidth="1.8" strokeLinecap="round">
           <line x1="12" y1="2" x2="12" y2="22" />
           <line x1="2" y1="12" x2="22" y2="12" />
@@ -456,25 +554,25 @@ const ToolIcon = ({ name }) => {
       </svg>
     ),
     m: (
-      <svg viewBox="0 0 24 24" className="w-9 h-9" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 24 24" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="#000" />
         <path d="M5 18V7l3.5 6L12 7l3.5 6L19 7v11" stroke="#fff" strokeWidth="2" fill="none" strokeLinejoin="round" strokeLinecap="round" />
       </svg>
     ),
     xd: (
-      <svg viewBox="0 0 24 24" className="w-9 h-9" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 24 24" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="#470137" />
         <text x="12" y="17" textAnchor="middle" fill="#FF61F6" fontSize="11" fontWeight="bold" fontFamily="Arial">Xd</text>
       </svg>
     ),
     ai: (
-      <svg viewBox="0 0 24 24" className="w-9 h-9" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 24 24" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="#330000" />
         <text x="12" y="17" textAnchor="middle" fill="#FF9A00" fontSize="11" fontWeight="bold" fontFamily="Arial">Ai</text>
       </svg>
     ),
     ps: (
-      <svg viewBox="0 0 24 24" className="w-9 h-9" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 24 24" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="#001E36" />
         <text x="12" y="17" textAnchor="middle" fill="#31A8FF" fontSize="11" fontWeight="bold" fontFamily="Arial">Ps</text>
       </svg>
@@ -485,14 +583,12 @@ const ToolIcon = ({ name }) => {
 
 const ToolBox = ({ name }) => (
   <div
-    className="flex items-center justify-center shrink-0"
+    className="flex items-center justify-center shrink-0 w-[70px] h-[70px] md:w-[100px] md:h-[100px] lg:w-[129.675px] lg:h-[129.675px]"
     style={{
-      width: "129.675px",
-      height: "129.675px",
       background: "#F5F1E7",
       border: "0.75px solid #DAD8D3",
       borderRadius: "4.5px",
-      padding: "15.74px",
+      padding: "10px",
     }}
   >
     <ToolIcon name={name} />
@@ -513,14 +609,14 @@ const experiences = [
 ];
 
 const ExperienceRow = ({ item }) => (
-  <div className="flex flex-col md:flex-row md:items-center justify-between" style={{ gap: "80px" }}>
-    <div className="flex flex-col" style={{ gap: "8px" }}>
-      <h3 className="text-[34px] leading-[1.1] text-[#111] font-medium" style={{ fontFamily: "'Inter', sans-serif" }}>
+  <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 lg:gap-20">
+    <div className="flex flex-col gap-2">
+      <h3 className="text-[24px] md:text-[28px] lg:text-[34px] leading-[1.1] text-[#111] font-medium" style={{ fontFamily: "'Inter', sans-serif" }}>
         {item.company}
       </h3>
-      <p className="text-[11px] text-[#4a4a4a]">{item.role}</p>
+      <p className="text-[10px] md:text-[11px] text-[#4a4a4a]">{item.role}</p>
     </div>
-    <div className="flex items-center flex-wrap" style={{ gap: "16px" }}>
+    <div className="flex items-center flex-wrap gap-2.5 md:gap-3 lg:gap-4">
       {item.tools.map((tool) => (
         <ToolBox key={tool} name={tool} />
       ))}
@@ -529,27 +625,40 @@ const ExperienceRow = ({ item }) => (
 );
 
 const ExperienceSection = () => (
-  <section className="relative w-full" style={{ background: "#FFFDF8", padding: "120px 40px 160px" }}>
-    <div className="mx-auto flex flex-col" style={{ maxWidth: "1401px", gap: "80px" }}>
-      <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8">
+  <section className="relative w-full experience-section-wrapper">
+    <style>{`
+      .experience-section-wrapper {
+        background: #FFFDF8;
+        padding: 60px 20px 80px;
+      }
+      @media (min-width: 768px) {
+        .experience-section-wrapper { padding: 90px 30px 110px; }
+      }
+      @media (min-width: 1024px) {
+        .experience-section-wrapper { padding: 120px 40px 160px; }
+      }
+    `}</style>
+
+    <div className="mx-auto flex flex-col gap-12 md:gap-16 lg:gap-20 max-w-[1401px]">
+      <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 lg:gap-8">
         <div>
-          <p className="text-[#C4552E] tracking-[0.15em] mb-3 font-medium text-[12px] uppercase" style={{ fontFamily: "'Inter', sans-serif" }}>
+          <p className="text-[#C4552E] tracking-[0.15em] mb-3 font-medium text-[11px] md:text-[12px] uppercase" style={{ fontFamily: "'Inter', sans-serif" }}>
             Selected work
           </p>
-          <h2 className="text-[52px] leading-[1.05] text-[#111] font-medium max-w-[600px]" style={{ fontFamily: "'Inter', sans-serif" }}>
+          <h2 className="text-[32px] md:text-[42px] lg:text-[52px] leading-[1.05] text-[#111] font-medium max-w-[600px]" style={{ fontFamily: "'Inter', sans-serif" }}>
             Problems explored with
             <br />
             purpose.
           </h2>
         </div>
-        <p className="text-[12px] text-[#6b6b6b] max-w-[320px] leading-[1.6] md:pt-14">
+        <p className="text-[11px] md:text-[12px] text-[#6b6b6b] max-w-[320px] leading-[1.6] lg:pt-14">
           These project slots are ready for your real screenshots, process, and
           measurable outcomes.
         </p>
       </div>
-      <div className="flex flex-col" style={{ gap: "80px" }}>
+      <div className="flex flex-col gap-10 md:gap-14 lg:gap-20">
         {experiences.map((item, idx) => (
-          <div key={idx} className="flex flex-col" style={{ gap: "40px" }}>
+          <div key={idx} className="flex flex-col gap-6 md:gap-8 lg:gap-10">
             <ExperienceRow item={item} />
             {idx < experiences.length - 1 && (
               <div className="w-full h-[1px] bg-[#DAD8D3]" />
@@ -582,20 +691,20 @@ const aiBars = [
 
 const WorkflowBars = ({ title, titleColor, bars }) => (
   <div className="flex flex-col gap-4">
-    <p className="text-[11px] tracking-[0.15em] font-medium uppercase" style={{ fontFamily: "'Inter', sans-serif", color: titleColor }}>
+    <p className="text-[10px] md:text-[11px] tracking-[0.15em] font-medium uppercase" style={{ fontFamily: "'Inter', sans-serif", color: titleColor }}>
       {title}
     </p>
     <div className="flex flex-col gap-3">
       {bars.map((bar) => (
-        <div key={bar.label} className="flex items-center gap-4">
-          <p className="text-[13px] text-[#282725] w-[110px] shrink-0">{bar.label}</p>
+        <div key={bar.label} className="flex items-center gap-3 md:gap-4">
+          <p className="text-[11px] md:text-[13px] text-[#282725] w-[80px] md:w-[110px] shrink-0">{bar.label}</p>
           <div className="relative flex-1 h-[6px] bg-[#BDBDBD]/70 rounded-full overflow-hidden">
             <div
               className="absolute left-0 top-0 h-full rounded-full"
               style={{ width: bar.width, background: bar.filled ? "#FF6714" : "#8a8a8a" }}
             />
           </div>
-          <p className="text-[11px] text-[#5a5a5a] w-[42px] text-right shrink-0">{bar.value}</p>
+          <p className="text-[10px] md:text-[11px] text-[#5a5a5a] w-[38px] md:w-[42px] text-right shrink-0">{bar.value}</p>
         </div>
       ))}
     </div>
@@ -604,67 +713,81 @@ const WorkflowBars = ({ title, titleColor, bars }) => (
 
 const FlowStep = ({ label }) => (
   <div
-    className="inline-flex items-center justify-center text-[13px] text-[#282725]"
+    className="inline-flex items-center justify-center text-[11px] md:text-[13px] text-[#282725]"
     style={{
       background: "#F5F1E7",
       border: "0.75px solid #DAD8D3",
       borderRadius: "6px",
-      padding: "8px 16px",
+      padding: "6px 12px",
     }}
   >
     {label}
   </div>
 );
 
-const FlowArrow = () => <span className="text-[#8a8478] text-[14px] mx-2">→</span>;
+const FlowArrow = () => <span className="text-[#8a8478] text-[12px] md:text-[14px] mx-1.5 md:mx-2">→</span>;
 
 const AIWorkflowSection = () => (
-  <section
-    className="relative w-full"
-    style={{
-      background: "#F5F1E7",
-      borderTopLeftRadius: "100px",
-      borderTopRightRadius: "100px",
-      padding: "120px 40px 160px",
-    }}
-  >
-    <div className="mx-auto flex flex-col" style={{ maxWidth: "1400px", gap: "80px" }}>
-      <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-10">
+  <section className="relative w-full ai-workflow-wrapper">
+    <style>{`
+      .ai-workflow-wrapper {
+        background: #F5F1E7;
+        border-top-left-radius: 48px;
+        border-top-right-radius: 48px;
+        padding: 60px 20px 80px;
+      }
+      @media (min-width: 768px) {
+        .ai-workflow-wrapper {
+          border-top-left-radius: 70px;
+          border-top-right-radius: 70px;
+          padding: 90px 30px 110px;
+        }
+      }
+      @media (min-width: 1024px) {
+        .ai-workflow-wrapper {
+          border-top-left-radius: 100px;
+          border-top-right-radius: 100px;
+          padding: 120px 40px 160px;
+        }
+      }
+    `}</style>
+
+    <div className="mx-auto flex flex-col gap-10 md:gap-14 lg:gap-20 max-w-[1400px]">
+      <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 lg:gap-10">
         <div>
-          <p className="text-[#FF6714] tracking-[0.15em] mb-3 font-bold text-[11px] uppercase" style={{ fontFamily: "'Inter', sans-serif" }}>
+          <p className="text-[#FF6714] tracking-[0.15em] mb-3 font-bold text-[10px] md:text-[11px] uppercase" style={{ fontFamily: "'Inter', sans-serif" }}>
             AI-Enhanced Workflow
           </p>
-          <h2 className="text-[56px] leading-[1.1] text-[#111] font-medium max-w-[760px]" style={{ fontFamily: "'Inter', sans-serif" }}>
+          <h2 className="text-[32px] md:text-[42px] lg:text-[56px] leading-[1.1] text-[#111] font-medium max-w-[760px]" style={{ fontFamily: "'Inter', sans-serif" }}>
             AI is part of my workflow.
             <br />
             Not my decision maker.
           </h2>
         </div>
-        <p className="text-[13px] text-[#4a4a4a] max-w-[320px] leading-[1.6] md:pt-16">
+        <p className="text-[11px] md:text-[13px] text-[#4a4a4a] max-w-[320px] leading-[1.6] lg:pt-16">
           AI removes the friction from my process so the craft gets more of my
           attention, not less. Here&apos;s where it plugs in – and where the
           decisions stay human.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
         <div
           className="flex flex-col justify-center"
           style={{
             background: "#FAF9F5",
-            borderRadius: "24px",
+            borderRadius: "20px",
             border: "1px solid #DAD8D3",
-            padding: "48px 42px",
-            minHeight: "380px",
+            padding: "28px 24px",
           }}
         >
-          <p className="text-[15px] leading-[1.75] text-[#282725]">
+          <p className="text-[13px] md:text-[15px] leading-[1.75] text-[#282725]">
             I use AI to quickly move from an unclear idea to a structured
             starting point. It helps me explore flows, generate screen ideas,
             write first-pass copy, and identify missing states before I begin
             detailed design work.
           </p>
-          <div className="flex flex-wrap items-center mt-10">
+          <div className="flex flex-wrap items-center gap-y-2 mt-8 md:mt-10">
             <FlowStep label="Idea" />
             <FlowArrow />
             <FlowStep label="AI Draft" />
@@ -678,13 +801,12 @@ const AIWorkflowSection = () => (
         </div>
 
         <div
-          className="flex flex-col gap-10"
+          className="flex flex-col gap-8 md:gap-10"
           style={{
             background: "#FAF9F5",
-            borderRadius: "24px",
+            borderRadius: "20px",
             border: "1px solid #DAD8D3",
-            padding: "48px 42px",
-            minHeight: "380px",
+            padding: "28px 24px",
           }}
         >
           <WorkflowBars
@@ -693,7 +815,7 @@ const AIWorkflowSection = () => (
             bars={traditionalBars}
           />
           <WorkflowBars title="Time taken with AI" titleColor="#FF6714" bars={aiBars} />
-          <p className="text-[13px] leading-[1.6] text-[#FF6714]">
+          <p className="text-[11px] md:text-[13px] leading-[1.6] text-[#FF6714]">
             AI reduced the overall design workflow time by around{" "}
             <strong>65–70%</strong>, helping me move faster from research to
             refined design.
@@ -730,10 +852,10 @@ const experiments = [
 ];
 
 const ExperimentMockup = ({ variant }) => (
-  <div className="relative w-full h-[150px] rounded-lg overflow-hidden bg-[#EFEAE0] flex items-center justify-center">
+  <div className="relative w-full h-[130px] md:h-[150px] rounded-lg overflow-hidden bg-[#EFEAE0] flex items-center justify-center">
     {variant === "claude" && (
       <div className="relative w-[80%]">
-        <div className="w-full h-[90px] bg-[#DAD5C8] rounded-md border border-[#c8c2b3] relative">
+        <div className="w-full h-[80px] md:h-[90px] bg-[#DAD5C8] rounded-md border border-[#c8c2b3] relative">
           <div className="absolute inset-2 bg-white rounded-sm flex flex-col gap-1 p-2">
             <div className="w-[40%] h-1.5 bg-[#d0d0d0] rounded-full" />
             <div className="w-[70%] h-1.5 bg-[#d0d0d0] rounded-full" />
@@ -750,32 +872,32 @@ const ExperimentMockup = ({ variant }) => (
     {variant === "stitch" && (
       <div className="w-[90%] flex flex-col gap-2">
         <div className="flex gap-2">
-          <div className="flex-1 h-[46px] bg-white rounded-md border border-[#e0ddd3] flex items-center justify-center text-[10px] text-[#999]">▣</div>
-          <div className="flex-1 h-[46px] bg-white rounded-md border border-[#e0ddd3] flex items-center justify-center">
+          <div className="flex-1 h-[40px] md:h-[46px] bg-white rounded-md border border-[#e0ddd3] flex items-center justify-center text-[10px] text-[#999]">▣</div>
+          <div className="flex-1 h-[40px] md:h-[46px] bg-white rounded-md border border-[#e0ddd3] flex items-center justify-center">
             <div className="w-[70%] h-2 bg-[#d0d0d0] rounded-full" />
           </div>
-          <div className="flex-1 h-[46px] bg-white rounded-md border border-[#e0ddd3] flex flex-col gap-1 p-1.5">
+          <div className="flex-1 h-[40px] md:h-[46px] bg-white rounded-md border border-[#e0ddd3] flex flex-col gap-1 p-1.5">
             <div className="w-[80%] h-1.5 bg-[#d0d0d0] rounded-full" />
             <div className="w-[60%] h-1.5 bg-[#d0d0d0] rounded-full" />
           </div>
         </div>
         <div className="flex gap-2">
-          <div className="flex-1 h-[40px] bg-white rounded-md border border-[#e0ddd3]" />
-          <div className="flex-1 h-[40px] bg-white rounded-md border border-[#e0ddd3]" />
+          <div className="flex-1 h-[35px] md:h-[40px] bg-white rounded-md border border-[#e0ddd3]" />
+          <div className="flex-1 h-[35px] md:h-[40px] bg-white rounded-md border border-[#e0ddd3]" />
         </div>
       </div>
     )}
 
     {variant === "majestic" && (
-      <div className="w-[90%] h-[120px] rounded-md overflow-hidden relative bg-gradient-to-br from-[#5B7B9A] via-[#3E5772] to-[#2A3B4F]">
+      <div className="w-[90%] h-[100px] md:h-[120px] rounded-md overflow-hidden relative bg-gradient-to-br from-[#5B7B9A] via-[#3E5772] to-[#2A3B4F]">
         <div className="absolute top-2 left-2 right-2 flex gap-1">
           <div className="w-[30%] h-1.5 bg-white/30 rounded-full" />
         </div>
         <div className="absolute bottom-2 left-2 right-2 flex gap-1.5">
-          <div className="w-[22%] h-[34px] bg-white/90 rounded-sm" />
-          <div className="w-[22%] h-[34px] bg-white/90 rounded-sm" />
-          <div className="w-[22%] h-[34px] bg-white/90 rounded-sm" />
-          <div className="w-[22%] h-[34px] bg-white/90 rounded-sm" />
+          <div className="w-[22%] h-[28px] md:h-[34px] bg-white/90 rounded-sm" />
+          <div className="w-[22%] h-[28px] md:h-[34px] bg-white/90 rounded-sm" />
+          <div className="w-[22%] h-[28px] md:h-[34px] bg-white/90 rounded-sm" />
+          <div className="w-[22%] h-[28px] md:h-[34px] bg-white/90 rounded-sm" />
         </div>
       </div>
     )}
@@ -783,23 +905,26 @@ const ExperimentMockup = ({ variant }) => (
 );
 
 const ExperimentCard = ({ item }) => (
-  <div
-    className="flex flex-col"
-    style={{
-      background: "#FAF9F5",
-      borderRadius: "16px",
-      border: "1px solid #DAD8D3",
-      padding: "20px",
-      gap: "16px",
-    }}
-  >
+  <div className="flex flex-col experiment-card">
+    <style>{`
+      .experiment-card {
+        background: #FAF9F5;
+        border-radius: 16px;
+        border: 1px solid #DAD8D3;
+        padding: 16px;
+        gap: 14px;
+      }
+      @media (min-width: 768px) {
+        .experiment-card { padding: 20px; gap: 16px; }
+      }
+    `}</style>
     <ExperimentMockup variant={item.image} />
     <div className="flex flex-col gap-2">
-      <h3 className="text-[15px] font-semibold text-[#111]" style={{ fontFamily: "'Inter', sans-serif" }}>
+      <h3 className="text-[14px] md:text-[15px] font-semibold text-[#111]" style={{ fontFamily: "'Inter', sans-serif" }}>
         {item.title}
       </h3>
-      <p className="text-[11.5px] leading-[1.6] text-[#5a5a5a]">{item.desc}</p>
-      <p className="text-[10px] tracking-[0.15em] uppercase text-[#8a8478] mt-1">
+      <p className="text-[11px] md:text-[11.5px] leading-[1.6] text-[#5a5a5a]">{item.desc}</p>
+      <p className="text-[9px] md:text-[10px] tracking-[0.15em] uppercase text-[#8a8478] mt-1">
         {item.tag}
       </p>
     </div>
@@ -807,40 +932,38 @@ const ExperimentCard = ({ item }) => (
 );
 
 const ProfileCard = () => (
-  <div
-    className="relative w-full flex flex-col md:flex-row items-center md:items-stretch"
-    style={{
-      background: "#FAF9F5",
-      borderRadius: "24px",
-      border: "3px solid #2E4A3B",
-      padding: "40px",
-      gap: "40px",
-      maxWidth: "1230px",
-      margin: "0 auto",
-    }}
-  >
-    {/* Left — profile info */}
-    <div className="flex flex-col items-start" style={{ width: "45%" }}>
-      <p className="text-[#C4552E] text-[28px] leading-none" style={{ fontFamily: "'Caveat', cursive" }}>
+  <div className="relative w-full flex flex-col md:flex-row items-center md:items-stretch profile-card">
+    <style>{`
+      .profile-card {
+        background: #FAF9F5;
+        border-radius: 24px;
+        border: 3px solid #2E4A3B;
+        padding: 24px;
+        gap: 30px;
+        max-width: 1230px;
+        margin: 0 auto;
+      }
+      @media (min-width: 768px) {
+        .profile-card { padding: 40px; gap: 40px; }
+      }
+    `}</style>
+
+    <div className="flex flex-col items-center md:items-start w-full md:w-[45%]">
+      <p className="text-[#C4552E] text-[24px] md:text-[28px] leading-none" style={{ fontFamily: "'Caveat', cursive" }}>
         Maitri Shah
       </p>
-      <div className="flex items-center gap-3 mt-2 mb-6">
-        <p className="text-[12px] text-[#4a4a4a]">UX/UI Designer</p>
+      <div className="flex items-center gap-3 mt-2 mb-5 md:mb-6">
+        <p className="text-[11px] md:text-[12px] text-[#4a4a4a]">UX/UI Designer</p>
         <span
-          className="text-[11px] text-[#C4552E] px-2.5 py-0.5 rounded-full"
+          className="text-[10px] md:text-[11px] text-[#C4552E] px-2.5 py-0.5 rounded-full"
           style={{ border: "1.5px solid #C4552E", fontFamily: "'Caveat', cursive" }}
         >
           2+ Years
         </span>
       </div>
 
-      {/* Maitri photo — actual jpg */}
-      <div className="relative w-[240px] h-[300px] rounded-lg overflow-hidden" style={{ background: "#E8E2D5" }}>
-        <img
-          src="/maitri.jpg"
-          alt="Maitri Shah"
-          className="w-full h-full object-cover"
-        />
+      <div className="relative w-[200px] md:w-[240px] h-[250px] md:h-[300px] rounded-lg overflow-hidden" style={{ background: "#E8E2D5" }}>
+        <img src="/maitri.jpg" alt="Maitri Shah" className="w-full h-full object-cover" />
         <div
           className="absolute bottom-3 right-3 text-white text-[10px] px-2.5 py-1 rounded"
           style={{ background: "#E5592E" }}
@@ -850,28 +973,25 @@ const ProfileCard = () => (
       </div>
     </div>
 
-    {/* Right — grid of assets + text */}
-    <div className="flex-1 flex flex-col gap-5">
-      {/* Top row: Sunflower + Dance */}
-      <div className="grid grid-cols-2 gap-5">
+    <div className="flex-1 flex flex-col gap-4 md:gap-5 w-full">
+      <div className="grid grid-cols-2 gap-4 md:gap-5">
         <div className="flex flex-col items-center gap-1">
-          <div className="w-[80px] h-[80px] flex items-center justify-center text-[50px]">🌻</div>
-          <p className="text-[10px] text-[#5a5a5a]">Sunflower.png</p>
+          <div className="w-[60px] md:w-[80px] h-[60px] md:h-[80px] flex items-center justify-center text-[40px] md:text-[50px]">🌻</div>
+          <p className="text-[9px] md:text-[10px] text-[#5a5a5a]">Sunflower.png</p>
         </div>
         <div className="flex flex-col items-center gap-1">
-          <div className="w-[80px] h-[80px] flex items-center justify-center text-[50px]">🦋</div>
-          <p className="text-[10px] text-[#5a5a5a]">Danceofmoon.png</p>
+          <div className="w-[60px] md:w-[80px] h-[60px] md:h-[80px] flex items-center justify-center text-[40px] md:text-[50px]">🦋</div>
+          <p className="text-[9px] md:text-[10px] text-[#5a5a5a]">Danceofmoon.png</p>
         </div>
       </div>
 
-      {/* Text box */}
-      <div className="flex items-start gap-3 p-4 rounded-lg" style={{ background: "#FFFFFF", border: "1px solid #E5E1D6" }}>
+      <div className="flex items-start gap-3 p-3 md:p-4 rounded-lg" style={{ background: "#FFFFFF", border: "1px solid #E5E1D6" }}>
         <div className="flex gap-0.5 mt-1">
           <span className="w-1.5 h-1.5 rounded-full bg-[#C4552E]" />
           <span className="w-1.5 h-1.5 rounded-full bg-[#F2C94C]" />
           <span className="w-1.5 h-1.5 rounded-full bg-[#6FA8BF]" />
         </div>
-        <p className="text-[12px] leading-[1.7] text-[#3a3a3a]">
+        <p className="text-[11px] md:text-[12px] leading-[1.7] text-[#3a3a3a]">
           I use AI to quickly move from an unclear idea to a structured starting
           point. It helps me explore flows, generate screen ideas, write
           first-pass copy, and identify missing states before I begin detailed
@@ -879,15 +999,14 @@ const ProfileCard = () => (
         </p>
       </div>
 
-      {/* Bottom row: Tools + Beach */}
-      <div className="grid grid-cols-2 gap-5">
+      <div className="grid grid-cols-2 gap-4 md:gap-5">
         <div className="flex flex-col items-center gap-1">
-          <div className="w-[80px] h-[80px] flex items-center justify-center text-[50px]">🌀</div>
-          <p className="text-[10px] text-[#5a5a5a]">ToolsCover.png</p>
+          <div className="w-[60px] md:w-[80px] h-[60px] md:h-[80px] flex items-center justify-center text-[40px] md:text-[50px]">🌀</div>
+          <p className="text-[9px] md:text-[10px] text-[#5a5a5a]">ToolsCover.png</p>
         </div>
         <div className="flex flex-col items-center gap-1">
-          <div className="w-[80px] h-[80px] flex items-center justify-center text-[50px]">🏖️</div>
-          <p className="text-[10px] text-[#5a5a5a]">BeachCover.png</p>
+          <div className="w-[60px] md:w-[80px] h-[60px] md:h-[80px] flex items-center justify-center text-[40px] md:text-[50px]">🏖️</div>
+          <p className="text-[9px] md:text-[10px] text-[#5a5a5a]">BeachCover.png</p>
         </div>
       </div>
     </div>
@@ -895,41 +1014,160 @@ const ProfileCard = () => (
 );
 
 const AIExperimentsSection = () => (
-  <section
-    className="relative w-full"
-    style={{
-      background: "#FFFDF8",
-      borderTopLeftRadius: "100px",
-      borderTopRightRadius: "100px",
-      padding: "120px 40px 160px",
-    }}
-  >
-    <div className="mx-auto flex flex-col" style={{ maxWidth: "1400px", gap: "100px" }}>
-      <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8">
+  <section className="relative w-full ai-experiments-wrapper">
+    <style>{`
+      .ai-experiments-wrapper {
+        background: #FFFDF8;
+        border-top-left-radius: 48px;
+        border-top-right-radius: 48px;
+        padding: 60px 20px 80px;
+      }
+      @media (min-width: 768px) {
+        .ai-experiments-wrapper {
+          border-top-left-radius: 70px;
+          border-top-right-radius: 70px;
+          padding: 90px 30px 110px;
+        }
+      }
+      @media (min-width: 1024px) {
+        .ai-experiments-wrapper {
+          border-top-left-radius: 100px;
+          border-top-right-radius: 100px;
+          padding: 120px 40px 160px;
+        }
+      }
+    `}</style>
+
+    <div className="mx-auto flex flex-col gap-12 md:gap-16 lg:gap-24 max-w-[1400px]">
+      <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 lg:gap-8">
         <div>
-          <p className="text-[#FF6714] tracking-[0.15em] mb-3 font-bold text-[11px] uppercase" style={{ fontFamily: "'Inter', sans-serif" }}>
+          <p className="text-[#FF6714] tracking-[0.15em] mb-3 font-bold text-[10px] md:text-[11px] uppercase" style={{ fontFamily: "'Inter', sans-serif" }}>
             AI Experiments
           </p>
-          <h2 className="text-[56px] leading-[1.1] text-[#111] font-medium max-w-[600px]" style={{ fontFamily: "'Inter', sans-serif" }}>
+          <h2 className="text-[32px] md:text-[42px] lg:text-[56px] leading-[1.1] text-[#111] font-medium max-w-[600px]" style={{ fontFamily: "'Inter', sans-serif" }}>
             AI-Powered Design
             <br />
             Experiments
           </h2>
         </div>
-        <p className="text-[13px] text-[#4a4a4a] max-w-[340px] leading-[1.6] md:pt-16">
+        <p className="text-[11px] md:text-[13px] text-[#4a4a4a] max-w-[340px] leading-[1.6] lg:pt-16">
           A collection of AI-led explorations where I used Claude and Google
           Stitch to build landing page concepts, and Majestic AI with ChatGPT to
           create images, videos, and visual assets.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
         {experiments.map((item) => (
           <ExperimentCard key={item.title} item={item} />
         ))}
       </div>
 
       <ProfileCard />
+    </div>
+  </section>
+);
+
+// ============================================================
+// CONTACT / CTA SECTION
+// ============================================================
+
+const orbitCards = [
+  { top: "6%", left: "28%", rotate: -14 },
+  { top: "2%", left: "39%", rotate: -6 },
+  { top: "2%", left: "50%", rotate: 4 },
+  { top: "6%", left: "61%", rotate: 12 },
+  { top: "22%", left: "10%", rotate: -22 },
+  { top: "22%", left: "79%", rotate: 20 },
+  { top: "48%", left: "4%", rotate: -28 },
+  { top: "48%", left: "85%", rotate: 26 },
+  { top: "72%", left: "2%", rotate: -24 },
+  { top: "72%", left: "87%", rotate: 24 },
+];
+
+const OrbitCard = ({ style, rotate }) => (
+  <div
+    className="absolute overflow-hidden w-[70px] h-[85px] md:w-[100px] md:h-[120px] lg:w-[140px] lg:h-[170px]"
+    style={{
+      transform: `rotate(${rotate}deg)`,
+      borderRadius: "8px",
+      background: "#E8E2D5",
+      boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
+      ...style,
+    }}
+  >
+    <div className="w-full h-full flex items-center justify-center text-[30px] md:text-[40px] lg:text-[54px]">
+      🖼️
+    </div>
+  </div>
+);
+
+const SocialIcon = ({ label }) => (
+  <a
+    href="#"
+    className="w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center text-[#C4552E] text-[12px] md:text-[13px] font-semibold transition-transform hover:scale-110"
+    style={{ background: "#F0DCCB" }}
+  >
+    {label}
+  </a>
+);
+
+const ContactSection = () => (
+  <section className="relative w-full overflow-hidden contact-wrapper">
+    <style>{`
+      .contact-wrapper {
+        background: #F5F1E7;
+        border-top-left-radius: 48px;
+        border-top-right-radius: 48px;
+        padding: 60px 20px 80px;
+      }
+      @media (min-width: 768px) {
+        .contact-wrapper {
+          border-top-left-radius: 70px;
+          border-top-right-radius: 70px;
+          padding: 80px 30px 100px;
+        }
+      }
+      @media (min-width: 1024px) {
+        .contact-wrapper {
+          border-top-left-radius: 100px;
+          border-top-right-radius: 100px;
+          padding: 80px 40px 100px;
+          min-height: 1000px;
+        }
+      }
+    `}</style>
+
+    <div className="relative mx-auto h-[500px] md:h-[600px] lg:h-[700px] max-w-[1400px]">
+      {orbitCards.map((c, i) => (
+        <OrbitCard key={i} style={{ top: c.top, left: c.left }} rotate={c.rotate} />
+      ))}
+
+      <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+        <p className="text-[#E5592E] text-[20px] md:text-[24px] lg:text-[26px] mb-3 md:mb-4" style={{ fontFamily: "'Caveat', cursive" }}>
+          Let&apos;s make something useful
+        </p>
+
+        <h2 className="text-[34px] md:text-[46px] lg:text-[60px] leading-[1.1] text-[#111] font-medium max-w-[820px]" style={{ fontFamily: "'Inter', sans-serif" }}>
+          Have a thoughtful product
+          <br />
+          problem to solve?
+        </h2>
+
+        <div className="flex items-center gap-3 md:gap-4 mt-6 md:mt-10">
+          <SocialIcon label="in" />
+          <SocialIcon label="Bē" />
+          <SocialIcon label="M" />
+        </div>
+
+        <a
+          href="#"
+          className="mt-6 md:mt-10 inline-flex items-center gap-2 text-white text-[12px] md:text-[13px] px-5 md:px-6 py-2.5 md:py-3 rounded-full hover:opacity-90 transition-opacity"
+          style={{ background: "#282725" }}
+        >
+          Add your email <span>↗</span>
+        </a>
+      </div>
     </div>
   </section>
 );
@@ -979,6 +1217,7 @@ function App() {
       <ExperienceSection />
       <AIWorkflowSection />
       <AIExperimentsSection />
+      <ContactSection />
 
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Caveat:wght@500;600&family=DM+Sans:wght@400;500;700&display=swap');
