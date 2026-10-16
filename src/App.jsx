@@ -526,7 +526,7 @@ const Frame2 = () => (
 );
 
 // ============================================================
-// PROBLEMS SECTION — Typography exact Figma match
+// PROBLEMS SECTION
 // ============================================================
 
 const problems = [
@@ -553,39 +553,19 @@ const problems = [
   },
 ];
 
-const BrowserMockup = () => (
-  <div
-    className="relative shrink-0 w-full max-w-[780px]"
+// Card image — no wrapper, no border, only rotate
+const CardImage = () => (
+  <img
+    src="/card.png"
+    alt="Case study preview"
     style={{
-      aspectRatio: "780 / 412",
+      display: "block",
+      width: "100%",
+      height: "auto",
       transform: "rotate(-2deg)",
-      background: "#FAF9F5",
-      borderRadius: "18.98px",
-      border: "5.2px solid #282725",
-      boxShadow: "0px 29.65px 59.31px 0px #2A251B40",
-      overflow: "hidden",
+      objectFit: "contain",
     }}
-  >
-    <div className="flex items-center gap-2 px-4 md:px-5 pt-3 md:pt-4 pb-2 md:pb-3">
-      <span className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-[#e0e0e0]" />
-      <span className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-[#e0e0e0]" />
-      <span className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-[#e0e0e0]" />
-    </div>
-    <div className="mx-3 md:mx-5 h-[30px] md:h-[42px] bg-[#282725] rounded-md flex items-center px-3 md:px-4">
-      <div className="w-[80px] md:w-[120px] h-1.5 md:h-2 bg-white/20 rounded-full" />
-      <div className="ml-auto w-2.5 h-2.5 md:w-3 md:h-3 bg-white/30 rounded-full" />
-    </div>
-    <div className="px-3 md:px-5 mt-3 md:mt-5">
-      <div className="w-[60%] h-2 md:h-2.5 bg-[#e0e0e0] rounded-full mb-1.5 md:mb-2" />
-      <div className="w-[80%] h-2 md:h-2.5 bg-[#e0e0e0] rounded-full mb-4 md:mb-6" />
-      <div className="flex items-end gap-2 md:gap-4 h-[70px] md:h-[120px]">
-        <div className="w-[15%] h-[50%] bg-[#E5592E] rounded-sm" />
-        <div className="w-[15%] h-[50%] bg-[#E5592E] rounded-sm" />
-        <div className="w-[15%] h-[75%] bg-[#E5592E] rounded-sm" />
-        <div className="w-[15%] h-[50%] bg-[#E5592E] rounded-sm" />
-      </div>
-    </div>
-  </div>
+  />
 );
 
 const ProblemCard = ({ item }) => (
@@ -595,10 +575,12 @@ const ProblemCard = ({ item }) => (
       maxWidth: "1400px",
       background: item.bg,
       border: "1.19px solid rgba(0,0,0,0.06)",
+      overflow: "hidden",
     }}
   >
-    <div className="flex-1 min-w-0 lg:min-w-[280px] max-w-full lg:max-w-[480px]">
-      {/* 01 — Caveat 400, 30px, lh 42.7px */}
+    {/* Left content */}
+    <div className="flex-1 min-w-0 lg:min-w-[280px] max-w-full lg:max-w-[480px] px-6 md:px-8 lg:px-10 py-6 md:py-8 lg:py-10">
+      {/* 01 */}
       <p
         className="text-[#C4552E] mb-1"
         style={{
@@ -612,7 +594,7 @@ const ProblemCard = ({ item }) => (
         {item.id}
       </p>
 
-      {/* TAG — DM Sans 700, 14px, lh 21.35px, ls 1.42px, uppercase */}
+      {/* TAG */}
       <p
         className="text-[#5a5a5a] mb-4 md:mb-5"
         style={{
@@ -627,7 +609,7 @@ const ProblemCard = ({ item }) => (
         {item.tag}
       </p>
 
-      {/* TITLE — Libre Franklin 400, 52px, lh 56.04px, ls -2.4px */}
+      {/* TITLE */}
       <h3
         className="text-[#111] mb-4 md:mb-5"
         style={{
@@ -641,7 +623,7 @@ const ProblemCard = ({ item }) => (
         {item.title}
       </h3>
 
-      {/* DESC — DM Sans 400, 18px, lh 31.31px */}
+      {/* DESC */}
       <p
         className="text-[#4a4a4a] mb-5 md:mb-6"
         style={{
@@ -696,8 +678,9 @@ const ProblemCard = ({ item }) => (
       </div>
     </div>
 
-    <div className="flex-1 flex justify-center items-center w-full overflow-hidden">
-      <BrowserMockup />
+    {/* Right — image flush right, no padding, no wrapper */}
+    <div className="flex-1 w-full flex justify-end items-center -mr-10 lg:-mr-16">
+      <CardImage />
     </div>
   </div>
 );
@@ -715,7 +698,7 @@ const ProblemsSection = () => (
       }
       .problem-card {
         border-radius: 24px;
-        padding: 32px 24px;
+        padding: 0;
       }
       @media (min-width: 768px) {
         .problems-section-wrapper {
@@ -726,7 +709,7 @@ const ProblemsSection = () => (
         }
         .problem-card {
           border-radius: 26px;
-          padding: 45px 35px;
+          padding: 0;
         }
       }
       @media (min-width: 1024px) {
@@ -738,7 +721,7 @@ const ProblemsSection = () => (
         }
         .problem-card {
           border-radius: 30.84px;
-          padding: 60px 50px;
+          padding: 0;
           min-height: 557px;
         }
       }
@@ -747,7 +730,6 @@ const ProblemsSection = () => (
     <div className="max-w-[1400px] mx-auto">
       <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 md:gap-6 mb-10 md:mb-14">
         <div>
-          {/* SELECTED WORK — DM Sans 700, 14px, lh 20.53px, ls 1.92px, uppercase, #FF6714 */}
           <p
             className="mb-3"
             style={{
@@ -777,7 +759,6 @@ const ProblemsSection = () => (
           </h2>
         </div>
 
-        {/* RIGHT TEXT — DM Sans 400, 18px, lh 31.03px, color #716F6B */}
         <p
           className="max-w-[340px] lg:pt-14"
           style={{
