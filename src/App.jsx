@@ -21,7 +21,7 @@ const NavBar = () => {
     { id: "hero", label: "MS" },
     { id: "problems", label: "Profile" },
     { id: "experience", label: "Case studies" },
-    { id: "ai-experiments", label: "Résumé" },
+    { id: "ai-experiments", label: "Resume" },
   ];
 
   const handleScroll = (id) => {
@@ -71,7 +71,6 @@ const Item = ({ style, children, className = "" }) => (
 // FRAME 1
 // ============================================================
 
-// ---------- FRAME 1 MOBILE ----------
 const Frame1Mobile = () => (
   <div className="absolute inset-0 flex flex-col items-center justify-center px-6 pt-20 pb-16 gap-5">
     <div className="text-center">
@@ -103,7 +102,7 @@ const Frame1Mobile = () => (
     </h3>
 
     <div className="flex items-center justify-center gap-4">
-      <img src="/design-notepad.png" alt="Design" className="w-[40px] h-auto rotate-[-4deg] shadow-md" />
+      <img src="/design-notepad.png" alt="Design" className="w-[40px] h-auto rotate-[-4deg]" />
       <img src="/icons.svg" alt="Icons" className="w-[55px] h-auto" />
       <img src="/coffe.png" alt="Coffee" className="w-[40px] h-auto" />
     </div>
@@ -139,7 +138,6 @@ const Frame1Mobile = () => (
   </div>
 );
 
-// ---------- FRAME 1 DESKTOP ----------
 const Frame1Desktop = () => (
   <div className="absolute inset-0 hidden lg:block">
     <Item style={{ top: "22%", left: "9%" }} className="text-left">
@@ -161,7 +159,7 @@ const Frame1Desktop = () => (
     </Item>
 
     <Item style={{ top: "18%", left: "61%" }}>
-      <img src="/design-notepad.png" alt="Design notepad" className="w-[90px] h-auto rotate-[-4deg] shadow-md" />
+      <img src="/design-notepad.png" alt="Design notepad" className="w-[90px] h-auto rotate-[-4deg] " />
     </Item>
 
     <Item style={{ top: "20%", left: "76%" }}>
@@ -249,7 +247,6 @@ const Frame1 = () => (
 // FRAME 2
 // ============================================================
 
-// ---------- FRAME 2 MOBILE ----------
 const Frame2Mobile = () => (
   <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 pt-20 pb-16 gap-4">
     <div className="flex items-center justify-center gap-5 mb-2">
@@ -291,7 +288,6 @@ const Frame2Mobile = () => (
   </div>
 );
 
-// ---------- FRAME 2 DESKTOP ----------
 const Frame2Desktop = () => (
   <div className="absolute inset-0 hidden lg:block">
     <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
@@ -347,7 +343,7 @@ const Frame2Desktop = () => (
     </Item>
 
     <Item style={{ top: "18%", left: "80%" }}>
-      <img src="/design-notepad.png" alt="Design" className="w-[80px] h-auto rotate-[4deg] shadow-md" />
+      <img src="/design-notepad.png" alt="Design" className="w-[80px] h-auto rotate-[4deg] " />
     </Item>
     <Item style={{ top: "14%", left: "92%" }}>
       <img src="/coffe.png" alt="Coffee" className="w-[60px] h-auto" />
@@ -540,14 +536,13 @@ const ProblemsSection = () => (
 );
 
 // ============================================================
-// EXPERIENCE SECTION — Actual PNG tool icons
+// EXPERIENCE SECTION
 // ============================================================
 
-// Map tool name to actual image file in public/
 const toolImageMap = {
   figma: "/figma.png",
-  framer: "/M.png",   // M-something tool logo
-  figjam: "/figma.png", // Fallback — figma image
+  framer: "/M.png",
+  figjam: "/figma.png",
   m: "/M.png",
   xd: "/xd.png",
   ai: "/Ai.png",
@@ -806,7 +801,7 @@ const AIWorkflowSection = () => (
 );
 
 // ============================================================
-// AI-POWERED EXPERIMENTS SECTION — Actual PNG mockups
+// AI-POWERED EXPERIMENTS SECTION
 // ============================================================
 
 const experiments = [
@@ -831,7 +826,7 @@ const experiments = [
 ];
 
 const ExperimentCard = ({ item }) => (
-  <div className="flex flex-col experiment-card">
+  <div className="flex flex-col experiment-card h-full">
     <style>{`
       .experiment-card {
         background: #FAF9F5;
@@ -839,27 +834,34 @@ const ExperimentCard = ({ item }) => (
         border: 1px solid #DAD8D3;
         padding: 16px;
         gap: 14px;
+        height: 100%;
+      }
+      /* No background wrapper — image directly */
+      .experiment-card img.experiment-img {
+        display: block;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        border-radius: 10px;
       }
       @media (min-width: 768px) {
         .experiment-card { padding: 20px; gap: 16px; }
       }
     `}</style>
 
-    {/* Actual mockup image */}
-    <div className="relative w-full h-[130px] md:h-[150px] rounded-lg overflow-hidden bg-[#EFEAE0] flex items-center justify-center">
-      <img
-        src={item.image}
-        alt={item.title}
-        className="w-full h-full object-cover"
-      />
-    </div>
+    {/* Image directly — no wrapper background */}
+    <img
+      src={item.image}
+      alt={item.title}
+      className="experiment-img"
+    />
 
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 flex-1">
       <h3 className="text-[14px] md:text-[15px] font-semibold text-[#111]" style={{ fontFamily: "'Inter', sans-serif" }}>
         {item.title}
       </h3>
       <p className="text-[11px] md:text-[11.5px] leading-[1.6] text-[#5a5a5a]">{item.desc}</p>
-      <p className="text-[9px] md:text-[10px] tracking-[0.15em] uppercase text-[#8a8478] mt-1">
+      <p className="text-[9px] md:text-[10px] tracking-[0.15em] uppercase text-[#8a8478] mt-auto pt-2">
         {item.tag}
       </p>
     </div>
@@ -867,10 +869,9 @@ const ExperimentCard = ({ item }) => (
 );
 
 // ============================================================
-// PROFILE CARD — Actual PNG assets
+// PROFILE CARD
 // ============================================================
 
-// Profile card asset grid (4 images)
 const profileAssets = [
   { src: "/sunflower.png", label: "Sunflower.png" },
   { src: "/dance-lover.png", label: "Danceofmoon.png" },
@@ -930,13 +931,11 @@ const ProfileCard = () => (
     </div>
 
     <div className="flex-1 flex flex-col gap-4 md:gap-5 w-full">
-      {/* Top row: 2 assets */}
       <div className="grid grid-cols-2 gap-4 md:gap-5">
         <ProfileAsset src={profileAssets[0].src} label={profileAssets[0].label} />
         <ProfileAsset src={profileAssets[1].src} label={profileAssets[1].label} />
       </div>
 
-      {/* Text box */}
       <div className="flex items-start gap-3 p-3 md:p-4 rounded-lg" style={{ background: "#FFFFFF", border: "1px solid #E5E1D6" }}>
         <div className="flex gap-0.5 mt-1">
           <span className="w-1.5 h-1.5 rounded-full bg-[#C4552E]" />
@@ -951,7 +950,6 @@ const ProfileCard = () => (
         </p>
       </div>
 
-      {/* Bottom row: 2 assets */}
       <div className="grid grid-cols-2 gap-4 md:gap-5">
         <ProfileAsset src={profileAssets[2].src} label={profileAssets[2].label} />
         <ProfileAsset src={profileAssets[3].src} label={profileAssets[3].label} />
@@ -1004,7 +1002,7 @@ const AIExperimentsSection = () => (
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 items-stretch">
         {experiments.map((item) => (
           <ExperimentCard key={item.title} item={item} />
         ))}
