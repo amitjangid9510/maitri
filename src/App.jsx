@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // ============================================================
 // REUSABLE PIECES
@@ -15,7 +15,7 @@ const GridBackground = () => (
   />
 );
 
-// ---------- NAVBAR with DM Sans typography + smooth scroll ----------
+// ---------- NAVBAR with Scroll Spy + smooth scroll ----------
 const NavBar = () => {
   const navItems = [
     { id: "hero", label: "MS" },
@@ -24,6 +24,8 @@ const NavBar = () => {
     { id: "ai-experiments", label: "Resume" },
   ];
 
+  const [activeId, setActiveId] = useState("hero");
+
   const handleScroll = (id) => {
     const el = document.getElementById(id);
     if (el) {
@@ -31,27 +33,57 @@ const NavBar = () => {
     }
   };
 
+  // Scroll spy — detect which section is currently in viewport
+  useEffect(() => {
+    const sectionIds = navItems.map((item) => item.id);
+
+    const handleScrollSpy = () => {
+      // Trigger point: 30% down from top of viewport
+      const triggerLine = window.innerHeight * 0.3;
+
+      let current = sectionIds[0];
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
+        // If section's top is above trigger line, it's the current one
+        if (rect.top <= triggerLine) {
+          current = id;
+        }
+      }
+      setActiveId(current);
+    };
+
+    window.addEventListener("scroll", handleScrollSpy, { passive: true });
+    handleScrollSpy(); // Initial check
+
+    return () => window.removeEventListener("scroll", handleScrollSpy);
+  }, []);
+
   return (
     <div className="fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] md:w-auto max-w-[420px]">
-      <div className="flex items-center justify-center md:justify-start gap-0.5 md:gap-1 bg-white rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.06)] px-1.5 md:px-2 py-1 md:py-1.5">
-        {navItems.map((item, i) => (
-          <button
-            key={item.id}
-            onClick={() => handleScroll(item.id)}
-            className={`px-2.5 md:px-4 py-1 md:py-1.5 text-[12px] md:text-[14px] rounded-full transition-colors whitespace-nowrap text-center ${
-              i === 0
-                ? "bg-[#111] text-white font-bold"
-                : "text-[#444] hover:bg-[#f2f2f2] font-normal"
-            }`}
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              lineHeight: "21px",
-              letterSpacing: "0px",
-            }}
-          >
-            {item.label}
-          </button>
-        ))}
+      <div className="flex items-center justify-center md:justify-start gap-0.5 md:gap-1 bg-[#FAF7EFEB] rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.06)] px-1.5 md:px-2 py-1 md:py-1.5">
+        {navItems.map((item) => {
+          const isActive = activeId === item.id;
+          return (
+            <button
+              key={item.id}
+              onClick={() => handleScroll(item.id)}
+              className={`px-2.5 md:px-4 py-1 md:py-1.5 text-[12px] md:text-[14px] rounded-full transition-all duration-300 whitespace-nowrap text-center ${
+                isActive
+                  ? "bg-white text-black font-bold shadow-sm"
+                  : "text-[#444] hover:bg-[#f2f2f2] font-normal"
+              }`}
+              style={{
+                fontFamily: "'DM Sans', sans-serif",
+                lineHeight: "21px",
+                letterSpacing: "0px",
+              }}
+            >
+              {item.label}
+            </button>
+          );
+        })}
       </div>
     </div>
   );
@@ -185,7 +217,6 @@ const Frame1Mobile = () => (
 
 const Frame1Desktop = () => (
   <div className="absolute inset-0 hidden lg:block">
-    {/* Maitri Shah block — exact Figma typography */}
     <Item style={{ top: "20.5%", left: "13.5%" }} className="text-left">
       <p
         className="text-[#C4552E] leading-none"
@@ -225,7 +256,6 @@ const Frame1Desktop = () => (
       </p>
     </Item>
 
-    {/* THE WORLD IS / FULL OF */}
     <Item style={{ top: "22%", left: "34%" }}>
       <h2
         className="text-[34px] text-[#111] uppercase"
