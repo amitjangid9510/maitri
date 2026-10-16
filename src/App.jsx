@@ -55,10 +55,7 @@ const Item = ({ style, children, className = "" }) => (
 const Frame1 = () => (
   <div className="absolute inset-0">
     <Item style={{ top: "22%", left: "9%" }} className="text-left">
-      <p
-        className="text-[#C4552E] text-[26px] leading-none"
-        style={{ fontFamily: "'Caveat', cursive" }}
-      >
+      <p className="text-[#C4552E] text-[26px] leading-none" style={{ fontFamily: "'Caveat', cursive" }}>
         Maitri Shah
       </p>
       <p className="text-[11px] text-[#4a4a4a] mt-1">UX/UI Designer · Mumbai</p>
@@ -68,49 +65,73 @@ const Frame1 = () => (
     </Item>
 
     <Item style={{ top: "22%", left: "34%" }}>
-      <h2
-        className="text-[34px] leading-[1.05] font-semibold tracking-tight text-[#111]"
-        style={{ fontFamily: "'Inter', sans-serif" }}
-      >
+      <h2 className="text-[34px] leading-[1.05] font-semibold tracking-tight text-[#111]" style={{ fontFamily: "'Inter', sans-serif" }}>
         THE WORLD IS
         <br />
         FULL OF
       </h2>
     </Item>
 
+    {/* DESIGN notepad — PNG */}
     <Item style={{ top: "18%", left: "61%" }}>
-      <div className="w-[64px] h-[86px] bg-[#F2C94C] shadow-md rotate-[-4deg] flex items-center justify-center">
-        <p className="text-[13px] font-bold text-[#111] tracking-wider">DESIGN</p>
-      </div>
+      <img
+        src="/design-notepad.png"
+        alt="Design notepad"
+        className="w-[64px] md:w-[80px] lg:w-[90px] h-auto rotate-[-4deg] shadow-md"
+      />
     </Item>
 
+    {/* Coffee — PNG */}
     <Item style={{ top: "20%", left: "76%" }}>
-      <div className="w-[60px] h-[50px] flex items-center justify-center text-[38px]">
-        ☕
-      </div>
+      <img
+        src="/coffe.png"
+        alt="Coffee"
+        className="w-[50px] md:w-[60px] lg:w-[70px] h-auto"
+      />
     </Item>
 
-    <Item style={{ top: "38%", left: "9%" }} className="text-[90px] leading-none">🛋️</Item>
-    <Item style={{ top: "38%", left: "31%" }} className="text-[70px] leading-none">🎧</Item>
-    <Item style={{ top: "37%", left: "48%" }} className="text-[80px] leading-none">💿</Item>
+    {/* Lamp — PNG */}
+    <Item style={{ top: "38%", left: "9%" }}>
+      <img
+        src="/lamp.png"
+        alt="Desk lamp"
+        className="w-[80px] md:w-[100px] lg:w-[120px] h-auto"
+      />
+    </Item>
+
+    {/* Headphones — PNG */}
+    <Item style={{ top: "38%", left: "31%" }}>
+      <img
+        src="/headphone.png"
+        alt="Headphones"
+        className="w-[60px] md:w-[75px] lg:w-[90px] h-auto"
+      />
+    </Item>
+
+    {/* Vinyl / Disc — PNG */}
+    <Item style={{ top: "37%", left: "48%" }}>
+      <img
+        src="/disc.png"
+        alt="Vinyl record"
+        className="w-[70px] md:w-[85px] lg:w-[100px] h-auto"
+      />
+    </Item>
 
     <Item style={{ top: "35%", left: "67%" }}>
-      <h3
-        className="text-[26px] leading-[1.05] font-semibold tracking-tight text-[#111]"
-        style={{ fontFamily: "'Inter', sans-serif" }}
-      >
+      <h3 className="text-[26px] leading-[1.05] font-semibold tracking-tight text-[#111]" style={{ fontFamily: "'Inter', sans-serif" }}>
         UNFINISHED
         <br />
         IDEAS
       </h3>
     </Item>
 
+    {/* Blue icons — SVG */}
     <Item style={{ top: "42%", left: "80%" }}>
-      <div className="w-[86px] h-[40px] bg-[#6FA8BF] rounded-md shadow-md flex items-center justify-center gap-2 text-white text-[16px]">
-        <span>⚏</span>
-        <span>✳</span>
-        <span>✦</span>
-      </div>
+      <img
+        src="/icons.svg"
+        alt="Icons"
+        className="w-[70px] md:w-[80px] lg:w-[86px] h-auto"
+      />
     </Item>
 
     <div className="absolute" style={{ top: "55%", left: "14%", right: "26%" }}>
@@ -120,16 +141,14 @@ const Frame1 = () => (
     </div>
 
     <Item style={{ top: "57%", left: "30%" }}>
-      <h3
-        className="text-[26px] leading-[1.05] font-semibold tracking-tight text-[#111]"
-        style={{ fontFamily: "'Inter', sans-serif" }}
-      >
+      <h3 className="text-[26px] leading-[1.05] font-semibold tracking-tight text-[#111]" style={{ fontFamily: "'Inter', sans-serif" }}>
         & FRUSTRATING
         <br />
         EXPERIENCES
       </h3>
     </Item>
 
+    {/* Polaroid placeholder — keep as is, no image provided */}
     <Item style={{ top: "50%", left: "73%" }}>
       <div className="w-[86px] h-[96px] bg-white shadow-lg rotate-[6deg] p-1.5">
         <div className="w-full h-[70%] bg-[#e8e8e8] flex items-center justify-center text-[24px]">
@@ -139,34 +158,33 @@ const Frame1 = () => (
     </Item>
 
     <Item style={{ top: "63%", left: "64%" }}>
-      <p
-        className="text-[#C4552E] text-[15px] italic"
-        style={{ fontFamily: "'Caveat', cursive" }}
-      >
+      <p className="text-[#C4552E] text-[15px] italic" style={{ fontFamily: "'Caveat', cursive" }}>
         I design the path
       </p>
-      <h3
-        className="text-[24px] leading-[1.05] font-semibold tracking-tight text-[#111] mt-0.5"
-        style={{ fontFamily: "'Inter', sans-serif" }}
-      >
+      <h3 className="text-[24px] leading-[1.05] font-semibold tracking-tight text-[#111] mt-0.5" style={{ fontFamily: "'Inter', sans-serif" }}>
         THAT MAKES
         <br />
         THEM SEAMLESS
       </h3>
     </Item>
 
-    <Item style={{ top: "70%", left: "26%" }} className="text-[64px] leading-none">🪴</Item>
+    {/* Plant — PNG */}
+    <Item style={{ top: "70%", left: "26%" }}>
+      <img
+        src="/plant.png"
+        alt="Plant"
+        className="w-[55px] md:w-[70px] lg:w-[85px] h-auto"
+      />
+    </Item>
 
+    {/* Sticky notes — keep CSS version */}
     <Item style={{ top: "72%", left: "38%" }}>
       <div className="relative w-[100px] h-[70px]">
         <div className="absolute left-0 top-0 w-[62px] h-[58px] bg-[#A8CBE0] shadow-sm rotate-[-6deg] flex items-start justify-start p-2">
           <p className="text-[9px] text-[#333]">Ask why</p>
         </div>
         <div className="absolute left-8 top-2 w-[52px] h-[46px] bg-[#E8A87C] shadow-sm rotate-[8deg] flex items-center justify-center">
-          <p
-            className="text-[11px] text-[#333]"
-            style={{ fontFamily: "'Caveat', cursive" }}
-          >
+          <p className="text-[11px] text-[#333]" style={{ fontFamily: "'Caveat', cursive" }}>
             Simplify
           </p>
         </div>
@@ -181,24 +199,15 @@ const Frame1 = () => (
 const Frame2 = () => (
   <div className="absolute inset-0">
     <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
-      <p
-        className="text-[#C4552E] text-[28px] mb-3"
-        style={{ fontFamily: "'Caveat', cursive" }}
-      >
+      <p className="text-[#C4552E] text-[28px] mb-3" style={{ fontFamily: "'Caveat', cursive" }}>
         Maitri Shah
       </p>
 
-      <h1
-        className="text-[64px] leading-[1.05] font-normal tracking-tight text-[#111] max-w-[900px]"
-        style={{ fontFamily: "'Inter', sans-serif" }}
-      >
+      <h1 className="text-[64px] leading-[1.05] font-normal tracking-tight text-[#111] max-w-[900px]" style={{ fontFamily: "'Inter', sans-serif" }}>
         I turn complex ideas
         <br />
         into{" "}
-        <span
-          className="text-[#C4552E] italic"
-          style={{ fontFamily: "'Caveat', cursive", fontSize: "72px" }}
-        >
+        <span className="text-[#C4552E] italic" style={{ fontFamily: "'Caveat', cursive", fontSize: "72px" }}>
           clear, human
         </span>
         <br />
@@ -215,40 +224,56 @@ const Frame2 = () => (
       </button>
     </div>
 
-    <Item style={{ top: "18%", left: "8%" }} className="text-[70px] leading-none">🎧</Item>
-    <Item style={{ top: "26%", left: "4%" }} className="text-[80px] leading-none">🛋️</Item>
-    <Item style={{ top: "36%", left: "6%" }} className="text-[70px] leading-none">💿</Item>
-    <Item style={{ top: "68%", left: "5%" }} className="text-[60px] leading-none">🪴</Item>
+    {/* Headphones */}
+    <Item style={{ top: "18%", left: "8%" }}>
+      <img src="/headphone.png" alt="Headphones" className="w-[55px] md:w-[70px] lg:w-[85px] h-auto" />
+    </Item>
 
+    {/* Lamp */}
+    <Item style={{ top: "26%", left: "4%" }}>
+      <img src="/lamp.png" alt="Desk lamp" className="w-[70px] md:w-[90px] lg:w-[105px] h-auto" />
+    </Item>
+
+    {/* Disc */}
+    <Item style={{ top: "36%", left: "6%" }}>
+      <img src="/disc.png" alt="Vinyl record" className="w-[55px] md:w-[70px] lg:w-[85px] h-auto" />
+    </Item>
+
+    {/* Plant */}
+    <Item style={{ top: "68%", left: "5%" }}>
+      <img src="/plant.png" alt="Plant" className="w-[50px] md:w-[65px] lg:w-[80px] h-auto" />
+    </Item>
+
+    {/* Sticky notes */}
     <Item style={{ top: "80%", left: "10%" }}>
       <div className="relative w-[110px] h-[70px]">
         <div className="absolute left-0 top-0 w-[62px] h-[58px] bg-[#A8CBE0] shadow-sm rotate-[-6deg] flex items-start justify-start p-2">
           <p className="text-[9px] text-[#333]">Ask why</p>
         </div>
         <div className="absolute left-9 top-2 w-[52px] h-[46px] bg-[#E8A87C] shadow-sm rotate-[8deg] flex items-center justify-center">
-          <p
-            className="text-[11px] text-[#333]"
-            style={{ fontFamily: "'Caveat', cursive" }}
-          >
+          <p className="text-[11px] text-[#333]" style={{ fontFamily: "'Caveat', cursive" }}>
             Simplify
           </p>
         </div>
       </div>
     </Item>
 
+    {/* Design notepad */}
     <Item style={{ top: "18%", left: "80%" }}>
-      <div className="w-[64px] h-[86px] bg-[#F2C94C] shadow-md rotate-[4deg] flex items-center justify-center">
-        <p className="text-[13px] font-bold text-[#111] tracking-wider">DESIGN</p>
-      </div>
+      <img src="/design-notepad.png" alt="Design notepad" className="w-[55px] md:w-[70px] lg:w-[80px] h-auto rotate-[4deg] shadow-md" />
     </Item>
-    <Item style={{ top: "14%", left: "92%" }} className="text-[44px] leading-none">☕</Item>
+
+    {/* Coffee */}
+    <Item style={{ top: "14%", left: "92%" }}>
+      <img src="/coffe.png" alt="Coffee" className="w-[40px] md:w-[50px] lg:w-[60px] h-auto" />
+    </Item>
+
+    {/* Icons SVG */}
     <Item style={{ top: "32%", left: "94%" }}>
-      <div className="w-[86px] h-[40px] bg-[#6FA8BF] rounded-md shadow-md flex items-center justify-center gap-2 text-white text-[16px]">
-        <span>⚏</span>
-        <span>✳</span>
-        <span>✦</span>
-      </div>
+      <img src="/icons.svg" alt="Icons" className="w-[70px] md:w-[80px] lg:w-[86px] h-auto" />
     </Item>
+
+    {/* Polaroid placeholder */}
     <Item style={{ top: "48%", left: "88%" }}>
       <div className="w-[86px] h-[96px] bg-white shadow-lg rotate-[6deg] p-1.5">
         <div className="w-full h-[70%] bg-[#e8e8e8] flex items-center justify-center text-[24px]">
@@ -336,36 +361,22 @@ const ProblemCard = ({ item }) => (
     }}
   >
     <div className="flex-1 min-w-[280px] max-w-[420px]">
-      <p
-        className="text-[#C4552E] text-[12px] tracking-[0.15em] font-medium mb-1"
-        style={{ fontFamily: "'Inter', sans-serif" }}
-      >
+      <p className="text-[#C4552E] text-[12px] tracking-[0.15em] font-medium mb-1" style={{ fontFamily: "'Inter', sans-serif" }}>
         {item.id}
       </p>
       <p className="text-[10px] tracking-[0.2em] text-[#5a5a5a] mb-4 uppercase">
         {item.tag}
       </p>
-      <h3
-        className="text-[40px] leading-[1.1] text-[#111] mb-4"
-        style={{ fontFamily: "'Caveat', cursive" }}
-      >
+      <h3 className="text-[40px] leading-[1.1] text-[#111] mb-4" style={{ fontFamily: "'Caveat', cursive" }}>
         {item.title}
       </h3>
       <p className="text-[12px] leading-[1.6] text-[#4a4a4a] mb-5">{item.desc}</p>
       <div className="flex flex-col gap-1.5">
-        <a
-          href="#"
-          className="inline-flex items-center gap-1.5 text-[11px] text-[#111] hover:opacity-70"
-        >
-          <span className="w-3 h-3 border border-[#111] rounded-full flex items-center justify-center text-[7px]">
-            ✕
-          </span>
+        <a href="#" className="inline-flex items-center gap-1.5 text-[11px] text-[#111] hover:opacity-70">
+          <span className="w-3 h-3 border border-[#111] rounded-full flex items-center justify-center text-[7px]">✕</span>
           Add to anticipated outcome
         </a>
-        <a
-          href="#"
-          className="inline-flex items-center gap-1.5 text-[11px] text-[#111] hover:opacity-70 underline underline-offset-4"
-        >
+        <a href="#" className="inline-flex items-center gap-1.5 text-[11px] text-[#111] hover:opacity-70 underline underline-offset-4">
           View case study ↗
         </a>
       </div>
@@ -391,16 +402,10 @@ const ProblemsSection = () => (
     <div className="max-w-[1400px] mx-auto">
       <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-14">
         <div>
-          <p
-            className="text-[#C4552E] tracking-[0.15em] mb-3"
-            style={{ fontFamily: "'Caveat', cursive", fontSize: "18px" }}
-          >
+          <p className="text-[#C4552E] tracking-[0.15em] mb-3" style={{ fontFamily: "'Caveat', cursive", fontSize: "18px" }}>
             Selected work
           </p>
-          <h2
-            className="text-[52px] leading-[1.05] text-[#111] font-medium max-w-[520px]"
-            style={{ fontFamily: "'Inter', sans-serif" }}
-          >
+          <h2 className="text-[52px] leading-[1.05] text-[#111] font-medium max-w-[520px]" style={{ fontFamily: "'Inter', sans-serif" }}>
             Problems explored
             <br />
             with purpose.
@@ -453,14 +458,7 @@ const ToolIcon = ({ name }) => {
     m: (
       <svg viewBox="0 0 24 24" className="w-9 h-9" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="#000" />
-        <path
-          d="M5 18V7l3.5 6L12 7l3.5 6L19 7v11"
-          stroke="#fff"
-          strokeWidth="2"
-          fill="none"
-          strokeLinejoin="round"
-          strokeLinecap="round"
-        />
+        <path d="M5 18V7l3.5 6L12 7l3.5 6L19 7v11" stroke="#fff" strokeWidth="2" fill="none" strokeLinejoin="round" strokeLinecap="round" />
       </svg>
     ),
     xd: (
@@ -515,15 +513,9 @@ const experiences = [
 ];
 
 const ExperienceRow = ({ item }) => (
-  <div
-    className="flex flex-col md:flex-row md:items-center justify-between"
-    style={{ gap: "80px" }}
-  >
+  <div className="flex flex-col md:flex-row md:items-center justify-between" style={{ gap: "80px" }}>
     <div className="flex flex-col" style={{ gap: "8px" }}>
-      <h3
-        className="text-[34px] leading-[1.1] text-[#111] font-medium"
-        style={{ fontFamily: "'Inter', sans-serif" }}
-      >
+      <h3 className="text-[34px] leading-[1.1] text-[#111] font-medium" style={{ fontFamily: "'Inter', sans-serif" }}>
         {item.company}
       </h3>
       <p className="text-[11px] text-[#4a4a4a]">{item.role}</p>
@@ -537,23 +529,14 @@ const ExperienceRow = ({ item }) => (
 );
 
 const ExperienceSection = () => (
-  <section
-    className="relative w-full"
-    style={{ background: "#FFFDF8", padding: "120px 40px 160px" }}
-  >
+  <section className="relative w-full" style={{ background: "#FFFDF8", padding: "120px 40px 160px" }}>
     <div className="mx-auto flex flex-col" style={{ maxWidth: "1401px", gap: "80px" }}>
       <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8">
         <div>
-          <p
-            className="text-[#C4552E] tracking-[0.15em] mb-3 font-medium text-[12px] uppercase"
-            style={{ fontFamily: "'Inter', sans-serif" }}
-          >
+          <p className="text-[#C4552E] tracking-[0.15em] mb-3 font-medium text-[12px] uppercase" style={{ fontFamily: "'Inter', sans-serif" }}>
             Selected work
           </p>
-          <h2
-            className="text-[52px] leading-[1.05] text-[#111] font-medium max-w-[600px]"
-            style={{ fontFamily: "'Inter', sans-serif" }}
-          >
+          <h2 className="text-[52px] leading-[1.05] text-[#111] font-medium max-w-[600px]" style={{ fontFamily: "'Inter', sans-serif" }}>
             Problems explored with
             <br />
             purpose.
@@ -599,10 +582,7 @@ const aiBars = [
 
 const WorkflowBars = ({ title, titleColor, bars }) => (
   <div className="flex flex-col gap-4">
-    <p
-      className="text-[11px] tracking-[0.15em] font-medium uppercase"
-      style={{ fontFamily: "'Inter', sans-serif", color: titleColor }}
-    >
+    <p className="text-[11px] tracking-[0.15em] font-medium uppercase" style={{ fontFamily: "'Inter', sans-serif", color: titleColor }}>
       {title}
     </p>
     <div className="flex flex-col gap-3">
@@ -651,16 +631,10 @@ const AIWorkflowSection = () => (
     <div className="mx-auto flex flex-col" style={{ maxWidth: "1400px", gap: "80px" }}>
       <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-10">
         <div>
-          <p
-            className="text-[#FF6714] tracking-[0.15em] mb-3 font-bold text-[11px] uppercase"
-            style={{ fontFamily: "'Inter', sans-serif" }}
-          >
+          <p className="text-[#FF6714] tracking-[0.15em] mb-3 font-bold text-[11px] uppercase" style={{ fontFamily: "'Inter', sans-serif" }}>
             AI-Enhanced Workflow
           </p>
-          <h2
-            className="text-[56px] leading-[1.1] text-[#111] font-medium max-w-[760px]"
-            style={{ fontFamily: "'Inter', sans-serif" }}
-          >
+          <h2 className="text-[56px] leading-[1.1] text-[#111] font-medium max-w-[760px]" style={{ fontFamily: "'Inter', sans-serif" }}>
             AI is part of my workflow.
             <br />
             Not my decision maker.
@@ -755,28 +729,19 @@ const experiments = [
   },
 ];
 
-// Simple mockup visual for each experiment card
 const ExperimentMockup = ({ variant }) => (
   <div className="relative w-full h-[150px] rounded-lg overflow-hidden bg-[#EFEAE0] flex items-center justify-center">
     {variant === "claude" && (
       <div className="relative w-[80%]">
-        {/* laptop */}
         <div className="w-full h-[90px] bg-[#DAD5C8] rounded-md border border-[#c8c2b3] relative">
           <div className="absolute inset-2 bg-white rounded-sm flex flex-col gap-1 p-2">
             <div className="w-[40%] h-1.5 bg-[#d0d0d0] rounded-full" />
             <div className="w-[70%] h-1.5 bg-[#d0d0d0] rounded-full" />
             <div className="w-[55%] h-1.5 bg-[#d0d0d0] rounded-full" />
           </div>
-          {/* flow chips around */}
-          <div className="absolute -top-2 -left-3 bg-white text-[7px] px-1.5 py-0.5 rounded shadow">
-            Idea
-          </div>
-          <div className="absolute -top-1 -right-4 bg-white text-[7px] px-1.5 py-0.5 rounded shadow">
-            Flow
-          </div>
-          <div className="absolute -bottom-2 -right-3 bg-white text-[7px] px-1.5 py-0.5 rounded shadow">
-            UX
-          </div>
+          <div className="absolute -top-2 -left-3 bg-white text-[7px] px-1.5 py-0.5 rounded shadow">Idea</div>
+          <div className="absolute -top-1 -right-4 bg-white text-[7px] px-1.5 py-0.5 rounded shadow">Flow</div>
+          <div className="absolute -bottom-2 -right-3 bg-white text-[7px] px-1.5 py-0.5 rounded shadow">UX</div>
         </div>
         <div className="h-[6px] w-[60%] mx-auto bg-[#c8c2b3] rounded-b-md" />
       </div>
@@ -785,9 +750,7 @@ const ExperimentMockup = ({ variant }) => (
     {variant === "stitch" && (
       <div className="w-[90%] flex flex-col gap-2">
         <div className="flex gap-2">
-          <div className="flex-1 h-[46px] bg-white rounded-md border border-[#e0ddd3] flex items-center justify-center text-[10px] text-[#999]">
-            ▣
-          </div>
+          <div className="flex-1 h-[46px] bg-white rounded-md border border-[#e0ddd3] flex items-center justify-center text-[10px] text-[#999]">▣</div>
           <div className="flex-1 h-[46px] bg-white rounded-md border border-[#e0ddd3] flex items-center justify-center">
             <div className="w-[70%] h-2 bg-[#d0d0d0] rounded-full" />
           </div>
@@ -832,10 +795,7 @@ const ExperimentCard = ({ item }) => (
   >
     <ExperimentMockup variant={item.image} />
     <div className="flex flex-col gap-2">
-      <h3
-        className="text-[15px] font-semibold text-[#111]"
-        style={{ fontFamily: "'Inter', sans-serif" }}
-      >
+      <h3 className="text-[15px] font-semibold text-[#111]" style={{ fontFamily: "'Inter', sans-serif" }}>
         {item.title}
       </h3>
       <p className="text-[11.5px] leading-[1.6] text-[#5a5a5a]">{item.desc}</p>
@@ -861,10 +821,7 @@ const ProfileCard = () => (
   >
     {/* Left — profile info */}
     <div className="flex flex-col items-start" style={{ width: "45%" }}>
-      <p
-        className="text-[#C4552E] text-[28px] leading-none"
-        style={{ fontFamily: "'Caveat', cursive" }}
-      >
+      <p className="text-[#C4552E] text-[28px] leading-none" style={{ fontFamily: "'Caveat', cursive" }}>
         Maitri Shah
       </p>
       <div className="flex items-center gap-3 mt-2 mb-6">
@@ -877,14 +834,13 @@ const ProfileCard = () => (
         </span>
       </div>
 
-      {/* Photo placeholder */}
-      <div
-        className="relative w-[240px] h-[300px] rounded-lg overflow-hidden"
-        style={{ background: "#E8E2D5" }}
-      >
-        <div className="w-full h-full flex items-center justify-center text-[60px]">
-          🧑‍🎨
-        </div>
+      {/* Maitri photo — actual jpg */}
+      <div className="relative w-[240px] h-[300px] rounded-lg overflow-hidden" style={{ background: "#E8E2D5" }}>
+        <img
+          src="/maitri.jpg"
+          alt="Maitri Shah"
+          className="w-full h-full object-cover"
+        />
         <div
           className="absolute bottom-3 right-3 text-white text-[10px] px-2.5 py-1 rounded"
           style={{ background: "#E5592E" }}
@@ -899,24 +855,17 @@ const ProfileCard = () => (
       {/* Top row: Sunflower + Dance */}
       <div className="grid grid-cols-2 gap-5">
         <div className="flex flex-col items-center gap-1">
-          <div className="w-[80px] h-[80px] flex items-center justify-center text-[50px]">
-            🌻
-          </div>
+          <div className="w-[80px] h-[80px] flex items-center justify-center text-[50px]">🌻</div>
           <p className="text-[10px] text-[#5a5a5a]">Sunflower.png</p>
         </div>
         <div className="flex flex-col items-center gap-1">
-          <div className="w-[80px] h-[80px] flex items-center justify-center text-[50px]">
-            🦋
-          </div>
+          <div className="w-[80px] h-[80px] flex items-center justify-center text-[50px]">🦋</div>
           <p className="text-[10px] text-[#5a5a5a]">Danceofmoon.png</p>
         </div>
       </div>
 
       {/* Text box */}
-      <div
-        className="flex items-start gap-3 p-4 rounded-lg"
-        style={{ background: "#FFFFFF", border: "1px solid #E5E1D6" }}
-      >
+      <div className="flex items-start gap-3 p-4 rounded-lg" style={{ background: "#FFFFFF", border: "1px solid #E5E1D6" }}>
         <div className="flex gap-0.5 mt-1">
           <span className="w-1.5 h-1.5 rounded-full bg-[#C4552E]" />
           <span className="w-1.5 h-1.5 rounded-full bg-[#F2C94C]" />
@@ -933,15 +882,11 @@ const ProfileCard = () => (
       {/* Bottom row: Tools + Beach */}
       <div className="grid grid-cols-2 gap-5">
         <div className="flex flex-col items-center gap-1">
-          <div className="w-[80px] h-[80px] flex items-center justify-center text-[50px]">
-            🌀
-          </div>
+          <div className="w-[80px] h-[80px] flex items-center justify-center text-[50px]">🌀</div>
           <p className="text-[10px] text-[#5a5a5a]">ToolsCover.png</p>
         </div>
         <div className="flex flex-col items-center gap-1">
-          <div className="w-[80px] h-[80px] flex items-center justify-center text-[50px]">
-            🏖️
-          </div>
+          <div className="w-[80px] h-[80px] flex items-center justify-center text-[50px]">🏖️</div>
           <p className="text-[10px] text-[#5a5a5a]">BeachCover.png</p>
         </div>
       </div>
@@ -960,19 +905,12 @@ const AIExperimentsSection = () => (
     }}
   >
     <div className="mx-auto flex flex-col" style={{ maxWidth: "1400px", gap: "100px" }}>
-      {/* Heading */}
       <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8">
         <div>
-          <p
-            className="text-[#FF6714] tracking-[0.15em] mb-3 font-bold text-[11px] uppercase"
-            style={{ fontFamily: "'Inter', sans-serif" }}
-          >
+          <p className="text-[#FF6714] tracking-[0.15em] mb-3 font-bold text-[11px] uppercase" style={{ fontFamily: "'Inter', sans-serif" }}>
             AI Experiments
           </p>
-          <h2
-            className="text-[56px] leading-[1.1] text-[#111] font-medium max-w-[600px]"
-            style={{ fontFamily: "'Inter', sans-serif" }}
-          >
+          <h2 className="text-[56px] leading-[1.1] text-[#111] font-medium max-w-[600px]" style={{ fontFamily: "'Inter', sans-serif" }}>
             AI-Powered Design
             <br />
             Experiments
@@ -985,14 +923,12 @@ const AIExperimentsSection = () => (
         </p>
       </div>
 
-      {/* Experiments row */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {experiments.map((item) => (
           <ExperimentCard key={item.title} item={item} />
         ))}
       </div>
 
-      {/* Profile card */}
       <ProfileCard />
     </div>
   </section>
@@ -1018,11 +954,7 @@ function App() {
   };
 
   return (
-    <div
-      className="relative w-full overflow-x-hidden"
-      style={{ background: "#F5F1E7" }}
-    >
-      {/* ---------- HERO ---------- */}
+    <div className="relative w-full overflow-x-hidden" style={{ background: "#F5F1E7" }}>
       <div
         className="relative w-full h-screen overflow-hidden"
         style={{ cursor: "grab" }}
@@ -1032,18 +964,10 @@ function App() {
       >
         <GridBackground />
         <div className="absolute inset-0">
-          <div
-            className={`absolute inset-0 transition-opacity duration-[1000ms] ease-out ${
-              frame === 1 ? "opacity-100" : "opacity-0 pointer-events-none"
-            }`}
-          >
+          <div className={`absolute inset-0 transition-opacity duration-[1000ms] ease-out ${frame === 1 ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
             <Frame1 />
           </div>
-          <div
-            className={`absolute inset-0 transition-opacity duration-[1000ms] ease-out ${
-              frame === 2 ? "opacity-100" : "opacity-0 pointer-events-none"
-            }`}
-          >
+          <div className={`absolute inset-0 transition-opacity duration-[1000ms] ease-out ${frame === 2 ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
             <Frame2 />
           </div>
         </div>
@@ -1051,13 +975,11 @@ function App() {
         <ScrollHint />
       </div>
 
-      {/* ---------- SECTIONS ---------- */}
       <ProblemsSection />
       <ExperienceSection />
       <AIWorkflowSection />
       <AIExperimentsSection />
 
-      {/* Font loader */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Caveat:wght@500;600&family=DM+Sans:wght@400;500;700&display=swap');
         body { font-family: 'Inter', sans-serif; margin: 0; }
