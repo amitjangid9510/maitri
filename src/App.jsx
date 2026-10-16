@@ -33,20 +33,16 @@ const NavBar = () => {
     }
   };
 
-  // Scroll spy — detect which section is currently in viewport
   useEffect(() => {
     const sectionIds = navItems.map((item) => item.id);
 
     const handleScrollSpy = () => {
-      // Trigger point: 30% down from top of viewport
       const triggerLine = window.innerHeight * 0.3;
-
       let current = sectionIds[0];
       for (const id of sectionIds) {
         const el = document.getElementById(id);
         if (!el) continue;
         const rect = el.getBoundingClientRect();
-        // If section's top is above trigger line, it's the current one
         if (rect.top <= triggerLine) {
           current = id;
         }
@@ -55,8 +51,7 @@ const NavBar = () => {
     };
 
     window.addEventListener("scroll", handleScrollSpy, { passive: true });
-    handleScrollSpy(); // Initial check
-
+    handleScrollSpy();
     return () => window.removeEventListener("scroll", handleScrollSpy);
   }, []);
 
@@ -154,10 +149,10 @@ const Frame1Mobile = () => (
       <span className="font-bold">FULL OF</span>
     </h2>
 
-    <div className="flex items-center justify-center gap-4 mt-2">
-      <img src="/lamp.png" alt="Lamp" className="w-[55px] h-auto" />
-      <img src="/headphone.png" alt="Headphones" className="w-[50px] h-auto" />
-      <img src="/disc.png" alt="Vinyl" className="w-[55px] h-auto" />
+    <div className="flex items-center justify-center gap-6 mt-2">
+      <img src="/lamp.png" alt="Lamp" className="w-[90px] h-auto" />
+      <img src="/headphone.png" alt="Headphones" className="w-[85px] h-auto" />
+      <img src="/disc.png" alt="Vinyl" className="w-[90px] h-auto" />
     </div>
 
     <h3
@@ -169,10 +164,10 @@ const Frame1Mobile = () => (
       <span className="font-bold">IDEAS</span>
     </h3>
 
-    <div className="flex items-center justify-center gap-4">
-      <img src="/design-notepad.png" alt="Design" className="w-[40px] h-auto rotate-[-4deg]" />
-      <img src="/icons.svg" alt="Icons" className="w-[55px] h-auto" />
-      <img src="/coffe.png" alt="Coffee" className="w-[40px] h-auto" />
+    <div className="flex items-center justify-center gap-6">
+      <img src="/design-notepad.png" alt="Design" className="w-[70px] h-auto rotate-[-4deg]" />
+      <img src="/icons.svg" alt="Icons" className="w-[90px] h-auto" />
+      <img src="/coffe.png" alt="Coffee" className="w-[85px] h-auto" />
     </div>
 
     <h3
@@ -184,14 +179,14 @@ const Frame1Mobile = () => (
       <span className="font-bold">EXPERIENCES</span>
     </h3>
 
-    <div className="flex items-center justify-center gap-6">
-      <img src="/plant.png" alt="Plant" className="w-[45px] h-auto" />
-      <div className="relative w-[80px] h-[55px]">
-        <div className="absolute left-0 top-0 w-[50px] h-[46px] bg-[#A8CBE0] shadow-sm rotate-[-6deg] flex items-start justify-start p-1.5">
-          <p className="text-[8px] text-[#333]" style={{ fontFamily: "'DM Sans', sans-serif" }}>Ask why</p>
+    <div className="flex items-center justify-center gap-10">
+      <img src="/plant.png" alt="Plant" className="w-[75px] h-auto" />
+      <div className="relative w-[120px] h-[85px]">
+        <div className="absolute left-0 top-0 w-[75px] h-[70px] bg-[#A8CBE0] shadow-sm rotate-[-6deg] flex items-start justify-start p-2">
+          <p className="text-[10px] text-[#333]" style={{ fontFamily: "'DM Sans', sans-serif" }}>Ask why</p>
         </div>
-        <div className="absolute left-6 top-1.5 w-[44px] h-[40px] bg-[#E8A87C] shadow-sm rotate-[8deg] flex items-center justify-center">
-          <p className="text-[10px] text-[#333]" style={{ fontFamily: "'Caveat', cursive" }}>Simplify</p>
+        <div className="absolute left-10 top-3 w-[64px] h-[56px] bg-[#E8A87C] shadow-sm rotate-[8deg] flex items-center justify-center">
+          <p className="text-[13px] text-[#333]" style={{ fontFamily: "'Caveat', cursive" }}>Simplify</p>
         </div>
       </div>
     </div>
@@ -271,24 +266,26 @@ const Frame1Desktop = () => (
       </h2>
     </Item>
 
-    <Item style={{ top: "18%", left: "61%" }}>
-      <img src="/design-notepad.png" alt="Design notepad" className="w-[90px] h-auto rotate-[-4deg] " />
+    {/* Desktop images — bigger */}
+    <Item style={{ top: "14%", left: "59%" }}>
+      <img src="/design-notepad.png" alt="Design notepad" className="w-[145px] h-auto rotate-[-4deg]" />
     </Item>
 
-    <Item style={{ top: "20%", left: "76%" }}>
-      <img src="/coffe.png" alt="Coffee" className="w-[70px] h-auto" />
+    {/* ☕ COFFEE — EXTRA BIG */}
+    <Item style={{ top: "14%", left: "75%" }}>
+      <img src="/coffe.png" alt="Coffee" className="w-[145px] h-auto" />
     </Item>
 
-    <Item style={{ top: "38%", left: "9%" }}>
-      <img src="/lamp.png" alt="Desk lamp" className="w-[120px] h-auto" />
+    <Item style={{ top: "34%", left: "7%" }}>
+      <img src="/lamp.png" alt="Desk lamp" className="w-[185px] h-auto" />
     </Item>
 
-    <Item style={{ top: "38%", left: "31%" }}>
-      <img src="/headphone.png" alt="Headphones" className="w-[90px] h-auto" />
+    <Item style={{ top: "34%", left: "29%" }}>
+      <img src="/headphone.png" alt="Headphones" className="w-[140px] h-auto" />
     </Item>
 
-    <Item style={{ top: "37%", left: "48%" }}>
-      <img src="/disc.png" alt="Vinyl record" className="w-[100px] h-auto" />
+    <Item style={{ top: "33%", left: "46%" }}>
+      <img src="/disc.png" alt="Vinyl record" className="w-[160px] h-auto" />
     </Item>
 
     <Item style={{ top: "35%", left: "67%" }}>
@@ -306,8 +303,8 @@ const Frame1Desktop = () => (
       </h3>
     </Item>
 
-    <Item style={{ top: "42%", left: "80%" }}>
-      <img src="/icons.svg" alt="Icons" className="w-[86px] h-auto" />
+    <Item style={{ top: "40%", left: "79%" }}>
+      <img src="/icons.svg" alt="Icons" className="w-[130px] h-auto" />
     </Item>
 
     <Item style={{ top: "57%", left: "30%" }}>
@@ -325,9 +322,9 @@ const Frame1Desktop = () => (
       </h3>
     </Item>
 
-    <Item style={{ top: "50%", left: "73%" }}>
-      <div className="w-[86px] h-[96px] bg-white shadow-lg rotate-[6deg] p-1.5">
-        <div className="w-full h-[70%] bg-[#e8e8e8] flex items-center justify-center text-[24px]">📷</div>
+    <Item style={{ top: "48%", left: "72%" }}>
+      <div className="w-[120px] h-[135px] bg-white shadow-lg rotate-[6deg] p-2">
+        <div className="w-full h-[70%] bg-[#e8e8e8] flex items-center justify-center text-[32px]">📷</div>
       </div>
     </Item>
 
@@ -352,23 +349,23 @@ const Frame1Desktop = () => (
       </h3>
     </Item>
 
-    <Item style={{ top: "70%", left: "26%" }}>
-      <img src="/plant.png" alt="Plant" className="w-[85px] h-auto" />
+    <Item style={{ top: "68%", left: "24%" }}>
+      <img src="/plant.png" alt="Plant" className="w-[130px] h-auto" />
     </Item>
 
-    <Item style={{ top: "72%", left: "38%" }}>
-      <div className="relative w-[100px] h-[70px]">
-        <div className="absolute left-0 top-0 w-[62px] h-[58px] bg-[#A8CBE0] shadow-sm rotate-[-6deg] flex items-start justify-start p-2">
+    <Item style={{ top: "69%", left: "36%" }}>
+      <div className="relative w-[145px] h-[100px]">
+        <div className="absolute left-0 top-0 w-[90px] h-[82px] bg-[#A8CBE0] shadow-sm rotate-[-6deg] flex items-start justify-start p-2.5">
           <p
-            className="text-[9px] text-[#333]"
+            className="text-[12px] text-[#333]"
             style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
             Ask why
           </p>
         </div>
-        <div className="absolute left-8 top-2 w-[52px] h-[46px] bg-[#E8A87C] shadow-sm rotate-[8deg] flex items-center justify-center">
+        <div className="absolute left-12 top-3 w-[76px] h-[66px] bg-[#E8A87C] shadow-sm rotate-[8deg] flex items-center justify-center">
           <p
-            className="text-[11px] text-[#333]"
+            className="text-[15px] text-[#333]"
             style={{ fontFamily: "'Caveat', cursive" }}
           >
             Simplify
@@ -394,10 +391,10 @@ const Frame1 = () => (
 
 const Frame2Mobile = () => (
   <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 pt-20 pb-16 gap-4">
-    <div className="flex items-center justify-center gap-5 mb-2">
-      <img src="/headphone.png" alt="Headphones" className="w-[40px] h-auto" />
-      <img src="/lamp.png" alt="Lamp" className="w-[45px] h-auto" />
-      <img src="/disc.png" alt="Vinyl" className="w-[45px] h-auto" />
+    <div className="flex items-center justify-center gap-6 mb-2">
+      <img src="/headphone.png" alt="Headphones" className="w-[65px] h-auto" />
+      <img src="/lamp.png" alt="Lamp" className="w-[70px] h-auto" />
+      <img src="/disc.png" alt="Vinyl" className="w-[70px] h-auto" />
     </div>
 
     <p
@@ -433,11 +430,11 @@ const Frame2Mobile = () => (
       Explore my work <span>↗</span>
     </button>
 
-    <div className="flex items-center justify-center gap-4 mt-4">
-      <img src="/plant.png" alt="Plant" className="w-[40px] h-auto" />
-      <img src="/design-notepad.png" alt="Design" className="w-[36px] h-auto rotate-[-4deg]" />
-      <img src="/icons.svg" alt="Icons" className="w-[55px] h-auto" />
-      <img src="/coffe.png" alt="Coffee" className="w-[36px] h-auto" />
+    <div className="flex items-center justify-center gap-6 mt-4">
+      <img src="/plant.png" alt="Plant" className="w-[65px] h-auto" />
+      <img src="/design-notepad.png" alt="Design" className="w-[60px] h-auto rotate-[-4deg]" />
+      <img src="/icons.svg" alt="Icons" className="w-[85px] h-auto" />
+      <img src="/coffe.png" alt="Coffee" className="w-[70px] h-auto" />
     </div>
   </div>
 );
@@ -479,44 +476,45 @@ const Frame2Desktop = () => (
       </button>
     </div>
 
-    <Item style={{ top: "18%", left: "8%" }}>
-      <img src="/headphone.png" alt="Headphones" className="w-[85px] h-auto" />
+    <Item style={{ top: "14%", left: "6%" }}>
+      <img src="/headphone.png" alt="Headphones" className="w-[135px] h-auto" />
     </Item>
-    <Item style={{ top: "26%", left: "4%" }}>
-      <img src="/lamp.png" alt="Desk lamp" className="w-[105px] h-auto" />
+    <Item style={{ top: "22%", left: "2%" }}>
+      <img src="/lamp.png" alt="Desk lamp" className="w-[165px] h-auto" />
     </Item>
-    <Item style={{ top: "36%", left: "6%" }}>
-      <img src="/disc.png" alt="Vinyl record" className="w-[85px] h-auto" />
+    <Item style={{ top: "34%", left: "4%" }}>
+      <img src="/disc.png" alt="Vinyl record" className="w-[135px] h-auto" />
     </Item>
-    <Item style={{ top: "68%", left: "5%" }}>
-      <img src="/plant.png" alt="Plant" className="w-[80px] h-auto" />
+    <Item style={{ top: "66%", left: "3%" }}>
+      <img src="/plant.png" alt="Plant" className="w-[130px] h-auto" />
     </Item>
 
-    <Item style={{ top: "80%", left: "10%" }}>
-      <div className="relative w-[110px] h-[70px]">
-        <div className="absolute left-0 top-0 w-[62px] h-[58px] bg-[#A8CBE0] shadow-sm rotate-[-6deg] flex items-start justify-start p-2">
-          <p className="text-[9px] text-[#333]" style={{ fontFamily: "'DM Sans', sans-serif" }}>Ask why</p>
+    <Item style={{ top: "78%", left: "8%" }}>
+      <div className="relative w-[155px] h-[105px]">
+        <div className="absolute left-0 top-0 w-[92px] h-[85px] bg-[#A8CBE0] shadow-sm rotate-[-6deg] flex items-start justify-start p-2.5">
+          <p className="text-[12px] text-[#333]" style={{ fontFamily: "'DM Sans', sans-serif" }}>Ask why</p>
         </div>
-        <div className="absolute left-9 top-2 w-[52px] h-[46px] bg-[#E8A87C] shadow-sm rotate-[8deg] flex items-center justify-center">
-          <p className="text-[11px] text-[#333]" style={{ fontFamily: "'Caveat', cursive" }}>
+        <div className="absolute left-12 top-3 w-[78px] h-[68px] bg-[#E8A87C] shadow-sm rotate-[8deg] flex items-center justify-center">
+          <p className="text-[15px] text-[#333]" style={{ fontFamily: "'Caveat', cursive" }}>
             Simplify
           </p>
         </div>
       </div>
     </Item>
 
-    <Item style={{ top: "18%", left: "80%" }}>
-      <img src="/design-notepad.png" alt="Design" className="w-[80px] h-auto rotate-[4deg] " />
+    <Item style={{ top: "14%", left: "78%" }}>
+      <img src="/design-notepad.png" alt="Design" className="w-[130px] h-auto rotate-[4deg]" />
     </Item>
-    <Item style={{ top: "14%", left: "92%" }}>
-      <img src="/coffe.png" alt="Coffee" className="w-[60px] h-auto" />
+    {/* ☕ COFFEE — EXTRA BIG in Frame2 too */}
+    <Item style={{ top: "9%", left: "89%" }}>
+      <img src="/coffe.png" alt="Coffee" className="w-[120px] h-auto" />
     </Item>
-    <Item style={{ top: "32%", left: "94%" }}>
-      <img src="/icons.svg" alt="Icons" className="w-[86px] h-auto" />
+    <Item style={{ top: "30%", left: "92%" }}>
+      <img src="/icons.svg" alt="Icons" className="w-[130px] h-auto" />
     </Item>
-    <Item style={{ top: "48%", left: "88%" }}>
-      <div className="w-[86px] h-[96px] bg-white shadow-lg rotate-[6deg] p-1.5">
-        <div className="w-full h-[70%] bg-[#e8e8e8] flex items-center justify-center text-[24px]">📷</div>
+    <Item style={{ top: "46%", left: "86%" }}>
+      <div className="w-[120px] h-[135px] bg-white shadow-lg rotate-[6deg] p-2">
+        <div className="w-full h-[70%] bg-[#e8e8e8] flex items-center justify-center text-[32px]">📷</div>
       </div>
     </Item>
   </div>
