@@ -319,10 +319,13 @@ const Frame1Desktop = () => (
       </h3>
     </Item>
 
-    <Item style={{ top: "48%", left: "72%" }}>
-      <div className="w-[120px] h-[135px] bg-white shadow-lg rotate-[6deg] p-2">
-        <div className="w-full h-[70%] bg-[#e8e8e8] flex items-center justify-center text-[32px]">📷</div>
-      </div>
+    {/* CAMERA — only image, no wrapper, no shadow — SIZE UP */}
+    <Item style={{ top: "46%", left: "71%" }}>
+      <img
+        src="/camera.png"
+        alt="Camera"
+        className="w-[160px] h-auto rotate-[6deg] object-contain"
+      />
     </Item>
 
     <Item style={{ top: "63%", left: "64%" }}>
@@ -508,10 +511,14 @@ const Frame2Desktop = () => (
     <Item style={{ top: "30%", left: "92%" }}>
       <img src="/icons.svg" alt="Icons" className="w-[130px] h-auto" />
     </Item>
-    <Item style={{ top: "46%", left: "86%" }}>
-      <div className="w-[120px] h-[135px] bg-white shadow-lg rotate-[6deg] p-2">
-        <div className="w-full h-[70%] bg-[#e8e8e8] flex items-center justify-center text-[32px]">📷</div>
-      </div>
+
+    {/* CAMERA — only image, no wrapper, no shadow — SIZE UP */}
+    <Item style={{ top: "44%", left: "84%" }}>
+      <img
+        src="/camera.png"
+        alt="Camera"
+        className="w-[160px] h-auto rotate-[6deg] object-contain"
+      />
     </Item>
   </div>
 );
@@ -578,9 +585,7 @@ const ProblemCard = ({ item }) => (
       overflow: "hidden",
     }}
   >
-    {/* Left content */}
     <div className="flex-1 min-w-0 lg:min-w-[280px] max-w-full lg:max-w-[480px] px-6 md:px-8 lg:px-10 py-6 md:py-8 lg:py-10">
-      {/* 01 */}
       <p
         className="text-[#C4552E] mb-1"
         style={{
@@ -594,7 +599,6 @@ const ProblemCard = ({ item }) => (
         {item.id}
       </p>
 
-      {/* TAG */}
       <p
         className="text-[#5a5a5a] mb-4 md:mb-5"
         style={{
@@ -609,7 +613,6 @@ const ProblemCard = ({ item }) => (
         {item.tag}
       </p>
 
-      {/* TITLE */}
       <h3
         className="text-[#111] mb-4 md:mb-5"
         style={{
@@ -623,7 +626,6 @@ const ProblemCard = ({ item }) => (
         {item.title}
       </h3>
 
-      {/* DESC */}
       <p
         className="text-[#4a4a4a] mb-5 md:mb-6"
         style={{
@@ -637,7 +639,6 @@ const ProblemCard = ({ item }) => (
         {item.desc}
       </p>
 
-      {/* CTA LINKS */}
       <div className="flex flex-col gap-3">
         <a
           href="#"
@@ -678,7 +679,6 @@ const ProblemCard = ({ item }) => (
       </div>
     </div>
 
-    {/* Right — image flush right, no padding, no wrapper */}
     <div className="flex-1 w-full flex justify-end items-center -mr-10 lg:-mr-16">
       <CardImage />
     </div>
