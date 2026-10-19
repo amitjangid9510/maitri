@@ -165,7 +165,7 @@ const Frame1Mobile = () => (
 
     <div className="flex items-center justify-center gap-6">
       <img src="/design-notepad.png" alt="Design" className="w-[70px] h-auto rotate-[-4deg]" />
-      <img src="/icons.svg" alt="Icons" className="w-[90px] h-auto" />
+      <img src="/tool-symbol.png" alt="Tool symbol" className="w-[90px] h-auto" />
       <img src="/coffe.png" alt="Coffee" className="w-[85px] h-auto" />
     </div>
 
@@ -300,8 +300,13 @@ const Frame1Desktop = () => (
       </h3>
     </Item>
 
-    <Item style={{ top: "40%", left: "79%" }}>
-      <img src="/icons.svg" alt="Icons" className="w-[130px] h-auto" />
+    {/* TOOL SYMBOL — next to UNFINISHED IDEAS text, bigger */}
+    <Item style={{ top: "41%", left: "82%" }}>
+      <img
+        src="/tool-symbol.png"
+        alt="Tool symbol"
+        className="w-[150px] h-auto object-contain"
+      />
     </Item>
 
     <Item style={{ top: "57%", left: "30%" }}>
@@ -319,7 +324,7 @@ const Frame1Desktop = () => (
       </h3>
     </Item>
 
-    {/* CAMERA — only image, no wrapper, no shadow — SIZE UP */}
+    {/* CAMERA — only image, no wrapper, no shadow */}
     <Item style={{ top: "46%", left: "71%" }}>
       <img
         src="/camera.png"
@@ -433,7 +438,7 @@ const Frame2Mobile = () => (
     <div className="flex items-center justify-center gap-6 mt-4">
       <img src="/plant.png" alt="Plant" className="w-[65px] h-auto" />
       <img src="/design-notepad.png" alt="Design" className="w-[60px] h-auto rotate-[-4deg]" />
-      <img src="/icons.svg" alt="Icons" className="w-[85px] h-auto" />
+      <img src="/tool-symbol.png" alt="Tool symbol" className="w-[85px] h-auto" />
       <img src="/coffe.png" alt="Coffee" className="w-[70px] h-auto" />
     </div>
   </div>
@@ -509,10 +514,10 @@ const Frame2Desktop = () => (
       <img src="/coffe.png" alt="Coffee" className="w-[120px] h-auto" />
     </Item>
     <Item style={{ top: "30%", left: "92%" }}>
-      <img src="/icons.svg" alt="Icons" className="w-[130px] h-auto" />
+      <img src="/tool-symbol.png" alt="Tool symbol" className="w-[150px] h-auto object-contain" />
     </Item>
 
-    {/* CAMERA — only image, no wrapper, no shadow — SIZE UP */}
+    {/* CAMERA — only image, no wrapper, no shadow */}
     <Item style={{ top: "44%", left: "84%" }}>
       <img
         src="/camera.png"
