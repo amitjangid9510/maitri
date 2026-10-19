@@ -15,6 +15,16 @@ const GridBackground = () => (
   />
 );
 
+const DotPattern = () => (
+  <div
+    className="absolute inset-0 pointer-events-none opacity-20"
+    style={{
+      backgroundImage: "radial-gradient(circle, #000 1px, transparent 1px)",
+      backgroundSize: "20px 20px",
+    }}
+  />
+);
+
 const NavBar = () => {
   const navItems = [
     { id: "hero", label: "MS" },
@@ -300,7 +310,6 @@ const Frame1Desktop = () => (
       </h3>
     </Item>
 
-    {/* TOOL SYMBOL — next to UNFINISHED IDEAS text, bigger */}
     <Item style={{ top: "41%", left: "82%" }}>
       <img
         src="/tool-symbol.png"
@@ -324,7 +333,6 @@ const Frame1Desktop = () => (
       </h3>
     </Item>
 
-    {/* CAMERA — only image, no wrapper, no shadow */}
     <Item style={{ top: "46%", left: "71%" }}>
       <img
         src="/camera.png"
@@ -517,7 +525,6 @@ const Frame2Desktop = () => (
       <img src="/tool-symbol.png" alt="Tool symbol" className="w-[150px] h-auto object-contain" />
     </Item>
 
-    {/* CAMERA — only image, no wrapper, no shadow */}
     <Item style={{ top: "44%", left: "84%" }}>
       <img
         src="/camera.png"
@@ -565,7 +572,6 @@ const problems = [
   },
 ];
 
-// Card image — no wrapper, no border, only rotate
 const CardImage = () => (
   <img
     src="/card.png"
@@ -1216,7 +1222,7 @@ const AIWorkflowSection = () => (
 );
 
 // ============================================================
-// AI-POWERED EXPERIMENTS SECTION — Typography Updated
+// AI-POWERED EXPERIMENTS SECTION
 // ============================================================
 
 const experiments = [
@@ -1270,7 +1276,6 @@ const ExperimentCard = ({ item }) => (
     />
 
     <div className="flex flex-col gap-2 flex-1">
-      {/* TITLE — Libre Franklin 700, 19px, lh 21.28px, ls -0.67px */}
       <h3
         className="text-[#111]"
         style={{
@@ -1283,7 +1288,6 @@ const ExperimentCard = ({ item }) => (
       >
         {item.title}
       </h3>
-      {/* DESC — DM Sans 400, 16px, lh 24px, ls -0.24px */}
       <p
         className="text-[#5a5a5a]"
         style={{
@@ -1296,7 +1300,6 @@ const ExperimentCard = ({ item }) => (
       >
         {item.desc}
       </p>
-      {/* READ MORE — Arial 700, 14px, lh 14px, ls 0px */}
       <a
         href="#"
         className="mt-auto pt-2 hover:opacity-70 transition-opacity inline-flex items-center"
@@ -1316,98 +1319,202 @@ const ExperimentCard = ({ item }) => (
 );
 
 // ============================================================
-// PROFILE CARD
+// PROFILE CARD — Exact Figma Design
 // ============================================================
 
-const profileAssets = [
-  { src: "/sunflower.png", label: "Sunflower.png" },
-  { src: "/dance-lover.png", label: "Danceofmoon.png" },
-  { src: "/tea-lover.png", label: "ToolsCover.png" },
-  { src: "/beach-lover.png", label: "BeachCover.png" },
-];
-
-const ProfileAsset = ({ src, label }) => (
-  <div className="flex flex-col items-center gap-1">
-    <div className="w-[60px] h-[60px] md:w-[80px] md:h-[80px] flex items-center justify-center">
-      <img src={src} alt={label} className="w-full h-full object-contain" />
-    </div>
-    <p className="text-[9px] md:text-[10px] text-[#5a5a5a]" style={{ fontFamily: "'DM Sans', sans-serif" }}>{label}</p>
-  </div>
-);
-
 const ProfileCard = () => (
-  <div className="relative w-full flex flex-col md:flex-row items-center md:items-stretch profile-card">
-    <style>{`
-      .profile-card {
-        background: #FAF9F5;
-        border-radius: 24px;
-        border: 3px solid #2E4A3B;
-        padding: 24px;
-        gap: 30px;
-        max-width: 1230px;
-        margin: 0 auto;
-      }
-      @media (min-width: 768px) {
-        .profile-card { padding: 40px; gap: 40px; }
-      }
-    `}</style>
+  <div
+    className="relative w-full max-w-[1230px] mx-auto overflow-hidden flex flex-col md:flex-row items-stretch"
+    style={{
+      background: "#FAF9F5",
+      border: "6px solid #2E4A3B",
+      borderRadius: "32px",
+      minHeight: "500px",
+    }}
+  >
+    {/* ---------- LEFT SIDE: Maitri Shah ---------- */}
+    <div className="relative w-full md:w-[45%] flex flex-col p-8 md:p-12 items-center md:items-start">
+      <DotPattern />
 
-    <div className="flex flex-col items-center md:items-start w-full md:w-[45%]">
-      <p
-        className="text-[#FF6714] leading-none"
-        style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, fontSize: "28px" }}
-      >
-        Maitri Shah
-      </p>
-      <div className="flex items-center gap-3 mt-2 mb-5 md:mb-6">
+      <div className="relative z-10 w-full flex flex-col items-center md:items-start">
+        {/* Name and title */}
         <p
-          className="text-[#4a4a4a]"
-          style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px" }}
+          className="text-[#E5592E] leading-none mb-1"
+          style={{
+            fontFamily: "'Caveat', cursive",
+            fontWeight: 600,
+            fontSize: "42px",
+          }}
         >
-          UX/UI Designer
+          Maitri Shah
         </p>
-        <span
-          className="text-[#C4552E] px-2.5 py-0.5 rounded-full"
-          style={{ border: "1.5px solid #C4552E", fontFamily: "'Caveat', cursive", fontSize: "11px" }}
-        >
-          2+ Years
-        </span>
-      </div>
 
-      <div className="relative w-[200px] md:w-[240px] h-[250px] md:h-[300px] rounded-lg overflow-hidden" style={{ background: "#E8E2D5" }}>
-        <img src="/maitri.jpg" alt="Maitri Shah" className="w-full h-full object-cover" />
+        <div className="flex items-center gap-3 mb-10">
+          <p
+            className="text-[#4a4a4a]"
+            style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: "15px",
+            }}
+          >
+            UX/UI Designer
+          </p>
+          <span
+            className="text-[#E5592E] px-3 py-0.5 rounded-full flex items-center justify-center"
+            style={{
+              border: "1.5px solid #E5592E",
+              fontFamily: "'Caveat', cursive",
+              fontSize: "14px",
+            }}
+          >
+            2+ Years
+          </span>
+        </div>
+
+        {/* Photo */}
         <div
-          className="absolute bottom-3 right-3 text-white text-[10px] px-2.5 py-1 rounded"
-          style={{ background: "#E5592E", fontFamily: "'DM Sans', sans-serif" }}
+          className="relative w-[260px] h-[320px] md:w-[280px] md:h-[350px] rounded-xl overflow-hidden shadow-lg"
+          style={{ background: "#E8E2D5" }}
         >
-          Hire me →
+          <img
+            src="/maitri.jpg"
+            alt="Maitri Shah"
+            className="w-full h-full object-cover"
+          />
+          {/* Orange Tag */}
+          <div
+            className="absolute bottom-0 right-0 text-white px-4 py-1.5 flex items-center gap-2"
+            style={{
+              background: "#E5592E",
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: "12px",
+              fontWeight: 700,
+            }}
+          >
+            <span className="w-0 h-0 border-t-[6px] border-t-transparent border-r-[8px] border-r-white border-b-[6px] border-b-transparent" />
+            Maitri Shah
+          </div>
         </div>
       </div>
     </div>
 
-    <div className="flex-1 flex flex-col gap-4 md:gap-5 w-full">
-      <div className="grid grid-cols-2 gap-4 md:gap-5">
-        <ProfileAsset src={profileAssets[0].src} label={profileAssets[0].label} />
-        <ProfileAsset src={profileAssets[1].src} label={profileAssets[1].label} />
-      </div>
-
-      <div className="flex items-start gap-3 p-3 md:p-4 rounded-lg" style={{ background: "#FFFFFF", border: "1px solid #E5E1D6" }}>
-        <div className="flex gap-0.5 mt-1">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#C4552E]" />
-          <span className="w-1.5 h-1.5 rounded-full bg-[#F2C94C]" />
-          <span className="w-1.5 h-1.5 rounded-full bg-[#6FA8BF]" />
+    {/* ---------- RIGHT SIDE: Images & Text ---------- */}
+    <div
+      className="w-full md:w-[55%] flex flex-col p-6 md:p-10 gap-6 border-t md:border-t-0 md:border-l border-[#DAD8D3]"
+      style={{ background: "#FAF9F5" }}
+    >
+      {/* Top Row: Sunflower + Dance */}
+      <div className="grid grid-cols-2 gap-6 mt-4">
+        <div className="flex flex-col items-center gap-2">
+          <img
+            src="/sunflower.png"
+            alt="Sunflower"
+            className="w-[80px] md:w-[100px] h-auto object-contain"
+          />
+          <p
+            className="text-[#111]"
+            style={{
+              fontFamily: "'Caveat', cursive",
+              fontSize: "14px",
+            }}
+          >
+            Sunflower.png
+          </p>
         </div>
-        <p className="text-[11px] md:text-[12px] leading-[1.7] text-[#3a3a3a]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-          I use AI to quickly move from an unclear idea to a structured starting
-          point. It helps me explore flows, generate screen ideas, write
-          first-pass copy, and identify missing states before I begin detailed
-          design work.
-        </p>
+        <div className="flex flex-col items-center gap-2">
+          <img
+            src="/dance-lover.png"
+            alt="Dance Lover"
+            className="w-[80px] md:w-[100px] h-auto object-contain"
+          />
+          <p
+            className="text-[#111]"
+            style={{
+              fontFamily: "'Caveat', cursive",
+              fontSize: "14px",
+            }}
+          >
+            DanceLover.png
+          </p>
+        </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 md:gap-5">
-        <ProfileAsset src={profileAssets[2].src} label={profileAssets[2].label} />
-        <ProfileAsset src={profileAssets[3].src} label={profileAssets[3].label} />
+      {/* Browser Window Text Box */}
+      <div className="relative mt-2">
+        {/* Browser top bar */}
+        <div
+          className="flex items-center gap-2 px-4 py-2.5 rounded-t-xl"
+          style={{ background: "#E5E1D6" }}
+        >
+          <span className="w-2.5 h-2.5 rounded-full bg-[#FF6714]" />
+          <span className="w-2.5 h-2.5 rounded-full bg-[#F2C94C]" />
+          <span className="w-2.5 h-2.5 rounded-full bg-[#6FA8BF]" />
+        </div>
+        
+        {/* Sunflower hanging on top right of the box */}
+        <div className="absolute -top-6 -right-2 md:-right-4">
+            <img src="/sunflower.png" alt="Sunflower" className="w-[50px] md:w-[60px] h-auto object-contain drop-shadow-md" />
+        </div>
+
+        {/* Browser content */}
+        <div
+          className="p-6 rounded-b-xl flex flex-col"
+          style={{
+            background: "#FFFFFF",
+            border: "1px solid #DAD8D3",
+            borderTop: "none",
+          }}
+        >
+          <p
+            className="text-[#3a3a3a]"
+            style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: "15px",
+              lineHeight: "24px",
+            }}
+          >
+            I use AI to quickly move from an unclear idea to a structured
+            starting point. It helps me explore flows, generate screen ideas,
+            write first-pass copy, and identify missing states before I begin
+            detailed design work.
+          </p>
+        </div>
+      </div>
+
+      {/* Bottom Row: Tea + Beach */}
+      <div className="grid grid-cols-2 gap-6 mt-4">
+        <div className="flex flex-col items-center gap-2">
+          <img
+            src="/tea-lover.png"
+            alt="Tea Lover"
+            className="w-[80px] md:w-[100px] h-auto object-contain"
+          />
+          <p
+            className="text-[#111]"
+            style={{
+              fontFamily: "'Caveat', cursive",
+              fontSize: "14px",
+            }}
+          >
+            TeaLover.png
+          </p>
+        </div>
+        <div className="flex flex-col items-center gap-2">
+          <img
+            src="/beach-lover.png"
+            alt="Beach Lover"
+            className="w-[80px] md:w-[100px] h-auto object-contain"
+          />
+          <p
+            className="text-[#111]"
+            style={{
+              fontFamily: "'Caveat', cursive",
+              fontSize: "14px",
+            }}
+          >
+            BeachLover.png
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -1441,7 +1548,6 @@ const AIExperimentsSection = () => (
     <div className="mx-auto flex flex-col gap-12 md:gap-16 lg:gap-24 max-w-[1400px]">
       <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 lg:gap-8">
         <div>
-          {/* AI EXPERIMENTS — DM Sans 700, 14px, lh 20.53px, ls 1.92px, uppercase, orange */}
           <p
             className="mb-3"
             style={{
@@ -1456,7 +1562,6 @@ const AIExperimentsSection = () => (
           >
             AI Experiments
           </p>
-          {/* AI-POWERED DESIGN EXPERIMENTS — Libre Franklin 400, 68px, lh 73.93px, ls -3.08px */}
           <h2
             className="text-[#111]"
             style={{
@@ -1472,7 +1577,6 @@ const AIExperimentsSection = () => (
             Experiments
           </h2>
         </div>
-        {/* RIGHT TEXT — DM Sans 400, 18px, lh 31.03px, ls 0px */}
         <p
           className="max-w-[340px] lg:pt-16"
           style={{
