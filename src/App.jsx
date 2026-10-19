@@ -963,7 +963,7 @@ const ExperienceSection = () => (
 );
 
 // ============================================================
-// AI WORKFLOW SECTION — Typography Updated
+// AI WORKFLOW SECTION
 // ============================================================
 
 const traditionalBars = [
@@ -982,7 +982,6 @@ const aiBars = [
 
 const WorkflowBars = ({ title, titleColor, bars }) => (
   <div className="flex flex-col gap-4">
-    {/* TITLE — DM Sans 700, 14px, lh 20.53px, ls 1.92px, uppercase, orange */}
     <p
       style={{
         fontFamily: "'DM Sans', sans-serif",
@@ -999,7 +998,6 @@ const WorkflowBars = ({ title, titleColor, bars }) => (
     <div className="flex flex-col gap-3">
       {bars.map((bar) => (
         <div key={bar.label} className="flex items-center gap-3 md:gap-4">
-          {/* LABEL — DM Sans 400, 18px, lh 31.03px */}
           <p
             className="text-[#282725] w-[80px] md:w-[110px] shrink-0"
             style={{
@@ -1018,7 +1016,6 @@ const WorkflowBars = ({ title, titleColor, bars }) => (
               style={{ width: bar.width, background: bar.filled ? "#FF6714" : "#8a8a8a" }}
             />
           </div>
-          {/* VALUE — DM Sans 400, 18px, lh 31.03px */}
           <p
             className="text-[#5a5a5a] w-[60px] text-right shrink-0"
             style={{
@@ -1099,7 +1096,6 @@ const AIWorkflowSection = () => (
     <div className="mx-auto flex flex-col gap-10 md:gap-14 lg:gap-20 max-w-[1400px]">
       <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 lg:gap-10">
         <div>
-          {/* AI-ENHANCED WORKFLOW — DM Sans 700, 14px, lh 20.53px, ls 1.92px, uppercase, orange */}
           <p
             className="mb-3"
             style={{
@@ -1114,7 +1110,6 @@ const AIWorkflowSection = () => (
           >
             AI-Enhanced Workflow
           </p>
-          {/* AI IS PART OF MY WORKFLOW — Libre Franklin 400, 68px, lh 73.93px, ls -3.08px */}
           <h2
             className="text-[#111]"
             style={{
@@ -1130,7 +1125,6 @@ const AIWorkflowSection = () => (
             Not my decision maker.
           </h2>
         </div>
-        {/* RIGHT TEXT — DM Sans 400, 18px, lh 31.03px */}
         <p
           className="max-w-[340px] lg:pt-16"
           style={{
@@ -1158,7 +1152,6 @@ const AIWorkflowSection = () => (
             padding: "28px 24px",
           }}
         >
-          {/* DESC — DM Sans 400, 18px, lh 31.03px */}
           <p
             style={{
               fontFamily: "'DM Sans', sans-serif",
@@ -1202,7 +1195,6 @@ const AIWorkflowSection = () => (
             bars={traditionalBars}
           />
           <WorkflowBars title="Time taken with AI" titleColor="#FF6714" bars={aiBars} />
-          {/* BOTTOM NOTE — DM Sans 400, 18px, lh 31.03px, orange */}
           <p
             style={{
               fontFamily: "'DM Sans', sans-serif",
@@ -1224,13 +1216,13 @@ const AIWorkflowSection = () => (
 );
 
 // ============================================================
-// AI-POWERED EXPERIMENTS SECTION
+// AI-POWERED EXPERIMENTS SECTION — Typography Updated
 // ============================================================
 
 const experiments = [
   {
     title: "Claude design",
-    desc: "Created landing page concepts, structure, and micro-interactions using Claude.",
+    desc: "Created landing page concepts, structure, and copy explorations using Claude.",
     tag: "Real estate",
     image: "/experimnts1.png",
   },
@@ -1278,13 +1270,47 @@ const ExperimentCard = ({ item }) => (
     />
 
     <div className="flex flex-col gap-2 flex-1">
-      <h3 className="text-[14px] md:text-[15px] font-semibold text-[#111]" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>
+      {/* TITLE — Libre Franklin 700, 19px, lh 21.28px, ls -0.67px */}
+      <h3
+        className="text-[#111]"
+        style={{
+          fontFamily: "'Libre Franklin', sans-serif",
+          fontWeight: 700,
+          fontSize: "19px",
+          lineHeight: "21.28px",
+          letterSpacing: "-0.67px",
+        }}
+      >
         {item.title}
       </h3>
-      <p className="text-[11px] md:text-[11.5px] leading-[1.6] text-[#5a5a5a]" style={{ fontFamily: "'DM Sans', sans-serif" }}>{item.desc}</p>
-      <p className="text-[9px] md:text-[10px] tracking-[0.15em] uppercase text-[#8a8478] mt-auto pt-2" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>
-        {item.tag}
+      {/* DESC — DM Sans 400, 16px, lh 24px, ls -0.24px */}
+      <p
+        className="text-[#5a5a5a]"
+        style={{
+          fontFamily: "'DM Sans', sans-serif",
+          fontWeight: 400,
+          fontSize: "16px",
+          lineHeight: "24px",
+          letterSpacing: "-0.24px",
+        }}
+      >
+        {item.desc}
       </p>
+      {/* READ MORE — Arial 700, 14px, lh 14px, ls 0px */}
+      <a
+        href="#"
+        className="mt-auto pt-2 hover:opacity-70 transition-opacity inline-flex items-center"
+        style={{
+          fontFamily: "Arial, sans-serif",
+          fontWeight: 700,
+          fontSize: "14px",
+          lineHeight: "14px",
+          letterSpacing: "0px",
+          color: "#111",
+        }}
+      >
+        Read more →
+      </a>
     </div>
   </div>
 );
@@ -1415,18 +1441,51 @@ const AIExperimentsSection = () => (
     <div className="mx-auto flex flex-col gap-12 md:gap-16 lg:gap-24 max-w-[1400px]">
       <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 lg:gap-8">
         <div>
-          <p className="text-[#FF6714] tracking-[0.15em] mb-3 font-bold text-[10px] md:text-[11px] uppercase" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>
+          {/* AI EXPERIMENTS — DM Sans 700, 14px, lh 20.53px, ls 1.92px, uppercase, orange */}
+          <p
+            className="mb-3"
+            style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontWeight: 700,
+              fontSize: "14px",
+              lineHeight: "20.53px",
+              letterSpacing: "1.92px",
+              textTransform: "uppercase",
+              color: "#FF6714",
+            }}
+          >
             AI Experiments
           </p>
-          <h2 className="text-[32px] md:text-[42px] lg:text-[56px] leading-[1.1] text-[#111] font-medium max-w-[600px]" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>
+          {/* AI-POWERED DESIGN EXPERIMENTS — Libre Franklin 400, 68px, lh 73.93px, ls -3.08px */}
+          <h2
+            className="text-[#111]"
+            style={{
+              fontFamily: "'Libre Franklin', sans-serif",
+              fontWeight: 400,
+              fontSize: "68px",
+              lineHeight: "73.93px",
+              letterSpacing: "-3.08px",
+            }}
+          >
             AI-Powered Design
             <br />
             Experiments
           </h2>
         </div>
-        <p className="text-[11px] md:text-[13px] text-[#4a4a4a] max-w-[340px] leading-[1.6] lg:pt-16" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+        {/* RIGHT TEXT — DM Sans 400, 18px, lh 31.03px, ls 0px */}
+        <p
+          className="max-w-[340px] lg:pt-16"
+          style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontWeight: 400,
+            fontSize: "18px",
+            lineHeight: "31.03px",
+            letterSpacing: "0px",
+            color: "#4a4a4a",
+          }}
+        >
           A collection of AI-led explorations where I used Claude and Google
-          Stitch to build landing page concepts, and Majestic AI with ChatGPT to
+          Stitch to build landing page concepts, and Magnific AI with ChatGPT to
           create images, videos, and visual assets.
         </p>
       </div>
