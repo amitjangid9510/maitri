@@ -1400,120 +1400,124 @@ const ProfileCard = () => (
 
     {/* ---------- RIGHT SIDE: Images & Text ---------- */}
     <div
-      className="w-full md:w-[55%] flex flex-col p-6 md:p-10 gap-6 border-t md:border-t-0 md:border-l border-[#DAD8D3]"
+      className="relative w-full md:w-[55%] flex flex-col p-6 md:p-10 gap-6 border-t md:border-t-0 md:border-l border-[#DAD8D3]"
       style={{ background: "#FAF9F5" }}
     >
-      {/* Top Row: Sunflower + Dance */}
-      <div className="grid grid-cols-2 gap-6 mt-4">
-        <div className="flex flex-col items-center gap-2">
-          <img
-            src="/sunflower.png"
-            alt="Sunflower"
-            className="w-[80px] md:w-[100px] h-auto object-contain"
-          />
-          <p
-            className="text-[#111]"
-            style={{
-              fontFamily: "'Caveat', cursive",
-              fontSize: "14px",
-            }}
-          >
-            Sunflower.png
-          </p>
-        </div>
-        <div className="flex flex-col items-center gap-2">
-          <img
-            src="/dance-lover.png"
-            alt="Dance Lover"
-            className="w-[80px] md:w-[100px] h-auto object-contain"
-          />
-          <p
-            className="text-[#111]"
-            style={{
-              fontFamily: "'Caveat', cursive",
-              fontSize: "14px",
-            }}
-          >
-            DanceLover.png
-          </p>
-        </div>
-      </div>
+      <DotPattern />
 
-      {/* Browser Window Text Box */}
-      <div className="relative mt-2">
-        {/* Browser top bar */}
-        <div
-          className="flex items-center gap-2 px-4 py-2.5 rounded-t-xl"
-          style={{ background: "#E5E1D6" }}
-        >
-          <span className="w-2.5 h-2.5 rounded-full bg-[#FF6714]" />
-          <span className="w-2.5 h-2.5 rounded-full bg-[#F2C94C]" />
-          <span className="w-2.5 h-2.5 rounded-full bg-[#6FA8BF]" />
+      <div className="relative z-10 flex flex-col gap-6 h-full">
+        {/* Top Row: Sunflower + Dance */}
+        <div className="grid grid-cols-2 gap-6 mt-4">
+          <div className="flex flex-col items-center gap-2">
+            <img
+              src="/sunflower.png"
+              alt="Sunflower"
+              className="w-[80px] md:w-[100px] h-auto object-contain"
+            />
+            <p
+              className="text-[#111]"
+              style={{
+                fontFamily: "'Caveat', cursive",
+                fontSize: "14px",
+              }}
+            >
+              Sunflower.png
+            </p>
+          </div>
+          <div className="flex flex-col items-center gap-2">
+            <img
+              src="/dance-lover.png"
+              alt="Dance Lover"
+              className="w-[80px] md:w-[100px] h-auto object-contain"
+            />
+            <p
+              className="text-[#111]"
+              style={{
+                fontFamily: "'Caveat', cursive",
+                fontSize: "14px",
+              }}
+            >
+              DanceLover.png
+            </p>
+          </div>
         </div>
-        
-        {/* Sunflower hanging on top right of the box */}
-        <div className="absolute -top-6 -right-2 md:-right-4">
+
+        {/* Browser Window Text Box */}
+        <div className="relative mt-2">
+          {/* Browser top bar */}
+          <div
+            className="flex items-center gap-2 px-4 py-2.5 rounded-t-xl"
+            style={{ background: "#E5E1D6" }}
+          >
+            <span className="w-2.5 h-2.5 rounded-full bg-[#FF6714]" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#F2C94C]" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#6FA8BF]" />
+          </div>
+
+          {/* Sunflower hanging on top right of the box */}
+          <div className="absolute -top-6 -right-2 md:-right-4">
             <img src="/sunflower.png" alt="Sunflower" className="w-[50px] md:w-[60px] h-auto object-contain drop-shadow-md" />
+          </div>
+
+          {/* Browser content */}
+          <div
+            className="p-6 rounded-b-xl flex flex-col"
+            style={{
+              background: "#FFFFFF",
+              border: "1px solid #DAD8D3",
+              borderTop: "none",
+            }}
+          >
+            <p
+              className="text-[#3a3a3a]"
+              style={{
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: "15px",
+                lineHeight: "24px",
+              }}
+            >
+              I use AI to quickly move from an unclear idea to a structured
+              starting point. It helps me explore flows, generate screen ideas,
+              write first-pass copy, and identify missing states before I begin
+              detailed design work.
+            </p>
+          </div>
         </div>
 
-        {/* Browser content */}
-        <div
-          className="p-6 rounded-b-xl flex flex-col"
-          style={{
-            background: "#FFFFFF",
-            border: "1px solid #DAD8D3",
-            borderTop: "none",
-          }}
-        >
-          <p
-            className="text-[#3a3a3a]"
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: "15px",
-              lineHeight: "24px",
-            }}
-          >
-            I use AI to quickly move from an unclear idea to a structured
-            starting point. It helps me explore flows, generate screen ideas,
-            write first-pass copy, and identify missing states before I begin
-            detailed design work.
-          </p>
-        </div>
-      </div>
-
-      {/* Bottom Row: Tea + Beach */}
-      <div className="grid grid-cols-2 gap-6 mt-4">
-        <div className="flex flex-col items-center gap-2">
-          <img
-            src="/tea-lover.png"
-            alt="Tea Lover"
-            className="w-[80px] md:w-[100px] h-auto object-contain"
-          />
-          <p
-            className="text-[#111]"
-            style={{
-              fontFamily: "'Caveat', cursive",
-              fontSize: "14px",
-            }}
-          >
-            TeaLover.png
-          </p>
-        </div>
-        <div className="flex flex-col items-center gap-2">
-          <img
-            src="/beach-lover.png"
-            alt="Beach Lover"
-            className="w-[80px] md:w-[100px] h-auto object-contain"
-          />
-          <p
-            className="text-[#111]"
-            style={{
-              fontFamily: "'Caveat', cursive",
-              fontSize: "14px",
-            }}
-          >
-            BeachLover.png
-          </p>
+        {/* Bottom Row: Tea + Beach */}
+        <div className="grid grid-cols-2 gap-6 mt-4">
+          <div className="flex flex-col items-center gap-2">
+            <img
+              src="/tea-lover.png"
+              alt="Tea Lover"
+              className="w-[80px] md:w-[100px] h-auto object-contain"
+            />
+            <p
+              className="text-[#111]"
+              style={{
+                fontFamily: "'Caveat', cursive",
+                fontSize: "14px",
+              }}
+            >
+              TeaLover.png
+            </p>
+          </div>
+          <div className="flex flex-col items-center gap-2">
+            <img
+              src="/beach-lover.png"
+              alt="Beach Lover"
+              className="w-[80px] md:w-[100px] h-auto object-contain"
+            />
+            <p
+              className="text-[#111]"
+              style={{
+                fontFamily: "'Caveat', cursive",
+                fontSize: "14px",
+              }}
+            >
+              BeachLover.png
+            </p>
+          </div>
         </div>
       </div>
     </div>
