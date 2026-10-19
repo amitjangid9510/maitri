@@ -826,12 +826,12 @@ const ToolBox = ({ name }) => (
 const experiences = [
   {
     company: "Logiclopp / Realatte",
-    role: "Executive UI/UX Designer / Gen AI + Agentic AI Designer – 08 Apr 2024 – Present",
+    role: "Executive UI/UX Designer / Gen AI + Agentic AI Designer - 08 Apr 2024 - Present",
     tools: ["figma", "claude", "chatgpt", "m"],
   },
   {
     company: "IvotionTech",
-    role: "UI/UX Designer – 01 Apr 2022–01 May 2023",
+    role: "UI/UX Designer - 01 Apr 2022 - 01 May 2023",
     tools: ["figma", "xd", "ai", "ps"],
   },
 ];
@@ -839,10 +839,32 @@ const experiences = [
 const ExperienceRow = ({ item }) => (
   <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 lg:gap-20">
     <div className="flex flex-col gap-2">
-      <h3 className="text-[24px] md:text-[28px] lg:text-[34px] leading-[1.1] text-[#111] font-medium" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>
+      <h3
+        className="text-[#111]"
+        style={{
+          fontFamily: "'Libre Franklin', sans-serif",
+          fontWeight: 500,
+          fontSize: "40px",
+          lineHeight: "100%",
+          letterSpacing: "-0.02em",
+          textTransform: "capitalize",
+        }}
+      >
         {item.company}
       </h3>
-      <p className="text-[10px] md:text-[11px] text-[#4a4a4a]" style={{ fontFamily: "'DM Sans', sans-serif" }}>{item.role}</p>
+      <p
+        className="text-[#4a4a4a]"
+        style={{
+          fontFamily: "'DM Sans', sans-serif",
+          fontWeight: 500,
+          fontSize: "15.19px",
+          lineHeight: "20.17px",
+          letterSpacing: "0.02em",
+          textTransform: "capitalize",
+        }}
+      >
+        {item.role}
+      </p>
     </div>
     <div className="flex items-center flex-wrap gap-2.5 md:gap-3 lg:gap-4">
       {item.tools.map((tool) => (
@@ -880,16 +902,47 @@ const ExperienceSection = () => (
     <div className="mx-auto flex flex-col gap-12 md:gap-16 lg:gap-20 max-w-[1401px]">
       <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 lg:gap-8">
         <div>
-          <p className="text-[#C4552E] tracking-[0.15em] mb-3 font-medium text-[11px] md:text-[12px] uppercase" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>
+          <p
+            className="mb-3"
+            style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontWeight: 700,
+              fontSize: "14px",
+              lineHeight: "20.53px",
+              letterSpacing: "1.92px",
+              textTransform: "uppercase",
+              color: "#FF6714",
+            }}
+          >
             Selected work
           </p>
-          <h2 className="text-[32px] md:text-[42px] lg:text-[52px] leading-[1.05] text-[#111] font-medium max-w-[600px]" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>
+          <h2
+            className="text-[#111]"
+            style={{
+              fontFamily: "'Libre Franklin', sans-serif",
+              fontWeight: 400,
+              fontSize: "68px",
+              lineHeight: "73.93px",
+              letterSpacing: "-3.08px",
+            }}
+          >
             Problems explored with
             <br />
             purpose.
           </h2>
         </div>
-        <p className="text-[11px] md:text-[12px] text-[#6b6b6b] max-w-[320px] leading-[1.6] lg:pt-14" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+
+        <p
+          className="max-w-[340px] lg:pt-14"
+          style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontWeight: 400,
+            fontSize: "18px",
+            lineHeight: "31.03px",
+            letterSpacing: "0px",
+            color: "#716F6B",
+          }}
+        >
           These project slots are ready for your real screenshots, process, and
           measurable outcomes.
         </p>
@@ -910,7 +963,7 @@ const ExperienceSection = () => (
 );
 
 // ============================================================
-// AI WORKFLOW SECTION
+// AI WORKFLOW SECTION — Typography Updated
 // ============================================================
 
 const traditionalBars = [
@@ -929,20 +982,55 @@ const aiBars = [
 
 const WorkflowBars = ({ title, titleColor, bars }) => (
   <div className="flex flex-col gap-4">
-    <p className="text-[10px] md:text-[11px] tracking-[0.15em] font-medium uppercase" style={{ fontFamily: "'Libre Franklin', sans-serif", color: titleColor }}>
+    {/* TITLE — DM Sans 700, 14px, lh 20.53px, ls 1.92px, uppercase, orange */}
+    <p
+      style={{
+        fontFamily: "'DM Sans', sans-serif",
+        fontWeight: 700,
+        fontSize: "14px",
+        lineHeight: "20.53px",
+        letterSpacing: "1.92px",
+        textTransform: "uppercase",
+        color: titleColor,
+      }}
+    >
       {title}
     </p>
     <div className="flex flex-col gap-3">
       {bars.map((bar) => (
         <div key={bar.label} className="flex items-center gap-3 md:gap-4">
-          <p className="text-[11px] md:text-[13px] text-[#282725] w-[80px] md:w-[110px] shrink-0" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>{bar.label}</p>
+          {/* LABEL — DM Sans 400, 18px, lh 31.03px */}
+          <p
+            className="text-[#282725] w-[80px] md:w-[110px] shrink-0"
+            style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontWeight: 400,
+              fontSize: "18px",
+              lineHeight: "31.03px",
+              letterSpacing: "0px",
+            }}
+          >
+            {bar.label}
+          </p>
           <div className="relative flex-1 h-[6px] bg-[#BDBDBD]/70 rounded-full overflow-hidden">
             <div
               className="absolute left-0 top-0 h-full rounded-full"
               style={{ width: bar.width, background: bar.filled ? "#FF6714" : "#8a8a8a" }}
             />
           </div>
-          <p className="text-[10px] md:text-[11px] text-[#5a5a5a] w-[38px] md:w-[42px] text-right shrink-0" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>{bar.value}</p>
+          {/* VALUE — DM Sans 400, 18px, lh 31.03px */}
+          <p
+            className="text-[#5a5a5a] w-[60px] text-right shrink-0"
+            style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontWeight: 400,
+              fontSize: "18px",
+              lineHeight: "31.03px",
+              letterSpacing: "0px",
+            }}
+          >
+            {bar.value}
+          </p>
         </div>
       ))}
     </div>
@@ -951,20 +1039,37 @@ const WorkflowBars = ({ title, titleColor, bars }) => (
 
 const FlowStep = ({ label }) => (
   <div
-    className="inline-flex items-center justify-center text-[11px] md:text-[13px] text-[#282725]"
+    className="inline-flex items-center justify-center text-[#282725]"
     style={{
       background: "#F5F1E7",
       border: "0.75px solid #DAD8D3",
       borderRadius: "6px",
       padding: "6px 12px",
       fontFamily: "'DM Sans', sans-serif",
+      fontWeight: 400,
+      fontSize: "18px",
+      lineHeight: "31.03px",
+      letterSpacing: "0px",
     }}
   >
     {label}
   </div>
 );
 
-const FlowArrow = () => <span className="text-[#8a8478] text-[12px] md:text-[14px] mx-1.5 md:mx-2">→</span>;
+const FlowArrow = () => (
+  <span
+    className="text-[#8a8478] mx-1.5 md:mx-2"
+    style={{
+      fontFamily: "'DM Sans', sans-serif",
+      fontWeight: 400,
+      fontSize: "18px",
+      lineHeight: "31.03px",
+      letterSpacing: "0px",
+    }}
+  >
+    →
+  </span>
+);
 
 const AIWorkflowSection = () => (
   <section id="ai-workflow" className="relative w-full ai-workflow-wrapper">
@@ -994,16 +1099,49 @@ const AIWorkflowSection = () => (
     <div className="mx-auto flex flex-col gap-10 md:gap-14 lg:gap-20 max-w-[1400px]">
       <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 lg:gap-10">
         <div>
-          <p className="text-[#FF6714] tracking-[0.15em] mb-3 font-bold text-[10px] md:text-[11px] uppercase" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>
+          {/* AI-ENHANCED WORKFLOW — DM Sans 700, 14px, lh 20.53px, ls 1.92px, uppercase, orange */}
+          <p
+            className="mb-3"
+            style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontWeight: 700,
+              fontSize: "14px",
+              lineHeight: "20.53px",
+              letterSpacing: "1.92px",
+              textTransform: "uppercase",
+              color: "#FF6714",
+            }}
+          >
             AI-Enhanced Workflow
           </p>
-          <h2 className="text-[32px] md:text-[42px] lg:text-[56px] leading-[1.1] text-[#111] font-medium max-w-[760px]" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>
+          {/* AI IS PART OF MY WORKFLOW — Libre Franklin 400, 68px, lh 73.93px, ls -3.08px */}
+          <h2
+            className="text-[#111]"
+            style={{
+              fontFamily: "'Libre Franklin', sans-serif",
+              fontWeight: 400,
+              fontSize: "68px",
+              lineHeight: "73.93px",
+              letterSpacing: "-3.08px",
+            }}
+          >
             AI is part of my workflow.
             <br />
             Not my decision maker.
           </h2>
         </div>
-        <p className="text-[11px] md:text-[13px] text-[#4a4a4a] max-w-[320px] leading-[1.6] lg:pt-16" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+        {/* RIGHT TEXT — DM Sans 400, 18px, lh 31.03px */}
+        <p
+          className="max-w-[340px] lg:pt-16"
+          style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontWeight: 400,
+            fontSize: "18px",
+            lineHeight: "31.03px",
+            letterSpacing: "0px",
+            color: "#4a4a4a",
+          }}
+        >
           AI removes the friction from my process so the craft gets more of my
           attention, not less. Here&apos;s where it plugs in – and where the
           decisions stay human.
@@ -1020,7 +1158,17 @@ const AIWorkflowSection = () => (
             padding: "28px 24px",
           }}
         >
-          <p className="text-[13px] md:text-[15px] leading-[1.75] text-[#282725]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+          {/* DESC — DM Sans 400, 18px, lh 31.03px */}
+          <p
+            style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontWeight: 400,
+              fontSize: "18px",
+              lineHeight: "31.03px",
+              letterSpacing: "0px",
+              color: "#282725",
+            }}
+          >
             I use AI to quickly move from an unclear idea to a structured
             starting point. It helps me explore flows, generate screen ideas,
             write first-pass copy, and identify missing states before I begin
@@ -1054,7 +1202,17 @@ const AIWorkflowSection = () => (
             bars={traditionalBars}
           />
           <WorkflowBars title="Time taken with AI" titleColor="#FF6714" bars={aiBars} />
-          <p className="text-[11px] md:text-[13px] leading-[1.6] text-[#FF6714]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+          {/* BOTTOM NOTE — DM Sans 400, 18px, lh 31.03px, orange */}
+          <p
+            style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontWeight: 400,
+              fontSize: "18px",
+              lineHeight: "31.03px",
+              letterSpacing: "0px",
+              color: "#FF6714",
+            }}
+          >
             AI reduced the overall design workflow time by around{" "}
             <strong>65–70%</strong>, helping me move faster from research to
             refined design.
