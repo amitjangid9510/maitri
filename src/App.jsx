@@ -1319,7 +1319,7 @@ const ExperimentCard = ({ item }) => (
 );
 
 // ============================================================
-// PROFILE CARD — Exact Figma Design
+// PROFILE CARD
 // ============================================================
 
 const ProfileCard = () => (
@@ -1337,7 +1337,6 @@ const ProfileCard = () => (
       <DotPattern />
 
       <div className="relative z-10 w-full flex flex-col items-center md:items-start">
-        {/* Name and title */}
         <p
           className="text-[#E5592E] leading-none mb-1"
           style={{
@@ -1371,7 +1370,6 @@ const ProfileCard = () => (
           </span>
         </div>
 
-        {/* Photo */}
         <div
           className="relative w-[260px] h-[320px] md:w-[280px] md:h-[350px] rounded-xl overflow-hidden shadow-lg"
           style={{ background: "#E8E2D5" }}
@@ -1381,7 +1379,6 @@ const ProfileCard = () => (
             alt="Maitri Shah"
             className="w-full h-full object-cover"
           />
-          {/* Orange Tag */}
           <div
             className="absolute bottom-0 right-0 text-white px-4 py-1.5 flex items-center gap-2"
             style={{
@@ -1406,7 +1403,6 @@ const ProfileCard = () => (
       <DotPattern />
 
       <div className="relative z-10 flex flex-col gap-6 h-full">
-        {/* Top Row: Sunflower + Dance */}
         <div className="grid grid-cols-2 gap-6 mt-4">
           <div className="flex flex-col items-center gap-2">
             <img
@@ -1442,9 +1438,7 @@ const ProfileCard = () => (
           </div>
         </div>
 
-        {/* Browser Window Text Box */}
         <div className="relative mt-2">
-          {/* Browser top bar */}
           <div
             className="flex items-center gap-2 px-4 py-2.5 rounded-t-xl"
             style={{ background: "#E5E1D6" }}
@@ -1454,12 +1448,10 @@ const ProfileCard = () => (
             <span className="w-2.5 h-2.5 rounded-full bg-[#6FA8BF]" />
           </div>
 
-          {/* Sunflower hanging on top right of the box */}
           <div className="absolute -top-6 -right-2 md:-right-4">
             <img src="/sunflower.png" alt="Sunflower" className="w-[50px] md:w-[60px] h-auto object-contain drop-shadow-md" />
           </div>
 
-          {/* Browser content */}
           <div
             className="p-6 rounded-b-xl flex flex-col"
             style={{
@@ -1484,7 +1476,6 @@ const ProfileCard = () => (
           </div>
         </div>
 
-        {/* Bottom Row: Tea + Beach */}
         <div className="grid grid-cols-2 gap-6 mt-4">
           <div className="flex flex-col items-center gap-2">
             <img
@@ -1610,7 +1601,7 @@ const AIExperimentsSection = () => (
 );
 
 // ============================================================
-// CONTACT / CTA SECTION
+// CONTACT / CTA SECTION — Typography Updated
 // ============================================================
 
 const orbitCards = [
@@ -1637,9 +1628,11 @@ const OrbitCard = ({ style, rotate }) => (
       ...style,
     }}
   >
-    <div className="w-full h-full flex items-center justify-center text-[30px] md:text-[40px] lg:text-[54px]">
-      🖼️
-    </div>
+    <img
+      src="/last-image.jpg"
+      alt="Orbit photo"
+      className="w-full h-full object-cover"
+    />
   </div>
 );
 
@@ -1654,63 +1647,97 @@ const SocialIcon = ({ label }) => (
 );
 
 const ContactSection = () => (
-  <section id="contact" className="relative w-full overflow-hidden contact-wrapper">
+  <section
+    id="contact"
+    className="relative w-full overflow-hidden"
+    style={{
+      background: "#F5F1E7",
+      borderTopLeftRadius: "48px",
+      borderTopRightRadius: "48px",
+    }}
+  >
     <style>{`
       .contact-wrapper {
-        background: #F5F1E7;
-        border-top-left-radius: 48px;
-        border-top-right-radius: 48px;
-        padding: 60px 20px 80px;
+        padding: 60px 20px 0;
+        min-height: auto;
       }
       @media (min-width: 768px) {
         .contact-wrapper {
-          border-top-left-radius: 70px;
-          border-top-right-radius: 70px;
-          padding: 80px 30px 100px;
+          padding: 80px 30px 0;
         }
       }
       @media (min-width: 1024px) {
         .contact-wrapper {
-          border-top-left-radius: 100px;
-          border-top-right-radius: 100px;
-          padding: 80px 40px 100px;
-          min-height: 1000px;
+          padding: 80px 40px 0;
         }
       }
     `}</style>
 
-    <div className="relative mx-auto h-[500px] md:h-[600px] lg:h-[700px] max-w-[1400px]">
-      {orbitCards.map((c, i) => (
-        <OrbitCard key={i} style={{ top: c.top, left: c.left }} rotate={c.rotate} />
-      ))}
+    <div className="contact-wrapper">
+      <div className="relative mx-auto h-[500px] md:h-[600px] lg:h-[680px] max-w-[1400px]">
+        {orbitCards.map((c, i) => (
+          <OrbitCard key={i} style={{ top: c.top, left: c.left }} rotate={c.rotate} />
+        ))}
 
-      <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
-        <p
-          className="text-[#E5592E] mb-3 md:mb-4"
-          style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, fontSize: "26px" }}
-        >
-          Let&apos;s make something useful
-        </p>
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+          {/* "Let's make something useful" — Caveat 600, 40px, lh 60px, color #FF6714 */}
+          <p
+            className="mb-4 md:mb-6"
+            style={{
+              fontFamily: "'Caveat', cursive",
+              fontWeight: 600,
+              fontSize: "40px",
+              lineHeight: "60px",
+              letterSpacing: "0px",
+              textAlign: "center",
+              color: "#FF6714",
+            }}
+          >
+            Let&apos;s make something useful
+          </p>
 
-        <h2 className="text-[34px] md:text-[46px] lg:text-[60px] leading-[1.1] text-[#111] font-medium max-w-[820px]" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>
-          Have a thoughtful product
-          <br />
-          problem to solve?
-        </h2>
+          {/* "Have a thoughtful..." — Libre Franklin 400, 67.11px, lh 72.47px, ls -3.02px */}
+          <h2
+            className="max-w-[900px]"
+            style={{
+              fontFamily: "'Libre Franklin', sans-serif",
+              fontWeight: 400,
+              fontSize: "67.11px",
+              lineHeight: "72.47px",
+              letterSpacing: "-3.02px",
+              textAlign: "center",
+              color: "#111",
+            }}
+          >
+            Have a thoughtful product
+            <br />
+            problem to solve?
+          </h2>
 
-        <div className="flex items-center gap-3 md:gap-4 mt-6 md:mt-10">
-          <SocialIcon label="in" />
-          <SocialIcon label="Bē" />
-          <SocialIcon label="M" />
+          <div className="flex items-center gap-3 md:gap-4 mt-6 md:mt-10">
+            <SocialIcon label="in" />
+            <SocialIcon label="Bē" />
+            <SocialIcon label="M" />
+          </div>
+
+          {/* "Add your email" — DM Sans 400, 16px, lh 24px */}
+          <a
+            href="#"
+            className="mt-6 md:mt-10 inline-flex items-center gap-2 text-white rounded-full hover:opacity-90 transition-opacity"
+            style={{
+              background: "#282725",
+              fontFamily: "'DM Sans', sans-serif",
+              fontWeight: 400,
+              fontSize: "16px",
+              lineHeight: "24px",
+              letterSpacing: "0px",
+              textAlign: "center",
+              padding: "12px 28px",
+            }}
+          >
+            Add your email <span>↗</span>
+          </a>
         </div>
-
-        <a
-          href="#"
-          className="mt-6 md:mt-10 inline-flex items-center gap-2 text-white text-[12px] md:text-[13px] px-5 md:px-6 py-2.5 md:py-3 rounded-full hover:opacity-90 transition-opacity"
-          style={{ background: "#282725", fontFamily: "'DM Sans', sans-serif", lineHeight: "19.5px" }}
-        >
-          Add your email <span>↗</span>
-        </a>
       </div>
     </div>
   </section>
