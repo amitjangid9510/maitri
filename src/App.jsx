@@ -649,7 +649,7 @@ const ProblemCard = ({ item }) => (
   >
     <div className="flex-1 min-w-0 md:min-w-[260px] lg:min-w-[280px] max-w-full lg:max-w-[480px] px-5 sm:px-6 md:px-7 lg:px-10 py-6 md:py-7 lg:py-10">
       <p
-        className="text-[#C4552E] mb-1"
+        className="text-[#FF6714] mb-1"
         style={{ fontFamily: "'Caveat', cursive", fontSize: "24px", lineHeight: "34px" }}
       >
         {item.id}
@@ -691,36 +691,35 @@ const ProblemCard = ({ item }) => (
         {item.desc}
       </p>
 
-      <div className="flex flex-col gap-3">
+      {/* UPDATED DESIGN BLOCK */}
+      <div className="flex flex-col gap-6 mt-8">
         <a
           href="#"
-          className="inline-flex items-center gap-2 text-[#111] hover:opacity-70 text-[13px] sm:text-[14px] md:text-[13.5px] lg:text-[15.42px]"
-          style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, lineHeight: "1.5" }}
+          className="inline-flex items-center gap-3 text-[#111] hover:opacity-70 text-[13px] sm:text-[14px] md:text-[13.5px] lg:text-[15.42px]"
+          style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontWeight: 700,
+            lineHeight: "1.5",
+          }}
         >
-          <span
-            className="border border-[#111] rounded-full flex items-center justify-center shrink-0"
-            style={{ width: "20px", height: "20px", fontSize: "10px" }}
-          >
-            ✕
-          </span>
+          <span className="w-[2px] h-[18px] bg-[#111] shrink-0" />
           Add your strongest outcome
         </a>
 
         <a
           href="#"
-          className="inline-flex items-center justify-center gap-2 text-white rounded-full hover:opacity-90 transition-opacity text-[14px] sm:text-[16px] md:text-[15px] lg:text-[18px]"
+          className="inline-flex items-center gap-2 text-[#111] hover:opacity-70 transition-opacity text-[14px] sm:text-[16px] md:text-[15px] lg:text-[18px] pb-2 border-b border-[#111] w-fit"
           style={{
-            background: "#282725",
             fontFamily: "'DM Sans', sans-serif",
             fontWeight: 600,
             lineHeight: "1.5",
-            padding: "10px 22px",
-            width: "fit-content",
           }}
         >
           View case study
+          <img src="/arrow.png" alt="arrow" className="w-3.5 h-3.5 sm:w-4 sm:h-4 object-contain" />
         </a>
       </div>
+      {/* ------------------------ */}
     </div>
 
     <div className="flex-1 w-full flex justify-center md:justify-end items-center px-4 sm:px-6 md:px-4 lg:px-0 md:-mr-6 lg:-mr-16">
