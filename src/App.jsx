@@ -1422,8 +1422,8 @@ const ProfileCard = () => (
               src="/sunflower.png"
               alt="Sunflower"
               style={{
-                width: "70.48px",
-                height: "105.42px",
+                width: "133.54px",
+                height: "133.45px",
                 transform: "rotate(16.85deg)",
                 objectFit: "contain",
               }}
@@ -1436,14 +1436,14 @@ const ProfileCard = () => (
             </p>
           </div>
           
-          {/* Dance Lover */}
+          {/* Dance Lover (Size matched to Sunflower/Tea Lover) */}
           <div className="flex flex-col items-center absolute" style={{ top: "20px", right: "10%" }}>
             <img
               src="/dance-lover.png"
               alt="Dance Lover"
               style={{
-                width: "136px",
-                height: "125.73px",
+                width: "133.54px",
+                height: "133.45px",
                 transform: "rotate(0deg)",
                 objectFit: "contain",
               }}
@@ -1519,14 +1519,14 @@ const ProfileCard = () => (
             </p>
           </div>
           
-          {/* Beach Lover */}
+          {/* Beach Lover (Size matched to Sunflower/Tea Lover) */}
           <div className="flex flex-col items-center absolute" style={{ bottom: "0px", right: "15%" }}>
             <img
               src="/beach-lover.png"
               alt="Beach Lover"
               style={{
-                width: "135.01px",
-                height: "130.76px",
+                width: "133.54px",
+                height: "133.45px",
                 transform: "rotate(0deg)",
                 objectFit: "contain",
               }}
@@ -1712,7 +1712,6 @@ const ContactSection = () => (
         ))}
 
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
-          {/* "Let's make something useful" — Caveat 600, 40px, lh 60px, color #FF6714 */}
           <p
             className="mb-4 md:mb-6"
             style={{
@@ -1728,7 +1727,6 @@ const ContactSection = () => (
             Let&apos;s make something useful
           </p>
 
-          {/* "Have a thoughtful..." — Libre Franklin 400, 67.11px, lh 72.47px, ls -3.02px */}
           <h2
             className="max-w-[900px]"
             style={{
@@ -1752,7 +1750,6 @@ const ContactSection = () => (
             <SocialIcon label="M" />
           </div>
 
-          {/* "Add your email" — DM Sans 400, 16px, lh 24px */}
           <a
             href="#"
             className="mt-6 md:mt-10 inline-flex items-center gap-2 text-white rounded-full hover:opacity-90 transition-opacity"
