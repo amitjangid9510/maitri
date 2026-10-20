@@ -37,35 +37,28 @@ const NavBar = () => {
 
   const handleScroll = (id) => {
     const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   useEffect(() => {
-    const sectionIds = navItems.map((item) => item.id);
-
+    const sectionIds = navItems.map((i) => i.id);
     const handleScrollSpy = () => {
       const triggerLine = window.innerHeight * 0.3;
       let current = sectionIds[0];
       for (const id of sectionIds) {
         const el = document.getElementById(id);
         if (!el) continue;
-        const rect = el.getBoundingClientRect();
-        if (rect.top <= triggerLine) {
-          current = id;
-        }
+        if (el.getBoundingClientRect().top <= triggerLine) current = id;
       }
       setActiveId(current);
     };
-
     window.addEventListener("scroll", handleScrollSpy, { passive: true });
     handleScrollSpy();
     return () => window.removeEventListener("scroll", handleScrollSpy);
   }, []);
 
   return (
-    <div className="fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] md:w-auto max-w-[420px]">
+    <div className="fixed top-3 sm:top-4 md:top-5 lg:top-6 left-1/2 -translate-x-1/2 z-50 w-[92%] sm:w-[80%] md:w-auto max-w-[420px] md:max-w-[460px]">
       <div className="flex items-center justify-center md:justify-start gap-0.5 md:gap-1 bg-[#FAF7EFEB] rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.06)] px-1.5 md:px-2 py-1 md:py-1.5">
         {navItems.map((item) => {
           const isActive = activeId === item.id;
@@ -73,7 +66,7 @@ const NavBar = () => {
             <button
               key={item.id}
               onClick={() => handleScroll(item.id)}
-              className={`px-2.5 md:px-4 py-1 md:py-1.5 text-[12px] md:text-[14px] rounded-full transition-all duration-300 whitespace-nowrap text-center ${
+              className={`flex-1 md:flex-none px-1.5 sm:px-2 md:px-3 lg:px-4 py-1 md:py-1.5 text-[10px] sm:text-[11px] md:text-[12.5px] lg:text-[14px] rounded-full transition-all duration-300 whitespace-nowrap text-center ${
                 isActive
                   ? "bg-white text-black font-bold shadow-sm"
                   : "text-[#444] hover:bg-[#f2f2f2] font-normal"
@@ -94,7 +87,7 @@ const NavBar = () => {
 };
 
 const ScrollHint = () => (
-  <div className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2 text-[9px] md:text-[10px] tracking-[0.25em] text-[#8a8478]">
+  <div className="absolute bottom-4 sm:bottom-5 md:bottom-6 lg:bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2 text-[8px] sm:text-[9px] md:text-[9.5px] lg:text-[10px] tracking-[0.25em] text-[#8a8478] z-20">
     <span className="inline-flex items-center justify-center w-4 h-3 md:w-5 md:h-3 border border-[#8a8478] rounded-full">
       <span className="w-0.5 h-1.5 bg-[#8a8478] rounded-full" />
     </span>
@@ -113,44 +106,30 @@ const Item = ({ style, children, className = "" }) => (
 // ============================================================
 
 const Frame1Mobile = () => (
-  <div className="absolute inset-0 flex flex-col items-center justify-center px-6 pt-20 pb-16 gap-5">
+  <div className="absolute inset-0 flex flex-col items-center justify-center px-4 sm:px-6 pt-16 sm:pt-20 pb-12 sm:pb-16 gap-3 sm:gap-5 overflow-y-auto">
     <div className="text-center">
       <p
         className="text-[#FF6714] leading-none"
-        style={{
-          fontFamily: "'Caveat', cursive",
-          fontWeight: 600,
-          fontSize: "28px",
-        }}
+        style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, fontSize: "22px" }}
       >
         Maitri Shah
       </p>
       <p
         className="text-[#4a4a4a] mt-1"
-        style={{
-          fontFamily: "'DM Sans', sans-serif",
-          fontWeight: 400,
-          fontSize: "13px",
-          lineHeight: "19.5px",
-        }}
+        style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 400, fontSize: "11px", lineHeight: "17px" }}
       >
         UX/UI Designer · Mumbai
       </p>
       <p
         className="text-[#4a4a4a] mt-1 flex items-center justify-center gap-1"
-        style={{
-          fontFamily: "'DM Sans', sans-serif",
-          fontWeight: 400,
-          fontSize: "13px",
-          lineHeight: "19.5px",
-        }}
+        style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 400, fontSize: "11px", lineHeight: "17px" }}
       >
         View selected work ↗
       </p>
     </div>
 
     <h2
-      className="text-[26px] leading-[1.08] text-[#111] text-center uppercase"
+      className="text-[20px] sm:text-[24px] leading-[1.08] text-[#111] text-center uppercase"
       style={{ fontFamily: "'Libre Franklin', sans-serif" }}
     >
       <span className="font-normal">THE WORLD IS</span>
@@ -158,14 +137,14 @@ const Frame1Mobile = () => (
       <span className="font-bold">FULL OF</span>
     </h2>
 
-    <div className="flex items-center justify-center gap-6 mt-2">
-      <img src="/lamp.png" alt="Lamp" className="w-[90px] h-auto" />
-      <img src="/headphone.png" alt="Headphones" className="w-[85px] h-auto" />
-      <img src="/disc.png" alt="Vinyl" className="w-[90px] h-auto" />
+    <div className="flex items-center justify-center gap-4 sm:gap-6 mt-1 sm:mt-2">
+      <img src="/lamp.png" alt="Lamp" className="w-[60px] sm:w-[80px] h-auto" />
+      <img src="/headphone.png" alt="Headphones" className="w-[58px] sm:w-[75px] h-auto" />
+      <img src="/disc.png" alt="Vinyl" className="w-[60px] sm:w-[80px] h-auto" />
     </div>
 
     <h3
-      className="text-[22px] leading-[1.08] text-[#111] text-center uppercase"
+      className="text-[18px] sm:text-[20px] leading-[1.08] text-[#111] text-center uppercase"
       style={{ fontFamily: "'Libre Franklin', sans-serif" }}
     >
       <span className="font-normal">UNFINISHED</span>
@@ -173,14 +152,14 @@ const Frame1Mobile = () => (
       <span className="font-bold">IDEAS</span>
     </h3>
 
-    <div className="flex items-center justify-center gap-6">
-      <img src="/design-notepad.png" alt="Design" className="w-[70px] h-auto rotate-[-4deg]" />
-      <img src="/tool-symbol.png" alt="Tool symbol" className="w-[90px] h-auto" />
-      <img src="/coffe.png" alt="Coffee" className="w-[85px] h-auto" />
+    <div className="flex items-center justify-center gap-4 sm:gap-6">
+      <img src="/design-notepad.png" alt="Design" className="w-[50px] sm:w-[62px] h-auto rotate-[-4deg]" />
+      <img src="/tool-symbol.png" alt="Tool symbol" className="w-[60px] sm:w-[78px] h-auto" />
+      <img src="/coffe.png" alt="Coffee" className="w-[58px] sm:w-[72px] h-auto" />
     </div>
 
     <h3
-      className="text-[22px] leading-[1.08] text-[#111] text-center uppercase"
+      className="text-[18px] sm:text-[20px] leading-[1.08] text-[#111] text-center uppercase"
       style={{ fontFamily: "'Libre Franklin', sans-serif" }}
     >
       <span className="font-normal">& FRUSTRATING</span>
@@ -188,27 +167,24 @@ const Frame1Mobile = () => (
       <span className="font-bold">EXPERIENCES</span>
     </h3>
 
-    <div className="flex items-center justify-center gap-10">
-      <img src="/plant.png" alt="Plant" className="w-[75px] h-auto" />
-      <div className="relative w-[120px] h-[85px]">
-        <div className="absolute left-0 top-0 w-[75px] h-[70px] bg-[#A8CBE0] shadow-sm rotate-[-6deg] flex items-start justify-start p-2">
-          <p className="text-[10px] text-[#333]" style={{ fontFamily: "'DM Sans', sans-serif" }}>Ask why</p>
+    <div className="flex items-center justify-center gap-6 sm:gap-10">
+      <img src="/plant.png" alt="Plant" className="w-[55px] sm:w-[65px] h-auto" />
+      <div className="relative w-[100px] sm:w-[118px] h-[70px] sm:h-[82px]">
+        <div className="absolute left-0 top-0 w-[62px] sm:w-[72px] h-[58px] sm:h-[68px] bg-[#A8CBE0] shadow-sm rotate-[-6deg] flex items-start justify-start p-1.5 sm:p-2">
+          <p className="text-[8px] sm:text-[9px] text-[#333]" style={{ fontFamily: "'DM Sans', sans-serif" }}>Ask why</p>
         </div>
-        <div className="absolute left-10 top-3 w-[64px] h-[56px] bg-[#E8A87C] shadow-sm rotate-[8deg] flex items-center justify-center">
-          <p className="text-[13px] text-[#333]" style={{ fontFamily: "'Caveat', cursive" }}>Simplify</p>
+        <div className="absolute left-8 sm:left-10 top-2.5 sm:top-3 w-[54px] sm:w-[62px] h-[48px] sm:h-[54px] bg-[#E8A87C] shadow-sm rotate-[8deg] flex items-center justify-center">
+          <p className="text-[10px] sm:text-[11px] text-[#333]" style={{ fontFamily: "'Caveat', cursive" }}>Simplify</p>
         </div>
       </div>
     </div>
 
     <div className="text-center">
-      <p
-        className="text-[#111] italic"
-        style={{ fontFamily: "'Caveat', cursive", fontSize: "13px" }}
-      >
+      <p className="text-[#111] italic" style={{ fontFamily: "'Caveat', cursive", fontSize: "11px" }}>
         I design the path
       </p>
       <h3
-        className="text-[20px] leading-[1.08] text-[#111] mt-0.5 uppercase"
+        className="text-[16px] sm:text-[18px] leading-[1.08] text-[#111] mt-0.5 uppercase"
         style={{ fontFamily: "'Libre Franklin', sans-serif" }}
       >
         <span className="font-normal">THAT MAKES</span>
@@ -219,56 +195,123 @@ const Frame1Mobile = () => (
   </div>
 );
 
+/* --------- TABLET LAYOUT: split 2-column intro + centered collage --------- */
+const Frame1Tablet = () => (
+  <div className="absolute inset-0 hidden md:flex lg:hidden items-center justify-center px-8 pt-24 pb-20">
+    <div className="w-full max-w-[900px] h-full flex flex-col justify-center gap-6">
+      {/* Top row: name on left, headline on right */}
+      <div className="flex items-start justify-between gap-6">
+        <div className="text-left shrink-0">
+          <p
+            className="text-[#FF6714] leading-none"
+            style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, fontSize: "26px" }}
+          >
+            Maitri Shah
+          </p>
+          <p
+            className="text-[#4a4a4a] mt-1"
+            style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "12px", lineHeight: "18px" }}
+          >
+            UX/UI Designer · Mumbai
+          </p>
+          <p
+            className="text-[#4a4a4a] mt-1 flex items-center gap-1"
+            style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "12px", lineHeight: "18px" }}
+          >
+            View selected work ↗
+          </p>
+        </div>
+        <h2
+          className="text-right text-[30px] leading-[1.08] text-[#111] uppercase"
+          style={{ fontFamily: "'Libre Franklin', sans-serif" }}
+        >
+          <span className="font-normal">THE WORLD IS</span>
+          <br />
+          <span className="font-bold">FULL OF</span>
+        </h2>
+      </div>
+
+      {/* Middle row: image collage */}
+      <div className="flex items-center justify-center gap-6 my-2">
+        <img src="/lamp.png" alt="Lamp" className="w-[100px] h-auto" />
+        <img src="/headphone.png" alt="Headphones" className="w-[90px] h-auto" />
+        <img src="/disc.png" alt="Vinyl" className="w-[100px] h-auto" />
+        <img src="/design-notepad.png" alt="Design" className="w-[80px] h-auto rotate-[-4deg]" />
+        <img src="/coffe.png" alt="Coffee" className="w-[95px] h-auto" />
+      </div>
+
+      {/* Second headline + more icons */}
+      <div className="flex items-start justify-between gap-6">
+        <h3
+          className="text-left text-[24px] leading-[1.08] text-[#111] uppercase"
+          style={{ fontFamily: "'Libre Franklin', sans-serif" }}
+        >
+          <span className="font-normal">UNFINISHED</span>
+          <br />
+          <span className="font-bold">IDEAS</span>
+        </h3>
+        <div className="flex items-center gap-5">
+          <img src="/tool-symbol.png" alt="Tool symbol" className="w-[95px] h-auto" />
+          <img src="/plant.png" alt="Plant" className="w-[75px] h-auto" />
+        </div>
+      </div>
+
+      {/* Third headline + sticky notes */}
+      <div className="flex items-center justify-between gap-6">
+        <h3
+          className="text-left text-[24px] leading-[1.08] text-[#111] uppercase shrink-0"
+          style={{ fontFamily: "'Libre Franklin', sans-serif" }}
+        >
+          <span className="font-normal">& FRUSTRATING</span>
+          <br />
+          <span className="font-bold">EXPERIENCES</span>
+        </h3>
+        <div className="relative w-[150px] h-[90px] shrink-0">
+          <div className="absolute left-0 top-0 w-[82px] h-[72px] bg-[#A8CBE0] shadow-sm rotate-[-6deg] flex items-start justify-start p-2">
+            <p className="text-[10px] text-[#333]" style={{ fontFamily: "'DM Sans', sans-serif" }}>Ask why</p>
+          </div>
+          <div className="absolute left-12 top-3 w-[68px] h-[58px] bg-[#E8A87C] shadow-sm rotate-[8deg] flex items-center justify-center">
+            <p className="text-[12px] text-[#333]" style={{ fontFamily: "'Caveat', cursive" }}>Simplify</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Closing line */}
+      <div className="text-right">
+        <p className="text-[#111] italic" style={{ fontFamily: "'Caveat', cursive", fontSize: "13px" }}>
+          I design the path
+        </p>
+        <h3
+          className="text-[22px] leading-[1.08] text-[#111] mt-0.5 uppercase"
+          style={{ fontFamily: "'Libre Franklin', sans-serif" }}
+        >
+          <span className="font-normal">THAT MAKES </span>
+          <span className="font-bold">THEM SEAMLESS</span>
+        </h3>
+      </div>
+    </div>
+  </div>
+);
+
 const Frame1Desktop = () => (
   <div className="absolute inset-0 hidden lg:block">
     <Item style={{ top: "20.5%", left: "13.5%" }} className="text-left">
       <p
         className="text-[#FF6714] leading-none"
-        style={{
-          fontFamily: "'Caveat', cursive",
-          fontWeight: 600,
-          fontSize: "32px",
-          lineHeight: "48px",
-          letterSpacing: "0px",
-        }}
+        style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, fontSize: "32px", lineHeight: "48px" }}
       >
         Maitri Shah
       </p>
-      <p
-        className="text-[#4a4a4a]"
-        style={{
-          fontFamily: "'DM Sans', sans-serif",
-          fontWeight: 400,
-          fontSize: "13px",
-          lineHeight: "19.5px",
-          letterSpacing: "0px",
-        }}
-      >
+      <p className="text-[#4a4a4a]" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", lineHeight: "19.5px" }}>
         UX/UI Designer · Mumbai
       </p>
-      <p
-        className="text-[#4a4a4a] mt-1.5 flex items-center gap-1"
-        style={{
-          fontFamily: "'DM Sans', sans-serif",
-          fontWeight: 400,
-          fontSize: "13px",
-          lineHeight: "19.5px",
-          letterSpacing: "0px",
-        }}
-      >
+      <p className="text-[#4a4a4a] mt-1.5 flex items-center gap-1" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", lineHeight: "19.5px" }}>
         View selected work <span className="text-[10px]">↗</span>
       </p>
     </Item>
 
     <Item style={{ top: "22%", left: "34%" }}>
-      <h2
-        className="text-[34px] text-[#111] uppercase"
-        style={{
-          fontFamily: "'Libre Franklin', sans-serif",
-          lineHeight: "36.72px",
-          letterSpacing: "0px",
-        }}
-      >
+      <h2 className="text-[34px] text-[#111] uppercase" style={{ fontFamily: "'Libre Franklin', sans-serif", lineHeight: "36.72px" }}>
         <span className="font-normal">THE WORLD IS</span>
         <br />
         <span className="font-bold">FULL OF</span>
@@ -278,111 +321,58 @@ const Frame1Desktop = () => (
     <Item style={{ top: "14%", left: "59%" }}>
       <img src="/design-notepad.png" alt="Design notepad" className="w-[145px] h-auto rotate-[-4deg]" />
     </Item>
-
     <Item style={{ top: "14%", left: "75%" }}>
       <img src="/coffe.png" alt="Coffee" className="w-[145px] h-auto" />
     </Item>
-
     <Item style={{ top: "34%", left: "7%" }}>
       <img src="/lamp.png" alt="Desk lamp" className="w-[185px] h-auto" />
     </Item>
-
     <Item style={{ top: "34%", left: "29%" }}>
       <img src="/headphone.png" alt="Headphones" className="w-[140px] h-auto" />
     </Item>
-
     <Item style={{ top: "33%", left: "46%" }}>
       <img src="/disc.png" alt="Vinyl record" className="w-[160px] h-auto" />
     </Item>
-
     <Item style={{ top: "35%", left: "67%" }}>
-      <h3
-        className="text-[26px] text-[#111] uppercase"
-        style={{
-          fontFamily: "'Libre Franklin', sans-serif",
-          lineHeight: "28px",
-          letterSpacing: "0px",
-        }}
-      >
+      <h3 className="text-[26px] text-[#111] uppercase" style={{ fontFamily: "'Libre Franklin', sans-serif", lineHeight: "28px" }}>
         <span className="font-normal">UNFINISHED</span>
         <br />
         <span className="font-bold">IDEAS</span>
       </h3>
     </Item>
-
     <Item style={{ top: "41%", left: "82%" }}>
-      <img
-        src="/tool-symbol.png"
-        alt="Tool symbol"
-        className="w-[150px] h-auto object-contain"
-      />
+      <img src="/tool-symbol.png" alt="Tool symbol" className="w-[150px] h-auto object-contain" />
     </Item>
-
     <Item style={{ top: "57%", left: "30%" }}>
-      <h3
-        className="text-[26px] text-[#111] uppercase"
-        style={{
-          fontFamily: "'Libre Franklin', sans-serif",
-          lineHeight: "28px",
-          letterSpacing: "0px",
-        }}
-      >
+      <h3 className="text-[26px] text-[#111] uppercase" style={{ fontFamily: "'Libre Franklin', sans-serif", lineHeight: "28px" }}>
         <span className="font-normal">& FRUSTRATING</span>
         <br />
         <span className="font-bold">EXPERIENCES</span>
       </h3>
     </Item>
-
     <Item style={{ top: "46%", left: "71%" }}>
-      <img
-        src="/camera.png"
-        alt="Camera"
-        className="w-[160px] h-auto rotate-[6deg] object-contain"
-      />
+      <img src="/camera.png" alt="Camera" className="w-[160px] h-auto rotate-[6deg] object-contain" />
     </Item>
-
     <Item style={{ top: "63%", left: "64%" }}>
-      <p
-        className="text-[#111] italic"
-        style={{ fontFamily: "'Caveat', cursive", fontSize: "15px" }}
-      >
+      <p className="text-[#111] italic" style={{ fontFamily: "'Caveat', cursive", fontSize: "15px" }}>
         I design the path
       </p>
-      <h3
-        className="text-[24px] text-[#111] mt-0.5 uppercase"
-        style={{
-          fontFamily: "'Libre Franklin', sans-serif",
-          lineHeight: "26px",
-          letterSpacing: "0px",
-        }}
-      >
+      <h3 className="text-[24px] text-[#111] mt-0.5 uppercase" style={{ fontFamily: "'Libre Franklin', sans-serif", lineHeight: "26px" }}>
         <span className="font-normal">THAT MAKES</span>
         <br />
         <span className="font-bold">THEM SEAMLESS</span>
       </h3>
     </Item>
-
     <Item style={{ top: "68%", left: "24%" }}>
       <img src="/plant.png" alt="Plant" className="w-[130px] h-auto" />
     </Item>
-
     <Item style={{ top: "69%", left: "36%" }}>
       <div className="relative w-[145px] h-[100px]">
         <div className="absolute left-0 top-0 w-[90px] h-[82px] bg-[#A8CBE0] shadow-sm rotate-[-6deg] flex items-start justify-start p-2.5">
-          <p
-            className="text-[12px] text-[#333]"
-            style={{ fontFamily: "'DM Sans', sans-serif" }}
-          >
-            Ask why
-          </p>
+          <p className="text-[12px] text-[#333]" style={{ fontFamily: "'DM Sans', sans-serif" }}>Ask why</p>
         </div>
         <div className="absolute left-12 top-3 w-[76px] h-[66px] bg-[#E8A87C] shadow-sm rotate-[8deg] flex items-center justify-center">
-          <p
-            className="text-[15px] text-[#333]"
-            style={{ fontFamily: "'Caveat', cursive" }}
-          >
-            Simplify
-          </p>
+          <p className="text-[15px] text-[#333]" style={{ fontFamily: "'Caveat', cursive" }}>Simplify</p>
         </div>
       </div>
     </Item>
@@ -391,9 +381,10 @@ const Frame1Desktop = () => (
 
 const Frame1 = () => (
   <>
-    <div className="lg:hidden">
+    <div className="md:hidden">
       <Frame1Mobile />
     </div>
+    <Frame1Tablet />
     <Frame1Desktop />
   </>
 );
@@ -403,25 +394,22 @@ const Frame1 = () => (
 // ============================================================
 
 const Frame2Mobile = () => (
-  <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 pt-20 pb-16 gap-4">
-    <div className="flex items-center justify-center gap-6 mb-2">
-      <img src="/headphone.png" alt="Headphones" className="w-[65px] h-auto" />
-      <img src="/lamp.png" alt="Lamp" className="w-[70px] h-auto" />
-      <img src="/disc.png" alt="Vinyl" className="w-[70px] h-auto" />
+  <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 pt-16 sm:pt-20 pb-12 sm:pb-16 gap-3 sm:gap-4 overflow-y-auto">
+    <div className="flex items-center justify-center gap-4 sm:gap-6 mb-1 sm:mb-2">
+      <img src="/headphone.png" alt="Headphones" className="w-[48px] sm:w-[60px] h-auto" />
+      <img src="/lamp.png" alt="Lamp" className="w-[52px] sm:w-[65px] h-auto" />
+      <img src="/disc.png" alt="Vinyl" className="w-[52px] sm:w-[65px] h-auto" />
     </div>
 
-    <p
-      className="text-[#FF6714]"
-      style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, fontSize: "24px" }}
-    >
+    <p className="text-[#FF6714]" style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, fontSize: "20px" }}>
       Maitri Shah
     </p>
 
-    <h1 className="text-[34px] leading-[1.1] text-[#111]" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>
+    <h1 className="text-[24px] sm:text-[30px] leading-[1.1] text-[#111]" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>
       I turn complex ideas
       <br />
       into{" "}
-      <span className="text-[#FF6714] italic" style={{ fontFamily: "'Caveat', cursive", fontSize: "38px" }}>
+      <span className="text-[#FF6714] italic" style={{ fontFamily: "'Caveat', cursive", fontSize: "28px" }}>
         clear, human
       </span>
       <br />
@@ -429,7 +417,7 @@ const Frame2Mobile = () => (
     </h1>
 
     <p
-      className="text-[11px] text-[#6b6b6b] max-w-[320px] mt-2 leading-relaxed"
+      className="text-[10px] sm:text-[11px] text-[#6b6b6b] max-w-[280px] sm:max-w-[320px] mt-2 leading-relaxed"
       style={{ fontFamily: "'DM Sans', sans-serif" }}
     >
       UX/UI designer in Mumbai with 2+ years of experience, bringing
@@ -437,17 +425,92 @@ const Frame2Mobile = () => (
     </p>
 
     <button
-      className="mt-4 bg-[#111] text-white text-[12px] px-5 py-2.5 rounded-full flex items-center gap-2 hover:bg-[#333] transition-colors"
+      className="mt-3 sm:mt-4 bg-[#111] text-white text-[11px] sm:text-[12px] px-4 sm:px-5 py-2 sm:py-2.5 rounded-full flex items-center gap-2 hover:bg-[#333] transition-colors"
       style={{ fontFamily: "'DM Sans', sans-serif" }}
     >
       Explore my work <span>↗</span>
     </button>
 
-    <div className="flex items-center justify-center gap-6 mt-4">
-      <img src="/plant.png" alt="Plant" className="w-[65px] h-auto" />
-      <img src="/design-notepad.png" alt="Design" className="w-[60px] h-auto rotate-[-4deg]" />
-      <img src="/tool-symbol.png" alt="Tool symbol" className="w-[85px] h-auto" />
-      <img src="/coffe.png" alt="Coffee" className="w-[70px] h-auto" />
+    <div className="flex items-center justify-center gap-3 sm:gap-5 mt-3 sm:mt-4">
+      <img src="/plant.png" alt="Plant" className="w-[48px] sm:w-[60px] h-auto" />
+      <img src="/design-notepad.png" alt="Design" className="w-[44px] sm:w-[55px] h-auto rotate-[-4deg]" />
+      <img src="/tool-symbol.png" alt="Tool symbol" className="w-[62px] sm:w-[78px] h-auto" />
+      <img src="/coffe.png" alt="Coffee" className="w-[52px] sm:w-[65px] h-auto" />
+    </div>
+  </div>
+);
+
+/* --------- TABLET LAYOUT: hero center + collage split left/right --------- */
+const Frame2Tablet = () => (
+  <div className="absolute inset-0 hidden md:block lg:hidden overflow-hidden">
+    {/* Center content */}
+    <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-10 pt-20 pb-16 z-10">
+      <p
+        className="text-[#FF6714] mb-2"
+        style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, fontSize: "24px", lineHeight: "36px" }}
+      >
+        Maitri Shah
+      </p>
+
+      <h1
+        className="text-[42px] leading-[1.05] text-[#111] max-w-[560px]"
+        style={{ fontFamily: "'Libre Franklin', sans-serif" }}
+      >
+        I turn complex ideas
+        <br />
+        into{" "}
+        <span className="text-[#FF6714] italic" style={{ fontFamily: "'Caveat', cursive", fontSize: "48px" }}>
+          clear, human
+        </span>
+        <br />
+        experiences.
+      </h1>
+
+      <p
+        className="text-[12px] text-[#6b6b6b] max-w-[380px] mt-5 leading-relaxed"
+        style={{ fontFamily: "'DM Sans', sans-serif", lineHeight: "20px" }}
+      >
+        UX/UI designer in Mumbai with 2+ years of experience, bringing
+        curiosity, clarity, and care to every screen.
+      </p>
+
+      <button
+        className="mt-6 bg-[#111] text-white text-[12px] px-5 py-2.5 rounded-full flex items-center gap-2 hover:bg-[#333] transition-colors"
+        style={{ fontFamily: "'DM Sans', sans-serif", lineHeight: "18px" }}
+      >
+        Explore my work <span>↗</span>
+      </button>
+    </div>
+
+    {/* Left collage cluster */}
+    <div className="absolute top-[14%] left-[3%] flex flex-col items-center gap-6 opacity-90">
+      <img src="/headphone.png" alt="Headphones" className="w-[95px] h-auto" />
+      <img src="/lamp.png" alt="Lamp" className="w-[110px] h-auto" />
+      <img src="/plant.png" alt="Plant" className="w-[85px] h-auto" />
+    </div>
+
+    {/* Right collage cluster */}
+    <div className="absolute top-[12%] right-[3%] flex flex-col items-center gap-5 opacity-90">
+      <img src="/design-notepad.png" alt="Design" className="w-[95px] h-auto rotate-[4deg]" />
+      <img src="/coffe.png" alt="Coffee" className="w-[85px] h-auto" />
+      <img src="/tool-symbol.png" alt="Tool symbol" className="w-[100px] h-auto" />
+    </div>
+
+    {/* Bottom-left notes */}
+    <div className="absolute bottom-[10%] left-[6%]">
+      <div className="relative w-[140px] h-[95px]">
+        <div className="absolute left-0 top-0 w-[84px] h-[78px] bg-[#A8CBE0] shadow-sm rotate-[-6deg] flex items-start justify-start p-2">
+          <p className="text-[11px] text-[#333]" style={{ fontFamily: "'DM Sans', sans-serif" }}>Ask why</p>
+        </div>
+        <div className="absolute left-11 top-3 w-[72px] h-[62px] bg-[#E8A87C] shadow-sm rotate-[8deg] flex items-center justify-center">
+          <p className="text-[13px] text-[#333]" style={{ fontFamily: "'Caveat', cursive" }}>Simplify</p>
+        </div>
+      </div>
+    </div>
+
+    {/* Bottom-right record */}
+    <div className="absolute bottom-[12%] right-[6%]">
+      <img src="/disc.png" alt="Vinyl" className="w-[105px] h-auto" />
     </div>
   </div>
 );
@@ -508,9 +571,7 @@ const Frame2Desktop = () => (
           <p className="text-[12px] text-[#333]" style={{ fontFamily: "'DM Sans', sans-serif" }}>Ask why</p>
         </div>
         <div className="absolute left-12 top-3 w-[78px] h-[68px] bg-[#E8A87C] shadow-sm rotate-[8deg] flex items-center justify-center">
-          <p className="text-[15px] text-[#333]" style={{ fontFamily: "'Caveat', cursive" }}>
-            Simplify
-          </p>
+          <p className="text-[15px] text-[#333]" style={{ fontFamily: "'Caveat', cursive" }}>Simplify</p>
         </div>
       </div>
     </Item>
@@ -524,22 +585,18 @@ const Frame2Desktop = () => (
     <Item style={{ top: "30%", left: "92%" }}>
       <img src="/tool-symbol.png" alt="Tool symbol" className="w-[150px] h-auto object-contain" />
     </Item>
-
     <Item style={{ top: "44%", left: "84%" }}>
-      <img
-        src="/camera.png"
-        alt="Camera"
-        className="w-[160px] h-auto rotate-[6deg] object-contain"
-      />
+      <img src="/camera.png" alt="Camera" className="w-[160px] h-auto rotate-[6deg] object-contain" />
     </Item>
   </div>
 );
 
 const Frame2 = () => (
   <>
-    <div className="lg:hidden">
+    <div className="md:hidden">
       <Frame2Mobile />
     </div>
+    <Frame2Tablet />
     <Frame2Desktop />
   </>
 );
@@ -576,19 +633,14 @@ const CardImage = () => (
   <img
     src="/card.png"
     alt="Case study preview"
-    style={{
-      display: "block",
-      width: "100%",
-      height: "auto",
-      transform: "rotate(-2deg)",
-      objectFit: "contain",
-    }}
+    style={{ display: "block", width: "100%", height: "auto", transform: "rotate(-2deg)", objectFit: "contain" }}
   />
 );
 
+/* Tablet version of the card: image on top, content below (stacked differently than mobile) */
 const ProblemCard = ({ item }) => (
   <div
-    className="relative w-full flex flex-col lg:flex-row items-center gap-6 md:gap-8 lg:gap-10 problem-card"
+    className="relative w-full flex flex-col md:flex-row lg:flex-row items-center gap-4 sm:gap-6 md:gap-6 lg:gap-10 problem-card"
     style={{
       maxWidth: "1400px",
       background: item.bg,
@@ -596,28 +648,21 @@ const ProblemCard = ({ item }) => (
       overflow: "hidden",
     }}
   >
-    <div className="flex-1 min-w-0 lg:min-w-[280px] max-w-full lg:max-w-[480px] px-6 md:px-8 lg:px-10 py-6 md:py-8 lg:py-10">
+    <div className="flex-1 min-w-0 md:min-w-[260px] lg:min-w-[280px] max-w-full lg:max-w-[480px] px-5 sm:px-6 md:px-7 lg:px-10 py-6 md:py-7 lg:py-10">
       <p
         className="text-[#C4552E] mb-1"
-        style={{
-          fontFamily: "'Caveat', cursive",
-          fontWeight: 400,
-          fontSize: "30px",
-          lineHeight: "42.7px",
-          letterSpacing: "0px",
-        }}
+        style={{ fontFamily: "'Caveat', cursive", fontSize: "24px", lineHeight: "34px", md: { fontSize: "26px" } }}
       >
         {item.id}
       </p>
 
       <p
-        className="text-[#5a5a5a] mb-4 md:mb-5"
+        className="text-[#5a5a5a] mb-3 sm:mb-4 md:mb-4 text-[11px] sm:text-[12px] md:text-[12.5px] lg:text-[14px]"
         style={{
           fontFamily: "'DM Sans', sans-serif",
           fontWeight: 700,
-          fontSize: "14px",
-          lineHeight: "21.35px",
-          letterSpacing: "1.42px",
+          lineHeight: "1.5",
+          letterSpacing: "1.2px",
           textTransform: "uppercase",
         }}
       >
@@ -625,26 +670,23 @@ const ProblemCard = ({ item }) => (
       </p>
 
       <h3
-        className="text-[#111] mb-4 md:mb-5"
+        className="text-[#111] mb-3 sm:mb-4 md:mb-4 text-[26px] sm:text-[34px] md:text-[36px] lg:text-[52px]"
         style={{
           fontFamily: "'Libre Franklin', sans-serif",
           fontWeight: 400,
-          fontSize: "52px",
-          lineHeight: "56.04px",
-          letterSpacing: "-2.4px",
+          lineHeight: "1.08",
+          letterSpacing: "-1.2px",
         }}
       >
         {item.title}
       </h3>
 
       <p
-        className="text-[#4a4a4a] mb-5 md:mb-6"
+        className="text-[#4a4a4a] mb-4 sm:mb-5 md:mb-5 text-[14px] sm:text-[16px] md:text-[15px] lg:text-[18px]"
         style={{
           fontFamily: "'DM Sans', sans-serif",
           fontWeight: 400,
-          fontSize: "18px",
-          lineHeight: "31.31px",
-          letterSpacing: "0px",
+          lineHeight: "1.6",
         }}
       >
         {item.desc}
@@ -653,17 +695,11 @@ const ProblemCard = ({ item }) => (
       <div className="flex flex-col gap-3">
         <a
           href="#"
-          className="inline-flex items-center gap-2 text-[#111] hover:opacity-70"
-          style={{
-            fontFamily: "'DM Sans', sans-serif",
-            fontWeight: 700,
-            fontSize: "15.42px",
-            lineHeight: "23.13px",
-            letterSpacing: "0px",
-          }}
+          className="inline-flex items-center gap-2 text-[#111] hover:opacity-70 text-[13px] sm:text-[14px] md:text-[13.5px] lg:text-[15.42px]"
+          style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, lineHeight: "1.5" }}
         >
           <span
-            className="border border-[#111] rounded-full flex items-center justify-center"
+            className="border border-[#111] rounded-full flex items-center justify-center shrink-0"
             style={{ width: "20px", height: "20px", fontSize: "10px" }}
           >
             ✕
@@ -673,15 +709,13 @@ const ProblemCard = ({ item }) => (
 
         <a
           href="#"
-          className="inline-flex items-center justify-center gap-2 text-white rounded-full hover:opacity-90 transition-opacity"
+          className="inline-flex items-center justify-center gap-2 text-white rounded-full hover:opacity-90 transition-opacity text-[14px] sm:text-[16px] md:text-[15px] lg:text-[18px]"
           style={{
             background: "#282725",
             fontFamily: "'DM Sans', sans-serif",
             fontWeight: 600,
-            fontSize: "18px",
-            lineHeight: "28.47px",
-            letterSpacing: "0px",
-            padding: "12px 28px",
+            lineHeight: "1.5",
+            padding: "10px 22px",
             width: "fit-content",
           }}
         >
@@ -690,7 +724,7 @@ const ProblemCard = ({ item }) => (
       </div>
     </div>
 
-    <div className="flex-1 w-full flex justify-end items-center -mr-10 lg:-mr-16">
+    <div className="flex-1 w-full flex justify-center md:justify-end items-center px-4 sm:px-6 md:px-4 lg:px-0 md:-mr-6 lg:-mr-16">
       <CardImage />
     </div>
   </div>
@@ -701,27 +735,30 @@ const ProblemsSection = () => (
     <style>{`
       .problems-section-wrapper {
         background: #FFFDF8;
-        border-top-left-radius: 48px;
-        border-top-right-radius: 48px;
-        padding: 60px 20px 80px;
-        margin-top: -60px;
+        border-top-left-radius: 32px;
+        border-top-right-radius: 32px;
+        padding: 48px 16px 60px;
+        margin-top: -40px;
         z-index: 10;
       }
-      .problem-card {
-        border-radius: 24px;
-        padding: 0;
+      .problem-card { border-radius: 20px; padding: 0; }
+      @media (min-width: 640px) {
+        .problems-section-wrapper {
+          border-top-left-radius: 48px;
+          border-top-right-radius: 48px;
+          padding: 56px 20px 70px;
+          margin-top: -50px;
+        }
+        .problem-card { border-radius: 22px; }
       }
       @media (min-width: 768px) {
         .problems-section-wrapper {
-          border-top-left-radius: 70px;
-          border-top-right-radius: 70px;
-          padding: 80px 30px 100px;
-          margin-top: -80px;
+          border-top-left-radius: 60px;
+          border-top-right-radius: 60px;
+          padding: 72px 28px 90px;
+          margin-top: -60px;
         }
-        .problem-card {
-          border-radius: 26px;
-          padding: 0;
-        }
+        .problem-card { border-radius: 26px; padding: 0; }
       }
       @media (min-width: 1024px) {
         .problems-section-wrapper {
@@ -730,25 +767,20 @@ const ProblemsSection = () => (
           padding: 100px 40px 120px;
           margin-top: -100px;
         }
-        .problem-card {
-          border-radius: 30.84px;
-          padding: 0;
-          min-height: 557px;
-        }
+        .problem-card { border-radius: 30.84px; padding: 0; min-height: 557px; }
       }
     `}</style>
 
     <div className="max-w-[1400px] mx-auto">
-      <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 md:gap-6 mb-10 md:mb-14">
+      <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 md:gap-5 mb-8 sm:mb-10 md:mb-12">
         <div>
           <p
-            className="mb-3"
+            className="mb-2 sm:mb-3 text-[11px] sm:text-[12px] md:text-[12.5px] lg:text-[14px]"
             style={{
               fontFamily: "'DM Sans', sans-serif",
               fontWeight: 700,
-              fontSize: "14px",
-              lineHeight: "20.53px",
-              letterSpacing: "1.92px",
+              lineHeight: "1.5",
+              letterSpacing: "1.5px",
               textTransform: "uppercase",
               color: "#FF6714",
             }}
@@ -756,12 +788,11 @@ const ProblemsSection = () => (
             Selected work
           </p>
           <h2
-            className="text-[#111] font-medium max-w-[600px]"
+            className="text-[#111] font-medium max-w-[600px] text-[28px] sm:text-[36px] md:text-[40px] lg:text-[52px]"
             style={{
               fontFamily: "'Libre Franklin', sans-serif",
-              fontSize: "52px",
-              lineHeight: "56.04px",
-              letterSpacing: "-2.4px",
+              lineHeight: "1.08",
+              letterSpacing: "-1.2px",
             }}
           >
             Problems explored with
@@ -771,13 +802,11 @@ const ProblemsSection = () => (
         </div>
 
         <p
-          className="max-w-[340px] lg:pt-14"
+          className="max-w-[340px] lg:pt-14 text-[14px] sm:text-[16px] md:text-[15px] lg:text-[18px]"
           style={{
             fontFamily: "'DM Sans', sans-serif",
             fontWeight: 400,
-            fontSize: "18px",
-            lineHeight: "31.03px",
-            letterSpacing: "0px",
+            lineHeight: "1.65",
             color: "#716F6B",
           }}
         >
@@ -786,7 +815,7 @@ const ProblemsSection = () => (
         </p>
       </div>
 
-      <div className="flex flex-col gap-6 md:gap-8 lg:gap-10">
+      <div className="flex flex-col gap-4 sm:gap-6 md:gap-6 lg:gap-10">
         {problems.map((item) => (
           <ProblemCard key={item.id} item={item} />
         ))}
@@ -813,19 +842,15 @@ const toolImageMap = {
 
 const ToolBox = ({ name }) => (
   <div
-    className="flex items-center justify-center shrink-0 w-[70px] h-[70px] md:w-[100px] md:h-[100px] lg:w-[129.675px] lg:h-[129.675px]"
+    className="flex items-center justify-center shrink-0 w-[56px] h-[56px] sm:w-[68px] sm:h-[68px] md:w-[78px] md:h-[78px] lg:w-[129.675px] lg:h-[129.675px]"
     style={{
       background: "#F5F1E7",
       border: "0.75px solid #DAD8D3",
       borderRadius: "4.5px",
-      padding: "15.74px",
+      padding: "10px",
     }}
   >
-    <img
-      src={toolImageMap[name] || "/figma.png"}
-      alt={name}
-      className="w-full h-full object-contain"
-    />
+    <img src={toolImageMap[name] || "/figma.png"} alt={name} className="w-full h-full object-contain" />
   </div>
 );
 
@@ -843,15 +868,14 @@ const experiences = [
 ];
 
 const ExperienceRow = ({ item }) => (
-  <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 lg:gap-20">
+  <div className="flex flex-col md:flex-row md:items-center lg:items-center justify-between gap-5 sm:gap-6 md:gap-8 lg:gap-20">
     <div className="flex flex-col gap-2">
       <h3
-        className="text-[#111]"
+        className="text-[#111] text-[24px] sm:text-[30px] md:text-[30px] lg:text-[40px]"
         style={{
           fontFamily: "'Libre Franklin', sans-serif",
           fontWeight: 500,
-          fontSize: "40px",
-          lineHeight: "100%",
+          lineHeight: "1.1",
           letterSpacing: "-0.02em",
           textTransform: "capitalize",
         }}
@@ -859,12 +883,11 @@ const ExperienceRow = ({ item }) => (
         {item.company}
       </h3>
       <p
-        className="text-[#4a4a4a]"
+        className="text-[#4a4a4a] text-[12px] sm:text-[13px] md:text-[13px] lg:text-[15.19px]"
         style={{
           fontFamily: "'DM Sans', sans-serif",
           fontWeight: 500,
-          fontSize: "15.19px",
-          lineHeight: "20.17px",
+          lineHeight: "1.5",
           letterSpacing: "0.02em",
           textTransform: "capitalize",
         }}
@@ -872,7 +895,7 @@ const ExperienceRow = ({ item }) => (
         {item.role}
       </p>
     </div>
-    <div className="flex items-center flex-wrap gap-2.5 md:gap-3 lg:gap-4">
+    <div className="flex items-center flex-wrap gap-2 sm:gap-2.5 md:gap-2.5 lg:gap-4">
       {item.tools.map((tool) => (
         <ToolBox key={tool} name={tool} />
       ))}
@@ -885,15 +908,22 @@ const ExperienceSection = () => (
     <style>{`
       .experience-section-wrapper {
         background: #FFFDF8;
-        border-top-left-radius: 48px;
-        border-top-right-radius: 48px;
-        padding: 60px 20px 80px;
+        border-top-left-radius: 32px;
+        border-top-right-radius: 32px;
+        padding: 48px 16px 60px;
+      }
+      @media (min-width: 640px) {
+        .experience-section-wrapper {
+          border-top-left-radius: 48px;
+          border-top-right-radius: 48px;
+          padding: 56px 20px 70px;
+        }
       }
       @media (min-width: 768px) {
         .experience-section-wrapper {
-          border-top-left-radius: 70px;
-          border-top-right-radius: 70px;
-          padding: 90px 30px 110px;
+          border-top-left-radius: 60px;
+          border-top-right-radius: 60px;
+          padding: 80px 28px 100px;
         }
       }
       @media (min-width: 1024px) {
@@ -905,17 +935,16 @@ const ExperienceSection = () => (
       }
     `}</style>
 
-    <div className="mx-auto flex flex-col gap-12 md:gap-16 lg:gap-20 max-w-[1401px]">
-      <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 lg:gap-8">
+    <div className="mx-auto flex flex-col gap-10 sm:gap-12 md:gap-14 lg:gap-20 max-w-[1401px]">
+      <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-5 sm:gap-6 md:gap-5 lg:gap-8">
         <div>
           <p
-            className="mb-3"
+            className="mb-2 sm:mb-3 text-[11px] sm:text-[12px] md:text-[12.5px] lg:text-[14px]"
             style={{
               fontFamily: "'DM Sans', sans-serif",
               fontWeight: 700,
-              fontSize: "14px",
-              lineHeight: "20.53px",
-              letterSpacing: "1.92px",
+              lineHeight: "1.5",
+              letterSpacing: "1.5px",
               textTransform: "uppercase",
               color: "#FF6714",
             }}
@@ -923,13 +952,12 @@ const ExperienceSection = () => (
             Selected work
           </p>
           <h2
-            className="text-[#111]"
+            className="text-[#111] text-[30px] sm:text-[40px] md:text-[44px] lg:text-[68px]"
             style={{
               fontFamily: "'Libre Franklin', sans-serif",
               fontWeight: 400,
-              fontSize: "68px",
-              lineHeight: "73.93px",
-              letterSpacing: "-3.08px",
+              lineHeight: "1.08",
+              letterSpacing: "-1.5px",
             }}
           >
             Problems explored with
@@ -939,13 +967,11 @@ const ExperienceSection = () => (
         </div>
 
         <p
-          className="max-w-[340px] lg:pt-14"
+          className="max-w-[340px] lg:pt-14 text-[14px] sm:text-[16px] md:text-[15px] lg:text-[18px]"
           style={{
             fontFamily: "'DM Sans', sans-serif",
             fontWeight: 400,
-            fontSize: "18px",
-            lineHeight: "31.03px",
-            letterSpacing: "0px",
+            lineHeight: "1.65",
             color: "#716F6B",
           }}
         >
@@ -953,13 +979,11 @@ const ExperienceSection = () => (
           measurable outcomes.
         </p>
       </div>
-      <div className="flex flex-col gap-10 md:gap-14 lg:gap-20">
+      <div className="flex flex-col gap-8 sm:gap-10 md:gap-12 lg:gap-20">
         {experiences.map((item, idx) => (
-          <div key={idx} className="flex flex-col gap-6 md:gap-8 lg:gap-10">
+          <div key={idx} className="flex flex-col gap-5 sm:gap-6 md:gap-6 lg:gap-10">
             <ExperienceRow item={item} />
-            {idx < experiences.length - 1 && (
-              <div className="w-full h-[1px] bg-[#DAD8D3]" />
-            )}
+            {idx < experiences.length - 1 && <div className="w-full h-[1px] bg-[#DAD8D3]" />}
           </div>
         ))}
         <div className="w-[55%] h-[1px] bg-[#DAD8D3]" />
@@ -987,50 +1011,38 @@ const aiBars = [
 ];
 
 const WorkflowBars = ({ title, titleColor, bars }) => (
-  <div className="flex flex-col gap-4">
+  <div className="flex flex-col gap-3 sm:gap-4">
     <p
+      className="text-[10px] sm:text-[11px] md:text-[11.5px] lg:text-[12px]"
       style={{
         fontFamily: "'DM Sans', sans-serif",
         fontWeight: 700,
-        fontSize: "12px",
-        lineHeight: "20.53px",
-        letterSpacing: "1.5px",
+        lineHeight: "1.5",
+        letterSpacing: "1.2px",
         textTransform: "uppercase",
         color: titleColor,
       }}
     >
       {title}
     </p>
-    <div className="flex flex-col gap-3.5">
+    <div className="flex flex-col gap-2.5 sm:gap-3 md:gap-3 lg:gap-3.5">
       {bars.map((bar) => (
-        <div key={bar.label} className="flex items-center gap-3 md:gap-4">
+        <div key={bar.label} className="flex items-center gap-2 sm:gap-3 md:gap-3 lg:gap-4">
           <p
-            className="text-[#282725] w-[90px] md:w-[110px] shrink-0"
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontWeight: 400,
-              fontSize: "16px",
-              lineHeight: "24px",
-              letterSpacing: "0px",
-            }}
+            className="text-[#282725] w-[70px] sm:w-[80px] md:w-[95px] lg:w-[110px] shrink-0 text-[12px] sm:text-[13px] md:text-[14px] lg:text-[16px]"
+            style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 400, lineHeight: "1.5" }}
           >
             {bar.label}
           </p>
-          <div className="relative flex-1 h-[6px] bg-[#E3E0D8] rounded-full overflow-hidden">
+          <div className="relative flex-1 h-[5px] sm:h-[6px] bg-[#E3E0D8] rounded-full overflow-hidden">
             <div
               className="absolute left-0 top-0 h-full rounded-full"
               style={{ width: bar.width, background: bar.filled ? "#F26D21" : "#999999" }}
             />
           </div>
           <p
-            className="text-[#5a5a5a] w-[50px] text-right shrink-0"
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontWeight: 400,
-              fontSize: "14px",
-              lineHeight: "24px",
-              letterSpacing: "0px",
-            }}
+            className="text-[#5a5a5a] w-[42px] sm:w-[46px] md:w-[48px] lg:w-[50px] text-right shrink-0 text-[11px] sm:text-[12px] md:text-[13px] lg:text-[14px]"
+            style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 400, lineHeight: "1.5" }}
           >
             {bar.value}
           </p>
@@ -1042,17 +1054,15 @@ const WorkflowBars = ({ title, titleColor, bars }) => (
 
 const FlowStep = ({ label }) => (
   <div
-    className="inline-flex items-center justify-center text-[#666666]"
+    className="inline-flex items-center justify-center text-[#666666] text-[10px] sm:text-[11px] md:text-[11.5px] lg:text-[14px]"
     style={{
       background: "#FAF9F5",
       border: "1px solid #DAD8D3",
       borderRadius: "4px",
-      padding: "8px 16px",
+      padding: "5px 10px",
       fontFamily: "'DM Sans', sans-serif",
       fontWeight: 400,
-      fontSize: "14px",
-      lineHeight: "20px",
-      letterSpacing: "0px",
+      lineHeight: "1.5",
     }}
   >
     {label}
@@ -1061,13 +1071,8 @@ const FlowStep = ({ label }) => (
 
 const FlowArrow = () => (
   <span
-    className="text-[#A0A0A0] mx-2 md:mx-3"
-    style={{
-      fontFamily: "'DM Sans', sans-serif",
-      fontWeight: 400,
-      fontSize: "16px",
-      lineHeight: "20px",
-    }}
+    className="text-[#A0A0A0] mx-1 sm:mx-1.5 md:mx-1.5 lg:mx-3 text-[12px] sm:text-[13px] md:text-[14px] lg:text-[16px]"
+    style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 400, lineHeight: "1.5" }}
   >
     →
   </span>
@@ -1078,15 +1083,22 @@ const AIWorkflowSection = () => (
     <style>{`
       .ai-workflow-wrapper {
         background: #F7F5EE;
-        border-top-left-radius: 48px;
-        border-top-right-radius: 48px;
-        padding: 60px 20px 80px;
+        border-top-left-radius: 32px;
+        border-top-right-radius: 32px;
+        padding: 48px 16px 60px;
+      }
+      @media (min-width: 640px) {
+        .ai-workflow-wrapper {
+          border-top-left-radius: 48px;
+          border-top-right-radius: 48px;
+          padding: 56px 20px 70px;
+        }
       }
       @media (min-width: 768px) {
         .ai-workflow-wrapper {
-          border-top-left-radius: 70px;
-          border-top-right-radius: 70px;
-          padding: 90px 30px 110px;
+          border-top-left-radius: 60px;
+          border-top-right-radius: 60px;
+          padding: 80px 28px 100px;
         }
       }
       @media (min-width: 1024px) {
@@ -1098,17 +1110,16 @@ const AIWorkflowSection = () => (
       }
     `}</style>
 
-    <div className="mx-auto flex flex-col gap-10 md:gap-14 lg:gap-20 max-w-[1400px]">
-      <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 lg:gap-10">
+    <div className="mx-auto flex flex-col gap-8 sm:gap-10 md:gap-12 lg:gap-20 max-w-[1400px]">
+      <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-5 sm:gap-6 md:gap-5 lg:gap-10">
         <div>
           <p
-            className="mb-3"
+            className="mb-2 sm:mb-3 text-[11px] sm:text-[12px] md:text-[12.5px] lg:text-[14px]"
             style={{
               fontFamily: "'DM Sans', sans-serif",
               fontWeight: 700,
-              fontSize: "14px",
-              lineHeight: "20.53px",
-              letterSpacing: "1.92px",
+              lineHeight: "1.5",
+              letterSpacing: "1.5px",
               textTransform: "uppercase",
               color: "#FF6714",
             }}
@@ -1116,13 +1127,12 @@ const AIWorkflowSection = () => (
             AI-Enhanced Workflow
           </p>
           <h2
-            className="text-[#111]"
+            className="text-[#111] text-[30px] sm:text-[40px] md:text-[44px] lg:text-[68px]"
             style={{
               fontFamily: "'Libre Franklin', sans-serif",
               fontWeight: 400,
-              fontSize: "68px",
-              lineHeight: "73.93px",
-              letterSpacing: "-3.08px",
+              lineHeight: "1.08",
+              letterSpacing: "-1.5px",
             }}
           >
             AI is part of my workflow.
@@ -1131,13 +1141,11 @@ const AIWorkflowSection = () => (
           </h2>
         </div>
         <p
-          className="max-w-[340px] lg:pt-16"
+          className="max-w-[340px] lg:pt-16 text-[14px] sm:text-[16px] md:text-[15px] lg:text-[18px]"
           style={{
             fontFamily: "'DM Sans', sans-serif",
             fontWeight: 400,
-            fontSize: "18px",
-            lineHeight: "31.03px",
-            letterSpacing: "0px",
+            lineHeight: "1.65",
             color: "#4a4a4a",
           }}
         >
@@ -1147,25 +1155,24 @@ const AIWorkflowSection = () => (
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-start">
+      {/* Tablet: 2-col at md, stacked below lg? Actually — keep stacked on md to give cards width */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6 md:gap-6 lg:gap-12 items-start">
         {/* Left Card */}
         <div
           className="flex flex-col justify-start"
           style={{
             background: "#FFFFFF",
-            borderRadius: "30px",
+            borderRadius: "20px",
             border: "1px solid #EAE8E3",
-            padding: "40px",
-            height: "240px",
+            padding: "24px",
           }}
         >
           <p
+            className="text-[14px] sm:text-[15px] md:text-[15px] lg:text-[16px]"
             style={{
               fontFamily: "'DM Sans', sans-serif",
               fontWeight: 400,
-              fontSize: "16px",
-              lineHeight: "28px",
-              letterSpacing: "0px",
+              lineHeight: "1.75",
               color: "#282725",
             }}
           >
@@ -1174,7 +1181,7 @@ const AIWorkflowSection = () => (
             write first-pass copy, and identify missing states before I begin
             detailed design work.
           </p>
-          <div className="flex flex-wrap items-center gap-y-2 mt-auto">
+          <div className="flex flex-wrap items-center gap-y-2 mt-4 sm:mt-5 md:mt-5 lg:mt-auto">
             <FlowStep label="Idea" />
             <FlowArrow />
             <FlowStep label="AI Draft" />
@@ -1192,13 +1199,12 @@ const AIWorkflowSection = () => (
           className="flex flex-col justify-start"
           style={{
             background: "#FFFFFF",
-            borderRadius: "30px",
+            borderRadius: "20px",
             border: "1px solid #EAE8E3",
-            padding: "40px",
-            height: "584px",
+            padding: "24px",
           }}
         >
-          <div className="flex flex-col gap-10">
+          <div className="flex flex-col gap-6 sm:gap-8 md:gap-8 lg:gap-10">
             <WorkflowBars
               title="Time taken with traditional flow"
               titleColor="#FF6714"
@@ -1206,16 +1212,14 @@ const AIWorkflowSection = () => (
             />
             <WorkflowBars title="Time taken with AI" titleColor="#FF6714" bars={aiBars} />
           </div>
-          
+
           <p
+            className="mt-6 sm:mt-8 md:mt-8 lg:mt-auto text-[12px] sm:text-[13px] md:text-[13px] lg:text-[14px]"
             style={{
               fontFamily: "'DM Sans', sans-serif",
               fontWeight: 400,
-              fontSize: "14px",
-              lineHeight: "24px",
-              letterSpacing: "0px",
+              lineHeight: "1.6",
               color: "#F26D21",
-              marginTop: "auto",
             }}
           >
             AI reduced the overall design workflow time by around{" "}
@@ -1260,8 +1264,8 @@ const ExperimentCard = ({ item }) => (
         background: #FAF9F5;
         border-radius: 16px;
         border: 1px solid #DAD8D3;
-        padding: 16px;
-        gap: 14px;
+        padding: 14px;
+        gap: 12px;
         height: 100%;
       }
       .experiment-card img.experiment-img {
@@ -1272,52 +1276,42 @@ const ExperimentCard = ({ item }) => (
         border-radius: 10px;
       }
       @media (min-width: 768px) {
+        .experiment-card { padding: 18px; gap: 14px; }
+      }
+      @media (min-width: 1024px) {
         .experiment-card { padding: 20px; gap: 16px; }
       }
     `}</style>
 
-    <img
-      src={item.image}
-      alt={item.title}
-      className="experiment-img"
-    />
+    <img src={item.image} alt={item.title} className="experiment-img" />
 
     <div className="flex flex-col gap-2 flex-1">
       <h3
-        className="text-[#111]"
+        className="text-[#111] text-[17px] sm:text-[18px] md:text-[18px] lg:text-[19px]"
         style={{
           fontFamily: "'Libre Franklin', sans-serif",
           fontWeight: 700,
-          fontSize: "19px",
-          lineHeight: "21.28px",
-          letterSpacing: "-0.67px",
+          lineHeight: "1.15",
+          letterSpacing: "-0.5px",
         }}
       >
         {item.title}
       </h3>
       <p
-        className="text-[#5a5a5a]"
+        className="text-[#5a5a5a] text-[14px] sm:text-[15px] md:text-[15px] lg:text-[16px]"
         style={{
           fontFamily: "'DM Sans', sans-serif",
           fontWeight: 400,
-          fontSize: "16px",
-          lineHeight: "24px",
-          letterSpacing: "-0.24px",
+          lineHeight: "1.5",
+          letterSpacing: "-0.2px",
         }}
       >
         {item.desc}
       </p>
       <a
         href="#"
-        className="mt-auto pt-2 hover:opacity-70 transition-opacity inline-flex items-center"
-        style={{
-          fontFamily: "Arial, sans-serif",
-          fontWeight: 700,
-          fontSize: "14px",
-          lineHeight: "14px",
-          letterSpacing: "0px",
-          color: "#111",
-        }}
+        className="mt-auto pt-2 hover:opacity-70 transition-opacity inline-flex items-center text-[13px] md:text-[13.5px] lg:text-[14px]"
+        style={{ fontFamily: "Arial, sans-serif", fontWeight: 700, lineHeight: "1.2", color: "#111" }}
       >
         Read more →
       </a>
@@ -1336,169 +1330,121 @@ const ProfileCard = () => (
       backgroundColor: "#FEFDFE",
       borderTop: "2px solid #196254",
       borderBottom: "2px solid #196254",
-      borderLeft: "8px solid #196254",
-      borderRight: "8px solid #196254",
-      borderRadius: "30px",
-      minHeight: "766px",
+      borderLeft: "6px solid #196254",
+      borderRight: "6px solid #196254",
+      borderRadius: "24px",
+      minHeight: "auto",
     }}
   >
-    {/* ---------- LEFT SIDE: Maitri Shah ---------- */}
-    <div className="relative w-full md:w-[42%] flex flex-col p-10 md:p-14 lg:p-16 items-center md:items-start border-b md:border-b-0 md:border-r border-[#DAD8D3]/60">
+    {/* LEFT */}
+    <div className="relative w-full md:w-[42%] flex flex-col p-6 sm:p-8 md:p-7 lg:p-16 items-center md:items-start border-b md:border-b-0 md:border-r border-[#DAD8D3]/60">
       <DotPattern />
 
       <div className="relative z-10 w-full flex flex-col items-center md:items-start mt-2">
         <p
-          className="text-[#FF6714] leading-none mb-1"
-          style={{
-            fontFamily: "'Caveat', cursive",
-            fontWeight: 600,
-            fontSize: "42px",
-            lineHeight: "48px",
-            letterSpacing: "0px",
-          }}
+          className="text-[#FF6714] leading-none mb-1 text-[32px] sm:text-[36px] md:text-[34px] lg:text-[42px]"
+          style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, lineHeight: "1.15" }}
         >
           Maitri Shah
         </p>
 
-        <div className="flex items-center gap-3 mb-10 mt-2">
+        <div className="flex items-center gap-2 sm:gap-3 mb-6 sm:mb-8 md:mb-6 lg:mb-10 mt-2 flex-wrap justify-center md:justify-start">
           <p
-            className="text-[#716F6B]"
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: "18px",
-              fontWeight: 400,
-              lineHeight: "19.5px",
-              letterSpacing: "0px",
-            }}
+            className="text-[#716F6B] text-[14px] sm:text-[16px] md:text-[14px] lg:text-[18px]"
+            style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 400, lineHeight: "1.4" }}
           >
             UX/UI Designer
           </p>
           <span
-            className="text-[#FF6714] px-3 py-0.5 rounded-full flex items-center justify-center"
-            style={{
-              border: "1.5px solid #FF6714",
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: "18px",
-              fontWeight: 400,
-              lineHeight: "19.5px",
-              letterSpacing: "0px",
-            }}
+            className="text-[#FF6714] px-2.5 sm:px-3 py-0.5 rounded-full flex items-center justify-center text-[12px] sm:text-[14px] md:text-[12px] lg:text-[18px]"
+            style={{ border: "1.5px solid #FF6714", fontFamily: "'DM Sans', sans-serif", fontWeight: 400, lineHeight: "1.4" }}
           >
             2+ Years
           </span>
         </div>
 
         <div
-          className="relative overflow-hidden shadow-md mt-2 shrink-0"
+          className="relative overflow-hidden shadow-md mt-2 shrink-0 w-full max-w-[240px] sm:max-w-[260px] md:max-w-[220px] lg:max-w-[313px]"
           style={{
-            width: "313px",
-            height: "380px",
+            aspectRatio: "313 / 380",
             borderRadius: "15px",
             border: "4px solid #FFFFFF",
             background: "#E8E2D5",
           }}
         >
-          <img
-            src="/maitri.jpg"
-            alt="Maitri Shah"
-            className="w-full h-full object-cover"
-          />
+          <img src="/maitri.jpg" alt="Maitri Shah" className="w-full h-full object-cover" />
           <div
-            className="absolute bottom-0 right-0 text-white px-4 py-2 flex items-center gap-1.5"
-            style={{
-              background: "#FF6714",
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: "14px",
-              fontWeight: 700,
-              borderTopLeftRadius: "8px",
-            }}
+            className="absolute bottom-0 right-0 text-white px-3 sm:px-4 py-1.5 sm:py-2 flex items-center gap-1.5 text-[11px] sm:text-[12px] md:text-[11px] lg:text-[14px]"
+            style={{ background: "#FF6714", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, borderTopLeftRadius: "8px" }}
           >
-            <span className="text-[10px]">◀</span>
+            <span className="text-[9px] sm:text-[10px]">◀</span>
             Maitri Shah
           </div>
         </div>
       </div>
     </div>
 
-    {/* ---------- RIGHT SIDE: Images & Text ---------- */}
-    <div className="relative w-full md:w-[58%] flex flex-col p-10 md:p-14 lg:p-16">
+    {/* RIGHT */}
+    <div className="relative w-full md:w-[58%] flex flex-col p-6 sm:p-8 md:p-7 lg:p-16">
       <DotPattern />
 
       <div className="relative z-10 flex flex-col h-full w-full">
-        {/* Top Images Area */}
-        <div className="flex justify-between items-start w-full px-2 md:px-8 mt-2 relative min-h-[200px]">
-          {/* Sunflower */}
-          <div className="flex flex-col items-center absolute" style={{ top: "0px", left: "10%" }}>
+        {/* Top images */}
+        <div className="flex justify-between items-start w-full px-1 sm:px-2 md:px-4 lg:px-8 mt-2 relative min-h-[130px] sm:min-h-[150px] md:min-h-[160px] lg:min-h-[200px]">
+          <div className="flex flex-col items-center absolute" style={{ top: "0px", left: "8%" }}>
             <img
               src="/sunflower.png"
               alt="Sunflower"
-              style={{
-                width: "133.54px",
-                height: "133.45px",
-                transform: "rotate(16.85deg)",
-                objectFit: "contain",
-              }}
+              className="w-[82px] sm:w-[100px] md:w-[105px] lg:w-[133.54px]"
+              style={{ height: "auto", aspectRatio: "1 / 1", transform: "rotate(16.85deg)", objectFit: "contain" }}
             />
             <p
-              className="text-[#111] mt-4"
-              style={{ fontFamily: "'Caveat', cursive", fontSize: "16px" }}
+              className="text-[#111] mt-2 sm:mt-3 md:mt-3 lg:mt-4 text-[11px] sm:text-[13px] md:text-[13px] lg:text-[16px]"
+              style={{ fontFamily: "'Caveat', cursive" }}
             >
               Sunflower.png
             </p>
           </div>
-          
-          {/* Dance Lover */}
-          <div className="flex flex-col items-center absolute" style={{ top: "20px", right: "10%" }}>
+
+          <div className="flex flex-col items-center absolute" style={{ top: "16px", right: "8%" }}>
             <img
               src="/dance-lover.png"
               alt="Dance Lover"
-              style={{
-                width: "133.54px",
-                height: "133.45px",
-                transform: "rotate(0deg)",
-                objectFit: "contain",
-              }}
+              className="w-[82px] sm:w-[100px] md:w-[105px] lg:w-[133.54px]"
+              style={{ height: "auto", aspectRatio: "1 / 1", objectFit: "contain" }}
             />
             <p
-              className="text-[#111] mt-4"
-              style={{ fontFamily: "'Caveat', cursive", fontSize: "16px" }}
+              className="text-[#111] mt-2 sm:mt-3 md:mt-3 lg:mt-4 text-[11px] sm:text-[13px] md:text-[13px] lg:text-[16px]"
+              style={{ fontFamily: "'Caveat', cursive" }}
             >
               DanceLover.png
             </p>
           </div>
         </div>
 
-        {/* Text Box Area */}
-        <div className="relative mt-8 md:mt-12 w-full px-4 md:px-10">
-          <div
-            className="flex items-center gap-2 px-4 py-3 rounded-t-xl"
-            style={{ background: "#e5e5e5" }}
-          >
-            <span className="w-2.5 h-2.5 rounded-full bg-[#F67A43]" />
-            <span className="w-2.5 h-2.5 rounded-full bg-[#F2C94C]" />
-            <span className="w-2.5 h-2.5 rounded-full bg-[#6FA8BF]" />
+        {/* Text box */}
+        <div className="relative mt-6 sm:mt-8 md:mt-6 lg:mt-12 w-full px-1 sm:px-2 md:px-2 lg:px-10">
+          <div className="flex items-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3 rounded-t-xl" style={{ background: "#e5e5e5" }}>
+            <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#F67A43]" />
+            <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#F2C94C]" />
+            <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#6FA8BF]" />
           </div>
 
-          <div className="absolute top-[14px] right-6 md:right-10">
-            <img src="/sunflower-flower.png" alt="Sunflower" className="w-[60px] md:w-[75px] h-auto object-contain drop-shadow-md" />
+          <div className="absolute top-[10px] sm:top-[12px] right-4 sm:right-6 md:right-4 lg:right-10">
+            <img
+              src="/sunflower-flower.png"
+              alt="Sunflower"
+              className="w-[45px] sm:w-[55px] md:w-[55px] lg:w-[75px] h-auto object-contain drop-shadow-md"
+            />
           </div>
 
           <div
-            className="p-6 md:p-8 rounded-b-xl flex flex-col bg-white shadow-[0_2px_10px_rgba(0,0,0,0.03)]"
-            style={{
-              border: "1px solid #DAD8D3",
-              borderTop: "none",
-            }}
+            className="p-4 sm:p-5 md:p-4 lg:p-8 rounded-b-xl flex flex-col bg-white shadow-[0_2px_10px_rgba(0,0,0,0.03)]"
+            style={{ border: "1px solid #DAD8D3", borderTop: "none" }}
           >
             <p
-              className="text-[#282725]"
-              style={{
-                fontFamily: "'DM Sans', sans-serif",
-                fontWeight: 400,
-                fontSize: "18px",
-                lineHeight: "31.03px",
-                letterSpacing: "0px",
-              }}
+              className="text-[#282725] text-[14px] sm:text-[15px] md:text-[14px] lg:text-[18px]"
+              style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 400, lineHeight: "1.7" }}
             >
               I use AI to quickly move from an unclear idea to a structured
               starting point. It helps me explore flows, generate screen ideas,
@@ -1508,46 +1454,33 @@ const ProfileCard = () => (
           </div>
         </div>
 
-        {/* Bottom Images Area */}
-        <div className="flex justify-between items-end w-full px-4 md:px-10 mt-auto pt-10 pb-4 relative min-h-[180px]">
-          {/* Tea Lover */}
-          <div className="flex flex-col items-center absolute" style={{ bottom: "10px", left: "20%" }}>
+        {/* Bottom images */}
+        <div className="flex justify-between items-end w-full px-1 sm:px-2 md:px-4 lg:px-10 mt-auto pt-8 sm:pt-10 md:pt-8 lg:pt-10 pb-4 relative min-h-[130px] sm:min-h-[150px] md:min-h-[150px] lg:min-h-[180px]">
+          <div className="flex flex-col items-center absolute" style={{ bottom: "10px", left: "18%" }}>
             <img
               src="/tea-lover.png"
               alt="Tea Lover"
-              style={{
-                width: "133.54px",
-                height: "133.45px",
-                transform: "rotate(0deg)",
-                objectFit: "contain",
-              }}
+              className="w-[82px] sm:w-[100px] md:w-[105px] lg:w-[133.54px]"
+              style={{ height: "auto", aspectRatio: "1 / 1", objectFit: "contain" }}
             />
             <p
-              className="text-[#111] mt-3"
-              style={{ fontFamily: "'Caveat', cursive", fontSize: "16px" }}
+              className="text-[#111] mt-2 sm:mt-3 md:mt-2 lg:mt-3 text-[11px] sm:text-[13px] md:text-[13px] lg:text-[16px]"
+              style={{ fontFamily: "'Caveat', cursive" }}
             >
               TeaLover.png
             </p>
           </div>
-          
-          {/* Beach Lover */}
-          <div className="flex flex-col items-center absolute" style={{ bottom: "0px", right: "15%" }}>
+
+          <div className="flex flex-col items-center absolute" style={{ bottom: "0px", right: "14%" }}>
             <img
               src="/beach-lover.png"
               alt="Beach Lover"
-              style={{
-                width: "133.54px",
-                height: "133.45px",
-                transform: "rotate(0deg)",
-                objectFit: "contain",
-              }}
+              className="w-[82px] sm:w-[100px] md:w-[105px] lg:w-[133.54px]"
+              style={{ height: "auto", aspectRatio: "1 / 1", objectFit: "contain" }}
             />
             <p
-              className="text-[#111] mt-3"
-              style={{
-                fontFamily: "'Caveat', cursive",
-                fontSize: "16px",
-              }}
+              className="text-[#111] mt-2 sm:mt-3 md:mt-2 lg:mt-3 text-[11px] sm:text-[13px] md:text-[13px] lg:text-[16px]"
+              style={{ fontFamily: "'Caveat', cursive" }}
             >
               BeachLover.png
             </p>
@@ -1563,15 +1496,22 @@ const AIExperimentsSection = () => (
     <style>{`
       .ai-experiments-wrapper {
         background: #FFFDF8;
-        border-top-left-radius: 48px;
-        border-top-right-radius: 48px;
-        padding: 60px 20px 80px;
+        border-top-left-radius: 32px;
+        border-top-right-radius: 32px;
+        padding: 48px 16px 60px;
+      }
+      @media (min-width: 640px) {
+        .ai-experiments-wrapper {
+          border-top-left-radius: 48px;
+          border-top-right-radius: 48px;
+          padding: 56px 20px 70px;
+        }
       }
       @media (min-width: 768px) {
         .ai-experiments-wrapper {
-          border-top-left-radius: 70px;
-          border-top-right-radius: 70px;
-          padding: 90px 30px 110px;
+          border-top-left-radius: 60px;
+          border-top-right-radius: 60px;
+          padding: 80px 28px 100px;
         }
       }
       @media (min-width: 1024px) {
@@ -1583,17 +1523,16 @@ const AIExperimentsSection = () => (
       }
     `}</style>
 
-    <div className="mx-auto flex flex-col gap-12 md:gap-16 lg:gap-24 max-w-[1400px]">
-      <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 lg:gap-8">
+    <div className="mx-auto flex flex-col gap-8 sm:gap-10 md:gap-12 lg:gap-24 max-w-[1400px]">
+      <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-5 sm:gap-6 md:gap-5 lg:gap-8">
         <div>
           <p
-            className="mb-3"
+            className="mb-2 sm:mb-3 text-[11px] sm:text-[12px] md:text-[12.5px] lg:text-[14px]"
             style={{
               fontFamily: "'DM Sans', sans-serif",
               fontWeight: 700,
-              fontSize: "14px",
-              lineHeight: "20.53px",
-              letterSpacing: "1.92px",
+              lineHeight: "1.5",
+              letterSpacing: "1.5px",
               textTransform: "uppercase",
               color: "#FF6714",
             }}
@@ -1601,13 +1540,12 @@ const AIExperimentsSection = () => (
             AI Experiments
           </p>
           <h2
-            className="text-[#111]"
+            className="text-[#111] text-[30px] sm:text-[40px] md:text-[44px] lg:text-[68px]"
             style={{
               fontFamily: "'Libre Franklin', sans-serif",
               fontWeight: 400,
-              fontSize: "68px",
-              lineHeight: "73.93px",
-              letterSpacing: "-3.08px",
+              lineHeight: "1.08",
+              letterSpacing: "-1.5px",
             }}
           >
             AI-Powered Design
@@ -1616,13 +1554,11 @@ const AIExperimentsSection = () => (
           </h2>
         </div>
         <p
-          className="max-w-[340px] lg:pt-16"
+          className="max-w-[340px] lg:pt-16 text-[14px] sm:text-[16px] md:text-[15px] lg:text-[18px]"
           style={{
             fontFamily: "'DM Sans', sans-serif",
             fontWeight: 400,
-            fontSize: "18px",
-            lineHeight: "31.03px",
-            letterSpacing: "0px",
+            lineHeight: "1.65",
             color: "#4a4a4a",
           }}
         >
@@ -1632,7 +1568,7 @@ const AIExperimentsSection = () => (
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 items-stretch">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-5 lg:gap-6 items-stretch">
         {experiments.map((item) => (
           <ExperimentCard key={item.title} item={item} />
         ))}
@@ -1644,7 +1580,7 @@ const AIExperimentsSection = () => (
 );
 
 // ============================================================
-// CONTACT / CTA SECTION — Typography Updated
+// CONTACT / CTA SECTION
 // ============================================================
 
 const orbitCards = [
@@ -1662,7 +1598,7 @@ const orbitCards = [
 
 const OrbitCard = ({ style, rotate }) => (
   <div
-    className="absolute overflow-hidden w-[70px] h-[85px] md:w-[100px] md:h-[120px] lg:w-[140px] lg:h-[170px]"
+    className="absolute overflow-hidden w-[50px] h-[62px] sm:w-[64px] sm:h-[78px] md:w-[82px] md:h-[100px] lg:w-[140px] lg:h-[170px]"
     style={{
       transform: `rotate(${rotate}deg)`,
       borderRadius: "8px",
@@ -1671,18 +1607,14 @@ const OrbitCard = ({ style, rotate }) => (
       ...style,
     }}
   >
-    <img
-      src="/last-image.jpg"
-      alt="Orbit photo"
-      className="w-full h-full object-cover"
-    />
+    <img src="/last-image.jpg" alt="Orbit photo" className="w-full h-full object-cover" />
   </div>
 );
 
 const SocialIcon = ({ label }) => (
   <a
     href="#"
-    className="w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center text-[#C4552E] text-[12px] md:text-[13px] font-semibold transition-transform hover:scale-110"
+    className="w-8 h-8 sm:w-9 sm:h-9 md:w-9 md:h-9 lg:w-10 lg:h-10 rounded-full flex items-center justify-center text-[#C4552E] text-[11px] sm:text-[12px] md:text-[12px] lg:text-[13px] font-semibold transition-transform hover:scale-110"
     style={{ background: "#F0DCCB", fontFamily: "'DM Sans', sans-serif" }}
   >
     {label}
@@ -1693,44 +1625,48 @@ const ContactSection = () => (
   <section
     id="contact"
     className="relative w-full overflow-hidden"
-    style={{
-      background: "#F5F1E7",
-      borderTopLeftRadius: "48px",
-      borderTopRightRadius: "48px",
-    }}
+    style={{ background: "#F5F1E7", borderTopLeftRadius: "32px", borderTopRightRadius: "32px" }}
   >
     <style>{`
-      .contact-wrapper {
-        padding: 60px 20px 0;
-        min-height: auto;
+      .contact-wrapper { padding: 48px 16px 0; min-height: auto; }
+      @media (min-width: 640px) {
+        .contact-wrapper { padding: 56px 20px 0; }
       }
       @media (min-width: 768px) {
-        .contact-wrapper {
-          padding: 80px 30px 0;
+        .contact-wrapper { padding: 68px 28px 0; }
+        section#contact {
+          border-top-left-radius: 60px !important;
+          border-top-right-radius: 60px !important;
         }
       }
       @media (min-width: 1024px) {
-        .contact-wrapper {
-          padding: 80px 40px 0;
+        .contact-wrapper { padding: 80px 40px 0; }
+        section#contact {
+          border-top-left-radius: 100px !important;
+          border-top-right-radius: 100px !important;
         }
       }
     `}</style>
 
     <div className="contact-wrapper">
-      <div className="relative mx-auto h-[500px] md:h-[600px] lg:h-[680px] max-w-[1400px]">
-        {orbitCards.map((c, i) => (
-          <OrbitCard key={i} style={{ top: c.top, left: c.left }} rotate={c.rotate} />
-        ))}
+      <div className="relative mx-auto h-[380px] sm:h-[440px] md:h-[500px] lg:h-[680px] max-w-[1400px]">
+        {orbitCards.map((c, i) => {
+          // Mobile: hide last 4 (i>=6). Tablet: hide last 2 (i>=8). Desktop: show all
+          const hideClass = i >= 8 ? "hidden lg:block" : i >= 6 ? "hidden sm:block" : "";
+          return (
+            <div key={i} className={hideClass}>
+              <OrbitCard style={{ top: c.top, left: c.left }} rotate={c.rotate} />
+            </div>
+          );
+        })}
 
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-3 sm:px-4">
           <p
-            className="mb-4 md:mb-6"
+            className="mb-3 sm:mb-4 md:mb-4 lg:mb-6 text-[24px] sm:text-[30px] md:text-[32px] lg:text-[40px]"
             style={{
               fontFamily: "'Caveat', cursive",
               fontWeight: 600,
-              fontSize: "40px",
-              lineHeight: "60px",
-              letterSpacing: "0px",
+              lineHeight: "1.4",
               textAlign: "center",
               color: "#FF6714",
             }}
@@ -1739,13 +1675,12 @@ const ContactSection = () => (
           </p>
 
           <h2
-            className="max-w-[900px]"
+            className="max-w-[900px] text-[26px] sm:text-[34px] md:text-[40px] lg:text-[67.11px]"
             style={{
               fontFamily: "'Libre Franklin', sans-serif",
               fontWeight: 400,
-              fontSize: "67.11px",
-              lineHeight: "72.47px",
-              letterSpacing: "-3.02px",
+              lineHeight: "1.08",
+              letterSpacing: "-1.2px",
               textAlign: "center",
               color: "#111",
             }}
@@ -1755,7 +1690,7 @@ const ContactSection = () => (
             problem to solve?
           </h2>
 
-          <div className="flex items-center gap-3 md:gap-4 mt-6 md:mt-10">
+          <div className="flex items-center gap-2.5 sm:gap-3 md:gap-3 lg:gap-4 mt-5 sm:mt-6 md:mt-6 lg:mt-10">
             <SocialIcon label="in" />
             <SocialIcon label="Bē" />
             <SocialIcon label="M" />
@@ -1763,16 +1698,14 @@ const ContactSection = () => (
 
           <a
             href="#"
-            className="mt-6 md:mt-10 inline-flex items-center gap-2 text-white rounded-full hover:opacity-90 transition-opacity"
+            className="mt-5 sm:mt-6 md:mt-6 lg:mt-10 inline-flex items-center gap-2 text-white rounded-full hover:opacity-90 transition-opacity text-[13px] sm:text-[14px] md:text-[14px] lg:text-[16px]"
             style={{
               background: "#282725",
               fontFamily: "'DM Sans', sans-serif",
               fontWeight: 400,
-              fontSize: "16px",
-              lineHeight: "24px",
-              letterSpacing: "0px",
+              lineHeight: "1.5",
               textAlign: "center",
-              padding: "12px 28px",
+              padding: "10px 22px",
             }}
           >
             Add your email <span>↗</span>
@@ -1834,6 +1767,7 @@ function App() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Caveat:wght@500;600&family=DM+Sans:wght@400;500;700&family=Libre+Franklin:wght@300;400;500;600;700&display=swap');
         body { font-family: 'Libre Franklin', sans-serif; margin: 0; scroll-behavior: smooth; }
+        html { -webkit-text-size-adjust: 100%; }
       `}</style>
     </div>
   );
