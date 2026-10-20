@@ -1326,7 +1326,10 @@ const ProfileCard = () => (
   <div
     className="relative w-full max-w-[1230px] mx-auto overflow-hidden flex flex-col md:flex-row items-stretch bg-[#F8F7F2]"
     style={{
-      border: "6px solid #253A2D",
+      borderTop: "2px solid #196254",
+      borderBottom: "2px solid #196254",
+      borderLeft: "8px solid #196254",
+      borderRight: "8px solid #196254",
       borderRadius: "30px",
       minHeight: "766px",
     }}
@@ -1436,7 +1439,7 @@ const ProfileCard = () => (
             </p>
           </div>
           
-          {/* Dance Lover (Size matched to Sunflower/Tea Lover) */}
+          {/* Dance Lover */}
           <div className="flex flex-col items-center absolute" style={{ top: "20px", right: "10%" }}>
             <img
               src="/dance-lover.png"
@@ -1519,7 +1522,7 @@ const ProfileCard = () => (
             </p>
           </div>
           
-          {/* Beach Lover (Size matched to Sunflower/Tea Lover) */}
+          {/* Beach Lover */}
           <div className="flex flex-col items-center absolute" style={{ bottom: "0px", right: "15%" }}>
             <img
               src="/beach-lover.png"
