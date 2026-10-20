@@ -202,7 +202,7 @@ const Frame1Mobile = () => (
 
     <div className="text-center">
       <p
-        className="text-[#C4552E] italic"
+        className="text-[#111] italic"
         style={{ fontFamily: "'Caveat', cursive", fontSize: "13px" }}
       >
         I design the path
@@ -223,7 +223,7 @@ const Frame1Desktop = () => (
   <div className="absolute inset-0 hidden lg:block">
     <Item style={{ top: "20.5%", left: "13.5%" }} className="text-left">
       <p
-        className="text-[#C4552E] leading-none"
+        className="text-[#FF6714] leading-none"
         style={{
           fontFamily: "'Caveat', cursive",
           fontWeight: 600,
@@ -343,7 +343,7 @@ const Frame1Desktop = () => (
 
     <Item style={{ top: "63%", left: "64%" }}>
       <p
-        className="text-[#C4552E] italic"
+        className="text-[#111] italic"
         style={{ fontFamily: "'Caveat', cursive", fontSize: "15px" }}
       >
         I design the path
@@ -1338,7 +1338,7 @@ const ProfileCard = () => (
 
       <div className="relative z-10 w-full flex flex-col items-center md:items-start">
         <p
-          className="text-[#E5592E] leading-none mb-1"
+          className="text-[#FF6714] leading-none mb-1"
           style={{
             fontFamily: "'Caveat', cursive",
             fontWeight: 600,
@@ -1359,9 +1359,9 @@ const ProfileCard = () => (
             UX/UI Designer
           </p>
           <span
-            className="text-[#E5592E] px-3 py-0.5 rounded-full flex items-center justify-center"
+            className="text-[#FF6714] px-3 py-0.5 rounded-full flex items-center justify-center"
             style={{
-              border: "1.5px solid #E5592E",
+              border: "1.5px solid #FF6714",
               fontFamily: "'Caveat', cursive",
               fontSize: "14px",
             }}
@@ -1382,7 +1382,7 @@ const ProfileCard = () => (
           <div
             className="absolute bottom-0 right-0 text-white px-4 py-1.5 flex items-center gap-2"
             style={{
-              background: "#E5592E",
+              background: "#FF6714",
               fontFamily: "'DM Sans', sans-serif",
               fontSize: "12px",
               fontWeight: 700,
