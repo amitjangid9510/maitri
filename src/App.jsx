@@ -66,11 +66,10 @@ const NavBar = () => {
             <button
               key={item.id}
               onClick={() => handleScroll(item.id)}
-              className={`flex-1 md:flex-none px-1.5 sm:px-2 md:px-3 lg:px-4 py-1 md:py-1.5 text-[10px] sm:text-[11px] md:text-[12.5px] lg:text-[14px] rounded-full transition-all duration-300 whitespace-nowrap text-center ${
-                isActive
+              className={`flex-1 md:flex-none px-1.5 sm:px-2 md:px-3 lg:px-4 py-1 md:py-1.5 text-[10px] sm:text-[11px] md:text-[12.5px] lg:text-[14px] rounded-full transition-all duration-300 whitespace-nowrap text-center ${isActive
                   ? "bg-white text-black font-bold shadow-sm"
                   : "text-[#444] hover:bg-[#f2f2f2] font-normal"
-              }`}
+                }`}
               style={{
                 fontFamily: "'DM Sans', sans-serif",
                 lineHeight: "21px",
@@ -86,14 +85,39 @@ const NavBar = () => {
   );
 };
 
-const ScrollHint = () => (
-  <div className="absolute bottom-4 sm:bottom-5 md:bottom-6 lg:bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2 text-[8px] sm:text-[9px] md:text-[9.5px] lg:text-[10px] tracking-[0.25em] text-[#8a8478] z-20">
-    <span className="inline-flex items-center justify-center w-4 h-3 md:w-5 md:h-3 border border-[#8a8478] rounded-full">
-      <span className="w-0.5 h-1.5 bg-[#8a8478] rounded-full" />
-    </span>
-    SCROLL TO EXPLORE
-  </div>
-);
+/* ============================================================
+   SCROLL HINT — fades out as soon as user starts scrolling
+   ============================================================ */
+const ScrollHint = () => {
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY < 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <div
+      className="absolute bottom-4 sm:bottom-5 md:bottom-6 lg:bottom-8 flex items-center gap-2 text-[8px] sm:text-[9px] md:text-[9.5px] lg:text-[10px] tracking-[0.25em] text-[#8a8478] z-20 transition-all duration-500 ease-out"
+      style={{
+        left: "50%",
+        transform: visible
+          ? "translate(-50%, 0)"
+          : "translate(-50%, 12px)",
+        opacity: visible ? 1 : 0,
+        pointerEvents: visible ? "auto" : "none",
+      }}
+      aria-hidden={!visible}
+    >
+      <span className="inline-flex items-center justify-center w-4 h-3 md:w-5 md:h-3 border border-[#8a8478] rounded-full">
+        <span className="w-0.5 h-1.5 bg-[#8a8478] rounded-full" />
+      </span>
+      SCROLL TO EXPLORE
+    </div>
+  );
+};
 
 const Item = ({ style, children, className = "" }) => (
   <div className={`absolute select-none ${className}`} style={style}>
@@ -199,7 +223,6 @@ const Frame1Mobile = () => (
 const Frame1Tablet = () => (
   <div className="absolute inset-0 hidden md:flex lg:hidden items-center justify-center px-8 pt-24 pb-20">
     <div className="w-full max-w-[900px] h-full flex flex-col justify-center gap-6">
-      {/* Top row: name on left, headline on right */}
       <div className="flex items-start justify-between gap-6">
         <div className="text-left shrink-0">
           <p
@@ -231,7 +254,6 @@ const Frame1Tablet = () => (
         </h2>
       </div>
 
-      {/* Middle row: image collage */}
       <div className="flex items-center justify-center gap-6 my-2">
         <img src="/lamp.png" alt="Lamp" className="w-[100px] h-auto" />
         <img src="/headphone.png" alt="Headphones" className="w-[90px] h-auto" />
@@ -240,7 +262,6 @@ const Frame1Tablet = () => (
         <img src="/coffe.png" alt="Coffee" className="w-[95px] h-auto" />
       </div>
 
-      {/* Second headline + more icons */}
       <div className="flex items-start justify-between gap-6">
         <h3
           className="text-left text-[24px] leading-[1.08] text-[#111] uppercase"
@@ -256,7 +277,6 @@ const Frame1Tablet = () => (
         </div>
       </div>
 
-      {/* Third headline + sticky notes */}
       <div className="flex items-center justify-between gap-6">
         <h3
           className="text-left text-[24px] leading-[1.08] text-[#111] uppercase shrink-0"
@@ -276,7 +296,6 @@ const Frame1Tablet = () => (
         </div>
       </div>
 
-      {/* Closing line */}
       <div className="text-right">
         <p className="text-[#111] italic" style={{ fontFamily: "'Caveat', cursive", fontSize: "13px" }}>
           I design the path
@@ -440,10 +459,8 @@ const Frame2Mobile = () => (
   </div>
 );
 
-/* --------- TABLET LAYOUT: hero center + collage split left/right --------- */
 const Frame2Tablet = () => (
   <div className="absolute inset-0 hidden md:block lg:hidden overflow-hidden">
-    {/* Center content */}
     <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-10 pt-20 pb-16 z-10">
       <p
         className="text-[#FF6714] mb-2"
@@ -482,21 +499,18 @@ const Frame2Tablet = () => (
       </button>
     </div>
 
-    {/* Left collage cluster */}
     <div className="absolute top-[14%] left-[3%] flex flex-col items-center gap-6 opacity-90">
       <img src="/headphone.png" alt="Headphones" className="w-[95px] h-auto" />
       <img src="/lamp.png" alt="Lamp" className="w-[110px] h-auto" />
       <img src="/plant.png" alt="Plant" className="w-[85px] h-auto" />
     </div>
 
-    {/* Right collage cluster */}
     <div className="absolute top-[12%] right-[3%] flex flex-col items-center gap-5 opacity-90">
       <img src="/design-notepad.png" alt="Design" className="w-[95px] h-auto rotate-[4deg]" />
       <img src="/coffe.png" alt="Coffee" className="w-[85px] h-auto" />
       <img src="/tool-symbol.png" alt="Tool symbol" className="w-[100px] h-auto" />
     </div>
 
-    {/* Bottom-left notes */}
     <div className="absolute bottom-[10%] left-[6%]">
       <div className="relative w-[140px] h-[95px]">
         <div className="absolute left-0 top-0 w-[84px] h-[78px] bg-[#A8CBE0] shadow-sm rotate-[-6deg] flex items-start justify-start p-2">
@@ -508,7 +522,6 @@ const Frame2Tablet = () => (
       </div>
     </div>
 
-    {/* Bottom-right record */}
     <div className="absolute bottom-[12%] right-[6%]">
       <img src="/disc.png" alt="Vinyl" className="w-[105px] h-auto" />
     </div>
@@ -637,7 +650,6 @@ const CardImage = () => (
   />
 );
 
-/* Tablet version of the card: image on top, content below (stacked differently than mobile) */
 const ProblemCard = ({ item }) => (
   <div
     className="relative w-full flex flex-col md:flex-row lg:flex-row items-center gap-4 sm:gap-6 md:gap-6 lg:gap-10 problem-card"
@@ -651,7 +663,7 @@ const ProblemCard = ({ item }) => (
     <div className="flex-1 min-w-0 md:min-w-[260px] lg:min-w-[280px] max-w-full lg:max-w-[480px] px-5 sm:px-6 md:px-7 lg:px-10 py-6 md:py-7 lg:py-10">
       <p
         className="text-[#C4552E] mb-1"
-        style={{ fontFamily: "'Caveat', cursive", fontSize: "24px", lineHeight: "34px", md: { fontSize: "26px" } }}
+        style={{ fontFamily: "'Caveat', cursive", fontSize: "24px", lineHeight: "34px" }}
       >
         {item.id}
       </p>
@@ -1155,9 +1167,7 @@ const AIWorkflowSection = () => (
         </p>
       </div>
 
-      {/* Tablet: 2-col at md, stacked below lg? Actually — keep stacked on md to give cards width */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6 md:gap-6 lg:gap-12 items-start">
-        {/* Left Card */}
         <div
           className="flex flex-col justify-start"
           style={{
@@ -1194,7 +1204,6 @@ const AIWorkflowSection = () => (
           </div>
         </div>
 
-        {/* Right Card */}
         <div
           className="flex flex-col justify-start"
           style={{
@@ -1336,7 +1345,6 @@ const ProfileCard = () => (
       minHeight: "auto",
     }}
   >
-    {/* LEFT */}
     <div className="relative w-full md:w-[42%] flex flex-col p-6 sm:p-8 md:p-7 lg:p-16 items-center md:items-start border-b md:border-b-0 md:border-r border-[#DAD8D3]/60">
       <DotPattern />
 
@@ -1384,12 +1392,10 @@ const ProfileCard = () => (
       </div>
     </div>
 
-    {/* RIGHT */}
     <div className="relative w-full md:w-[58%] flex flex-col p-6 sm:p-8 md:p-7 lg:p-16">
       <DotPattern />
 
       <div className="relative z-10 flex flex-col h-full w-full">
-        {/* Top images */}
         <div className="flex justify-between items-start w-full px-1 sm:px-2 md:px-4 lg:px-8 mt-2 relative min-h-[130px] sm:min-h-[150px] md:min-h-[160px] lg:min-h-[200px]">
           <div className="flex flex-col items-center absolute" style={{ top: "0px", left: "8%" }}>
             <img
@@ -1422,7 +1428,6 @@ const ProfileCard = () => (
           </div>
         </div>
 
-        {/* Text box */}
         <div className="relative mt-6 sm:mt-8 md:mt-6 lg:mt-12 w-full px-1 sm:px-2 md:px-2 lg:px-10">
           <div className="flex items-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3 rounded-t-xl" style={{ background: "#e5e5e5" }}>
             <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#F67A43]" />
@@ -1454,7 +1459,6 @@ const ProfileCard = () => (
           </div>
         </div>
 
-        {/* Bottom images */}
         <div className="flex justify-between items-end w-full px-1 sm:px-2 md:px-4 lg:px-10 mt-auto pt-8 sm:pt-10 md:pt-8 lg:pt-10 pb-4 relative min-h-[130px] sm:min-h-[150px] md:min-h-[150px] lg:min-h-[180px]">
           <div className="flex flex-col items-center absolute" style={{ bottom: "10px", left: "18%" }}>
             <img
@@ -1651,7 +1655,6 @@ const ContactSection = () => (
     <div className="contact-wrapper">
       <div className="relative mx-auto h-[380px] sm:h-[440px] md:h-[500px] lg:h-[680px] max-w-[1400px]">
         {orbitCards.map((c, i) => {
-          // Mobile: hide last 4 (i>=6). Tablet: hide last 2 (i>=8). Desktop: show all
           const hideClass = i >= 8 ? "hidden lg:block" : i >= 6 ? "hidden sm:block" : "";
           return (
             <div key={i} className={hideClass}>
