@@ -1465,7 +1465,7 @@ const ProfileCard = () => (
         <div className="relative mt-8 md:mt-12 w-full px-4 md:px-10">
           <div
             className="flex items-center gap-2 px-4 py-3 rounded-t-xl"
-            style={{ background: "#EBE8DD" }}
+            style={{ background: "#e5e5e5" }}
           >
             <span className="w-2.5 h-2.5 rounded-full bg-[#F67A43]" />
             <span className="w-2.5 h-2.5 rounded-full bg-[#F2C94C]" />
