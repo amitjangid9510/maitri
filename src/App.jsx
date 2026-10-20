@@ -974,9 +974,9 @@ const ExperienceSection = () => (
 
 const traditionalBars = [
   { label: "Research", value: "20 hrs", width: "100%" },
-  { label: "Wireframes", value: "6 hrs", width: "30%" },
+  { label: "Wireframes", value: "6 hrs", width: "32%" },
   { label: "Prototype", value: "10 hrs", width: "50%" },
-  { label: "Documentation", value: "5 hrs", width: "25%" },
+  { label: "Documentation", value: "5 hrs", width: "24%" },
 ];
 
 const aiBars = [
@@ -992,43 +992,43 @@ const WorkflowBars = ({ title, titleColor, bars }) => (
       style={{
         fontFamily: "'DM Sans', sans-serif",
         fontWeight: 700,
-        fontSize: "14px",
+        fontSize: "12px",
         lineHeight: "20.53px",
-        letterSpacing: "1.92px",
+        letterSpacing: "1.5px",
         textTransform: "uppercase",
         color: titleColor,
       }}
     >
       {title}
     </p>
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3.5">
       {bars.map((bar) => (
         <div key={bar.label} className="flex items-center gap-3 md:gap-4">
           <p
-            className="text-[#282725] w-[80px] md:w-[110px] shrink-0"
+            className="text-[#282725] w-[90px] md:w-[110px] shrink-0"
             style={{
               fontFamily: "'DM Sans', sans-serif",
               fontWeight: 400,
-              fontSize: "18px",
-              lineHeight: "31.03px",
+              fontSize: "16px",
+              lineHeight: "24px",
               letterSpacing: "0px",
             }}
           >
             {bar.label}
           </p>
-          <div className="relative flex-1 h-[6px] bg-[#BDBDBD]/70 rounded-full overflow-hidden">
+          <div className="relative flex-1 h-[6px] bg-[#E3E0D8] rounded-full overflow-hidden">
             <div
               className="absolute left-0 top-0 h-full rounded-full"
-              style={{ width: bar.width, background: bar.filled ? "#FF6714" : "#8a8a8a" }}
+              style={{ width: bar.width, background: bar.filled ? "#F26D21" : "#999999" }}
             />
           </div>
           <p
-            className="text-[#5a5a5a] w-[60px] text-right shrink-0"
+            className="text-[#5a5a5a] w-[50px] text-right shrink-0"
             style={{
               fontFamily: "'DM Sans', sans-serif",
               fontWeight: 400,
-              fontSize: "18px",
-              lineHeight: "31.03px",
+              fontSize: "14px",
+              lineHeight: "24px",
               letterSpacing: "0px",
             }}
           >
@@ -1042,16 +1042,16 @@ const WorkflowBars = ({ title, titleColor, bars }) => (
 
 const FlowStep = ({ label }) => (
   <div
-    className="inline-flex items-center justify-center text-[#282725]"
+    className="inline-flex items-center justify-center text-[#666666]"
     style={{
-      background: "#F5F1E7",
-      border: "0.75px solid #DAD8D3",
-      borderRadius: "6px",
-      padding: "6px 12px",
+      background: "#FAF9F5",
+      border: "1px solid #DAD8D3",
+      borderRadius: "4px",
+      padding: "8px 16px",
       fontFamily: "'DM Sans', sans-serif",
       fontWeight: 400,
-      fontSize: "18px",
-      lineHeight: "31.03px",
+      fontSize: "14px",
+      lineHeight: "20px",
       letterSpacing: "0px",
     }}
   >
@@ -1061,13 +1061,12 @@ const FlowStep = ({ label }) => (
 
 const FlowArrow = () => (
   <span
-    className="text-[#8a8478] mx-1.5 md:mx-2"
+    className="text-[#A0A0A0] mx-2 md:mx-3"
     style={{
       fontFamily: "'DM Sans', sans-serif",
       fontWeight: 400,
-      fontSize: "18px",
-      lineHeight: "31.03px",
-      letterSpacing: "0px",
+      fontSize: "16px",
+      lineHeight: "20px",
     }}
   >
     →
@@ -1078,7 +1077,7 @@ const AIWorkflowSection = () => (
   <section id="ai-workflow" className="relative w-full ai-workflow-wrapper">
     <style>{`
       .ai-workflow-wrapper {
-        background: #F5F1E7;
+        background: #F7F5EE;
         border-top-left-radius: 48px;
         border-top-right-radius: 48px;
         padding: 60px 20px 80px;
@@ -1148,22 +1147,24 @@ const AIWorkflowSection = () => (
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-start">
+        {/* Left Card */}
         <div
-          className="flex flex-col justify-center"
+          className="flex flex-col justify-start"
           style={{
-            background: "#FAF9F5",
-            borderRadius: "20px",
-            border: "1px solid #DAD8D3",
-            padding: "28px 24px",
+            background: "#FFFFFF",
+            borderRadius: "30px",
+            border: "1px solid #EAE8E3",
+            padding: "40px",
+            height: "240px",
           }}
         >
           <p
             style={{
               fontFamily: "'DM Sans', sans-serif",
               fontWeight: 400,
-              fontSize: "18px",
-              lineHeight: "31.03px",
+              fontSize: "16px",
+              lineHeight: "28px",
               letterSpacing: "0px",
               color: "#282725",
             }}
@@ -1173,7 +1174,7 @@ const AIWorkflowSection = () => (
             write first-pass copy, and identify missing states before I begin
             detailed design work.
           </p>
-          <div className="flex flex-wrap items-center gap-y-2 mt-8 md:mt-10">
+          <div className="flex flex-wrap items-center gap-y-2 mt-auto">
             <FlowStep label="Idea" />
             <FlowArrow />
             <FlowStep label="AI Draft" />
@@ -1186,29 +1187,35 @@ const AIWorkflowSection = () => (
           </div>
         </div>
 
+        {/* Right Card */}
         <div
-          className="flex flex-col gap-8 md:gap-10"
+          className="flex flex-col justify-start"
           style={{
-            background: "#FAF9F5",
-            borderRadius: "20px",
-            border: "1px solid #DAD8D3",
-            padding: "28px 24px",
+            background: "#FFFFFF",
+            borderRadius: "30px",
+            border: "1px solid #EAE8E3",
+            padding: "40px",
+            height: "584px",
           }}
         >
-          <WorkflowBars
-            title="Time taken with traditional flow"
-            titleColor="#FF6714"
-            bars={traditionalBars}
-          />
-          <WorkflowBars title="Time taken with AI" titleColor="#FF6714" bars={aiBars} />
+          <div className="flex flex-col gap-10">
+            <WorkflowBars
+              title="Time taken with traditional flow"
+              titleColor="#FF6714"
+              bars={traditionalBars}
+            />
+            <WorkflowBars title="Time taken with AI" titleColor="#FF6714" bars={aiBars} />
+          </div>
+          
           <p
             style={{
               fontFamily: "'DM Sans', sans-serif",
               fontWeight: 400,
-              fontSize: "18px",
-              lineHeight: "31.03px",
+              fontSize: "14px",
+              lineHeight: "24px",
               letterSpacing: "0px",
-              color: "#FF6714",
+              color: "#F26D21",
+              marginTop: "auto",
             }}
           >
             AI reduced the overall design workflow time by around{" "}
