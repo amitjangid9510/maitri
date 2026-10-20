@@ -1324,8 +1324,9 @@ const ExperimentCard = ({ item }) => (
 
 const ProfileCard = () => (
   <div
-    className="relative w-full max-w-[1230px] mx-auto overflow-hidden flex flex-col md:flex-row items-stretch bg-[#F8F7F2]"
+    className="relative w-full max-w-[1230px] mx-auto overflow-hidden flex flex-col md:flex-row items-stretch"
     style={{
+      backgroundColor: "#FEFDFE",
       borderTop: "2px solid #196254",
       borderBottom: "2px solid #196254",
       borderLeft: "8px solid #196254",
