@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 // ============================================================
 // REUSABLE PIECES
@@ -66,10 +66,11 @@ const NavBar = () => {
             <button
               key={item.id}
               onClick={() => handleScroll(item.id)}
-              className={`flex-1 md:flex-none px-1.5 sm:px-2 md:px-3 lg:px-4 py-1 md:py-1.5 text-[10px] sm:text-[11px] md:text-[12.5px] lg:text-[14px] rounded-full transition-all duration-300 whitespace-nowrap text-center ${isActive
+              className={`flex-1 md:flex-none px-1.5 sm:px-2 md:px-3 lg:px-4 py-1 md:py-1.5 text-[10px] sm:text-[11px] md:text-[12.5px] lg:text-[14px] rounded-full transition-all duration-300 whitespace-nowrap text-center ${
+                isActive
                   ? "bg-white text-black font-bold shadow-sm"
                   : "text-[#444] hover:bg-[#f2f2f2] font-normal"
-                }`}
+              }`}
               style={{
                 fontFamily: "'DM Sans', sans-serif",
                 lineHeight: "21px",
@@ -86,38 +87,25 @@ const NavBar = () => {
 };
 
 /* ============================================================
-   SCROLL HINT — fades out as soon as user starts scrolling
+   SCROLL HINT — always horizontally centered, fades on scroll
    ============================================================ */
-const ScrollHint = () => {
-  const [visible, setVisible] = useState(true);
-
-  useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY < 20);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  return (
-    <div
-      className="absolute bottom-4 sm:bottom-5 md:bottom-6 lg:bottom-8 flex items-center gap-2 text-[8px] sm:text-[9px] md:text-[9.5px] lg:text-[10px] tracking-[0.25em] text-[#8a8478] z-20 transition-all duration-500 ease-out"
-      style={{
-        left: "50%",
-        transform: visible
-          ? "translate(-50%, 0)"
-          : "translate(-50%, 12px)",
-        opacity: visible ? 1 : 0,
-        pointerEvents: visible ? "auto" : "none",
-      }}
-      aria-hidden={!visible}
-    >
-      <span className="inline-flex items-center justify-center w-4 h-3 md:w-5 md:h-3 border border-[#8a8478] rounded-full">
-        <span className="w-0.5 h-1.5 bg-[#8a8478] rounded-full" />
-      </span>
-      SCROLL TO EXPLORE
-    </div>
-  );
-};
+const ScrollHint = ({ visible = true }) => (
+  <div
+    className="absolute bottom-4 sm:bottom-5 md:bottom-6 lg:bottom-8 flex items-center gap-2 text-[8px] sm:text-[9px] md:text-[9.5px] lg:text-[10px] tracking-[0.25em] text-[#8a8478] z-20 transition-all duration-500 ease-out"
+    style={{
+      left: "50%",
+      transform: visible ? "translate(-50%, 0)" : "translate(-50%, 12px)",
+      opacity: visible ? 1 : 0,
+      pointerEvents: visible ? "auto" : "none",
+    }}
+    aria-hidden={!visible}
+  >
+    <span className="inline-flex items-center justify-center w-4 h-3 md:w-5 md:h-3 border border-[#8a8478] rounded-full">
+      <span className="w-0.5 h-1.5 bg-[#8a8478] rounded-full" />
+    </span>
+    SCROLL TO EXPLORE
+  </div>
+);
 
 const Item = ({ style, children, className = "" }) => (
   <div className={`absolute select-none ${className}`} style={style}>
@@ -219,7 +207,6 @@ const Frame1Mobile = () => (
   </div>
 );
 
-/* --------- TABLET LAYOUT: split 2-column intro + centered collage --------- */
 const Frame1Tablet = () => (
   <div className="absolute inset-0 hidden md:flex lg:hidden items-center justify-center px-8 pt-24 pb-20">
     <div className="w-full max-w-[900px] h-full flex flex-col justify-center gap-6">
@@ -1724,29 +1711,121 @@ const ContactSection = () => (
 // ============================================================
 function App() {
   const [frame, setFrame] = useState(1);
+  const [hintVisible, setHintVisible] = useState(true);
 
-  const handleDragStart = (e) => {
-    e.currentTarget.dataset.startx = e.clientX;
-  };
+  // refs used inside listeners so we never depend on stale state
+  const frameRef = useRef(1);
+  const animatingRef = useRef(false);   // true while the 1s transition is playing
+  const lockUntilRef = useRef(0);       // timestamp: any wheel before this is blocked
 
-  const handleDragEnd = (e) => {
-    const startX = e.currentTarget.dataset.startx;
-    if (startX) {
-      const diff = e.clientX - parseInt(startX);
-      if (diff < -60) setFrame(2);
-      if (diff > 60) setFrame(1);
-    }
-  };
+  // keep frameRef in sync
+  useEffect(() => {
+    frameRef.current = frame;
+  }, [frame]);
+
+  useEffect(() => {
+    const ANIM_DURATION = 1000;
+
+    const playAnimation = (targetFrame) => {
+      if (animatingRef.current) return;
+      animatingRef.current = true;
+      lockUntilRef.current = performance.now() + ANIM_DURATION;
+      setFrame(targetFrame);
+      window.setTimeout(() => {
+        animatingRef.current = false;
+      }, ANIM_DURATION);
+    };
+
+    // ---- named handlers (so removeEventListener actually works) ----
+    const handleWheel = (e) => {
+      // if we're not at the very top, let the page scroll normally
+      if (window.scrollY > 0) return;
+
+      const now = performance.now();
+      const currentlyAnimating = animatingRef.current;
+
+      // during the animation → block everything
+      if (currentlyAnimating || now < lockUntilRef.current) {
+        e.preventDefault();
+        return;
+      }
+
+      // at top + frame 1 + scroll down → play animation, block this scroll
+      if (e.deltaY > 0 && frameRef.current === 1) {
+        e.preventDefault();
+        playAnimation(2);
+        return;
+      }
+
+      // at top + frame 2 + scroll up → reverse animation
+      if (e.deltaY < 0 && frameRef.current === 2) {
+        e.preventDefault();
+        playAnimation(1);
+        return;
+      }
+
+      // otherwise → allow default (page will start scrolling)
+    };
+
+    let touchStartY = 0;
+
+    const handleTouchStart = (e) => {
+      touchStartY = e.touches[0].clientY;
+    };
+
+    const handleTouchMove = (e) => {
+      if (window.scrollY > 0) return;
+
+      const now = performance.now();
+      const currentlyAnimating = animatingRef.current;
+
+      if (currentlyAnimating || now < lockUntilRef.current) {
+        e.preventDefault();
+        return;
+      }
+
+      const deltaY = touchStartY - e.touches[0].clientY;
+
+      if (deltaY > 8 && frameRef.current === 1) {
+        e.preventDefault();
+        playAnimation(2);
+        return;
+      }
+      if (deltaY < -8 && frameRef.current === 2) {
+        e.preventDefault();
+        playAnimation(1);
+        return;
+      }
+    };
+
+    // ---- ScrollHint sync with REAL page scroll ----
+    // Visible only while at the top; hides the moment real page scroll starts.
+    const handleScroll = () => {
+      setHintVisible(window.scrollY <= 0);
+    };
+
+    window.addEventListener("wheel", handleWheel, { passive: false });
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: false });
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    // set initial state correctly on mount
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("wheel", handleWheel);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []); // run ONCE
 
   return (
     <div className="relative w-full overflow-x-hidden" style={{ background: "#F5F1E7" }}>
       <div
         id="hero"
         className="relative w-full h-screen overflow-hidden"
-        style={{ cursor: "grab" }}
-        onClick={() => setFrame((f) => (f === 1 ? 2 : 1))}
-        onMouseDown={handleDragStart}
-        onMouseUp={handleDragEnd}
+        style={{ cursor: "default" }}
       >
         <GridBackground />
         <div className="absolute inset-0">
@@ -1758,7 +1837,7 @@ function App() {
           </div>
         </div>
         <NavBar />
-        <ScrollHint />
+        <ScrollHint visible={hintVisible} />
       </div>
 
       <ProblemsSection />
