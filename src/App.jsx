@@ -58,23 +58,37 @@ const NavBar = () => {
   }, []);
 
   return (
-    <div className="fixed top-3 sm:top-4 md:top-5 lg:top-6 left-1/2 -translate-x-1/2 z-50 w-[92%] sm:w-[80%] md:w-auto max-w-[420px] md:max-w-[460px]">
-      <div className="flex items-center justify-center md:justify-start gap-0.5 md:gap-1 bg-[#FAF7EFEB] rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.06)] px-1.5 md:px-2 py-1 md:py-1.5">
+    /* 
+      FIX: 
+      - Moved up: Changed pt-4 to pt-2.5
+      - Less blur: Changed pb-6 to pb-3, mask from 60% to 50%, and fade starts earlier.
+    */
+    <div
+      className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-2.5 sm:pt-3 md:pt-4 pb-3 sm:pb-4 pointer-events-none backdrop-blur-md"
+      style={{
+        background: "linear-gradient(to bottom, rgba(245, 241, 231, 0.95) 0%, rgba(245, 241, 231, 0.6) 50%, rgba(245, 241, 231, 0) 100%)",
+        WebkitMaskImage: "linear-gradient(to bottom, black 50%, transparent 100%)",
+        maskImage: "linear-gradient(to bottom, black 50%, transparent 100%)",
+      }}
+    >
+      
+      {/* Navigation Pill */}
+      <div className="flex items-center justify-center md:justify-start gap-1 md:gap-1.5 bg-[#FAF7EFEB] rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.08)] px-2 md:px-2.5 py-1.5 md:py-2 pointer-events-auto w-[92%] sm:w-[85%] md:w-auto max-w-[460px]">
         {navItems.map((item) => {
           const isActive = activeId === item.id;
           return (
             <button
               key={item.id}
               onClick={() => handleScroll(item.id)}
-              className={`flex-1 md:flex-none px-1.5 sm:px-2 md:px-3 lg:px-4 py-1 md:py-1.5 text-[10px] sm:text-[11px] md:text-[12.5px] lg:text-[14px] rounded-full transition-all duration-300 whitespace-nowrap text-center ${
+              className={`flex-1 md:flex-none px-3 sm:px-4 md:px-5 py-2 md:py-2.5 text-[13px] sm:text-[14px] md:text-[14.5px] rounded-full transition-all duration-300 whitespace-nowrap text-center ${
                 isActive
                   ? "bg-white text-black font-bold shadow-sm"
-                  : "text-[#444] hover:bg-[#f2f2f2] font-normal"
+                  : "text-[#444] hover:bg-[#f2f2f2] font-medium"
               }`}
               style={{
                 fontFamily: "'DM Sans', sans-serif",
-                lineHeight: "21px",
-                letterSpacing: "0px",
+                lineHeight: "1.2",
+                letterSpacing: "0.2px",
               }}
             >
               {item.label}
@@ -82,6 +96,7 @@ const NavBar = () => {
           );
         })}
       </div>
+
     </div>
   );
 };
