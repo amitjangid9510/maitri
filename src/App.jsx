@@ -17,10 +17,10 @@ const GridBackground = () => (
 
 const DotPattern = () => (
   <div
-    className="absolute inset-0 pointer-events-none opacity-20"
+    className="absolute inset-0 pointer-events-none opacity-[0.15]"
     style={{
-      backgroundImage: "radial-gradient(circle, #000 1px, transparent 1px)",
-      backgroundSize: "20px 20px",
+      backgroundImage: "radial-gradient(circle, #000 1.5px, transparent 1.5px)",
+      backgroundSize: "24px 24px",
     }}
   />
 );
@@ -1324,36 +1324,40 @@ const ExperimentCard = ({ item }) => (
 
 const ProfileCard = () => (
   <div
-    className="relative w-full max-w-[1230px] mx-auto overflow-hidden flex flex-col md:flex-row items-stretch"
+    className="relative w-full max-w-[1230px] mx-auto overflow-hidden flex flex-col md:flex-row items-stretch bg-[#F8F7F2]"
     style={{
-      background: "#FAF9F5",
-      border: "6px solid #2E4A3B",
-      borderRadius: "32px",
-      minHeight: "500px",
+      border: "6px solid #253A2D",
+      borderRadius: "30px",
+      minHeight: "766px",
     }}
   >
     {/* ---------- LEFT SIDE: Maitri Shah ---------- */}
-    <div className="relative w-full md:w-[45%] flex flex-col p-8 md:p-12 items-center md:items-start">
+    <div className="relative w-full md:w-[42%] flex flex-col p-10 md:p-14 lg:p-16 items-center md:items-start border-b md:border-b-0 md:border-r border-[#DAD8D3]/60">
       <DotPattern />
 
-      <div className="relative z-10 w-full flex flex-col items-center md:items-start">
+      <div className="relative z-10 w-full flex flex-col items-center md:items-start mt-2">
         <p
           className="text-[#FF6714] leading-none mb-1"
           style={{
             fontFamily: "'Caveat', cursive",
             fontWeight: 600,
             fontSize: "42px",
+            lineHeight: "48px",
+            letterSpacing: "0px",
           }}
         >
           Maitri Shah
         </p>
 
-        <div className="flex items-center gap-3 mb-10">
+        <div className="flex items-center gap-3 mb-10 mt-2">
           <p
-            className="text-[#4a4a4a]"
+            className="text-[#716F6B]"
             style={{
               fontFamily: "'DM Sans', sans-serif",
-              fontSize: "15px",
+              fontSize: "18px",
+              fontWeight: 400,
+              lineHeight: "19.5px",
+              letterSpacing: "0px",
             }}
           >
             UX/UI Designer
@@ -1362,8 +1366,11 @@ const ProfileCard = () => (
             className="text-[#FF6714] px-3 py-0.5 rounded-full flex items-center justify-center"
             style={{
               border: "1.5px solid #FF6714",
-              fontFamily: "'Caveat', cursive",
-              fontSize: "14px",
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: "18px",
+              fontWeight: 400,
+              lineHeight: "19.5px",
+              letterSpacing: "0px",
             }}
           >
             2+ Years
@@ -1371,8 +1378,14 @@ const ProfileCard = () => (
         </div>
 
         <div
-          className="relative w-[260px] h-[320px] md:w-[280px] md:h-[350px] rounded-xl overflow-hidden shadow-lg"
-          style={{ background: "#E8E2D5" }}
+          className="relative overflow-hidden shadow-md mt-2 shrink-0"
+          style={{
+            width: "313px",
+            height: "380px",
+            borderRadius: "15px",
+            border: "4px solid #FFFFFF",
+            background: "#E8E2D5",
+          }}
         >
           <img
             src="/maitri.jpg"
@@ -1380,15 +1393,16 @@ const ProfileCard = () => (
             className="w-full h-full object-cover"
           />
           <div
-            className="absolute bottom-0 right-0 text-white px-4 py-1.5 flex items-center gap-2"
+            className="absolute bottom-0 right-0 text-white px-4 py-2 flex items-center gap-1.5"
             style={{
               background: "#FF6714",
               fontFamily: "'DM Sans', sans-serif",
-              fontSize: "12px",
+              fontSize: "14px",
               fontWeight: 700,
+              borderTopLeftRadius: "8px",
             }}
           >
-            <span className="w-0 h-0 border-t-[6px] border-t-transparent border-r-[8px] border-r-white border-b-[6px] border-b-transparent" />
+            <span className="text-[10px]">◀</span>
             Maitri Shah
           </div>
         </div>
@@ -1396,76 +1410,83 @@ const ProfileCard = () => (
     </div>
 
     {/* ---------- RIGHT SIDE: Images & Text ---------- */}
-    <div
-      className="relative w-full md:w-[55%] flex flex-col p-6 md:p-10 gap-6 border-t md:border-t-0 md:border-l border-[#DAD8D3]"
-      style={{ background: "#FAF9F5" }}
-    >
+    <div className="relative w-full md:w-[58%] flex flex-col p-10 md:p-14 lg:p-16">
       <DotPattern />
 
-      <div className="relative z-10 flex flex-col gap-6 h-full">
-        <div className="grid grid-cols-2 gap-6 mt-4">
-          <div className="flex flex-col items-center gap-2">
+      <div className="relative z-10 flex flex-col h-full w-full">
+        {/* Top Images Area */}
+        <div className="flex justify-between items-start w-full px-2 md:px-8 mt-2 relative min-h-[200px]">
+          {/* Sunflower */}
+          <div className="flex flex-col items-center absolute" style={{ top: "0px", left: "10%" }}>
             <img
               src="/sunflower.png"
               alt="Sunflower"
-              className="w-[80px] md:w-[100px] h-auto object-contain"
+              style={{
+                width: "70.48px",
+                height: "105.42px",
+                transform: "rotate(16.85deg)",
+                objectFit: "contain",
+              }}
             />
             <p
-              className="text-[#111]"
-              style={{
-                fontFamily: "'Caveat', cursive",
-                fontSize: "14px",
-              }}
+              className="text-[#111] mt-4"
+              style={{ fontFamily: "'Caveat', cursive", fontSize: "16px" }}
             >
               Sunflower.png
             </p>
           </div>
-          <div className="flex flex-col items-center gap-2">
+          
+          {/* Dance Lover */}
+          <div className="flex flex-col items-center absolute" style={{ top: "20px", right: "10%" }}>
             <img
               src="/dance-lover.png"
               alt="Dance Lover"
-              className="w-[80px] md:w-[100px] h-auto object-contain"
+              style={{
+                width: "136px",
+                height: "125.73px",
+                transform: "rotate(0deg)",
+                objectFit: "contain",
+              }}
             />
             <p
-              className="text-[#111]"
-              style={{
-                fontFamily: "'Caveat', cursive",
-                fontSize: "14px",
-              }}
+              className="text-[#111] mt-4"
+              style={{ fontFamily: "'Caveat', cursive", fontSize: "16px" }}
             >
               DanceLover.png
             </p>
           </div>
         </div>
 
-        <div className="relative mt-2">
+        {/* Text Box Area */}
+        <div className="relative mt-8 md:mt-12 w-full px-4 md:px-10">
           <div
-            className="flex items-center gap-2 px-4 py-2.5 rounded-t-xl"
-            style={{ background: "#E5E1D6" }}
+            className="flex items-center gap-2 px-4 py-3 rounded-t-xl"
+            style={{ background: "#EBE8DD" }}
           >
-            <span className="w-2.5 h-2.5 rounded-full bg-[#FF6714]" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#F67A43]" />
             <span className="w-2.5 h-2.5 rounded-full bg-[#F2C94C]" />
             <span className="w-2.5 h-2.5 rounded-full bg-[#6FA8BF]" />
           </div>
 
-          <div className="absolute -top-6 -right-2 md:-right-4">
-            <img src="/sunflower.png" alt="Sunflower" className="w-[50px] md:w-[60px] h-auto object-contain drop-shadow-md" />
+          <div className="absolute top-[14px] right-6 md:right-10">
+            <img src="/sunflower-flower.png" alt="Sunflower" className="w-[60px] md:w-[75px] h-auto object-contain drop-shadow-md" />
           </div>
 
           <div
-            className="p-6 rounded-b-xl flex flex-col"
+            className="p-6 md:p-8 rounded-b-xl flex flex-col bg-white shadow-[0_2px_10px_rgba(0,0,0,0.03)]"
             style={{
-              background: "#FFFFFF",
               border: "1px solid #DAD8D3",
               borderTop: "none",
             }}
           >
             <p
-              className="text-[#3a3a3a]"
+              className="text-[#282725]"
               style={{
                 fontFamily: "'DM Sans', sans-serif",
-                fontSize: "15px",
-                lineHeight: "24px",
+                fontWeight: 400,
+                fontSize: "18px",
+                lineHeight: "31.03px",
+                letterSpacing: "0px",
               }}
             >
               I use AI to quickly move from an unclear idea to a structured
@@ -1476,34 +1497,45 @@ const ProfileCard = () => (
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-6 mt-4">
-          <div className="flex flex-col items-center gap-2">
+        {/* Bottom Images Area */}
+        <div className="flex justify-between items-end w-full px-4 md:px-10 mt-auto pt-10 pb-4 relative min-h-[180px]">
+          {/* Tea Lover */}
+          <div className="flex flex-col items-center absolute" style={{ bottom: "10px", left: "20%" }}>
             <img
               src="/tea-lover.png"
               alt="Tea Lover"
-              className="w-[80px] md:w-[100px] h-auto object-contain"
+              style={{
+                width: "133.54px",
+                height: "133.45px",
+                transform: "rotate(0deg)",
+                objectFit: "contain",
+              }}
             />
             <p
-              className="text-[#111]"
-              style={{
-                fontFamily: "'Caveat', cursive",
-                fontSize: "14px",
-              }}
+              className="text-[#111] mt-3"
+              style={{ fontFamily: "'Caveat', cursive", fontSize: "16px" }}
             >
               TeaLover.png
             </p>
           </div>
-          <div className="flex flex-col items-center gap-2">
+          
+          {/* Beach Lover */}
+          <div className="flex flex-col items-center absolute" style={{ bottom: "0px", right: "15%" }}>
             <img
               src="/beach-lover.png"
               alt="Beach Lover"
-              className="w-[80px] md:w-[100px] h-auto object-contain"
+              style={{
+                width: "135.01px",
+                height: "130.76px",
+                transform: "rotate(0deg)",
+                objectFit: "contain",
+              }}
             />
             <p
-              className="text-[#111]"
+              className="text-[#111] mt-3"
               style={{
                 fontFamily: "'Caveat', cursive",
-                fontSize: "14px",
+                fontSize: "16px",
               }}
             >
               BeachLover.png
