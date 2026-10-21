@@ -58,11 +58,6 @@ const NavBar = () => {
   }, []);
 
   return (
-    /* 
-      FIX: 
-      - Moved up: Changed pt-4 to pt-2.5
-      - Less blur: Changed pb-6 to pb-3, mask from 60% to 50%, and fade starts earlier.
-    */
     <div
       className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-2.5 sm:pt-3 md:pt-4 pb-3 sm:pb-4 pointer-events-none backdrop-blur-md"
       style={{
@@ -71,8 +66,6 @@ const NavBar = () => {
         maskImage: "linear-gradient(to bottom, black 50%, transparent 100%)",
       }}
     >
-      
-      {/* Navigation Pill */}
       <div className="flex items-center justify-center md:justify-start gap-1 md:gap-1.5 bg-[#FAF7EFEB] rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.08)] px-2 md:px-2.5 py-1.5 md:py-2 pointer-events-auto w-[92%] sm:w-[85%] md:w-auto max-w-[460px]">
         {navItems.map((item) => {
           const isActive = activeId === item.id;
@@ -96,7 +89,6 @@ const NavBar = () => {
           );
         })}
       </div>
-
     </div>
   );
 };
@@ -127,6 +119,95 @@ const Item = ({ style, children, className = "" }) => (
     {children}
   </div>
 );
+
+// ============================================================
+// SECTION SHELL (same as before — controls the rounded curve)
+// ============================================================
+const SectionShell = ({ id, bg, prevBg, zIndex = 10, extraBottom = true, children }) => {
+  const cls = `sec-shell-${id}`;
+  return (
+    <section id={id} className={`relative w-full ${cls}`} style={{ zIndex }}>
+      <div className={`${cls}-cap`} style={{ background: prevBg }}>
+        <div className={`${cls}-content`} style={{ background: bg }}>
+          {children}
+        </div>
+      </div>
+
+      <style>{`
+        /* ---------- base (mobile) ---------- */
+        .${cls} { margin-top: -40px; }
+        .${cls}-cap {
+          border-top-left-radius: 32px;
+          border-top-right-radius: 32px;
+          padding-top: 32px;
+          background-clip: padding-box;
+        }
+        .${cls}-content {
+          border-top-left-radius: 32px;
+          border-top-right-radius: 32px;
+          padding: 32px 16px 60px;
+        }
+        ${extraBottom ? `
+        .${cls}-content { padding-bottom: 46px; }
+        ` : ``}
+
+        /* ---------- sm ---------- */
+        @media (min-width: 640px) {
+          .${cls} { margin-top: -50px; }
+          .${cls}-cap {
+            border-top-left-radius: 48px;
+            border-top-right-radius: 48px;
+            padding-top: 48px;
+          }
+          .${cls}-content {
+            border-top-left-radius: 48px;
+            border-top-right-radius: 48px;
+            padding: 48px 20px 70px;
+          }
+          ${extraBottom ? `
+          .${cls}-content { padding-bottom: 59px; }
+          ` : ``}
+        }
+
+        /* ---------- md ---------- */
+        @media (min-width: 768px) {
+          .${cls} { margin-top: -60px; }
+          .${cls}-cap {
+            border-top-left-radius: 60px;
+            border-top-right-radius: 60px;
+            padding-top: 60px;
+          }
+          .${cls}-content {
+            border-top-left-radius: 60px;
+            border-top-right-radius: 60px;
+            padding: 60px 28px 90px;
+          }
+          ${extraBottom ? `
+          .${cls}-content { padding-bottom: 75px; }
+          ` : ``}
+        }
+
+        /* ---------- lg ---------- */
+        @media (min-width: 1024px) {
+          .${cls} { margin-top: -100px; }
+          .${cls}-cap {
+            border-top-left-radius: 100px;
+            border-top-right-radius: 100px;
+            padding-top: 100px;
+          }
+          .${cls}-content {
+            border-top-left-radius: 100px;
+            border-top-right-radius: 100px;
+            padding: 100px 40px 120px;
+          }
+          ${extraBottom ? `
+          .${cls}-content { padding-bottom: 110px; }
+          ` : ``}
+        }
+      `}</style>
+    </section>
+  );
+};
 
 // ============================================================
 // FRAME 1
@@ -617,7 +698,8 @@ const Frame2 = () => (
 );
 
 // ============================================================
-// PROBLEMS SECTION
+// PROBLEMS + EXPERIENCE — merged into ONE section
+// (same heading "Problems explored with purpose." → same visual block)
 // ============================================================
 
 const problems = [
@@ -706,7 +788,6 @@ const ProblemCard = ({ item }) => (
         {item.desc}
       </p>
 
-      {/* UPDATED DESIGN BLOCK */}
       <div className="flex flex-col gap-6 mt-8">
         <a
           href="#"
@@ -734,7 +815,6 @@ const ProblemCard = ({ item }) => (
           <img src="/arrow.png" alt="arrow" className="w-3.5 h-3.5 sm:w-4 sm:h-4 object-contain" />
         </a>
       </div>
-      {/* ------------------------ */}
     </div>
 
     <div className="flex-1 w-full flex justify-center md:justify-end items-center px-4 sm:px-6 md:px-4 lg:px-0 md:-mr-6 lg:-mr-16">
@@ -742,104 +822,6 @@ const ProblemCard = ({ item }) => (
     </div>
   </div>
 );
-
-const ProblemsSection = () => (
-  <section id="problems" className="relative w-full problems-section-wrapper">
-    <style>{`
-      .problems-section-wrapper {
-        background: #FFFDF8;
-        border-top-left-radius: 32px;
-        border-top-right-radius: 32px;
-        padding: 48px 16px 60px;
-        margin-top: -40px;
-        z-index: 10;
-      }
-      .problem-card { border-radius: 20px; padding: 0; }
-      @media (min-width: 640px) {
-        .problems-section-wrapper {
-          border-top-left-radius: 48px;
-          border-top-right-radius: 48px;
-          padding: 56px 20px 70px;
-          margin-top: -50px;
-        }
-        .problem-card { border-radius: 22px; }
-      }
-      @media (min-width: 768px) {
-        .problems-section-wrapper {
-          border-top-left-radius: 60px;
-          border-top-right-radius: 60px;
-          padding: 72px 28px 90px;
-          margin-top: -60px;
-        }
-        .problem-card { border-radius: 26px; padding: 0; }
-      }
-      @media (min-width: 1024px) {
-        .problems-section-wrapper {
-          border-top-left-radius: 100px;
-          border-top-right-radius: 100px;
-          padding: 100px 40px 120px;
-          margin-top: -100px;
-        }
-        .problem-card { border-radius: 30.84px; padding: 0; min-height: 557px; }
-      }
-    `}</style>
-
-    <div className="max-w-[1400px] mx-auto">
-      <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 md:gap-5 mb-8 sm:mb-10 md:mb-12">
-        <div>
-          <p
-            className="mb-2 sm:mb-3 text-[11px] sm:text-[12px] md:text-[12.5px] lg:text-[14px]"
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontWeight: 700,
-              lineHeight: "1.5",
-              letterSpacing: "1.5px",
-              textTransform: "uppercase",
-              color: "#FF6714",
-            }}
-          >
-            Selected work
-          </p>
-          <h2
-            className="text-[#111] font-medium max-w-[600px] text-[28px] sm:text-[36px] md:text-[40px] lg:text-[52px]"
-            style={{
-              fontFamily: "'Libre Franklin', sans-serif",
-              lineHeight: "1.08",
-              letterSpacing: "-1.2px",
-            }}
-          >
-            Problems explored with
-            <br />
-            purpose.
-          </h2>
-        </div>
-
-        <p
-          className="max-w-[340px] lg:pt-14 text-[14px] sm:text-[16px] md:text-[15px] lg:text-[18px]"
-          style={{
-            fontFamily: "'DM Sans', sans-serif",
-            fontWeight: 400,
-            lineHeight: "1.65",
-            color: "#716F6B",
-          }}
-        >
-          These project slots are ready for your real screenshots, process, and
-          measurable outcomes.
-        </p>
-      </div>
-
-      <div className="flex flex-col gap-4 sm:gap-6 md:gap-6 lg:gap-10">
-        {problems.map((item) => (
-          <ProblemCard key={item.id} item={item} />
-        ))}
-      </div>
-    </div>
-  </section>
-);
-
-// ============================================================
-// EXPERIENCE SECTION
-// ============================================================
 
 const toolImageMap = {
   figma: "/figma.png",
@@ -916,38 +898,80 @@ const ExperienceRow = ({ item }) => (
   </div>
 );
 
-const ExperienceSection = () => (
-  <section id="experience" className="relative w-full experience-section-wrapper">
+// Merged block: one SectionShell that contains BOTH the problems list and
+// the experience rows. Only the top is curved; inside, everything is a
+// single continuous flow with normal spacing.
+const ProblemsExperienceSection = () => (
+  <SectionShell id="problems" bg="#FFFDF8" prevBg="#F5F1E7" extraBottom>
     <style>{`
-      .experience-section-wrapper {
-        background: #FFFDF8;
-        border-top-left-radius: 32px;
-        border-top-right-radius: 32px;
-        padding: 48px 16px 60px;
-      }
+      .problem-card { border-radius: 20px; padding: 0; }
       @media (min-width: 640px) {
-        .experience-section-wrapper {
-          border-top-left-radius: 48px;
-          border-top-right-radius: 48px;
-          padding: 56px 20px 70px;
-        }
+        .problem-card { border-radius: 22px; }
       }
       @media (min-width: 768px) {
-        .experience-section-wrapper {
-          border-top-left-radius: 60px;
-          border-top-right-radius: 60px;
-          padding: 80px 28px 100px;
-        }
+        .problem-card { border-radius: 26px; padding: 0; }
       }
       @media (min-width: 1024px) {
-        .experience-section-wrapper {
-          border-top-left-radius: 100px;
-          border-top-right-radius: 100px;
-          padding: 120px 40px 160px;
-        }
+        .problem-card { border-radius: 30.84px; padding: 0; min-height: 557px; }
       }
     `}</style>
 
+    {/* ---------------- BLOCK A: problems list ---------------- */}
+    <div id="experience" className="max-w-[1400px] mx-auto">
+      <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 md:gap-5 mb-8 sm:mb-10 md:mb-12">
+        <div>
+          <p
+            className="mb-2 sm:mb-3 text-[11px] sm:text-[12px] md:text-[12.5px] lg:text-[14px]"
+            style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontWeight: 700,
+              lineHeight: "1.5",
+              letterSpacing: "1.5px",
+              textTransform: "uppercase",
+              color: "#FF6714",
+            }}
+          >
+            Selected work
+          </p>
+          <h2
+            className="text-[#111] font-medium max-w-[600px] text-[28px] sm:text-[36px] md:text-[40px] lg:text-[52px]"
+            style={{
+              fontFamily: "'Libre Franklin', sans-serif",
+              lineHeight: "1.08",
+              letterSpacing: "-1.2px",
+            }}
+          >
+            Problems explored with
+            <br />
+            purpose.
+          </h2>
+        </div>
+
+        <p
+          className="max-w-[340px] lg:pt-14 text-[14px] sm:text-[16px] md:text-[15px] lg:text-[18px]"
+          style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontWeight: 400,
+            lineHeight: "1.65",
+            color: "#716F6B",
+          }}
+        >
+          These project slots are ready for your real screenshots, process, and
+          measurable outcomes.
+        </p>
+      </div>
+
+      <div className="flex flex-col gap-4 sm:gap-6 md:gap-6 lg:gap-10">
+        {problems.map((item) => (
+          <ProblemCard key={item.id} item={item} />
+        ))}
+      </div>
+    </div>
+
+    {/* ---------------- normal spacing between the two blocks ---------------- */}
+    <div className="h-16 sm:h-20 md:h-24 lg:h-32" aria-hidden="true" />
+
+    {/* ---------------- BLOCK B: experience rows ---------------- */}
     <div className="mx-auto flex flex-col gap-10 sm:gap-12 md:gap-14 lg:gap-20 max-w-[1401px]">
       <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-5 sm:gap-6 md:gap-5 lg:gap-8">
         <div>
@@ -1002,7 +1026,7 @@ const ExperienceSection = () => (
         <div className="w-[55%] h-[1px] bg-[#DAD8D3]" />
       </div>
     </div>
-  </section>
+  </SectionShell>
 );
 
 // ============================================================
@@ -1092,37 +1116,7 @@ const FlowArrow = () => (
 );
 
 const AIWorkflowSection = () => (
-  <section id="ai-workflow" className="relative w-full ai-workflow-wrapper">
-    <style>{`
-      .ai-workflow-wrapper {
-        background: #F7F5EE;
-        border-top-left-radius: 32px;
-        border-top-right-radius: 32px;
-        padding: 48px 16px 60px;
-      }
-      @media (min-width: 640px) {
-        .ai-workflow-wrapper {
-          border-top-left-radius: 48px;
-          border-top-right-radius: 48px;
-          padding: 56px 20px 70px;
-        }
-      }
-      @media (min-width: 768px) {
-        .ai-workflow-wrapper {
-          border-top-left-radius: 60px;
-          border-top-right-radius: 60px;
-          padding: 80px 28px 100px;
-        }
-      }
-      @media (min-width: 1024px) {
-        .ai-workflow-wrapper {
-          border-top-left-radius: 100px;
-          border-top-right-radius: 100px;
-          padding: 120px 40px 160px;
-        }
-      }
-    `}</style>
-
+  <SectionShell id="ai-workflow" bg="#F7F5EE" prevBg="#FFFDF8" extraBottom>
     <div className="mx-auto flex flex-col gap-8 sm:gap-10 md:gap-12 lg:gap-20 max-w-[1400px]">
       <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-5 sm:gap-6 md:gap-5 lg:gap-10">
         <div>
@@ -1239,7 +1233,7 @@ const AIWorkflowSection = () => (
         </div>
       </div>
     </div>
-  </section>
+  </SectionShell>
 );
 
 // ============================================================
@@ -1497,37 +1491,7 @@ const ProfileCard = () => (
 );
 
 const AIExperimentsSection = () => (
-  <section id="ai-experiments" className="relative w-full ai-experiments-wrapper">
-    <style>{`
-      .ai-experiments-wrapper {
-        background: #FFFDF8;
-        border-top-left-radius: 32px;
-        border-top-right-radius: 32px;
-        padding: 48px 16px 60px;
-      }
-      @media (min-width: 640px) {
-        .ai-experiments-wrapper {
-          border-top-left-radius: 48px;
-          border-top-right-radius: 48px;
-          padding: 56px 20px 70px;
-        }
-      }
-      @media (min-width: 768px) {
-        .ai-experiments-wrapper {
-          border-top-left-radius: 60px;
-          border-top-right-radius: 60px;
-          padding: 80px 28px 100px;
-        }
-      }
-      @media (min-width: 1024px) {
-        .ai-experiments-wrapper {
-          border-top-left-radius: 100px;
-          border-top-right-radius: 100px;
-          padding: 120px 40px 160px;
-        }
-      }
-    `}</style>
-
+  <SectionShell id="ai-experiments" bg="#FFFDF8" prevBg="#F7F5EE" extraBottom>
     <div className="mx-auto flex flex-col gap-8 sm:gap-10 md:gap-12 lg:gap-24 max-w-[1400px]">
       <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-5 sm:gap-6 md:gap-5 lg:gap-8">
         <div>
@@ -1581,7 +1545,7 @@ const AIExperimentsSection = () => (
 
       <ProfileCard />
     </div>
-  </section>
+  </SectionShell>
 );
 
 // ============================================================
@@ -1626,31 +1590,11 @@ const SocialIcon = ({ label }) => (
   </a>
 );
 
+// Last section → extraBottom = false → no extra R at the bottom
 const ContactSection = () => (
-  <section
-    id="contact"
-    className="relative w-full overflow-hidden"
-    style={{ background: "#F5F1E7", borderTopLeftRadius: "32px", borderTopRightRadius: "32px" }}
-  >
+  <SectionShell id="contact" bg="#F5F1E7" prevBg="#FFFDF8" extraBottom={false}>
     <style>{`
-      .contact-wrapper { padding: 48px 16px 0; min-height: auto; }
-      @media (min-width: 640px) {
-        .contact-wrapper { padding: 56px 20px 0; }
-      }
-      @media (min-width: 768px) {
-        .contact-wrapper { padding: 68px 28px 0; }
-        section#contact {
-          border-top-left-radius: 60px !important;
-          border-top-right-radius: 60px !important;
-        }
-      }
-      @media (min-width: 1024px) {
-        .contact-wrapper { padding: 80px 40px 0; }
-        section#contact {
-          border-top-left-radius: 100px !important;
-          border-top-right-radius: 100px !important;
-        }
-      }
+      .contact-wrapper { padding-bottom: 0; min-height: auto; }
     `}</style>
 
     <div className="contact-wrapper">
@@ -1717,7 +1661,7 @@ const ContactSection = () => (
         </div>
       </div>
     </div>
-  </section>
+  </SectionShell>
 );
 
 // ============================================================
@@ -1727,12 +1671,10 @@ function App() {
   const [frame, setFrame] = useState(1);
   const [hintVisible, setHintVisible] = useState(true);
 
-  // refs used inside listeners so we never depend on stale state
   const frameRef = useRef(1);
-  const animatingRef = useRef(false);   // true while the 1s transition is playing
-  const lockUntilRef = useRef(0);       // timestamp: any wheel before this is blocked
+  const animatingRef = useRef(false);
+  const lockUntilRef = useRef(0);
 
-  // keep frameRef in sync
   useEffect(() => {
     frameRef.current = frame;
   }, [frame]);
@@ -1750,35 +1692,28 @@ function App() {
       }, ANIM_DURATION);
     };
 
-    // ---- named handlers (so removeEventListener actually works) ----
     const handleWheel = (e) => {
-      // if we're not at the very top, let the page scroll normally
       if (window.scrollY > 0) return;
 
       const now = performance.now();
       const currentlyAnimating = animatingRef.current;
 
-      // during the animation → block everything
       if (currentlyAnimating || now < lockUntilRef.current) {
         e.preventDefault();
         return;
       }
 
-      // at top + frame 1 + scroll down → play animation, block this scroll
       if (e.deltaY > 0 && frameRef.current === 1) {
         e.preventDefault();
         playAnimation(2);
         return;
       }
 
-      // at top + frame 2 + scroll up → reverse animation
       if (e.deltaY < 0 && frameRef.current === 2) {
         e.preventDefault();
         playAnimation(1);
         return;
       }
-
-      // otherwise → allow default (page will start scrolling)
     };
 
     let touchStartY = 0;
@@ -1812,8 +1747,6 @@ function App() {
       }
     };
 
-    // ---- ScrollHint sync with REAL page scroll ----
-    // Visible only while at the top; hides the moment real page scroll starts.
     const handleScroll = () => {
       setHintVisible(window.scrollY <= 0);
     };
@@ -1823,7 +1756,6 @@ function App() {
     window.addEventListener("touchmove", handleTouchMove, { passive: false });
     window.addEventListener("scroll", handleScroll, { passive: true });
 
-    // set initial state correctly on mount
     handleScroll();
 
     return () => {
@@ -1832,7 +1764,7 @@ function App() {
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []); // run ONCE
+  }, []);
 
   return (
     <div className="relative w-full overflow-x-hidden" style={{ background: "#F5F1E7" }}>
@@ -1854,8 +1786,7 @@ function App() {
         <ScrollHint visible={hintVisible} />
       </div>
 
-      <ProblemsSection />
-      <ExperienceSection />
+      <ProblemsExperienceSection />
       <AIWorkflowSection />
       <AIExperimentsSection />
       <ContactSection />
