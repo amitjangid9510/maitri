@@ -397,9 +397,6 @@ const Frame1Tablet = () => (
 
 // ============================================================
 // FRAME 1 — DESKTOP
-// All 4 heading blocks share the same typography (per Figma):
-//   Normal line: Libre Franklin 400, 34px / 36.72px, ls 0, uppercase
-//   Bold line:   Libre Franklin 700, 34px / 36.72px, ls 0, uppercase
 // ============================================================
 const Frame1Desktop = () => {
   const headingStyle = {
@@ -687,11 +684,6 @@ const Frame2Tablet = () => (
 
 // ============================================================
 // FRAME 2 — DESKTOP
-// Typography per Figma spec:
-//  - "Maitri Shah":   #B65337, Caveat 600, 45.63px / 68.45px
-//  - Main heading:    Libre Franklin 400, 88.98px / 87.2px, ls -4.89px
-//  - "clear, human":  #B65337, Caveat 500, 96.1px / 94.18px, ls -2.88px
-//  - Paragraph:       #66635D, DM Sans 400, 19.39px / 32px
 // ============================================================
 const Frame2Desktop = () => (
   <div className="absolute inset-0 hidden lg:block">
@@ -823,7 +815,6 @@ const Frame2 = () => (
 
 // ============================================================
 // PROBLEMS + EXPERIENCE — merged into ONE section
-// (same heading "Problems explored with purpose." → same visual block)
 // ============================================================
 
 const problems = [
@@ -986,45 +977,50 @@ const experiences = [
   },
 ];
 
+// ExperienceRow now has an internal divider at the BOTTOM so every row
+// (including the last) shows a full-width line beneath it — matching
+// the reference image where the line sits below the company + role text.
 const ExperienceRow = ({ item }) => (
-  <div className="flex flex-col md:flex-row md:items-center lg:items-center justify-between gap-5 sm:gap-6 md:gap-8 lg:gap-20">
-    <div className="flex flex-col gap-2">
-      <h3
-        className="text-[#111] text-[24px] sm:text-[30px] md:text-[30px] lg:text-[40px]"
-        style={{
-          fontFamily: "'Libre Franklin', sans-serif",
-          fontWeight: 500,
-          lineHeight: "1.1",
-          letterSpacing: "-0.02em",
-          textTransform: "capitalize",
-        }}
-      >
-        {item.company}
-      </h3>
-      <p
-        className="text-[#4a4a4a] text-[12px] sm:text-[13px] md:text-[13px] lg:text-[15.19px]"
-        style={{
-          fontFamily: "'DM Sans', sans-serif",
-          fontWeight: 500,
-          lineHeight: "1.5",
-          letterSpacing: "0.02em",
-          textTransform: "capitalize",
-        }}
-      >
-        {item.role}
-      </p>
+  <div className="flex flex-col gap-5 sm:gap-6 md:gap-6 lg:gap-8">
+    <div className="flex flex-col md:flex-row md:items-center lg:items-center justify-between gap-5 sm:gap-6 md:gap-8 lg:gap-20">
+      <div className="flex flex-col gap-2">
+        <h3
+          className="text-[#111] text-[24px] sm:text-[30px] md:text-[30px] lg:text-[40px]"
+          style={{
+            fontFamily: "'Libre Franklin', sans-serif",
+            fontWeight: 500,
+            lineHeight: "1.1",
+            letterSpacing: "-0.02em",
+            textTransform: "capitalize",
+          }}
+        >
+          {item.company}
+        </h3>
+        <p
+          className="text-[#4a4a4a] text-[12px] sm:text-[13px] md:text-[13px] lg:text-[15.19px]"
+          style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontWeight: 500,
+            lineHeight: "1.5",
+            letterSpacing: "0.02em",
+            textTransform: "capitalize",
+          }}
+        >
+          {item.role}
+        </p>
+      </div>
+      <div className="flex items-center flex-wrap gap-2 sm:gap-2.5 md:gap-2.5 lg:gap-4">
+        {item.tools.map((tool) => (
+          <ToolBox key={tool} name={tool} />
+        ))}
+      </div>
     </div>
-    <div className="flex items-center flex-wrap gap-2 sm:gap-2.5 md:gap-2.5 lg:gap-4">
-      {item.tools.map((tool) => (
-        <ToolBox key={tool} name={tool} />
-      ))}
-    </div>
+
+    {/* Full-width divider below every experience row */}
+    <div className="w-full h-[1px] bg-[#DAD8D3]" />
   </div>
 );
 
-// Merged block: one SectionShell that contains BOTH the problems list and
-// the experience rows. Only the top is curved; inside, everything is a
-// single continuous flow with normal spacing.
 const ProblemsExperienceSection = () => (
   <SectionShell id="problems" bg="#FFFDF8" prevBg="#F5F1E7" extraBottom>
     <style>{`
@@ -1142,12 +1138,8 @@ const ProblemsExperienceSection = () => (
       </div>
       <div className="flex flex-col gap-8 sm:gap-10 md:gap-12 lg:gap-20">
         {experiences.map((item, idx) => (
-          <div key={idx} className="flex flex-col gap-5 sm:gap-6 md:gap-6 lg:gap-10">
-            <ExperienceRow item={item} />
-            {idx < experiences.length - 1 && <div className="w-full h-[1px] bg-[#DAD8D3]" />}
-          </div>
+          <ExperienceRow key={idx} item={item} />
         ))}
-        <div className="w-[55%] h-[1px] bg-[#DAD8D3]" />
       </div>
     </div>
   </SectionShell>
