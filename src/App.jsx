@@ -978,8 +978,7 @@ const experiences = [
 ];
 
 // ExperienceRow now has an internal divider at the BOTTOM so every row
-// (including the last) shows a full-width line beneath it — matching
-// the reference image where the line sits below the company + role text.
+// (including the last) shows a full-width line beneath it.
 const ExperienceRow = ({ item }) => (
   <div className="flex flex-col gap-5 sm:gap-6 md:gap-6 lg:gap-8">
     <div className="flex flex-col md:flex-row md:items-center lg:items-center justify-between gap-5 sm:gap-6 md:gap-8 lg:gap-20">
@@ -1279,13 +1278,14 @@ const AIWorkflowSection = () => (
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6 md:gap-6 lg:gap-12 items-start">
+        {/* LEFT CARD — paragraph + flow steps (spacing fixed) */}
         <div
-          className="flex flex-col justify-start"
+          className="flex flex-col justify-between"
           style={{
             background: "#FFFFFF",
             borderRadius: "20px",
             border: "1px solid #EAE8E3",
-            padding: "24px",
+            padding: "32px",
           }}
         >
           <p
@@ -1302,7 +1302,9 @@ const AIWorkflowSection = () => (
             write first-pass copy, and identify missing states before I begin
             detailed design work.
           </p>
-          <div className="flex flex-wrap items-center gap-y-2 mt-4 sm:mt-5 md:mt-5 lg:mt-auto">
+
+          {/* Flow steps — separated clearly from the paragraph */}
+          <div className="flex flex-wrap items-center gap-y-3 sm:gap-y-4 md:gap-y-4 lg:gap-y-4 mt-6 sm:mt-8 md:mt-8 lg:mt-10">
             <FlowStep label="Idea" />
             <FlowArrow />
             <FlowStep label="AI Draft" />
