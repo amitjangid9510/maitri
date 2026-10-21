@@ -217,7 +217,7 @@ const Frame1Mobile = () => (
   <div className="absolute inset-0 flex flex-col items-center justify-center px-4 sm:px-6 pt-16 sm:pt-20 pb-12 sm:pb-16 gap-3 sm:gap-5 overflow-y-auto">
     <div className="text-center">
       <p
-        className="text-[#FF6714] leading-none"
+        className="text-[#B65337] leading-none"
         style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, fontSize: "22px" }}
       >
         Maitri Shah
@@ -309,7 +309,7 @@ const Frame1Tablet = () => (
       <div className="flex items-start justify-between gap-6">
         <div className="text-left shrink-0">
           <p
-            className="text-[#FF6714] leading-none"
+            className="text-[#B65337] leading-none"
             style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, fontSize: "26px" }}
           >
             Maitri Shah
@@ -395,91 +395,110 @@ const Frame1Tablet = () => (
   </div>
 );
 
-const Frame1Desktop = () => (
-  <div className="absolute inset-0 hidden lg:block">
-    <Item style={{ top: "20.5%", left: "13.5%" }} className="text-left">
-      <p
-        className="text-[#FF6714] leading-none"
-        style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, fontSize: "32px", lineHeight: "48px" }}
-      >
-        Maitri Shah
-      </p>
-      <p className="text-[#4a4a4a]" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", lineHeight: "19.5px" }}>
-        UX/UI Designer · Mumbai
-      </p>
-      <p className="text-[#4a4a4a] mt-1.5 flex items-center gap-1" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", lineHeight: "19.5px" }}>
-        View selected work <span className="text-[10px]">↗</span>
-      </p>
-    </Item>
+// ============================================================
+// FRAME 1 — DESKTOP
+// All 4 heading blocks share the same typography (per Figma):
+//   Normal line: Libre Franklin 400, 34px / 36.72px, ls 0, uppercase
+//   Bold line:   Libre Franklin 700, 34px / 36.72px, ls 0, uppercase
+// ============================================================
+const Frame1Desktop = () => {
+  const headingStyle = {
+    fontFamily: "'Libre Franklin', sans-serif",
+    fontSize: "34px",
+    lineHeight: "36.72px",
+    letterSpacing: "0px",
+    textTransform: "uppercase",
+    color: "#111",
+  };
+  const normalSpan = { fontWeight: 400, fontStyle: "normal" };
+  const boldSpan = { fontWeight: 700, fontStyle: "normal" };
 
-    <Item style={{ top: "22%", left: "34%" }}>
-      <h2 className="text-[34px] text-[#111] uppercase" style={{ fontFamily: "'Libre Franklin', sans-serif", lineHeight: "36.72px" }}>
-        <span className="font-normal">THE WORLD IS</span>
-        <br />
-        <span className="font-bold">FULL OF</span>
-      </h2>
-    </Item>
+  return (
+    <div className="absolute inset-0 hidden lg:block">
+      <Item style={{ top: "20.5%", left: "13.5%" }} className="text-left">
+        <p
+          className="text-[#B65337] leading-none"
+          style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, fontSize: "32px", lineHeight: "48px" }}
+        >
+          Maitri Shah
+        </p>
+        <p className="text-[#4a4a4a]" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", lineHeight: "19.5px" }}>
+          UX/UI Designer · Mumbai
+        </p>
+        <p className="text-[#4a4a4a] mt-1.5 flex items-center gap-1" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", lineHeight: "19.5px" }}>
+          View selected work <span className="text-[10px]">↗</span>
+        </p>
+      </Item>
 
-    <Item style={{ top: "14%", left: "59%" }}>
-      <img src="/design-notepad.png" alt="Design notepad" className="w-[145px] h-auto rotate-[-4deg]" />
-    </Item>
-    <Item style={{ top: "14%", left: "75%" }}>
-      <img src="/coffe.png" alt="Coffee" className="w-[145px] h-auto" />
-    </Item>
-    <Item style={{ top: "34%", left: "7%" }}>
-      <img src="/lamp.png" alt="Desk lamp" className="w-[185px] h-auto" />
-    </Item>
-    <Item style={{ top: "34%", left: "29%" }}>
-      <img src="/headphone.png" alt="Headphones" className="w-[140px] h-auto" />
-    </Item>
-    <Item style={{ top: "33%", left: "46%" }}>
-      <img src="/disc.png" alt="Vinyl record" className="w-[160px] h-auto" />
-    </Item>
-    <Item style={{ top: "35%", left: "67%" }}>
-      <h3 className="text-[26px] text-[#111] uppercase" style={{ fontFamily: "'Libre Franklin', sans-serif", lineHeight: "28px" }}>
-        <span className="font-normal">UNFINISHED</span>
-        <br />
-        <span className="font-bold">IDEAS</span>
-      </h3>
-    </Item>
-    <Item style={{ top: "41%", left: "82%" }}>
-      <img src="/tool-symbol.png" alt="Tool symbol" className="w-[150px] h-auto object-contain" />
-    </Item>
-    <Item style={{ top: "57%", left: "30%" }}>
-      <h3 className="text-[26px] text-[#111] uppercase" style={{ fontFamily: "'Libre Franklin', sans-serif", lineHeight: "28px" }}>
-        <span className="font-normal">& FRUSTRATING</span>
-        <br />
-        <span className="font-bold">EXPERIENCES</span>
-      </h3>
-    </Item>
-    <Item style={{ top: "46%", left: "71%" }}>
-      <img src="/camera.png" alt="Camera" className="w-[160px] h-auto rotate-[6deg] object-contain" />
-    </Item>
-    <Item style={{ top: "63%", left: "64%" }}>
-      <p className="text-[#111] italic" style={{ fontFamily: "'Caveat', cursive", fontSize: "15px" }}>
-        I design the path
-      </p>
-      <h3 className="text-[24px] text-[#111] mt-0.5 uppercase" style={{ fontFamily: "'Libre Franklin', sans-serif", lineHeight: "26px" }}>
-        <span className="font-normal">THAT MAKES</span>
-        <br />
-        <span className="font-bold">THEM SEAMLESS</span>
-      </h3>
-    </Item>
-    <Item style={{ top: "68%", left: "24%" }}>
-      <img src="/plant.png" alt="Plant" className="w-[130px] h-auto" />
-    </Item>
-    <Item style={{ top: "69%", left: "36%" }}>
-      <div className="relative w-[145px] h-[100px]">
-        <div className="absolute left-0 top-0 w-[90px] h-[82px] bg-[#A8CBE0] shadow-sm rotate-[-6deg] flex items-start justify-start p-2.5">
-          <p className="text-[12px] text-[#333]" style={{ fontFamily: "'DM Sans', sans-serif" }}>Ask why</p>
+      <Item style={{ top: "22%", left: "34%" }}>
+        <h2 style={headingStyle}>
+          <span style={normalSpan}>THE WORLD IS</span>
+          <br />
+          <span style={boldSpan}>FULL OF</span>
+        </h2>
+      </Item>
+
+      <Item style={{ top: "14%", left: "59%" }}>
+        <img src="/design-notepad.png" alt="Design notepad" className="w-[145px] h-auto rotate-[-4deg]" />
+      </Item>
+      <Item style={{ top: "14%", left: "75%" }}>
+        <img src="/coffe.png" alt="Coffee" className="w-[145px] h-auto" />
+      </Item>
+      <Item style={{ top: "34%", left: "7%" }}>
+        <img src="/lamp.png" alt="Desk lamp" className="w-[185px] h-auto" />
+      </Item>
+      <Item style={{ top: "34%", left: "29%" }}>
+        <img src="/headphone.png" alt="Headphones" className="w-[140px] h-auto" />
+      </Item>
+      <Item style={{ top: "33%", left: "46%" }}>
+        <img src="/disc.png" alt="Vinyl record" className="w-[160px] h-auto" />
+      </Item>
+      <Item style={{ top: "35%", left: "67%" }}>
+        <h3 style={headingStyle}>
+          <span style={normalSpan}>UNFINISHED</span>
+          <br />
+          <span style={boldSpan}>IDEAS</span>
+        </h3>
+      </Item>
+      <Item style={{ top: "41%", left: "82%" }}>
+        <img src="/tool-symbol.png" alt="Tool symbol" className="w-[150px] h-auto object-contain" />
+      </Item>
+      <Item style={{ top: "57%", left: "30%" }}>
+        <h3 style={headingStyle}>
+          <span style={normalSpan}>& FRUSTRATING</span>
+          <br />
+          <span style={boldSpan}>EXPERIENCES</span>
+        </h3>
+      </Item>
+      <Item style={{ top: "46%", left: "71%" }}>
+        <img src="/camera.png" alt="Camera" className="w-[160px] h-auto rotate-[6deg] object-contain" />
+      </Item>
+      <Item style={{ top: "63%", left: "64%" }}>
+        <p className="text-[#111] italic" style={{ fontFamily: "'Caveat', cursive", fontSize: "15px" }}>
+          I design the path
+        </p>
+        <h3 style={{ ...headingStyle, marginTop: "2px" }}>
+          <span style={normalSpan}>THAT MAKES</span>
+          <br />
+          <span style={boldSpan}>THEM SEAMLESS</span>
+        </h3>
+      </Item>
+      <Item style={{ top: "68%", left: "24%" }}>
+        <img src="/plant.png" alt="Plant" className="w-[130px] h-auto" />
+      </Item>
+      <Item style={{ top: "69%", left: "36%" }}>
+        <div className="relative w-[145px] h-[100px]">
+          <div className="absolute left-0 top-0 w-[90px] h-[82px] bg-[#A8CBE0] shadow-sm rotate-[-6deg] flex items-start justify-start p-2.5">
+            <p className="text-[12px] text-[#333]" style={{ fontFamily: "'DM Sans', sans-serif" }}>Ask why</p>
+          </div>
+          <div className="absolute left-12 top-3 w-[76px] h-[66px] bg-[#E8A87C] shadow-sm rotate-[8deg] flex items-center justify-center">
+            <p className="text-[15px] text-[#333]" style={{ fontFamily: "'Caveat', cursive" }}>Simplify</p>
+          </div>
         </div>
-        <div className="absolute left-12 top-3 w-[76px] h-[66px] bg-[#E8A87C] shadow-sm rotate-[8deg] flex items-center justify-center">
-          <p className="text-[15px] text-[#333]" style={{ fontFamily: "'Caveat', cursive" }}>Simplify</p>
-        </div>
-      </div>
-    </Item>
-  </div>
-);
+      </Item>
+    </div>
+  );
+};
 
 const Frame1 = () => (
   <>
@@ -503,15 +522,39 @@ const Frame2Mobile = () => (
       <img src="/disc.png" alt="Vinyl" className="w-[52px] sm:w-[65px] h-auto" />
     </div>
 
-    <p className="text-[#FF6714]" style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, fontSize: "20px" }}>
+    <p
+      className="leading-none"
+      style={{
+        fontFamily: "'Caveat', cursive",
+        fontWeight: 600,
+        fontSize: "20px",
+        color: "#B65337",
+      }}
+    >
       Maitri Shah
     </p>
 
-    <h1 className="text-[24px] sm:text-[30px] leading-[1.1] text-[#111]" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>
+    <h1
+      className="text-[#111]"
+      style={{
+        fontFamily: "'Libre Franklin', sans-serif",
+        fontWeight: 400,
+        fontSize: "24px",
+        lineHeight: 1.1,
+        letterSpacing: "-1.2px",
+      }}
+    >
       I turn complex ideas
       <br />
       into{" "}
-      <span className="text-[#FF6714] italic" style={{ fontFamily: "'Caveat', cursive", fontSize: "28px" }}>
+      <span
+        style={{
+          fontFamily: "'Caveat', cursive",
+          fontWeight: 500,
+          fontSize: "28px",
+          color: "#B65337",
+        }}
+      >
         clear, human
       </span>
       <br />
@@ -519,8 +562,14 @@ const Frame2Mobile = () => (
     </h1>
 
     <p
-      className="text-[10px] sm:text-[11px] text-[#6b6b6b] max-w-[280px] sm:max-w-[320px] mt-2 leading-relaxed"
-      style={{ fontFamily: "'DM Sans', sans-serif" }}
+      className="max-w-[280px] sm:max-w-[320px] mt-2"
+      style={{
+        fontFamily: "'DM Sans', sans-serif",
+        fontWeight: 400,
+        fontSize: "10px",
+        lineHeight: "16px",
+        color: "#66635D",
+      }}
     >
       UX/UI designer in Mumbai with 2+ years of experience, bringing
       curiosity, clarity, and care to every screen.
@@ -546,20 +595,39 @@ const Frame2Tablet = () => (
   <div className="absolute inset-0 hidden md:block lg:hidden overflow-hidden">
     <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-10 pt-20 pb-16 z-10">
       <p
-        className="text-[#FF6714] mb-2"
-        style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, fontSize: "24px", lineHeight: "36px" }}
+        className="mb-2"
+        style={{
+          fontFamily: "'Caveat', cursive",
+          fontWeight: 600,
+          fontSize: "24px",
+          lineHeight: "36px",
+          color: "#B65337",
+        }}
       >
         Maitri Shah
       </p>
 
       <h1
-        className="text-[42px] leading-[1.05] text-[#111] max-w-[560px]"
-        style={{ fontFamily: "'Libre Franklin', sans-serif" }}
+        className="text-[#111] max-w-[560px]"
+        style={{
+          fontFamily: "'Libre Franklin', sans-serif",
+          fontWeight: 400,
+          fontSize: "42px",
+          lineHeight: 1.05,
+          letterSpacing: "-2px",
+        }}
       >
         I turn complex ideas
         <br />
         into{" "}
-        <span className="text-[#FF6714] italic" style={{ fontFamily: "'Caveat', cursive", fontSize: "48px" }}>
+        <span
+          style={{
+            fontFamily: "'Caveat', cursive",
+            fontWeight: 500,
+            fontSize: "48px",
+            color: "#B65337",
+          }}
+        >
           clear, human
         </span>
         <br />
@@ -567,8 +635,14 @@ const Frame2Tablet = () => (
       </h1>
 
       <p
-        className="text-[12px] text-[#6b6b6b] max-w-[380px] mt-5 leading-relaxed"
-        style={{ fontFamily: "'DM Sans', sans-serif", lineHeight: "20px" }}
+        className="max-w-[380px] mt-5"
+        style={{
+          fontFamily: "'DM Sans', sans-serif",
+          fontWeight: 400,
+          fontSize: "12px",
+          lineHeight: "20px",
+          color: "#66635D",
+        }}
       >
         UX/UI designer in Mumbai with 2+ years of experience, bringing
         curiosity, clarity, and care to every screen.
@@ -611,21 +685,61 @@ const Frame2Tablet = () => (
   </div>
 );
 
+// ============================================================
+// FRAME 2 — DESKTOP
+// Typography per Figma spec:
+//  - "Maitri Shah":   #B65337, Caveat 600, 45.63px / 68.45px
+//  - Main heading:    Libre Franklin 400, 88.98px / 87.2px, ls -4.89px
+//  - "clear, human":  #B65337, Caveat 500, 96.1px / 94.18px, ls -2.88px
+//  - Paragraph:       #66635D, DM Sans 400, 19.39px / 32px
+// ============================================================
 const Frame2Desktop = () => (
   <div className="absolute inset-0 hidden lg:block">
     <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
       <p
-        className="text-[#FF6714] mb-3"
-        style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, fontSize: "32px", lineHeight: "48px" }}
+        className="mb-3"
+        style={{
+          fontFamily: "'Caveat', cursive",
+          fontWeight: 600,
+          fontStyle: "normal",
+          fontSize: "45.63px",
+          lineHeight: "68.45px",
+          letterSpacing: "0px",
+          textAlign: "center",
+          color: "#B65337",
+        }}
       >
         Maitri Shah
       </p>
 
-      <h1 className="text-[64px] leading-[1.05] text-[#111] max-w-[900px]" style={{ fontFamily: "'Libre Franklin', sans-serif" }}>
+      <h1
+        className="max-w-[900px]"
+        style={{
+          fontFamily: "'Libre Franklin', sans-serif",
+          fontWeight: 400,
+          fontStyle: "normal",
+          fontSize: "88.98px",
+          lineHeight: "87.2px",
+          letterSpacing: "-4.89px",
+          textAlign: "center",
+          color: "#111",
+        }}
+      >
         I turn complex ideas
         <br />
         into{" "}
-        <span className="text-[#FF6714] italic" style={{ fontFamily: "'Caveat', cursive", fontSize: "72px" }}>
+        <span
+          style={{
+            fontFamily: "'Caveat', cursive",
+            fontWeight: 500,
+            fontStyle: "normal",
+            fontSize: "96.1px",
+            lineHeight: "94.18px",
+            letterSpacing: "-2.88px",
+            textAlign: "center",
+            color: "#B65337",
+          }}
+        >
           clear, human
         </span>
         <br />
@@ -633,8 +747,18 @@ const Frame2Desktop = () => (
       </h1>
 
       <p
-        className="text-[13px] text-[#6b6b6b] max-w-[440px] mt-7 leading-relaxed"
-        style={{ fontFamily: "'DM Sans', sans-serif", lineHeight: "19.5px" }}
+        className="max-w-[440px]"
+        style={{
+          fontFamily: "'DM Sans', sans-serif",
+          fontWeight: 400,
+          fontStyle: "normal",
+          fontSize: "19.39px",
+          lineHeight: "32px",
+          letterSpacing: "0px",
+          textAlign: "center",
+          color: "#66635D",
+          marginTop: "28px",
+        }}
       >
         UX/UI designer in Mumbai with 2+ years of experience, bringing
         curiosity, clarity, and care to every screen.
@@ -746,7 +870,7 @@ const ProblemCard = ({ item }) => (
   >
     <div className="flex-1 min-w-0 md:min-w-[260px] lg:min-w-[280px] max-w-full lg:max-w-[480px] px-5 sm:px-6 md:px-7 lg:px-10 py-6 md:py-7 lg:py-10">
       <p
-        className="text-[#FF6714] mb-1"
+        className="text-[#B65337] mb-1"
         style={{ fontFamily: "'Caveat', cursive", fontSize: "24px", lineHeight: "34px" }}
       >
         {item.id}
@@ -928,7 +1052,7 @@ const ProblemsExperienceSection = () => (
               lineHeight: "1.5",
               letterSpacing: "1.5px",
               textTransform: "uppercase",
-              color: "#FF6714",
+              color: "#B65337",
             }}
           >
             Selected work
@@ -983,7 +1107,7 @@ const ProblemsExperienceSection = () => (
               lineHeight: "1.5",
               letterSpacing: "1.5px",
               textTransform: "uppercase",
-              color: "#FF6714",
+              color: "#B65337",
             }}
           >
             Selected work
@@ -1128,7 +1252,7 @@ const AIWorkflowSection = () => (
               lineHeight: "1.5",
               letterSpacing: "1.5px",
               textTransform: "uppercase",
-              color: "#FF6714",
+              color: "#B65337",
             }}
           >
             AI-Enhanced Workflow
@@ -1211,10 +1335,10 @@ const AIWorkflowSection = () => (
           <div className="flex flex-col gap-6 sm:gap-8 md:gap-8 lg:gap-10">
             <WorkflowBars
               title="Time taken with traditional flow"
-              titleColor="#FF6714"
+              titleColor="#B65337"
               bars={traditionalBars}
             />
-            <WorkflowBars title="Time taken with AI" titleColor="#FF6714" bars={aiBars} />
+            <WorkflowBars title="Time taken with AI" titleColor="#B65337" bars={aiBars} />
           </div>
 
           <p
@@ -1345,7 +1469,7 @@ const ProfileCard = () => (
 
       <div className="relative z-10 w-full flex flex-col items-center md:items-start mt-2">
         <p
-          className="text-[#FF6714] leading-none mb-1 text-[32px] sm:text-[36px] md:text-[34px] lg:text-[42px]"
+          className="text-[#B65337] leading-none mb-1 text-[32px] sm:text-[36px] md:text-[34px] lg:text-[42px]"
           style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, lineHeight: "1.15" }}
         >
           Maitri Shah
@@ -1359,8 +1483,8 @@ const ProfileCard = () => (
             UX/UI Designer
           </p>
           <span
-            className="text-[#FF6714] px-2.5 sm:px-3 py-0.5 rounded-full flex items-center justify-center text-[12px] sm:text-[14px] md:text-[12px] lg:text-[18px]"
-            style={{ border: "1.5px solid #FF6714", fontFamily: "'DM Sans', sans-serif", fontWeight: 400, lineHeight: "1.4" }}
+            className="text-[#B65337] px-2.5 sm:px-3 py-0.5 rounded-full flex items-center justify-center text-[12px] sm:text-[14px] md:text-[12px] lg:text-[18px]"
+            style={{ border: "1.5px solid #B65337", fontFamily: "'DM Sans', sans-serif", fontWeight: 400, lineHeight: "1.4" }}
           >
             2+ Years
           </span>
@@ -1378,7 +1502,7 @@ const ProfileCard = () => (
           <img src="/maitri.jpg" alt="Maitri Shah" className="w-full h-full object-cover" />
           <div
             className="absolute bottom-0 right-0 text-white px-3 sm:px-4 py-1.5 sm:py-2 flex items-center gap-1.5 text-[11px] sm:text-[12px] md:text-[11px] lg:text-[14px]"
-            style={{ background: "#FF6714", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, borderTopLeftRadius: "8px" }}
+            style={{ background: "#B65337", fontFamily: "'DM Sans', sans-serif", fontWeight: 700, borderTopLeftRadius: "8px" }}
           >
             <span className="text-[9px] sm:text-[10px]">◀</span>
             Maitri Shah
@@ -1503,7 +1627,7 @@ const AIExperimentsSection = () => (
               lineHeight: "1.5",
               letterSpacing: "1.5px",
               textTransform: "uppercase",
-              color: "#FF6714",
+              color: "#B65337",
             }}
           >
             AI Experiments
@@ -1590,7 +1714,6 @@ const SocialIcon = ({ label }) => (
   </a>
 );
 
-// Last section → extraBottom = false → no extra R at the bottom
 const ContactSection = () => (
   <SectionShell id="contact" bg="#F5F1E7" prevBg="#FFFDF8" extraBottom={false}>
     <style>{`
@@ -1616,7 +1739,7 @@ const ContactSection = () => (
               fontWeight: 600,
               lineHeight: "1.4",
               textAlign: "center",
-              color: "#FF6714",
+              color: "#B65337",
             }}
           >
             Let&apos;s make something useful
